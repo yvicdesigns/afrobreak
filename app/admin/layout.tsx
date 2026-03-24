@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
-  Settings, Menu, X, Play, ChevronRight, Bell, Search
+  Settings, Menu, X, Play, ChevronRight
 } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -155,14 +155,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <button className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
-              <Search size={18} />
-            </button>
-            <button className="relative p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
-              <Bell size={18} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary-500 rounded-full" />
-            </button>
-            <Link href="/" className="text-xs text-primary-500 hover:text-primary-400 font-medium ml-2 transition-colors">
+            <Link href="/" className="text-xs text-primary-500 hover:text-primary-400 font-medium transition-colors">
               View Site
             </Link>
           </div>
