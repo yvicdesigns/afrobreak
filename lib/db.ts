@@ -235,3 +235,25 @@ export async function deleteBlogPost(id: string): Promise<boolean> {
   const { error } = await supabase.from('blog_posts').delete().eq('id', id)
   return !error
 }
+
+// ── PROFILE MUTATIONS ─────────────────────────────────────────────
+export async function updateProfile(userId: string, updates: { name?: string; avatar?: string }): Promise<boolean> {
+  const { error } = await supabase.from('profiles').update(updates).eq('id', userId)
+  return !error
+}
+
+export async function toggleFavorite(userId: string, videoId: string, currentFavorites: string[]): Promise<string[]> {
+  const updated = currentFavorites.includes(videoId)
+    ? currentFavorites.filter(id => id !== videoId)
+    : [...currentFavorites, videoId]
+  await supabase.from('profiles').update({ favorites: updated }).eq('id', userId)
+  return updated
+}
+
+export async function toggleWatchLater(userId: string, videoId: string, currentWatchLater: string[]): Promise<string[]> {
+  const updated = currentWatchLater.includes(videoId)
+    ? currentWatchLater.filter(id => id !== videoId)
+    : [...currentWatchLater, videoId]
+  await supabase.from('profiles').update({ watch_later: updated }).eq('id', userId)
+  return updated
+}
