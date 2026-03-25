@@ -21,7 +21,7 @@ const tabs: { id: Tab; label: string; icon: typeof Heart }[] = [
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { currentUser, updateUser } = useAuthStore()
+  const { currentUser, updateUser, logout } = useAuthStore()
   const [activeTab, setActiveTab] = useState<Tab>('favorites')
   const [allVideos, setAllVideos] = useState<Video[]>([])
   const [editOpen, setEditOpen] = useState(false)
@@ -95,7 +95,7 @@ export default function ProfilePage() {
   }
 
   const handleLogout = () => {
-    useAuthStore.getState().logout()
+    logout()
     router.push('/')
   }
 
