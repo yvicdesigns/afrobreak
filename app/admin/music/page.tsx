@@ -12,6 +12,8 @@ const emptyAlbum = { title: '', artist: '', genre: 'Afrobeats', price: '9.99', c
 
 type TrackForm = typeof emptyTrack
 type AlbumForm = typeof emptyAlbum
+type TrackRow = { id: string; title: string; artist: string; genre: string; duration: string; price: string; cover: string; preview_url: string; download_url: string; album: string; badge: string; [key: string]: string }
+type AlbumRow = { id: string; title: string; artist: string; genre: string; price: string; cover: string; track_count: string; [key: string]: string }
 
 function Field({ label, value, onChange, placeholder, required, type = 'text' }: {
   label: string; value: string; onChange: (v: string) => void
@@ -27,8 +29,8 @@ function Field({ label, value, onChange, placeholder, required, type = 'text' }:
 
 export default function AdminMusicPage() {
   const [tab, setTab] = useState<'tracks' | 'albums'>('tracks')
-  const [tracks, setTracks] = useState<Record<string, unknown>[]>([])
-  const [albums, setAlbums] = useState<Record<string, unknown>[]>([])
+  const [tracks, setTracks] = useState<TrackRow[]>([])
+  const [albums, setAlbums] = useState<AlbumRow[]>([])
   const [showForm, setShowForm] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [trackForm, setTrackForm] = useState<TrackForm>(emptyTrack)

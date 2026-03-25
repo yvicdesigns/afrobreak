@@ -9,9 +9,10 @@ const categories = ['Events', 'Classes', 'Battles', 'Backstage', 'Community']
 
 const emptyForm = { src: '', title: '', category: 'Events', photographer: '', location: '' }
 type FormState = typeof emptyForm
+type PhotoRow = { id: string; src: string; title: string; category: string; photographer: string; location: string; [key: string]: string }
 
 export default function AdminPhotosPage() {
-  const [photos, setPhotos] = useState<Record<string, unknown>[]>([])
+  const [photos, setPhotos] = useState<PhotoRow[]>([])
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState<FormState>(emptyForm)
   const [saving, setSaving] = useState(false)

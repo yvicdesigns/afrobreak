@@ -20,6 +20,7 @@ const emptyForm = {
 }
 
 type FormState = typeof emptyForm
+type ProductRow = { id: string; name: string; description: string; price: string; image: string; category: string; sizes: string; colors: string; badge: string; in_stock: boolean; [key: string]: string | boolean }
 
 function Field({ label, value, onChange, placeholder, required, type = 'text', textarea }: {
   label: string; value: string; onChange: (v: string) => void
@@ -37,7 +38,7 @@ function Field({ label, value, onChange, placeholder, required, type = 'text', t
 }
 
 export default function AdminStorePage() {
-  const [products, setProducts] = useState<Record<string, unknown>[]>([])
+  const [products, setProducts] = useState<ProductRow[]>([])
   const [showForm, setShowForm] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [form, setForm] = useState<FormState>(emptyForm)
@@ -73,7 +74,7 @@ export default function AdminStorePage() {
     setEditId(null)
   }
 
-  const handleEdit = (p: Record<string, unknown>) => {
+  const handleEdit = (p: ProductRow) => {
     setForm({
       name: p.name as string || '',
       description: p.description as string || '',
