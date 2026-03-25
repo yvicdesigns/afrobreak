@@ -1,0 +1,418 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { Play, Pause, ShoppingCart, Music, Download, Clock, ChevronRight, Volume2, X, Check } from 'lucide-react'
+import Button from '@/components/ui/Button'
+
+type MusicGenre = 'All' | 'Afrobeats' | 'Amapiano' | 'Dancehall' | 'Afro-Fusion' | 'Hip-Hop'
+
+interface Track {
+  id: string
+  title: string
+  artist: string
+  genre: MusicGenre
+  duration: string
+  price: number
+  albumPrice?: number
+  cover: string
+  preview: string
+  album?: string
+  badge?: string
+}
+
+const tracks: Track[] = [
+  {
+    id: 't1',
+    title: 'Lagos Nights',
+    artist: 'DJ AfroBreak',
+    genre: 'Afrobeats',
+    duration: '3:42',
+    price: 1.99,
+    albumPrice: 9.99,
+    cover: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80',
+    preview: '',
+    album: 'African Rhythm Vol.1',
+    badge: 'Hot',
+  },
+  {
+    id: 't2',
+    title: 'Durban Sunset',
+    artist: 'Amapiano Kings',
+    genre: 'Amapiano',
+    duration: '4:15',
+    price: 1.99,
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80',
+    preview: '',
+    album: 'Piano Sessions',
+  },
+  {
+    id: 't3',
+    title: 'Kingston Vibes',
+    artist: 'Yaya Kingston',
+    genre: 'Dancehall',
+    duration: '3:28',
+    price: 1.49,
+    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&q=80',
+    preview: '',
+    album: 'Caribbean Fire',
+    badge: 'New',
+  },
+  {
+    id: 't4',
+    title: 'Paris Afro',
+    artist: 'Kemi Adeyemi',
+    genre: 'Afro-Fusion',
+    duration: '4:52',
+    price: 1.99,
+    albumPrice: 11.99,
+    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80',
+    preview: '',
+    album: 'Fusion Collective',
+  },
+  {
+    id: 't5',
+    title: 'Street Cipher',
+    artist: 'Marcus Flow',
+    genre: 'Hip-Hop',
+    duration: '3:05',
+    price: 1.49,
+    cover: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&q=80',
+    preview: '',
+    album: 'Urban Code',
+  },
+  {
+    id: 't6',
+    title: 'Accra Movement',
+    artist: 'DJ AfroBreak',
+    genre: 'Afrobeats',
+    duration: '3:58',
+    price: 1.99,
+    cover: 'https://images.unsplash.com/photo-1526142684086-7ebd69df27a5?w=400&q=80',
+    preview: '',
+    album: 'African Rhythm Vol.1',
+  },
+  {
+    id: 't7',
+    title: 'Joburg Piano',
+    artist: 'Amapiano Kings',
+    genre: 'Amapiano',
+    duration: '5:10',
+    price: 1.99,
+    cover: 'https://images.unsplash.com/photo-1598387993441-a364f854cde4?w=400&q=80',
+    preview: '',
+    album: 'Piano Sessions',
+    badge: 'Best Seller',
+  },
+  {
+    id: 't8',
+    title: 'Diaspora Groove',
+    artist: 'Amara Diallo',
+    genre: 'Afro-Fusion',
+    duration: '4:30',
+    price: 1.99,
+    cover: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&q=80',
+    preview: '',
+    album: 'Fusion Collective',
+  },
+]
+
+const genres: MusicGenre[] = ['All', 'Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
+
+const albums = [
+  { id: 'a1', title: 'African Rhythm Vol.1', artist: 'DJ AfroBreak', tracks: 8, price: 9.99, cover: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80', genre: 'Afrobeats' },
+  { id: 'a2', title: 'Piano Sessions', artist: 'Amapiano Kings', tracks: 10, price: 12.99, cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80', genre: 'Amapiano' },
+  { id: 'a3', title: 'Fusion Collective', artist: 'Various Artists', tracks: 12, price: 11.99, cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80', genre: 'Afro-Fusion' },
+]
+
+export default function MusicPage() {
+  const [activeGenre, setActiveGenre] = useState<MusicGenre>('All')
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const [cart, setCart] = useState<string[]>([])
+  const [cartOpen, setCartOpen] = useState(false)
+  const [addedId, setAddedId] = useState<string | null>(null)
+  const [tab, setTab] = useState<'tracks' | 'albums'>('tracks')
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  const filtered = activeGenre === 'All' ? tracks : tracks.filter(t => t.genre === activeGenre)
+  const cartItems = tracks.filter(t => cart.includes(t.id))
+  const cartTotal = cartItems.reduce((sum, t) => sum + t.price, 0)
+
+  const togglePlay = (track: Track) => {
+    if (playingId === track.id) {
+      setPlayingId(null)
+      audioRef.current?.pause()
+    } else {
+      setPlayingId(track.id)
+    }
+  }
+
+  const addToCart = (trackId: string) => {
+    if (!cart.includes(trackId)) {
+      setCart(prev => [...prev, trackId])
+      setAddedId(trackId)
+      setTimeout(() => setAddedId(null), 1500)
+    }
+  }
+
+  const removeFromCart = (trackId: string) => setCart(prev => prev.filter(id => id !== trackId))
+
+  useEffect(() => {
+    return () => { audioRef.current?.pause() }
+  }, [])
+
+  return (
+    <div className="min-h-screen pt-20 bg-background">
+      {/* Hero */}
+      <div className="relative bg-surface border-b border-white/5 py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">AfroBreak Music</p>
+          <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
+            Feel the <span className="gradient-text-purple">Rhythm</span>
+          </h1>
+          <p className="text-text-secondary max-w-xl mx-auto mb-8">
+            Preview and purchase exclusive Afro & urban music tracks. Download instantly, own forever.
+          </p>
+          <div className="flex items-center justify-center gap-6 flex-wrap text-sm text-text-secondary">
+            <div className="flex items-center gap-2"><Download size={14} className="text-primary-500" /> Instant download</div>
+            <div className="flex items-center gap-2"><Music size={14} className="text-secondary-400" /> MP3 & WAV formats</div>
+            <div className="flex items-center gap-2"><Volume2 size={14} className="text-gold-DEFAULT" /> 30-sec preview</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Tabs + Cart */}
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <div className="flex gap-1 bg-surface rounded-xl p-1 border border-white/10">
+            <button
+              onClick={() => setTab('tracks')}
+              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${tab === 'tracks' ? 'bg-primary-500 text-white' : 'text-text-secondary hover:text-white'}`}
+            >
+              Tracks
+            </button>
+            <button
+              onClick={() => setTab('albums')}
+              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${tab === 'albums' ? 'bg-primary-500 text-white' : 'text-text-secondary hover:text-white'}`}
+            >
+              Albums
+            </button>
+          </div>
+
+          <button
+            onClick={() => setCartOpen(true)}
+            className="relative flex items-center gap-2 px-4 py-2 bg-surface border border-white/10 rounded-xl text-sm font-medium text-white hover:border-primary-500/40 transition-all"
+          >
+            <ShoppingCart size={16} className="text-primary-500" />
+            My Purchases
+            {cart.length > 0 && (
+              <span className="absolute -top-2 -right-2 w-5 h-5 bg-primary-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {cart.length}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {tab === 'tracks' && (
+          <>
+            {/* Genre filters */}
+            <div className="flex gap-2 flex-wrap mb-8">
+              {genres.map(g => (
+                <button
+                  key={g}
+                  onClick={() => setActiveGenre(g)}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                    activeGenre === g
+                      ? 'bg-secondary-500 text-white'
+                      : 'bg-surface border border-white/10 text-text-secondary hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+
+            {/* Tracks list */}
+            <div className="space-y-3">
+              {filtered.map((track, i) => (
+                <div
+                  key={track.id}
+                  className={`group flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 ${
+                    playingId === track.id
+                      ? 'bg-primary-500/10 border-primary-500/30'
+                      : 'bg-surface border-white/5 hover:border-white/15'
+                  }`}
+                >
+                  {/* Index / Play */}
+                  <button
+                    onClick={() => togglePlay(track)}
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-500/20 transition-all flex-shrink-0"
+                  >
+                    {playingId === track.id
+                      ? <Pause size={16} className="text-primary-500" />
+                      : <span className="text-text-muted text-sm group-hover:hidden">{i + 1}</span>
+                    }
+                    {playingId !== track.id && <Play size={16} className="text-primary-500 hidden group-hover:block" />}
+                  </button>
+
+                  {/* Cover */}
+                  <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                    <img src={track.cover} alt={track.title} className="w-full h-full object-cover" />
+                  </div>
+
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-white truncate">{track.title}</p>
+                      {track.badge && (
+                        <span className="px-2 py-0.5 bg-primary-500/20 text-primary-400 text-[10px] font-bold rounded-full flex-shrink-0">{track.badge}</span>
+                      )}
+                    </div>
+                    <p className="text-sm text-text-secondary truncate">{track.artist} · {track.album}</p>
+                  </div>
+
+                  {/* Genre */}
+                  <span className="hidden md:block text-xs text-text-muted bg-white/5 px-2 py-1 rounded-lg flex-shrink-0">{track.genre}</span>
+
+                  {/* Duration */}
+                  <div className="hidden sm:flex items-center gap-1 text-xs text-text-muted flex-shrink-0">
+                    <Clock size={12} />
+                    {track.duration}
+                  </div>
+
+                  {/* Price + Buy */}
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="font-bold text-white">€{track.price.toFixed(2)}</span>
+                    {cart.includes(track.id) ? (
+                      <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-xl">
+                        <Check size={12} /> Owned
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => addToCart(track.id)}
+                        className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                          addedId === track.id
+                            ? 'bg-emerald-500 text-white'
+                            : 'bg-primary-500/15 text-primary-400 hover:bg-primary-500 hover:text-white border border-primary-500/30'
+                        }`}
+                      >
+                        {addedId === track.id ? <><Check size={12} /> Added</> : <><ShoppingCart size={12} /> Buy</>}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {tab === 'albums' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {albums.map(album => (
+              <div key={album.id} className="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary-500/20 transition-all duration-300">
+                <div className="relative aspect-square overflow-hidden">
+                  <img src={album.cover} alt={album.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  <div className="absolute bottom-3 left-3">
+                    <span className="px-2 py-1 bg-secondary-500/80 text-white text-[10px] font-bold rounded-lg">{album.genre}</span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-white mb-1">{album.title}</h3>
+                  <p className="text-sm text-text-secondary mb-1">{album.artist}</p>
+                  <p className="text-xs text-text-muted mb-4 flex items-center gap-1">
+                    <Music size={11} /> {album.tracks} tracks
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xl font-black text-white">€{album.price.toFixed(2)}</span>
+                      <p className="text-xs text-text-muted">Full album</p>
+                    </div>
+                    <Button variant="primary" size="sm" leftIcon={<Download size={14} />}>
+                      Buy Album
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Cart Drawer */}
+      {cartOpen && (
+        <div className="fixed inset-0 z-50 flex justify-end">
+          <div className="absolute inset-0 bg-black/60" onClick={() => setCartOpen(false)} />
+          <div className="relative w-full max-w-sm bg-surface border-l border-white/10 flex flex-col h-full">
+            <div className="flex items-center justify-between p-5 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <Music size={18} className="text-primary-500" />
+                <h2 className="font-bold text-white">My Purchases ({cart.length})</h2>
+              </div>
+              <button onClick={() => setCartOpen(false)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-5 space-y-3">
+              {cartItems.length === 0 ? (
+                <div className="text-center py-16">
+                  <Music size={40} className="text-text-muted mx-auto mb-3" />
+                  <p className="text-text-secondary">No tracks selected</p>
+                </div>
+              ) : (
+                cartItems.map(track => (
+                  <div key={track.id} className="flex gap-3 p-3 bg-surface-2 rounded-xl border border-white/5">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                      <img src={track.cover} alt={track.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white truncate">{track.title}</p>
+                      <p className="text-xs text-text-muted">{track.artist}</p>
+                      <p className="text-sm font-bold text-primary-400 mt-1">€{track.price.toFixed(2)}</p>
+                    </div>
+                    <button onClick={() => removeFromCart(track.id)} className="p-1.5 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-all">
+                      <X size={14} />
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {cartItems.length > 0 && (
+              <div className="p-5 border-t border-white/10 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-text-secondary">Total</span>
+                  <span className="text-xl font-black text-white">€{cartTotal.toFixed(2)}</span>
+                </div>
+                <Button variant="primary" fullWidth leftIcon={<Download size={16} />}>
+                  Buy & Download — €{cartTotal.toFixed(2)}
+                </Button>
+                <p className="text-xs text-text-muted text-center">MP3 + WAV · Instant download · DRM-free</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Featured artist */}
+      <div className="border-t border-white/5 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-secondary-500/15 to-primary-500/10 border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
+            <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80" alt="Featured" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <p className="text-secondary-400 text-xs font-bold uppercase tracking-widest mb-1">Featured Artist</p>
+              <h3 className="text-xl font-bold text-white mb-1">DJ AfroBreak</h3>
+              <p className="text-text-secondary text-sm">The official AfroBreak DJ — blending Lagos rhythms with European club culture since 2015.</p>
+            </div>
+            <Button variant="secondary" rightIcon={<ChevronRight size={16} />}>
+              View All Tracks
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

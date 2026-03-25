@@ -17,6 +17,9 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Videos', href: '/videos' },
   { label: 'Events', href: '/events' },
+  { label: 'Music', href: '/music' },
+  { label: 'Photos', href: '/photos' },
+  { label: 'Store', href: '/store' },
   { label: 'Blog', href: '/blog' },
 ]
 

@@ -236,6 +236,62 @@ export async function deleteBlogPost(id: string): Promise<boolean> {
   return !error
 }
 
+// ── MUSIC ─────────────────────────────────────────────────────────
+export async function getTracks() {
+  const { data } = await supabase.from('tracks').select('*').order('created_at', { ascending: false })
+  return data || []
+}
+export async function createTrack(t: Record<string, unknown>) {
+  const { data, error } = await supabase.from('tracks').insert({ id: `t${Date.now()}`, ...t }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateTrack(id: string, t: Record<string, unknown>) {
+  const { error } = await supabase.from('tracks').update(t).eq('id', id)
+  return !error
+}
+export async function deleteTrack(id: string) {
+  const { error } = await supabase.from('tracks').delete().eq('id', id)
+  return !error
+}
+
+export async function getAlbums() {
+  const { data } = await supabase.from('albums').select('*').order('created_at', { ascending: false })
+  return data || []
+}
+export async function createAlbum(a: Record<string, unknown>) {
+  const { data, error } = await supabase.from('albums').insert({ id: `a${Date.now()}`, ...a }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateAlbum(id: string, a: Record<string, unknown>) {
+  const { error } = await supabase.from('albums').update(a).eq('id', id)
+  return !error
+}
+export async function deleteAlbum(id: string) {
+  const { error } = await supabase.from('albums').delete().eq('id', id)
+  return !error
+}
+
+// ── STORE PRODUCTS ────────────────────────────────────────────────
+export async function getProducts() {
+  const { data } = await supabase.from('products').select('*').order('created_at', { ascending: false })
+  return data || []
+}
+export async function createProduct(p: Record<string, unknown>) {
+  const { data, error } = await supabase.from('products').insert({ id: `p${Date.now()}`, ...p }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateProduct(id: string, p: Record<string, unknown>) {
+  const { error } = await supabase.from('products').update(p).eq('id', id)
+  return !error
+}
+export async function deleteProduct(id: string) {
+  const { error } = await supabase.from('products').delete().eq('id', id)
+  return !error
+}
+
 // ── PROFILE MUTATIONS ─────────────────────────────────────────────
 export async function updateProfile(userId: string, updates: { name?: string; avatar?: string }): Promise<boolean> {
   const { error } = await supabase.from('profiles').update(updates).eq('id', userId)

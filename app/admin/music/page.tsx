@@ -1,0 +1,334 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { Plus, Edit3, Trash2, X, Check, Music, Disc } from 'lucide-react'
+import { getTracks, createTrack, updateTrack, deleteTrack, getAlbums, createAlbum, updateAlbum, deleteAlbum } from '@/lib/db'
+import Button from '@/components/ui/Button'
+
+const genres = ['Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
+
+const emptyTrack = { title: '', artist: '', genre: 'Afrobeats', duration: '', price: '1.99', cover: '', preview_url: '', download_url: '', album: '', badge: '' }
+const emptyAlbum = { title: '', artist: '', genre: 'Afrobeats', price: '9.99', cover: '', track_count: '0' }
+
+type TrackForm = typeof emptyTrack
+type AlbumForm = typeof emptyAlbum
+
+function Field({ label, value, onChange, placeholder, required, type = 'text' }: {
+  label: string; value: string; onChange: (v: string) => void
+  placeholder?: string; required?: boolean; type?: string
+}) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-white mb-1.5">{label}{required && <span className="text-red-400 ml-1">*</span>}</label>
+      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className="input-base" />
+    </div>
+  )
+}
+
+export default function AdminMusicPage() {
+  const [tab, setTab] = useState<'tracks' | 'albums'>('tracks')
+  const [tracks, setTracks] = useState<Record<string, unknown>[]>([])
+  const [albums, setAlbums] = useState<Record<string, unknown>[]>([])
+  const [showForm, setShowForm] = useState(false)
+  const [editId, setEditId] = useState<string | null>(null)
+  const [trackForm, setTrackForm] = useState<TrackForm>(emptyTrack)
+  const [albumForm, setAlbumForm] = useState<AlbumForm>(emptyAlbum)
+  const [saving, setSaving] = useState(false)
+  const [success, setSuccess] = useState('')
+
+  useEffect(() => {
+    getTracks().then(setTracks)
+    getAlbums().then(setAlbums)
+  }, [])
+
+  const flash = (msg: string) => { setSuccess(msg); setTimeout(() => setSuccess(''), 3000) }
+
+  // --- TRACK HANDLERS ---
+  const handleTrackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!trackForm.title || !trackForm.artist) return
+    setSaving(true)
+    const payload = { ...trackForm, price: parseFloat(trackForm.price), in_stock: true }
+    if (editId) {
+      await updateTrack(editId, payload)
+      setTracks(prev => prev.map(t => t.id === editId ? { ...t, ...payload } : t))
+      flash('Track updated!')
+    } else {
+      const created = await createTrack(payload)
+      if (created) setTracks(prev => [created, ...prev])
+      flash('Track added!')
+    }
+    setSaving(false)
+    setTrackForm(emptyTrack)
+    setShowForm(false)
+    setEditId(null)
+  }
+
+  const handleTrackEdit = (t: Record<string, unknown>) => {
+    setTrackForm({
+      title: t.title as string || '',
+      artist: t.artist as string || '',
+      genre: t.genre as string || 'Afrobeats',
+      duration: t.duration as string || '',
+      price: String(t.price || '1.99'),
+      cover: t.cover as string || '',
+      preview_url: t.preview_url as string || '',
+      download_url: t.download_url as string || '',
+      album: t.album as string || '',
+      badge: t.badge as string || '',
+    })
+    setEditId(t.id as string)
+    setShowForm(true)
+  }
+
+  const handleTrackDelete = async (id: string) => {
+    if (!confirm('Delete this track?')) return
+    await deleteTrack(id)
+    setTracks(prev => prev.filter(t => t.id !== id))
+  }
+
+  // --- ALBUM HANDLERS ---
+  const handleAlbumSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!albumForm.title || !albumForm.artist) return
+    setSaving(true)
+    const payload = { ...albumForm, price: parseFloat(albumForm.price), track_count: parseInt(albumForm.track_count) }
+    if (editId) {
+      await updateAlbum(editId, payload)
+      setAlbums(prev => prev.map(a => a.id === editId ? { ...a, ...payload } : a))
+      flash('Album updated!')
+    } else {
+      const created = await createAlbum(payload)
+      if (created) setAlbums(prev => [created, ...prev])
+      flash('Album added!')
+    }
+    setSaving(false)
+    setAlbumForm(emptyAlbum)
+    setShowForm(false)
+    setEditId(null)
+  }
+
+  const handleAlbumEdit = (a: Record<string, unknown>) => {
+    setAlbumForm({
+      title: a.title as string || '',
+      artist: a.artist as string || '',
+      genre: a.genre as string || 'Afrobeats',
+      price: String(a.price || '9.99'),
+      cover: a.cover as string || '',
+      track_count: String(a.track_count || '0'),
+    })
+    setEditId(a.id as string)
+    setShowForm(true)
+  }
+
+  const handleAlbumDelete = async (id: string) => {
+    if (!confirm('Delete this album?')) return
+    await deleteAlbum(id)
+    setAlbums(prev => prev.filter(a => a.id !== id))
+  }
+
+  const openAdd = () => {
+    setEditId(null)
+    tab === 'tracks' ? setTrackForm(emptyTrack) : setAlbumForm(emptyAlbum)
+    setShowForm(!showForm)
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Music</h1>
+          <p className="text-text-secondary text-sm">{tracks.length} tracks · {albums.length} albums</p>
+        </div>
+        <Button variant="primary" size="sm" leftIcon={<Plus size={14} />} onClick={openAdd}>
+          {showForm ? 'Cancel' : tab === 'tracks' ? 'Add Track' : 'Add Album'}
+        </Button>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 bg-surface rounded-xl p-1 border border-white/10 w-fit">
+        {(['tracks', 'albums'] as const).map(t => (
+          <button key={t} onClick={() => { setTab(t); setShowForm(false); setEditId(null) }}
+            className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-all ${tab === t ? 'bg-primary-500 text-white' : 'text-text-secondary hover:text-white'}`}>
+            {t === 'tracks' ? <Music size={14} /> : <Disc size={14} />}
+            {t === 'tracks' ? 'Tracks' : 'Albums'}
+          </button>
+        ))}
+      </div>
+
+      {success && (
+        <div className="flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 rounded-xl p-4">
+          <Check size={16} /> {success}
+        </div>
+      )}
+
+      {/* TRACK FORM */}
+      {showForm && tab === 'tracks' && (
+        <div className="bg-surface border border-white/10 rounded-2xl p-6 animate-slide-down">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-white">{editId ? 'Edit Track' : 'Add New Track'}</h2>
+            <button onClick={() => { setShowForm(false); setEditId(null) }} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"><X size={18} /></button>
+          </div>
+          <form onSubmit={handleTrackSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <Field label="Title" required value={trackForm.title} onChange={v => setTrackForm(f => ({ ...f, title: v }))} placeholder="Track title" />
+              <Field label="Artist" required value={trackForm.artist} onChange={v => setTrackForm(f => ({ ...f, artist: v }))} placeholder="Artist name" />
+              <div>
+                <label className="block text-sm font-medium text-white mb-1.5">Genre</label>
+                <select value={trackForm.genre} onChange={e => setTrackForm(f => ({ ...f, genre: e.target.value }))} className="input-base">
+                  {genres.map(g => <option key={g} value={g} className="bg-surface">{g}</option>)}
+                </select>
+              </div>
+              <Field label="Duration" value={trackForm.duration} onChange={v => setTrackForm(f => ({ ...f, duration: v }))} placeholder="3:45" />
+              <Field label="Price (€)" type="number" value={trackForm.price} onChange={v => setTrackForm(f => ({ ...f, price: v }))} placeholder="1.99" />
+              <Field label="Album" value={trackForm.album} onChange={v => setTrackForm(f => ({ ...f, album: v }))} placeholder="Album name" />
+              <div className="md:col-span-2">
+                <Field label="Cover Image URL" value={trackForm.cover} onChange={v => setTrackForm(f => ({ ...f, cover: v }))} placeholder="https://..." />
+              </div>
+              <div className="md:col-span-2">
+                <Field label="Preview URL (30 sec MP3)" value={trackForm.preview_url} onChange={v => setTrackForm(f => ({ ...f, preview_url: v }))} placeholder="https://..." />
+              </div>
+              <div className="md:col-span-2">
+                <Field label="Download URL (Full MP3/WAV)" value={trackForm.download_url} onChange={v => setTrackForm(f => ({ ...f, download_url: v }))} placeholder="https://..." />
+              </div>
+              <Field label="Badge (optional)" value={trackForm.badge} onChange={v => setTrackForm(f => ({ ...f, badge: v }))} placeholder="New, Hot, Best Seller..." />
+            </div>
+            <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">
+              <Button type="submit" variant="primary" loading={saving}>{editId ? 'Update Track' : 'Save Track'}</Button>
+              <Button type="button" variant="ghost" onClick={() => { setShowForm(false); setEditId(null) }}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* ALBUM FORM */}
+      {showForm && tab === 'albums' && (
+        <div className="bg-surface border border-white/10 rounded-2xl p-6 animate-slide-down">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-white">{editId ? 'Edit Album' : 'Add New Album'}</h2>
+            <button onClick={() => { setShowForm(false); setEditId(null) }} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"><X size={18} /></button>
+          </div>
+          <form onSubmit={handleAlbumSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <Field label="Album Title" required value={albumForm.title} onChange={v => setAlbumForm(f => ({ ...f, title: v }))} placeholder="Album name" />
+              <Field label="Artist" required value={albumForm.artist} onChange={v => setAlbumForm(f => ({ ...f, artist: v }))} placeholder="Artist name" />
+              <div>
+                <label className="block text-sm font-medium text-white mb-1.5">Genre</label>
+                <select value={albumForm.genre} onChange={e => setAlbumForm(f => ({ ...f, genre: e.target.value }))} className="input-base">
+                  {genres.map(g => <option key={g} value={g} className="bg-surface">{g}</option>)}
+                </select>
+              </div>
+              <Field label="Number of Tracks" type="number" value={albumForm.track_count} onChange={v => setAlbumForm(f => ({ ...f, track_count: v }))} placeholder="10" />
+              <Field label="Price (€)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
+              <div className="md:col-span-2">
+                <Field label="Cover Image URL" value={albumForm.cover} onChange={v => setAlbumForm(f => ({ ...f, cover: v }))} placeholder="https://..." />
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">
+              <Button type="submit" variant="primary" loading={saving}>{editId ? 'Update Album' : 'Save Album'}</Button>
+              <Button type="button" variant="ghost" onClick={() => { setShowForm(false); setEditId(null) }}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* TRACKS TABLE */}
+      {tab === 'tracks' && (
+        <div className="bg-surface border border-white/5 rounded-2xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Track</th>
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden sm:table-cell">Genre</th>
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden md:table-cell">Duration</th>
+                  <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Price</th>
+                  <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tracks.length === 0 ? (
+                  <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No tracks yet. Add your first track!</td></tr>
+                ) : tracks.map(track => (
+                  <tr key={track.id as string} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        {track.cover && (
+                          <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                            <img src={track.cover as string} alt={track.title as string} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-sm font-medium text-white">{track.title as string}</p>
+                          <p className="text-xs text-text-secondary">{track.artist as string}{track.album ? ` · ${track.album}` : ''}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{track.genre as string}</span></td>
+                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{track.duration as string}</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{(track.price as number)?.toFixed(2)}</span></td>
+                    <td className="p-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <button onClick={() => handleTrackEdit(track)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
+                        <button onClick={() => handleTrackDelete(track.id as string)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* ALBUMS TABLE */}
+      {tab === 'albums' && (
+        <div className="bg-surface border border-white/5 rounded-2xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Album</th>
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden sm:table-cell">Genre</th>
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden md:table-cell">Tracks</th>
+                  <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Price</th>
+                  <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {albums.length === 0 ? (
+                  <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No albums yet. Add your first album!</td></tr>
+                ) : albums.map(album => (
+                  <tr key={album.id as string} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        {album.cover && (
+                          <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                            <img src={album.cover as string} alt={album.title as string} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-sm font-medium text-white">{album.title as string}</p>
+                          <p className="text-xs text-text-secondary">{album.artist as string}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre as string}</span></td>
+                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{album.track_count as number} tracks</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{(album.price as number)?.toFixed(2)}</span></td>
+                    <td className="p-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
+                        <button onClick={() => handleAlbumDelete(album.id as string)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

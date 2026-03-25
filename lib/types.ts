@@ -67,6 +67,28 @@ export interface User {
   watchLater: string[]
 }
 
+export interface Product {
+  id: string
+  name: string
+  description: string
+  price: number
+  image: string
+  category: ProductCategory
+  sizes?: string[]
+  colors?: string[]
+  badge?: string
+  inStock: boolean
+}
+
+export type ProductCategory = 'Apparel' | 'Accessories' | 'Footwear' | 'Digital'
+
+export interface CartItem {
+  product: Product
+  quantity: number
+  size?: string
+  color?: string
+}
+
 export interface Instructor {
   id: string
   name: string
