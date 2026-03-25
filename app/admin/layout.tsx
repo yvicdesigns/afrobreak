@@ -18,31 +18,31 @@ const navItems = [
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
-  const [notifOpen, setNotifOpen] = useState(false)
-  const [unreadCount, setUnreadCount] = useState(2)
+const notifications = [
+  { id: 1, text: 'New user signed up', time: '2 min ago', unread: true },
+  { id: 2, text: 'New premium subscriber', time: '1 hour ago', unread: true },
+  { id: 3, text: 'Video upload complete', time: '3 hours ago', unread: false },
+]
 
-  const notifications = [
-    { id: 1, text: 'New user signed up', time: '2 min ago', unread: true },
-    { id: 2, text: 'New premium subscriber', time: '1 hour ago', unread: true },
-    { id: 3, text: 'Video upload complete', time: '3 hours ago', unread: false },
-  ]
-
+function Sidebar({
+  sidebarOpen, mobile = false, pathname, setMobileSidebarOpen
+}: {
+  sidebarOpen: boolean
+  mobile?: boolean
+  pathname: string
+  setMobileSidebarOpen: (v: boolean) => void
+}) {
   const isActive = (item: typeof navItems[0]) => {
     if (item.exact) return pathname === item.href
     return pathname.startsWith(item.href)
   }
 
-  const Sidebar = ({ mobile = false }: { mobile?: boolean }) => (
+  return (
     <div className={clsx(
       'flex flex-col h-full',
       mobile ? 'w-64' : (sidebarOpen ? 'w-64' : 'w-16'),
       'bg-surface border-r border-white/5 transition-all duration-300'
     )}>
-      {/* Logo */}
       <div className={clsx(
         'flex items-center border-b border-white/5 h-16 flex-shrink-0',
         (sidebarOpen || mobile) ? 'px-5 gap-3' : 'px-3 justify-center'
@@ -61,7 +61,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         )}
       </div>
 
-      {/* Nav */}
       <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
         {navItems.map(item => {
           const active = isActive(item)
@@ -91,7 +90,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         })}
       </nav>
 
-      {/* Bottom user info */}
       {(sidebarOpen || mobile) && (
         <div className="p-4 border-t border-white/5">
           <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer">
@@ -107,12 +105,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}
     </div>
   )
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(2)
 
   return (
     <div className="min-h-screen bg-background flex">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex flex-col flex-shrink-0 fixed left-0 top-0 h-screen z-30">
-        <Sidebar />
+        <Sidebar sidebarOpen={sidebarOpen} pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} />
       </div>
 
       {/* Mobile sidebar */}
@@ -120,7 +126,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileSidebarOpen(false)} />
           <div className="relative flex-shrink-0 animate-slide-down">
-            <Sidebar mobile />
+            <Sidebar sidebarOpen={true} mobile pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} />
           </div>
         </div>
       )}
@@ -132,7 +138,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}>
         {/* Top bar */}
         <header className="sticky top-0 z-20 bg-surface/90 backdrop-blur-xl border-b border-white/5 h-16 flex items-center px-4 sm:px-6 gap-4">
-          {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileSidebarOpen(true)}
             className="lg:hidden p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"
@@ -140,7 +145,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Menu size={20} />
           </button>
 
-          {/* Desktop sidebar toggle */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="hidden lg:flex p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"
@@ -148,7 +152,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             {sidebarOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
-          {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm text-text-secondary flex-1">
             <span>Admin</span>
             {pathname !== '/admin' && (
@@ -162,9 +165,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2 relative">
+          <div className="flex items-center gap-2">
+            {/* Notification bell */}
             <div className="relative">
               <button
+                type="button"
                 onClick={() => { setNotifOpen(o => !o); setUnreadCount(0) }}
                 className="relative p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"
               >
@@ -174,29 +179,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 )}
               </button>
               {notifOpen && (
-                <div className="absolute right-0 top-11 w-72 bg-surface border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
-                  <div className="px-4 py-3 border-b border-white/5">
-                    <p className="text-sm font-bold text-white">Notifications</p>
-                  </div>
-                  {notifications.map(n => (
-                    <div key={n.id} className={clsx('px-4 py-3 border-b border-white/5 hover:bg-white/5 transition-colors', n.unread && 'bg-primary-500/5')}>
-                      <p className="text-sm text-white">{n.text}</p>
-                      <p className="text-xs text-text-muted mt-0.5">{n.time}</p>
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setNotifOpen(false)} />
+                  <div className="absolute right-0 top-11 w-72 bg-surface border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
+                    <div className="px-4 py-3 border-b border-white/5">
+                      <p className="text-sm font-bold text-white">Notifications</p>
                     </div>
-                  ))}
-                  <div className="px-4 py-3 text-center">
-                    <span className="text-xs text-text-muted">No more notifications</span>
+                    {notifications.map(n => (
+                      <div key={n.id} className={clsx('px-4 py-3 border-b border-white/5 transition-colors', n.unread ? 'bg-primary-500/5' : 'hover:bg-white/5')}>
+                        <p className="text-sm text-white">{n.text}</p>
+                        <p className="text-xs text-text-muted mt-0.5">{n.time}</p>
+                      </div>
+                    ))}
+                    <div className="px-4 py-3 text-center">
+                      <span className="text-xs text-text-muted">No more notifications</span>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
+
             <Link href="/" className="text-xs text-primary-500 hover:text-primary-400 font-medium transition-colors">
               View Site
             </Link>
           </div>
         </header>
 
-        {/* Page content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           {children}
         </main>
