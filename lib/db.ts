@@ -292,6 +292,74 @@ export async function deleteProduct(id: string) {
   return !error
 }
 
+// ── SITE SETTINGS ─────────────────────────────────────────────────
+export async function getSetting(key: string): Promise<string | null> {
+  const { data } = await supabase.from('settings').select('value').eq('key', key).single()
+  return data?.value ?? null
+}
+
+export async function saveSetting(key: string, value: string): Promise<boolean> {
+  const { error } = await supabase.from('settings').upsert({ key, value })
+  return !error
+}
+
+// ── TEAM MEMBERS ──────────────────────────────────────────────────
+export async function getTeamMembers() {
+  const { data } = await supabase.from('team_members').select('*').order('display_order', { ascending: true })
+  return data || []
+}
+export async function createTeamMember(m: Record<string, unknown>) {
+  const { data, error } = await supabase.from('team_members').insert({ id: `tm${Date.now()}`, ...m }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateTeamMember(id: string, m: Record<string, unknown>) {
+  const { error } = await supabase.from('team_members').update(m).eq('id', id)
+  return !error
+}
+export async function deleteTeamMember(id: string) {
+  const { error } = await supabase.from('team_members').delete().eq('id', id)
+  return !error
+}
+
+// ── PRESS COVERAGE ────────────────────────────────────────────────
+export async function getPresscoverage() {
+  const { data } = await supabase.from('press_coverage').select('*').order('date', { ascending: false })
+  return data || []
+}
+export async function createPressCoverage(p: Record<string, unknown>) {
+  const { data, error } = await supabase.from('press_coverage').insert({ id: `pc${Date.now()}`, ...p }).select().single()
+  if (error) return null
+  return data
+}
+export async function updatePressCoverage(id: string, p: Record<string, unknown>) {
+  const { error } = await supabase.from('press_coverage').update(p).eq('id', id)
+  return !error
+}
+export async function deletePressCoverage(id: string) {
+  const { error } = await supabase.from('press_coverage').delete().eq('id', id)
+  return !error
+}
+
+// ── JOBS ──────────────────────────────────────────────────────────
+export async function getJobs() {
+  const { data } = await supabase.from('jobs').select('*').order('title', { ascending: true })
+  return data || []
+}
+export async function createJob(j: Record<string, unknown>) {
+  const { data, error } = await supabase.from('jobs').insert({ id: `j${Date.now()}`, ...j }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateJob(id: string, j: Record<string, unknown>) {
+  const { error } = await supabase.from('jobs').update(j).eq('id', id)
+  return !error
+}
+export async function deleteJob(id: string) {
+  const { error } = await supabase.from('jobs').delete().eq('id', id)
+  return !error
+}
+
 // ── PROFILE MUTATIONS ─────────────────────────────────────────────
 export async function updateProfile(userId: string, updates: { name?: string; avatar?: string }): Promise<boolean> {
   const { error } = await supabase.from('profiles').update(updates).eq('id', userId)

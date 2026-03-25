@@ -10,7 +10,7 @@ const platformLinks = [
 ]
 
 const companyLinks = [
-  { label: 'About Us', href: '/#about' },
+  { label: 'About Us', href: '/about' },
   { label: 'Our Instructors', href: '/instructors' },
   { label: 'Press', href: '/press' },
   { label: 'Careers', href: '/careers' },

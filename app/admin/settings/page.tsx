@@ -1,11 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { Check, Globe, Bell, Shield, Palette } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Check, Globe, Bell, Shield, Palette, Loader2 } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { getSetting, saveSetting } from '@/lib/db'
 
 export default function AdminSettingsPage() {
   const [saved, setSaved] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
     siteName: 'AfroBreak',
     siteUrl: 'https://www.afrobreak.com',
@@ -18,13 +21,25 @@ export default function AdminSettingsPage() {
     currency: 'EUR',
   })
 
-  const handleSave = () => {
+  useEffect(() => {
+    getSetting('maintenance_mode').then(val => {
+      if (val !== null) setForm(f => ({ ...f, maintenanceMode: val === 'true' }))
+      setLoading(false)
+    })
+  }, [])
+
+  const handleSave = async () => {
+    setSaving(true)
+    await saveSetting('maintenance_mode', form.maintenanceMode ? 'true' : 'false')
+    setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
   }
 
+  if (loading) return <div className="p-6 text-text-secondary">Loading settings...</div>
+
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6 max-w-2xl p-6">
       <div>
         <h1 className="text-2xl font-bold text-white">Settings</h1>
         <p className="text-text-secondary text-sm">Configure your AfroBreak platform</p>
@@ -54,14 +69,19 @@ export default function AdminSettingsPage() {
           <label className="block text-sm font-medium text-white mb-1.5">Contact Email</label>
           <input type="email" value={form.contactEmail} onChange={e => setForm(f => ({...f, contactEmail: e.target.value}))} className="input-base" />
         </div>
-        <div className="flex items-center justify-between p-4 bg-surface-2 rounded-xl border border-white/5">
+
+        {/* Maintenance Mode */}
+        <div className={`flex items-center justify-between p-4 rounded-xl border transition-all ${form.maintenanceMode ? 'bg-orange-500/10 border-orange-500/30' : 'bg-surface-2 border-white/5'}`}>
           <div>
             <p className="text-sm font-medium text-white">Maintenance Mode</p>
-            <p className="text-xs text-text-secondary">Show a maintenance page to visitors</p>
+            <p className="text-xs text-text-secondary">Show a maintenance page to all visitors. Admins can still access the site.</p>
+            {form.maintenanceMode && (
+              <p className="text-xs text-orange-400 font-semibold mt-1">⚠ Site is currently in maintenance mode</p>
+            )}
           </div>
           <button
             onClick={() => setForm(f => ({...f, maintenanceMode: !f.maintenanceMode}))}
-            className={`w-11 h-6 rounded-full transition-colors ${form.maintenanceMode ? 'bg-primary-500' : 'bg-white/20'}`}
+            className={`w-11 h-6 rounded-full transition-colors flex-shrink-0 ml-4 ${form.maintenanceMode ? 'bg-orange-500' : 'bg-white/20'}`}
           >
             <span className={`block w-4 h-4 bg-white rounded-full mx-1 transition-transform ${form.maintenanceMode ? 'translate-x-5' : 'translate-x-0'}`} />
           </button>
@@ -150,8 +170,8 @@ export default function AdminSettingsPage() {
         </div>
       </div>
 
-      <Button variant="primary" size="lg" onClick={handleSave}>
-        Save Settings
+      <Button variant="primary" size="lg" onClick={handleSave} disabled={saving}>
+        {saving ? <><Loader2 size={16} className="animate-spin mr-2" />Saving...</> : 'Save Settings'}
       </Button>
     </div>
   )
