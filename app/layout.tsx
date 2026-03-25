@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
+import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { AuthProvider } from '@/lib/store'
 
 export const metadata: Metadata = {
@@ -63,11 +62,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="bg-background text-white antialiased min-h-screen flex flex-col">
         <AuthProvider>
-          <Navbar />
-          <main className="flex-1">
+          <ConditionalLayout>
             {children}
-          </main>
-          <Footer />
+          </ConditionalLayout>
         </AuthProvider>
       </body>
     </html>
