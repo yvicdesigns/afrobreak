@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Play, Instagram, Twitter, Youtube, Facebook, Mail, ArrowRight } from 'lucide-react'
+import DonateButton from '@/components/ui/DonateButton'
 
 const platformLinks = [
   { label: 'Browse Videos', href: '/videos' },
@@ -68,6 +69,12 @@ export default function Footer() {
                   <Icon size={16} />
                 </a>
               ))}
+            </div>
+
+            {/* Donate */}
+            <div>
+              <p className="text-sm font-semibold text-white mb-2">Support the culture</p>
+              <DonateButton variant="footer" />
             </div>
 
             {/* Newsletter */}

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Play, Calendar, ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import DonateButton from '@/components/ui/DonateButton'
 
 const stats = [
   { value: '500+', label: 'Videos' },
@@ -189,6 +190,7 @@ export default function Hero() {
                 Browse Events
               </Button>
             </Link>
+            <DonateButton variant="hero" />
           </div>
 
           {/* Stats */}
