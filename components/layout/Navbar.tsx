@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
 import SearchBar from '@/components/ui/SearchBar'
+import { supabase } from '@/lib/supabase'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -26,7 +27,14 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!currentUser) { setIsAdmin(false); return }
+    supabase.from('profiles').select('is_admin').eq('id', currentUser.id).single()
+      .then(({ data }) => setIsAdmin(data?.is_admin ?? false))
+  }, [currentUser])
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -170,13 +178,15 @@ export default function Navbar() {
                             <Crown size={15} /> Upgrade to Premium
                           </Link>
                         )}
-                        <Link
-                          href="/admin"
-                          onClick={() => setDropdownOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"
-                        >
-                          <Settings size={15} /> Admin
-                        </Link>
+                        {isAdmin && (
+                          <Link
+                            href="/admin"
+                            onClick={() => setDropdownOpen(false)}
+                            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"
+                          >
+                            <Settings size={15} /> Admin
+                          </Link>
+                        )}
                         <div className="border-t border-white/10 mt-2 pt-2">
                           <button
                             onClick={() => { logout(); setDropdownOpen(false) }}
@@ -261,7 +271,9 @@ export default function Navbar() {
                     </div>
                     <Link href="/profile" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">Profile</Link>
                     <Link href="/subscribe" className="block px-4 py-3 rounded-xl text-gold-DEFAULT hover:bg-gold-DEFAULT/10 transition-all">Upgrade to Premium</Link>
-                    <Link href="/admin" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">Admin</Link>
+                    {isAdmin && (
+                      <Link href="/admin" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">Admin</Link>
+                    )}
                     <button
                       onClick={logout}
                       className="block w-full text-left px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all"
