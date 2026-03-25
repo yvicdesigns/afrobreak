@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
-  Settings, Menu, X, Play, ChevronRight
+  Settings, Menu, X, Play, ChevronRight, Bell
 } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -22,6 +22,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(2)
+
+  const notifications = [
+    { id: 1, text: 'New user signed up', time: '2 min ago', unread: true },
+    { id: 2, text: 'New premium subscriber', time: '1 hour ago', unread: true },
+    { id: 3, text: 'Video upload complete', time: '3 hours ago', unread: false },
+  ]
 
   const isActive = (item: typeof navItems[0]) => {
     if (item.exact) return pathname === item.href
@@ -154,7 +162,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative">
+            <div className="relative">
+              <button
+                onClick={() => { setNotifOpen(o => !o); setUnreadCount(0) }}
+                className="relative p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all"
+              >
+                <Bell size={18} />
+                {unreadCount > 0 && (
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary-500 rounded-full" />
+                )}
+              </button>
+              {notifOpen && (
+                <div className="absolute right-0 top-11 w-72 bg-surface border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
+                  <div className="px-4 py-3 border-b border-white/5">
+                    <p className="text-sm font-bold text-white">Notifications</p>
+                  </div>
+                  {notifications.map(n => (
+                    <div key={n.id} className={clsx('px-4 py-3 border-b border-white/5 hover:bg-white/5 transition-colors', n.unread && 'bg-primary-500/5')}>
+                      <p className="text-sm text-white">{n.text}</p>
+                      <p className="text-xs text-text-muted mt-0.5">{n.time}</p>
+                    </div>
+                  ))}
+                  <div className="px-4 py-3 text-center">
+                    <span className="text-xs text-text-muted">No more notifications</span>
+                  </div>
+                </div>
+              )}
+            </div>
             <Link href="/" className="text-xs text-primary-500 hover:text-primary-400 font-medium transition-colors">
               View Site
             </Link>
