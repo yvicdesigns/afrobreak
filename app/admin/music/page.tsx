@@ -12,8 +12,8 @@ const emptyAlbum = { title: '', artist: '', genre: 'Afrobeats', price: '9.99', c
 
 type TrackForm = typeof emptyTrack
 type AlbumForm = typeof emptyAlbum
-type TrackRow = { id: string; title: string; artist: string; genre: string; duration: string; price: string; cover: string; preview_url: string; download_url: string; album: string; badge: string; [key: string]: string }
-type AlbumRow = { id: string; title: string; artist: string; genre: string; price: string; cover: string; track_count: string; [key: string]: string }
+type TrackRow = { id: string; title: string; artist: string; genre: string; duration: string; price: number; cover: string; preview_url: string; download_url: string; album: string; badge: string; in_stock: boolean }
+type AlbumRow = { id: string; title: string; artist: string; genre: string; price: number; cover: string; track_count: number }
 
 function Field({ label, value, onChange, placeholder, required, type = 'text' }: {
   label: string; value: string; onChange: (v: string) => void
@@ -53,11 +53,11 @@ export default function AdminMusicPage() {
     const payload = { ...trackForm, price: parseFloat(trackForm.price), in_stock: true }
     if (editId) {
       await updateTrack(editId, payload)
-      setTracks(prev => prev.map(t => t.id === editId ? { ...t, ...payload } : t))
+      setTracks(prev => prev.map(t => t.id === editId ? { ...t, ...payload } as TrackRow : t))
       flash('Track updated!')
     } else {
       const created = await createTrack(payload)
-      if (created) setTracks(prev => [created, ...prev])
+      if (created) setTracks(prev => [created as TrackRow, ...prev])
       flash('Track added!')
     }
     setSaving(false)
@@ -66,20 +66,20 @@ export default function AdminMusicPage() {
     setEditId(null)
   }
 
-  const handleTrackEdit = (t: Record<string, unknown>) => {
+  const handleTrackEdit = (t: TrackRow) => {
     setTrackForm({
-      title: t.title as string || '',
-      artist: t.artist as string || '',
-      genre: t.genre as string || 'Afrobeats',
-      duration: t.duration as string || '',
+      title: t.title || '',
+      artist: t.artist || '',
+      genre: t.genre || 'Afrobeats',
+      duration: t.duration || '',
       price: String(t.price || '1.99'),
-      cover: t.cover as string || '',
-      preview_url: t.preview_url as string || '',
-      download_url: t.download_url as string || '',
-      album: t.album as string || '',
-      badge: t.badge as string || '',
+      cover: t.cover || '',
+      preview_url: t.preview_url || '',
+      download_url: t.download_url || '',
+      album: t.album || '',
+      badge: t.badge || '',
     })
-    setEditId(t.id as string)
+    setEditId(t.id)
     setShowForm(true)
   }
 
@@ -97,11 +97,11 @@ export default function AdminMusicPage() {
     const payload = { ...albumForm, price: parseFloat(albumForm.price), track_count: parseInt(albumForm.track_count) }
     if (editId) {
       await updateAlbum(editId, payload)
-      setAlbums(prev => prev.map(a => a.id === editId ? { ...a, ...payload } : a))
+      setAlbums(prev => prev.map(a => a.id === editId ? { ...a, ...payload } as AlbumRow : a))
       flash('Album updated!')
     } else {
       const created = await createAlbum(payload)
-      if (created) setAlbums(prev => [created, ...prev])
+      if (created) setAlbums(prev => [created as AlbumRow, ...prev])
       flash('Album added!')
     }
     setSaving(false)
@@ -110,16 +110,16 @@ export default function AdminMusicPage() {
     setEditId(null)
   }
 
-  const handleAlbumEdit = (a: Record<string, unknown>) => {
+  const handleAlbumEdit = (a: AlbumRow) => {
     setAlbumForm({
-      title: a.title as string || '',
-      artist: a.artist as string || '',
-      genre: a.genre as string || 'Afrobeats',
+      title: a.title || '',
+      artist: a.artist || '',
+      genre: a.genre || 'Afrobeats',
       price: String(a.price || '9.99'),
-      cover: a.cover as string || '',
+      cover: a.cover || '',
       track_count: String(a.track_count || '0'),
     })
-    setEditId(a.id as string)
+    setEditId(a.id)
     setShowForm(true)
   }
 
@@ -268,7 +268,7 @@ export default function AdminMusicPage() {
                     </td>
                     <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{track.genre}</span></td>
                     <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{track.duration}</span></td>
-                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{parseFloat(track.price).toFixed(2)}</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{track.price?.toFixed(2)}</span></td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button onClick={() => handleTrackEdit(track)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
@@ -317,7 +317,7 @@ export default function AdminMusicPage() {
                     </td>
                     <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre}</span></td>
                     <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{album.track_count} tracks</span></td>
-                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{parseFloat(album.price).toFixed(2)}</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{album.price?.toFixed(2)}</span></td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>

@@ -61,11 +61,11 @@ export default function AdminStorePage() {
     }
     if (editId) {
       await updateProduct(editId, payload)
-      setProducts(prev => prev.map(p => p.id === editId ? { ...p, ...payload } : p))
+      setProducts(prev => prev.map(p => p.id === editId ? { ...p, ...payload } as ProductRow : p))
       flash('Product updated!')
     } else {
       const created = await createProduct(payload)
-      if (created) setProducts(prev => [created, ...prev])
+      if (created) setProducts(prev => [created as ProductRow, ...prev])
       flash('Product added!')
     }
     setSaving(false)
