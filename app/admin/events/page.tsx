@@ -6,6 +6,7 @@ import { getEvents, createEvent, updateEvent, deleteEvent } from '@/lib/db'
 import type { Event, EventType } from '@/lib/types'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 const eventTypes: EventType[] = ['Workshop', 'Class', 'Show', 'Battle']
 
@@ -203,9 +204,7 @@ export default function AdminEventsPage() {
                 <input type="number" value={form.capacity} onChange={e => setForm(f => ({...f, capacity: parseInt(e.target.value)}))} min={1} className="input-base" />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-white mb-1.5">Image URL *</label>
-                <input type="url" value={form.image} onChange={e => setForm(f => ({...f, image: e.target.value}))}
-                  placeholder="https://images.unsplash.com/..." className={`input-base ${errors.image ? 'border-red-500/60' : ''}`} />
+                <ImageUpload label="Image *" value={form.image} onChange={v => setForm(f => ({...f, image: v}))} folder="events" />
                 {errors.image && <p className="text-red-400 text-xs mt-1">{errors.image}</p>}
               </div>
               <div className="md:col-span-2">

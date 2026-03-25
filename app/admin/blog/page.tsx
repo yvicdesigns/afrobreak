@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { getBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost } from '@/lib/db'
 import type { BlogPost, BlogCategory } from '@/lib/types'
 import Button from '@/components/ui/Button'
+import ImageUpload from '@/components/ui/ImageUpload'
 import Badge from '@/components/ui/Badge'
 
 const categories: BlogCategory[] = ['Dance Tips', 'Lifestyle', 'Culture', 'Interviews', 'News']
@@ -223,9 +224,7 @@ export default function AdminBlogPage() {
                   {errors.author && <p className="text-red-400 text-xs mt-1">{errors.author}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">Cover Image URL *</label>
-                  <input type="url" value={form.image} onChange={e => setForm(f => ({...f, image: e.target.value}))}
-                    placeholder="https://images.unsplash.com/..." className={`input-base ${errors.image ? 'border-red-500/60' : ''}`} />
+                  <ImageUpload label="Cover Image *" value={form.image} onChange={v => setForm(f => ({...f, image: v}))} folder="blog" />
                   {errors.image && <p className="text-red-400 text-xs mt-1">{errors.image}</p>}
                 </div>
                 <div>

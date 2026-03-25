@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Edit3, Trash2, X, Check, Lock, Unlock } from 'lucide-react'
 import { getProducts, createProduct, updateProduct, deleteProduct } from '@/lib/db'
 import Button from '@/components/ui/Button'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 const categories = ['Apparel', 'Accessories', 'Footwear', 'Digital']
 
@@ -130,7 +131,7 @@ export default function AdminStorePage() {
                 <Field label="Description" value={form.description} onChange={v => setForm(f => ({ ...f, description: v }))} placeholder="Describe the product..." textarea />
               </div>
               <div className="md:col-span-2">
-                <Field label="Image URL" value={form.image} onChange={v => setForm(f => ({ ...f, image: v }))} placeholder="https://..." />
+                <ImageUpload label="Product Image" value={form.image} onChange={v => setForm(f => ({ ...f, image: v }))} folder="store" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-white mb-1.5">Category</label>

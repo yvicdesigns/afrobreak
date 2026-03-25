@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Edit3, Trash2, X, Check, Music, Disc } from 'lucide-react'
 import { getTracks, createTrack, updateTrack, deleteTrack, getAlbums, createAlbum, updateAlbum, deleteAlbum } from '@/lib/db'
 import Button from '@/components/ui/Button'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 const genres = ['Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
 
@@ -185,7 +186,7 @@ export default function AdminMusicPage() {
               <Field label="Price (€)" type="number" value={trackForm.price} onChange={v => setTrackForm(f => ({ ...f, price: v }))} placeholder="1.99" />
               <Field label="Album" value={trackForm.album} onChange={v => setTrackForm(f => ({ ...f, album: v }))} placeholder="Album name" />
               <div className="md:col-span-2">
-                <Field label="Cover Image URL" value={trackForm.cover} onChange={v => setTrackForm(f => ({ ...f, cover: v }))} placeholder="https://..." />
+                <ImageUpload label="Cover Image" value={trackForm.cover} onChange={v => setTrackForm(f => ({ ...f, cover: v }))} folder="music" />
               </div>
               <div className="md:col-span-2">
                 <Field label="Preview URL (30 sec MP3)" value={trackForm.preview_url} onChange={v => setTrackForm(f => ({ ...f, preview_url: v }))} placeholder="https://..." />
@@ -223,7 +224,7 @@ export default function AdminMusicPage() {
               <Field label="Number of Tracks" type="number" value={albumForm.track_count} onChange={v => setAlbumForm(f => ({ ...f, track_count: v }))} placeholder="10" />
               <Field label="Price (€)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
               <div className="md:col-span-2">
-                <Field label="Cover Image URL" value={albumForm.cover} onChange={v => setAlbumForm(f => ({ ...f, cover: v }))} placeholder="https://..." />
+                <ImageUpload label="Cover Image" value={albumForm.cover} onChange={v => setAlbumForm(f => ({ ...f, cover: v }))} folder="music" />
               </div>
             </div>
             <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">

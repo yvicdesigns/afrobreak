@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Save } from 'lucide-react'
+import ImageUpload from '@/components/ui/ImageUpload'
 import { getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from '@/lib/db'
 
 type Member = {
@@ -113,8 +114,7 @@ export default function AdminTeamPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-white mb-1">Avatar URL</label>
-              <input value={form.avatar} onChange={e => setForm(f => ({ ...f, avatar: e.target.value }))} className="input-base" placeholder="https://..." />
+              <ImageUpload label="Avatar" value={form.avatar} onChange={v => setForm(f => ({ ...f, avatar: v }))} folder="avatars" />
             </div>
             <div>
               <label className="block text-xs font-medium text-white mb-1">Bio</label>

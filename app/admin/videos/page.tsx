@@ -7,6 +7,7 @@ import { getVideos, createVideo, updateVideo, deleteVideo } from '@/lib/db'
 import type { Video, VideoCategory, VideoLevel } from '@/lib/types'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 const categories: VideoCategory[] = ['Afro', 'Hip-Hop', 'Tutorial', 'Dancehall', 'Contemporary', 'Kids']
 const levels: VideoLevel[] = ['Beginner', 'Intermediate', 'Advanced']
@@ -171,7 +172,8 @@ export default function AdminVideosPage() {
                 <Field label="Description" value={form.description} onChange={v => setForm(f => ({...f, description: v}))} placeholder="Describe the video..." textarea />
               </div>
               <Field label="Video URL" required value={form.videoUrl} onChange={v => setForm(f => ({...f, videoUrl: v}))} error={errors.videoUrl} placeholder="https://www.youtube.com/embed/..." />
-              <Field label="Thumbnail URL" required value={form.thumbnail} onChange={v => setForm(f => ({...f, thumbnail: v}))} error={errors.thumbnail} placeholder="https://images.unsplash.com/..." />
+              <ImageUpload label="Thumbnail *" value={form.thumbnail} onChange={v => setForm(f => ({...f, thumbnail: v}))} folder="thumbnails" />
+              {errors.thumbnail && <p className="text-red-400 text-xs -mt-2">{errors.thumbnail}</p>}
 
               <div>
                 <label className="block text-sm font-medium text-white mb-1.5">Category *</label>

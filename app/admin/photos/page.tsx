@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Trash2, X, Check, Image } from 'lucide-react'
+import ImageUpload from '@/components/ui/ImageUpload'
 import { supabase } from '@/lib/supabase'
 import Button from '@/components/ui/Button'
 
@@ -84,8 +85,7 @@ export default function AdminPhotosPage() {
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-white mb-1.5">Image URL <span className="text-red-400">*</span></label>
-                <input type="text" value={form.src} onChange={e => setForm(f => ({ ...f, src: e.target.value }))} placeholder="https://images.unsplash.com/..." className="input-base" />
+                <ImageUpload label="Photo *" value={form.src} onChange={v => setForm(f => ({ ...f, src: v }))} folder="photos" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-white mb-1.5">Title <span className="text-red-400">*</span></label>
