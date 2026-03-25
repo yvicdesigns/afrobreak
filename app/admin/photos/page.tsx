@@ -20,7 +20,7 @@ export default function AdminPhotosPage() {
 
   useEffect(() => {
     supabase.from('photos').select('*').order('created_at', { ascending: false }).then(({ data }) => {
-      if (data) setPhotos(data)
+      if (data) setPhotos(data as PhotoRow[])
     })
   }, [])
 
@@ -123,17 +123,17 @@ export default function AdminPhotosPage() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {photos.map(photo => (
-            <div key={photo.id as string} className="group relative rounded-xl overflow-hidden border border-white/5 hover:border-primary-500/30 transition-all aspect-square">
-              <img src={photo.src as string} alt={photo.title as string} className="w-full h-full object-cover" />
+            <div key={photo.id} className="group relative rounded-xl overflow-hidden border border-white/5 hover:border-primary-500/30 transition-all aspect-square">
+              <img src={photo.src} alt={photo.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3">
                 <div className="flex justify-end">
-                  <button onClick={() => handleDelete(photo.id as string)} className="p-1.5 rounded-lg bg-red-500/80 text-white hover:bg-red-500 transition-all">
+                  <button onClick={() => handleDelete(photo.id)} className="p-1.5 rounded-lg bg-red-500/80 text-white hover:bg-red-500 transition-all">
                     <Trash2 size={13} />
                   </button>
                 </div>
                 <div>
-                  <p className="text-white text-xs font-semibold truncate">{photo.title as string}</p>
-                  <p className="text-white/50 text-[10px]">{photo.category as string}</p>
+                  <p className="text-white text-xs font-semibold truncate">{photo.title}</p>
+                  <p className="text-white/50 text-[10px]">{photo.category}</p>
                 </div>
               </div>
             </div>

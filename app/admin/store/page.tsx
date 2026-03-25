@@ -20,7 +20,7 @@ const emptyForm = {
 }
 
 type FormState = typeof emptyForm
-type ProductRow = { id: string; name: string; description: string; price: string; image: string; category: string; sizes: string; colors: string; badge: string; in_stock: boolean; [key: string]: string | boolean }
+type ProductRow = { id: string; name: string; description: string; price: number; image: string; category: string; sizes: string[]; colors: string[]; badge: string; in_stock: boolean }
 
 function Field({ label, value, onChange, placeholder, required, type = 'text', textarea }: {
   label: string; value: string; onChange: (v: string) => void
@@ -45,7 +45,7 @@ export default function AdminStorePage() {
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState('')
 
-  useEffect(() => { getProducts().then(setProducts) }, [])
+  useEffect(() => { getProducts().then(data => setProducts(data as ProductRow[])) }, [])
 
   const flash = (msg: string) => { setSuccess(msg); setTimeout(() => setSuccess(''), 3000) }
 
@@ -76,17 +76,17 @@ export default function AdminStorePage() {
 
   const handleEdit = (p: ProductRow) => {
     setForm({
-      name: p.name as string || '',
-      description: p.description as string || '',
+      name: p.name || '',
+      description: p.description || '',
       price: String(p.price || '29.99'),
-      image: p.image as string || '',
-      category: p.category as string || 'Apparel',
-      sizes: (p.sizes as string[] || []).join(', '),
-      colors: (p.colors as string[] || []).join(', '),
-      badge: p.badge as string || '',
-      in_stock: p.in_stock as boolean ?? true,
+      image: p.image || '',
+      category: p.category || 'Apparel',
+      sizes: (p.sizes || []).join(', '),
+      colors: (p.colors || []).join(', '),
+      badge: p.badge || '',
+      in_stock: p.in_stock ?? true,
     })
-    setEditId(p.id as string)
+    setEditId(p.id)
     setShowForm(true)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -172,32 +172,32 @@ export default function AdminStorePage() {
               {products.length === 0 ? (
                 <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No products yet. Add your first product!</td></tr>
               ) : products.map(product => (
-                <tr key={product.id as string} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                <tr key={product.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
-                      {product.image && (
+                      {!!product.image && (
                         <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                          <img src={product.image as string} alt={product.name as string} className="w-full h-full object-cover" />
+                          <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                         </div>
                       )}
                       <div>
-                        <p className="text-sm font-medium text-white">{product.name as string}</p>
-                        {product.badge && <span className="text-[10px] text-primary-400">{product.badge as string}</span>}
+                        <p className="text-sm font-medium text-white">{product.name}</p>
+                        {!!product.badge && <span className="text-[10px] text-primary-400">{product.badge}</span>}
                       </div>
                     </div>
                   </td>
-                  <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{product.category as string}</span></td>
+                  <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{product.category}</span></td>
                   <td className="p-4 text-center">
                     {product.in_stock
                       ? <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">IN STOCK</span>
                       : <span className="px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 text-[10px] font-bold">OUT</span>
                     }
                   </td>
-                  <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{(product.price as number)?.toFixed(2)}</span></td>
+                  <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{product.price?.toFixed(2)}</span></td>
                   <td className="p-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => handleEdit(product)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
-                      <button onClick={() => handleDelete(product.id as string)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                      <button onClick={() => handleDelete(product.id)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
                     </div>
                   </td>
                 </tr>

@@ -39,8 +39,8 @@ export default function AdminMusicPage() {
   const [success, setSuccess] = useState('')
 
   useEffect(() => {
-    getTracks().then(setTracks)
-    getAlbums().then(setAlbums)
+    getTracks().then(data => setTracks(data as TrackRow[]))
+    getAlbums().then(data => setAlbums(data as AlbumRow[]))
   }, [])
 
   const flash = (msg: string) => { setSuccess(msg); setTimeout(() => setSuccess(''), 3000) }
@@ -252,27 +252,27 @@ export default function AdminMusicPage() {
                 {tracks.length === 0 ? (
                   <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No tracks yet. Add your first track!</td></tr>
                 ) : tracks.map(track => (
-                  <tr key={track.id as string} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                  <tr key={track.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
-                        {track.cover && (
+                        {!!track.cover && (
                           <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-                            <img src={track.cover as string} alt={track.title as string} className="w-full h-full object-cover" />
+                            <img src={track.cover} alt={track.title} className="w-full h-full object-cover" />
                           </div>
                         )}
                         <div>
-                          <p className="text-sm font-medium text-white">{track.title as string}</p>
-                          <p className="text-xs text-text-secondary">{track.artist as string}{track.album ? ` · ${track.album}` : ''}</p>
+                          <p className="text-sm font-medium text-white">{track.title}</p>
+                          <p className="text-xs text-text-secondary">{track.artist}{track.album ? ` · ${track.album}` : ''}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{track.genre as string}</span></td>
-                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{track.duration as string}</span></td>
-                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{(track.price as number)?.toFixed(2)}</span></td>
+                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{track.genre}</span></td>
+                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{track.duration}</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{parseFloat(track.price).toFixed(2)}</span></td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button onClick={() => handleTrackEdit(track)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
-                        <button onClick={() => handleTrackDelete(track.id as string)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                        <button onClick={() => handleTrackDelete(track.id)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
                       </div>
                     </td>
                   </tr>
@@ -301,27 +301,27 @@ export default function AdminMusicPage() {
                 {albums.length === 0 ? (
                   <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No albums yet. Add your first album!</td></tr>
                 ) : albums.map(album => (
-                  <tr key={album.id as string} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                  <tr key={album.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
-                        {album.cover && (
+                        {!!album.cover && (
                           <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-                            <img src={album.cover as string} alt={album.title as string} className="w-full h-full object-cover" />
+                            <img src={album.cover} alt={album.title} className="w-full h-full object-cover" />
                           </div>
                         )}
                         <div>
-                          <p className="text-sm font-medium text-white">{album.title as string}</p>
-                          <p className="text-xs text-text-secondary">{album.artist as string}</p>
+                          <p className="text-sm font-medium text-white">{album.title}</p>
+                          <p className="text-xs text-text-secondary">{album.artist}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre as string}</span></td>
-                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{album.track_count as number} tracks</span></td>
-                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{(album.price as number)?.toFixed(2)}</span></td>
+                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre}</span></td>
+                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{album.track_count} tracks</span></td>
+                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{parseFloat(album.price).toFixed(2)}</span></td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
-                        <button onClick={() => handleAlbumDelete(album.id as string)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                        <button onClick={() => handleAlbumDelete(album.id)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
                       </div>
                     </td>
                   </tr>
