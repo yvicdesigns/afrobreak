@@ -18,13 +18,16 @@ const eventsLinks = [
 
 const companyLinks = [
   { label: 'About Us', href: '/about' },
-  { label: 'Awards', href: '/awards' },
-  { label: 'Instructors', href: '/instructors' },
   { label: 'Press', href: '/press' },
-  { label: 'Careers', href: '/careers' },
   { label: 'Partners', href: '/partners' },
-  { label: 'Shop', href: '/store' },
   { label: 'Contact Us', href: '/contact' },
+]
+
+const moreLinks = [
+  { label: 'Awards', href: '/awards' },
+  { label: 'Shop', href: '/store' },
+  { label: 'Instructors', href: '/instructors' },
+  { label: 'Careers', href: '/careers' },
 ]
 
 const socialLinks = [
@@ -39,9 +42,9 @@ export default function Footer() {
     <footer className="bg-surface border-t border-white/5 mt-auto">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-6">
           {/* Brand Column */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-glow-orange">
                 <Play size={16} className="text-white fill-white ml-0.5" />
@@ -130,6 +133,20 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-white uppercase tracking-widest">Company</h3>
             <ul className="space-y-3">
               {companyLinks.map(link => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* More */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">More</h3>
+            <ul className="space-y-3">
+              {moreLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200">
                     {link.label}
