@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake } from 'lucide-react'
+import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake, Quote } from 'lucide-react'
 import Button from '@/components/ui/Button'
 
 const partnerTypes = [
@@ -50,12 +50,39 @@ const partnerTypes = [
 ]
 
 const currentPartners = [
-  { name: 'Institut Français', type: 'Cultural', logo: '🏛️' },
-  { name: 'Afrobeats Nation', type: 'Media', logo: '🎵' },
-  { name: 'Urban Dance Academy', type: 'Studio', logo: '🏫' },
-  { name: 'Diaspora Connect', type: 'Community', logo: '🌍' },
-  { name: 'BeatMakers Paris', type: 'Music', logo: '🎧' },
-  { name: 'African Fashion Week', type: 'Events', logo: '👗' },
+  { name: 'Ghana Olympic Committee', type: 'Sports', logo: '🏅' },
+  { name: 'KGL Foundation', type: 'Foundation', logo: '🌍' },
+  { name: 'The Ruggeds Crew', type: 'Netherlands', logo: '💪' },
+  { name: 'Elavanyo School', type: 'Education', logo: '🏫' },
+  { name: 'WDSF', type: 'Dance Sport', logo: '🕺' },
+]
+
+const testimonials = [
+  {
+    quote: "Collaborating with Africa Breaking Academy has been a transformative experience. Their commitment to storytelling, youth empowerment, and promoting Hip Hop across the African continent aligns seamlessly with our mission. Their professionalism and innovative approach to youth empowerment training is truly setting a new standard.",
+    name: 'Sammy Heywood',
+    org: 'Ghana Olympic Committee',
+  },
+  {
+    quote: "Africa Breaking Academy continues to raise the bar in youth-led education initiatives. Their innovative workshops and programs bring practical, real-world value to our students. It's a privilege to work alongside a team that so deeply understands the pulse of Africa's next generation.",
+    name: 'Madam Precious',
+    org: 'Head Mistress, Elavanyo School',
+  },
+  {
+    quote: "We've worked with many youth organizations, but Africa Breaking Academy stands out. Their passion, structure, and ability to mobilize young leaders is exceptional. Together, we've reached thousands with training, mentorship, and opportunity.",
+    name: 'KGL Foundation Team',
+    org: 'KGL Foundation',
+  },
+  {
+    quote: "Partnering with Africa Breaking Academy has given us access to a vibrant, driven youth Hip Hop audience in West Africa eager to embrace next level development in breaking and Hip Hop. Their leadership is forward-thinking, agile, and always collaborative. We're proud to support their mission.",
+    name: 'The Ruggeds Crew',
+    org: 'Netherlands',
+  },
+  {
+    quote: "Afrobreak's intention of building mind, body, and soul connections in Africa is incredibly important. Staying connected to our roots while uplifting one another and creating opportunities is key to our growth. If you continue to stay true to this vision, I have no doubt that this event will thrive and have a lasting impact.",
+    name: 'Elvina Vee',
+    org: 'WDSF Licensed Judge, South Africa',
+  },
 ]
 
 export default function PartnersPage() {
@@ -127,6 +154,26 @@ export default function PartnersPage() {
                 <span className="text-3xl block mb-2">{partner.logo}</span>
                 <p className="text-white text-xs font-semibold">{partner.name}</p>
                 <p className="text-text-muted text-[10px]">{partner.type}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-white mb-2">What Our Partners Say</h2>
+            <p className="text-text-secondary">Voices from across the AfroBreak network</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-surface border border-white/5 rounded-2xl p-6 flex flex-col hover:border-primary-500/20 transition-all">
+                <Quote size={22} className="text-primary-500/40 mb-4 flex-shrink-0" />
+                <p className="text-text-secondary text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
+                <div className="mt-5 pt-4 border-t border-white/10">
+                  <p className="font-bold text-white text-sm">{t.name}</p>
+                  <p className="text-primary-500 text-xs mt-0.5">{t.org}</p>
+                </div>
               </div>
             ))}
           </div>
