@@ -83,9 +83,9 @@ export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }
         ],
       },
       onClose: () => setLoading(false),
-      callback: async () => {
-        // Save order to Supabase
-        await supabase.from('orders').insert({
+      callback: (response: { reference: string }) => {
+        // Save order to Supabase (fire and forget)
+        supabase.from('orders').insert({
           type,
           email,
           items: items.map(i => ({
@@ -98,14 +98,14 @@ export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }
           })),
           total: convertedTotal,
           currency,
-          paystack_ref: ref,
+          paystack_ref: response.reference || ref,
           shipping: type === 'shop' ? { name, address, city, country, phone } : null,
           status: 'paid',
+        }).then(() => {
+          setLoading(false)
+          onClose()
+          router.push(`/thank-you?type=${type}&ref=${ref}&email=${encodeURIComponent(email)}`)
         })
-
-        setLoading(false)
-        onClose()
-        router.push(`/thank-you?type=${type}&ref=${ref}&email=${encodeURIComponent(email)}`)
       },
     })
 
