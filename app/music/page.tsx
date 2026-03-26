@@ -226,7 +226,7 @@ export default function MusicPage() {
 
                   {/* Price + Buy */}
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="font-bold text-white">GH₵{(track.price * 15.5).toFixed(2)}</span>
+                    <span className="font-bold text-white">€{track.price.toFixed(2)}</span>
                     {cart.includes(track.id) ? (
                       <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-xl">
                         <Check size={12} /> Owned
@@ -269,7 +269,7 @@ export default function MusicPage() {
                   </p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-xl font-black text-white">GH₵{(album.price * 15.5).toFixed(2)}</span>
+                      <span className="text-xl font-black text-white">€{album.price.toFixed(2)}</span>
                       <p className="text-xs text-text-muted">Full album</p>
                     </div>
                     <Button variant="primary" size="sm" leftIcon={<Download size={14} />} onClick={() => setAlbumCheckout(album)}>
@@ -313,7 +313,7 @@ export default function MusicPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-white truncate">{track.title}</p>
                       <p className="text-xs text-text-muted">{track.artist}</p>
-                      <p className="text-sm font-bold text-primary-400 mt-1">GH₵{(track.price * 15.5).toFixed(2)}</p>
+                      <p className="text-sm font-bold text-primary-400 mt-1">€{track.price.toFixed(2)}</p>
                     </div>
                     <button onClick={() => removeFromCart(track.id)} className="p-1.5 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-all">
                       <X size={14} />
@@ -330,7 +330,7 @@ export default function MusicPage() {
                   <span className="text-xl font-black text-white">€{cartTotal.toFixed(2)}</span>
                 </div>
                 <Button variant="primary" fullWidth leftIcon={<Download size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
-                  Buy & Download — GH₵{(cartTotal * 15.5).toFixed(2)}
+                  Buy & Download — €{cartTotal.toFixed(2)}
                 </Button>
                 <p className="text-xs text-text-muted text-center">MP3 + WAV · Instant download · DRM-free</p>
               </div>

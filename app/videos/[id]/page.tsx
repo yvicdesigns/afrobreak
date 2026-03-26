@@ -242,7 +242,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
                 <div className="text-3xl mb-3">👑</div>
                 <h3 className="font-bold text-white mb-2">Go Premium</h3>
                 <p className="text-sm text-text-secondary mb-4">
-                  Unlock all {premiumCount} premium videos for just GH₵154.85/month.
+                  Unlock all {premiumCount} premium videos for just €9.99/month.
                 </p>
                 <Link href="/subscribe">
                   <Button variant="gold" size="sm" fullWidth>

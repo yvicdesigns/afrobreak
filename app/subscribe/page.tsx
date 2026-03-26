@@ -23,7 +23,6 @@ const currencies = [
   { code: 'NGN', symbol: '₦', rate: 1600 },
 ]
 
-const GHS_RATE = 15.5
 
 const plans = [
   {
@@ -308,14 +307,14 @@ export default function SubscribePage() {
                       <span className="text-4xl font-black text-white">Free</span>
                     ) : (
                       <>
-                        <span className="text-4xl font-black text-white">GH₵{(plan.priceUSD * GHS_RATE).toFixed(2)}</span>
+                        <span className="text-4xl font-black text-white">€{plan.priceUSD.toFixed(2)}</span>
                         <span className="text-text-secondary mb-1">/{plan.period}</span>
                       </>
                     )}
                   </div>
                   {plan.id === 'annual' && (
                     <p className="text-xs text-emerald-400 mt-1 font-medium">
-                      Equivalent to GH₵{(6.67 * GHS_RATE).toFixed(2)}/month — save GH₵{(40 * GHS_RATE).toFixed(2)}
+                      Equivalent to €6.67/month — save €40
                     </p>
                   )}
                 </div>
@@ -351,7 +350,7 @@ export default function SubscribePage() {
                     ? 'Current Plan'
                     : plan.priceUSD === 0
                     ? 'Get Started Free'
-                    : `Subscribe — GH₵${(plan.priceUSD * GHS_RATE).toFixed(2)}/${plan.period}`}
+                    : `Subscribe — €${plan.priceUSD.toFixed(2)}/${plan.period}`}
                 </button>
               </div>
             ))}

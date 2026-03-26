@@ -44,7 +44,7 @@ export default function VideoPlayer({ video, className }: VideoPlayerProps) {
           </div>
           <h3 className="text-2xl font-bold text-white mb-3">Premium Content</h3>
           <p className="text-text-secondary mb-6">
-            This video is part of our Premium library. Unlock unlimited access to all {500}+ videos for just GH₵154.85/month.
+            This video is part of our Premium library. Unlock unlimited access to all {500}+ videos for just €9.99/month.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
             <Link href="/subscribe">
@@ -62,7 +62,7 @@ export default function VideoPlayer({ video, className }: VideoPlayerProps) {
           </div>
           {video.price && (
             <p className="text-xs text-text-muted mt-4">
-              Or purchase this video individually for GH₵{video.price ? (video.price * 15.5).toFixed(2) : ''}
+              Or purchase this video individually for €{video.price}
             </p>
           )}
         </div>

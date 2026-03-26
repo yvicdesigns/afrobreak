@@ -7,7 +7,11 @@
       "Bash(git push:*)",
       "Bash(npm run:*)",
       "Bash(git restore:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(sed -i '' 's/GH₵{\\(track\\\\.price \\\\* 15\\\\.5\\)\\\\.toFixed\\(2\\)}/€{track.price.toFixed\\(2\\)}/g' /Users/tchissambouvanyvic/afrobreak/app/music/page.tsx)",
+      "Bash(sed -i '' 's/GH₵{\\(album\\\\.price \\\\* 15\\\\.5\\)\\\\.toFixed\\(2\\)}/€{album.price.toFixed\\(2\\)}/g' /Users/tchissambouvanyvic/afrobreak/app/music/page.tsx)",
+      "Bash(sed -i '' 's/GH₵{\\(cartTotal \\\\* 15\\\\.5\\)\\\\.toFixed\\(2\\)}/€{cartTotal.toFixed\\(2\\)}/g' /Users/tchissambouvanyvic/afrobreak/app/music/page.tsx)",
+      "Bash(sed -i '' 's/Buy \\\\& Download — GH₵{\\(cartTotal \\\\* 15\\\\.5\\)\\\\.toFixed\\(2\\)}/Buy \\\\& Download — €{cartTotal.toFixed\\(2\\)}/g' /Users/tchissambouvanyvic/afrobreak/app/music/page.tsx)"
     ]
   }
 }

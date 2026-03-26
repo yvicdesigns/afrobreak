@@ -52,7 +52,7 @@ export default function EventCard({ event, className }: EventCardProps) {
           {event.price === 0 ? (
             <span className="text-sm font-bold text-emerald-400">Free</span>
           ) : (
-            <span className="text-sm font-bold text-white">GH₵{(event.price * 15.5).toFixed(2)}</span>
+            <span className="text-sm font-bold text-white">€{event.price.toFixed(2)}</span>
           )}
         </div>
       </div>

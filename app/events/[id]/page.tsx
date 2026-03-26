@@ -181,7 +181,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     {event.price === 0 ? (
                       <span className="text-2xl font-black text-emerald-400">Free</span>
                     ) : (
-                      <span className="text-2xl font-black text-white">GH₵{(event.price * 15.5).toFixed(2)}</span>
+                      <span className="text-2xl font-black text-white">€{event.price.toFixed(2)}</span>
                     )}
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     disabled={soldOut}
                     onClick={() => event.price === 0 ? setShowRegModal(true) : setShowPayment(true)}
                   >
-                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — GH₵${(event.price * 15.5).toFixed(2)}`}
+                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — €${event.price.toFixed(2)}`}
                   </Button>
                 )}
 

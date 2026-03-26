@@ -243,7 +243,7 @@ export default function AdminMusicPage() {
                   {genres.map(g => <option key={g} value={g} className="bg-surface">{g}</option>)}
                 </select>
               </div>
-              <Field label="Price (GH₵)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
+              <Field label="Price (€)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-white mb-1.5">Description</label>
                 <textarea
@@ -405,7 +405,7 @@ export default function AdminMusicPage() {
                             : <span className="text-xs text-text-muted">—</span>
                           }
                         </td>
-                        <td className="p-4 text-right"><span className="text-sm font-bold text-white">GH₵{album.price?.toFixed(2)}</span></td>
+                        <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{album.price?.toFixed(2)}</span></td>
                         <td className="p-4 text-right">
                           <div className="flex items-center justify-end gap-2">
                             <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
@@ -429,7 +429,7 @@ export default function AdminMusicPage() {
                                     <span className="text-text-secondary">{t.artist}</span>
                                     <span className="text-text-muted">·</span>
                                     <span className="text-text-muted">{t.duration}</span>
-                                    <span className="ml-auto text-primary-400 font-bold">GH₵{(t.price * 15.5).toFixed(2)}</span>
+                                    <span className="ml-auto text-primary-400 font-bold">€{t.price.toFixed(2)}</span>
                                   </div>
                                 ))}
                               </div>
