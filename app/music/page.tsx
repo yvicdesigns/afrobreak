@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Play, Pause, ShoppingCart, Music, Download, Clock, ChevronRight, Volume2, X, Check } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
 
 type MusicGenre = 'All' | 'Afrobeats' | 'Amapiano' | 'Dancehall' | 'Afro-Fusion' | 'Hip-Hop'
 
@@ -131,6 +132,8 @@ export default function MusicPage() {
   const [cartOpen, setCartOpen] = useState(false)
   const [addedId, setAddedId] = useState<string | null>(null)
   const [tab, setTab] = useState<'tracks' | 'albums'>('tracks')
+  const [checkoutOpen, setCheckoutOpen] = useState(false)
+  const [albumCheckout, setAlbumCheckout] = useState<typeof albums[0] | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const filtered = activeGenre === 'All' ? tracks : tracks.filter(t => t.genre === activeGenre)
@@ -328,7 +331,7 @@ export default function MusicPage() {
                       <span className="text-xl font-black text-white">€{album.price.toFixed(2)}</span>
                       <p className="text-xs text-text-muted">Full album</p>
                     </div>
-                    <Button variant="primary" size="sm" leftIcon={<Download size={14} />}>
+                    <Button variant="primary" size="sm" leftIcon={<Download size={14} />} onClick={() => setAlbumCheckout(album)}>
                       Buy Album
                     </Button>
                   </div>
@@ -385,14 +388,34 @@ export default function MusicPage() {
                   <span className="text-text-secondary">Total</span>
                   <span className="text-xl font-black text-white">€{cartTotal.toFixed(2)}</span>
                 </div>
-                <Button variant="primary" fullWidth leftIcon={<Download size={16} />}>
-                  Buy & Download — €{cartTotal.toFixed(2)}
+                <Button variant="primary" fullWidth leftIcon={<Download size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
+                  Buy & Download — ${cartTotal.toFixed(2)}
                 </Button>
                 <p className="text-xs text-text-muted text-center">MP3 + WAV · Instant download · DRM-free</p>
               </div>
             )}
           </div>
         </div>
+      )}
+
+      {/* Paystack Checkout — tracks */}
+      {checkoutOpen && (
+        <PaystackCheckoutModal
+          type="music"
+          items={cartItems.map(t => ({ id: t.id, name: t.title, price: t.price, cover: t.cover }))}
+          totalUSD={cartTotal}
+          onClose={() => setCheckoutOpen(false)}
+        />
+      )}
+
+      {/* Paystack Checkout — album */}
+      {albumCheckout && (
+        <PaystackCheckoutModal
+          type="music"
+          items={[{ id: albumCheckout.id, name: albumCheckout.title, price: albumCheckout.price }]}
+          totalUSD={albumCheckout.price}
+          onClose={() => setAlbumCheckout(null)}
+        />
       )}
 
       {/* Featured artist */}

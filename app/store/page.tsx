@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ShoppingCart, X, Plus, Minus, ShoppingBag, Star, Truck, Shield, RotateCcw } from 'lucide-react'
 import type { Product, CartItem, ProductCategory } from '@/lib/types'
 import Button from '@/components/ui/Button'
+import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
 
 const products: Product[] = [
   {
@@ -106,6 +107,7 @@ export default function StorePage() {
   const [selectedSize, setSelectedSize] = useState<string>('')
   const [selectedColor, setSelectedColor] = useState<string>('')
   const [addedId, setAddedId] = useState<string | null>(null)
+  const [checkoutOpen, setCheckoutOpen] = useState(false)
 
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory)
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -371,8 +373,8 @@ export default function StorePage() {
                     Add €{(50 - cartTotal).toFixed(2)} more for free shipping
                   </p>
                 )}
-                <Button variant="primary" fullWidth leftIcon={<ShoppingCart size={16} />}>
-                  Checkout — €{cartTotal.toFixed(2)}
+                <Button variant="primary" fullWidth leftIcon={<ShoppingCart size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
+                  Checkout — ${cartTotal.toFixed(2)}
                 </Button>
                 <Button variant="ghost" fullWidth onClick={() => setCartOpen(false)}>
                   Continue Shopping
@@ -381,6 +383,23 @@ export default function StorePage() {
             )}
           </div>
         </div>
+      )}
+
+      {/* Paystack Checkout */}
+      {checkoutOpen && (
+        <PaystackCheckoutModal
+          type="shop"
+          items={cart.map(item => ({
+            id: item.product.id,
+            name: item.product.name,
+            price: item.product.price,
+            quantity: item.quantity,
+            size: item.size,
+            color: item.color,
+          }))}
+          totalUSD={cartTotal}
+          onClose={() => setCheckoutOpen(false)}
+        />
       )}
 
       {/* Reviews section */}
