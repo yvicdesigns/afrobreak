@@ -3,27 +3,28 @@ import { Play, Instagram, Twitter, Youtube, Facebook, Mail, ArrowRight } from 'l
 import DonateButton from '@/components/ui/DonateButton'
 
 const platformLinks = [
-  { label: 'Browse Videos', href: '/videos' },
-  { label: 'Events', href: '/events' },
+  { label: 'Gallery', href: '/photos' },
+  { label: 'Music', href: '/music' },
+  { label: 'Videos', href: '/videos' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Premium Subscription', href: '/subscribe' },
-  { label: 'Admin Dashboard', href: '/admin' },
+]
+
+const eventsLinks = [
+  { label: 'History', href: '/events?tab=history' },
+  { label: 'Projects', href: '/events?tab=projects' },
+  { label: 'Qualifiers', href: '/events?tab=qualifiers' },
+  { label: 'Africa Final', href: '/events?tab=africa-final' },
 ]
 
 const companyLinks = [
   { label: 'About Us', href: '/about' },
-  { label: 'Our Instructors', href: '/instructors' },
+  { label: 'Awards', href: '/awards' },
+  { label: 'Instructors', href: '/instructors' },
   { label: 'Press', href: '/press' },
   { label: 'Careers', href: '/careers' },
-  { label: 'Partner With Us', href: '/partners' },
-]
-
-const supportLinks = [
-  { label: 'Help Center', href: '/help' },
+  { label: 'Partners', href: '/partners' },
+  { label: 'Shop', href: '/store' },
   { label: 'Contact Us', href: '/contact' },
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'Cookie Policy', href: '/cookies' },
 ]
 
 const socialLinks = [
@@ -38,7 +39,7 @@ export default function Footer() {
     <footer className="bg-surface border-t border-white/5 mt-auto">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
@@ -102,10 +103,21 @@ export default function Footer() {
             <ul className="space-y-3">
               {platformLinks.map(link => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Events */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">Events</h3>
+            <ul className="space-y-3">
+              {eventsLinks.map(link => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -119,27 +131,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">Support</h3>
-            <ul className="space-y-3">
-              {supportLinks.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-sm text-text-secondary hover:text-primary-400 transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
