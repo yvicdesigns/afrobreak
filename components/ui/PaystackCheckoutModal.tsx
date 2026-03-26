@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Script from 'next/script'
-import { X, Loader2, ShoppingCart, Download, MapPin } from 'lucide-react'
+import { X, Loader2, ShoppingCart, Download, MapPin, Calendar } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
@@ -32,13 +32,14 @@ interface OrderItem {
 }
 
 interface Props {
-  type: 'shop' | 'music'
+  type: 'shop' | 'music' | 'event'
   items: OrderItem[]
   totalUSD: number
   onClose: () => void
+  onSuccess?: (ref: string, email: string, name: string) => void
 }
 
-export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }: Props) {
+export default function PaystackCheckoutModal({ type, items, totalUSD, onClose, onSuccess }: Props) {
   const router = useRouter()
   const [currency, setCurrency] = useState('USD')
   const [email, setEmail] = useState('')
@@ -104,7 +105,11 @@ export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }
         }).then(() => {
           setLoading(false)
           onClose()
-          router.push(`/thank-you?type=${type}&ref=${ref}&email=${encodeURIComponent(email)}`)
+          if (onSuccess) {
+            onSuccess(ref, email, name)
+          } else {
+            router.push(`/thank-you?type=${type}&ref=${ref}&email=${encodeURIComponent(email)}`)
+          }
         })
       },
     })
@@ -122,8 +127,8 @@ export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }
           {/* Header */}
           <div className="flex items-center justify-between p-5 border-b border-white/10 sticky top-0 bg-surface z-10">
             <div className="flex items-center gap-2">
-              {type === 'shop' ? <ShoppingCart size={18} className="text-primary-500" /> : <Download size={18} className="text-primary-500" />}
-              <h2 className="font-bold text-white">{type === 'shop' ? 'Checkout' : 'Buy & Download'}</h2>
+              {type === 'shop' ? <ShoppingCart size={18} className="text-primary-500" /> : type === 'music' ? <Download size={18} className="text-primary-500" /> : <Calendar size={18} className="text-primary-500" />}
+              <h2 className="font-bold text-white">{type === 'shop' ? 'Checkout' : type === 'music' ? 'Buy & Download' : 'Event Registration'}</h2>
             </div>
             <button onClick={onClose} className="p-2 rounded-xl hover:bg-white/10 text-text-muted transition-colors">
               <X size={18} />
@@ -204,7 +209,7 @@ export default function PaystackCheckoutModal({ type, items, totalUSD, onClose }
             >
               {loading
                 ? <><Loader2 size={18} className="animate-spin" /> Processing…</>
-                : <>{type === 'shop' ? <ShoppingCart size={18} /> : <Download size={18} />} Pay {selectedCurrency.symbol}{convertedTotal.toFixed(2)}</>
+                : <>{type === 'shop' ? <ShoppingCart size={18} /> : type === 'music' ? <Download size={18} /> : <Calendar size={18} />} Pay {selectedCurrency.symbol}{convertedTotal.toFixed(2)}</>
               }
             </button>
 

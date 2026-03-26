@@ -5,13 +5,15 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
   Calendar, Clock, MapPin, Users, Euro, ArrowLeft,
-  Share2, ExternalLink, ChevronRight
+  Share2, ExternalLink, ChevronRight, X, Loader2, Check
 } from 'lucide-react'
 import { getEventById, getEvents } from '@/lib/db'
 import type { Event } from '@/lib/types'
 import EventCard from '@/components/events/EventCard'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
+import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
+import { supabase } from '@/lib/supabase'
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-GB', {
@@ -24,6 +26,30 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
   const [similar, setSimilar] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
   const [registered, setRegistered] = useState(false)
+  const [showRegModal, setShowRegModal] = useState(false)
+  const [showPayment, setShowPayment] = useState(false)
+  const [regName, setRegName] = useState('')
+  const [regEmail, setRegEmail] = useState('')
+  const [regLoading, setRegLoading] = useState(false)
+  const [regError, setRegError] = useState('')
+
+  const handleFreeRegister = async () => {
+    setRegError('')
+    if (!regName) { setRegError('Please enter your name.'); return }
+    if (!regEmail || !/\S+@\S+\.\S+/.test(regEmail)) { setRegError('Please enter a valid email.'); return }
+    setRegLoading(true)
+    await supabase.from('event_registrations').insert({
+      event_id: event?.id,
+      event_title: event?.title,
+      name: regName,
+      email: regEmail,
+      amount_paid: 0,
+      status: 'confirmed',
+    })
+    setRegLoading(false)
+    setShowRegModal(false)
+    setRegistered(true)
+  }
 
   useEffect(() => {
     Promise.all([getEventById(params.id), getEvents()]).then(([e, all]) => {
@@ -184,6 +210,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
 
                 {registered ? (
                   <div className="bg-emerald-500/15 border border-emerald-500/30 rounded-xl p-4 text-center">
+                    <Check size={24} className="text-emerald-400 mx-auto mb-2" />
                     <p className="text-emerald-400 font-semibold">You&apos;re registered!</p>
                     <p className="text-xs text-text-secondary mt-1">Check your email for confirmation.</p>
                   </div>
@@ -193,9 +220,9 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     size="lg"
                     fullWidth
                     disabled={soldOut}
-                    onClick={() => setRegistered(true)}
+                    onClick={() => event.price === 0 ? setShowRegModal(true) : setShowPayment(true)}
                   >
-                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — €${event.price}`}
+                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — $${event.price}`}
                   </Button>
                 )}
 
@@ -210,6 +237,61 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
             </div>
           </div>
         </div>
+
+        {/* Free registration modal */}
+        {showRegModal && event && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <div className="w-full max-w-md bg-surface border border-white/10 rounded-2xl shadow-2xl">
+              <div className="flex items-center justify-between p-5 border-b border-white/10">
+                <h2 className="font-bold text-white">Register — {event.title}</h2>
+                <button onClick={() => setShowRegModal(false)} className="p-2 rounded-xl hover:bg-white/10 text-text-muted transition-colors"><X size={18} /></button>
+              </div>
+              <div className="p-5 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1.5">Full Name <span className="text-red-400">*</span></label>
+                  <input type="text" value={regName} onChange={e => setRegName(e.target.value)} placeholder="Your name" className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1.5">Email <span className="text-red-400">*</span></label>
+                  <input type="email" value={regEmail} onChange={e => setRegEmail(e.target.value)} placeholder="you@example.com" className="input-base" />
+                </div>
+                {regError && <p className="text-red-400 text-sm">{regError}</p>}
+                <button
+                  onClick={handleFreeRegister}
+                  disabled={regLoading}
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-white bg-primary-500 hover:bg-primary-600 disabled:opacity-60 transition-all"
+                >
+                  {regLoading ? <><Loader2 size={18} className="animate-spin" /> Registering…</> : 'Confirm Registration'}
+                </button>
+                <p className="text-center text-xs text-text-muted">Free event — no payment required</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Paid registration — Paystack */}
+        {showPayment && event && (
+          <PaystackCheckoutModal
+            type="event"
+            items={[{ id: event.id, name: event.title, price: event.price }]}
+            totalUSD={event.price}
+            onClose={() => setShowPayment(false)}
+            onSuccess={(ref, email, name) => {
+              supabase.from('event_registrations').insert({
+                event_id: event.id,
+                event_title: event.title,
+                name,
+                email,
+                amount_paid: event.price,
+                paystack_ref: ref,
+                status: 'confirmed',
+              }).then(() => {
+                setShowPayment(false)
+                setRegistered(true)
+              })
+            }}
+          />
+        )}
 
         {similar.length > 0 && (
           <div className="mt-16">
