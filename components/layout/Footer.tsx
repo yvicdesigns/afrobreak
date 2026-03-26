@@ -56,7 +56,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-text-secondary text-sm leading-relaxed max-w-xs">
-              The premier platform for Afro and urban dance. Learn from world-class instructors, attend live events, and connect with a global community of dancers.
+              The premier platform for african dance Community . Learn from our well versed ambassadors , attend live events and connect with a global community of dancers.
             </p>
 
             {/* Social */}

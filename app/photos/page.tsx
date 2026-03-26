@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { X, ChevronLeft, ChevronRight, Download, Instagram } from 'lucide-react'
 
-type PhotoCategory = 'All' | 'Events' | 'Classes' | 'Battles' | 'Backstage' | 'Community'
+type PhotoCategory = 'All' | 'Events' | 'Workshops' | 'Battles' | 'Schools Outreach' | 'Community'
 
 interface Photo {
   id: string
@@ -15,24 +15,24 @@ interface Photo {
 }
 
 const photos: Photo[] = [
-  { id: '1', src: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80', title: 'Afrobeat Session', category: 'Classes', photographer: 'AfroBreak Media', location: 'Paris' },
+  { id: '1', src: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80', title: 'Afrobeat Session', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '2', src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80', title: 'Hip-Hop Cypher', category: 'Events', photographer: 'AfroBreak Media', location: 'Lyon' },
-  { id: '3', src: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80', title: 'Dancehall Vibes', category: 'Classes', photographer: 'AfroBreak Media', location: 'Marseille' },
+  { id: '3', src: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80', title: 'Dancehall Vibes', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Marseille' },
   { id: '4', src: 'https://images.unsplash.com/photo-1535525153412-5a42439a210e?w=800&q=80', title: 'Contemporary Fusion', category: 'Events', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '5', src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80', title: 'Battle Night', category: 'Battles', photographer: 'AfroBreak Media', location: 'Bordeaux' },
   { id: '6', src: 'https://images.unsplash.com/photo-1508700929628-c3d7819c1498?w=800&q=80', title: 'B-Boy Showcase', category: 'Battles', photographer: 'AfroBreak Media', location: 'Toulouse' },
-  { id: '7', src: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80', title: 'Backstage Moments', category: 'Backstage', photographer: 'AfroBreak Media', location: 'Paris' },
+  { id: '7', src: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80', title: 'Backstage Moments', category: 'Schools Outreach', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '8', src: 'https://images.unsplash.com/photo-1483362271674-7461064d5e66?w=800&q=80', title: 'Community Day', category: 'Community', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '9', src: 'https://images.unsplash.com/photo-1526483291330-fe44429f3e0d?w=800&q=80', title: 'Afro Workshop', category: 'Classes', photographer: 'AfroBreak Media', location: 'Nice' },
+  { id: '9', src: 'https://images.unsplash.com/photo-1526483291330-fe44429f3e0d?w=800&q=80', title: 'Afro Workshop', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Nice' },
   { id: '10', src: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80', title: 'Kids Dance Party', category: 'Community', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '11', src: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80', title: 'Show Night', category: 'Events', photographer: 'AfroBreak Media', location: 'Lyon' },
   { id: '12', src: 'https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?w=800&q=80', title: 'Urban Dance Festival', category: 'Events', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '13', src: 'https://images.unsplash.com/photo-1598387993441-a364f854cde4?w=800&q=80', title: 'Rehearsal Room', category: 'Backstage', photographer: 'AfroBreak Media', location: 'Paris' },
+  { id: '13', src: 'https://images.unsplash.com/photo-1598387993441-a364f854cde4?w=800&q=80', title: 'Rehearsal Room', category: 'Schools Outreach', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '14', src: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800&q=80', title: 'Battle Qualifiers', category: 'Battles', photographer: 'AfroBreak Media', location: 'Marseille' },
   { id: '15', src: 'https://images.unsplash.com/photo-1526142684086-7ebd69df27a5?w=800&q=80', title: 'Community Gathering', category: 'Community', photographer: 'AfroBreak Media', location: 'Bordeaux' },
 ]
 
-const categories: PhotoCategory[] = ['All', 'Events', 'Classes', 'Battles', 'Backstage', 'Community']
+const categories: PhotoCategory[] = ['All', 'Events', 'Workshops', 'Battles', 'Schools Outreach', 'Community']
 
 export default function PhotosPage() {
   const [activeCategory, setActiveCategory] = useState<PhotoCategory>('All')
@@ -57,7 +57,7 @@ export default function PhotosPage() {
             Our <span className="gradient-text-orange">Moments</span>
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto">
-            Behind the scenes, on stage, in the studio — the AfroBreak community captured in motion.
+            Creative Studio for AfroBreak Community captured in motion.
           </p>
         </div>
       </div>

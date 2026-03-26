@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Calendar, MapPin, Users, Euro } from 'lucide-react'
+import { Calendar, MapPin, Users } from 'lucide-react'
 import clsx from 'clsx'
 import type { Event } from '@/lib/types'
 import Badge from '@/components/ui/Badge'
@@ -52,10 +52,7 @@ export default function EventCard({ event, className }: EventCardProps) {
           {event.price === 0 ? (
             <span className="text-sm font-bold text-emerald-400">Free</span>
           ) : (
-            <>
-              <Euro size={13} className="text-gold-DEFAULT" />
-              <span className="text-sm font-bold text-white">{event.price}</span>
-            </>
+            <span className="text-sm font-bold text-white">GH₵{(event.price * 15.5).toFixed(2)}</span>
           )}
         </div>
       </div>

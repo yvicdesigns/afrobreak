@@ -261,7 +261,7 @@ export async function getAlbums() {
 }
 export async function createAlbum(a: Record<string, unknown>) {
   const { data, error } = await supabase.from('albums').insert({ id: `a${Date.now()}`, ...a }).select().single()
-  if (error) return null
+  if (error) { console.error('createAlbum error:', error.message); return null }
   return data
 }
 export async function updateAlbum(id: string, a: Record<string, unknown>) {

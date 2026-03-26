@@ -15,8 +15,8 @@ declare global {
 }
 
 const currencies = [
-  { code: 'USD', symbol: '$', label: 'USD — Dollar', rate: 1 },
   { code: 'GHS', symbol: 'GH₵', label: 'GHS — Cedi', rate: 15.5 },
+  { code: 'USD', symbol: '$', label: 'USD — Dollar', rate: 1 },
   { code: 'NGN', symbol: '₦', label: 'NGN — Naira', rate: 1600 },
 ]
 
@@ -41,7 +41,7 @@ interface Props {
 
 export default function PaystackCheckoutModal({ type, items, totalUSD, onClose, onSuccess }: Props) {
   const router = useRouter()
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState('GHS')
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)

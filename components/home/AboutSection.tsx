@@ -52,7 +52,7 @@ export default function AboutSection() {
           </p>
           <h2 className="heading-lg text-white mb-4">Built for the Culture</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
-            We didn&apos;t just build a dance platform—we built a home for the global Afro and urban dance community.
+            We didn&apos;t just build a dance platform we built a home for the global Afro and urban dance community.
           </p>
         </div>
 

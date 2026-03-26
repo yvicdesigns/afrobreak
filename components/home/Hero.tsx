@@ -150,10 +150,10 @@ export default function Hero() {
           <h1
             className="heading-xl text-white mb-6 animate-slide-up opacity-initial fill-forwards animation-delay-100"
           >
-            MOVE TO THE{' '}
-            <span className="gradient-text-orange">RHYTHM</span>
+            RHYTHM AND{' '}
+            <span className="gradient-text-orange">DANCE</span>
             <br />
-            OF YOUR{' '}
+            BREAKTHROUGH{' '}
             <span className="relative inline-block">
               <span className="gradient-text-purple">CULTURE</span>
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary-500 to-transparent" />
@@ -164,7 +164,7 @@ export default function Hero() {
           <p
             className="text-lg text-text-secondary leading-relaxed mb-10 max-w-xl animate-slide-up opacity-initial fill-forwards animation-delay-200"
           >
-            Master Afrobeat, Hip-Hop, Dancehall and more with 500+ premium tutorials from world-class instructors. Join 10,000+ dancers from the diaspora and beyond.
+            Empowering African Youth Breakthrough Hiphop Culture and Dance Sport for Development.
           </p>
 
           {/* CTAs */}

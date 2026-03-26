@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Play, Pause, ShoppingCart, Music, Download, Clock, ChevronRight, Volume2, X, Check } from 'lucide-react'
+import { Play, Pause, ShoppingCart, Music, Download, Clock, Volume2, X, Check, ChevronRight } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
+import { getTracks, getAlbums } from '@/lib/db'
 
 type MusicGenre = 'All' | 'Afrobeats' | 'Amapiano' | 'Dancehall' | 'Afro-Fusion' | 'Hip-Hop'
 
@@ -11,121 +12,30 @@ interface Track {
   id: string
   title: string
   artist: string
-  genre: MusicGenre
+  genre: string
   duration: string
   price: number
-  albumPrice?: number
   cover: string
   preview: string
   album?: string
   badge?: string
 }
 
-const tracks: Track[] = [
-  {
-    id: 't1',
-    title: 'Lagos Nights',
-    artist: 'DJ AfroBreak',
-    genre: 'Afrobeats',
-    duration: '3:42',
-    price: 1.99,
-    albumPrice: 9.99,
-    cover: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80',
-    preview: '',
-    album: 'African Rhythm Vol.1',
-    badge: 'Hot',
-  },
-  {
-    id: 't2',
-    title: 'Durban Sunset',
-    artist: 'Amapiano Kings',
-    genre: 'Amapiano',
-    duration: '4:15',
-    price: 1.99,
-    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80',
-    preview: '',
-    album: 'Piano Sessions',
-  },
-  {
-    id: 't3',
-    title: 'Kingston Vibes',
-    artist: 'Yaya Kingston',
-    genre: 'Dancehall',
-    duration: '3:28',
-    price: 1.49,
-    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&q=80',
-    preview: '',
-    album: 'Caribbean Fire',
-    badge: 'New',
-  },
-  {
-    id: 't4',
-    title: 'Paris Afro',
-    artist: 'Kemi Adeyemi',
-    genre: 'Afro-Fusion',
-    duration: '4:52',
-    price: 1.99,
-    albumPrice: 11.99,
-    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80',
-    preview: '',
-    album: 'Fusion Collective',
-  },
-  {
-    id: 't5',
-    title: 'Street Cipher',
-    artist: 'Marcus Flow',
-    genre: 'Hip-Hop',
-    duration: '3:05',
-    price: 1.49,
-    cover: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&q=80',
-    preview: '',
-    album: 'Urban Code',
-  },
-  {
-    id: 't6',
-    title: 'Accra Movement',
-    artist: 'DJ AfroBreak',
-    genre: 'Afrobeats',
-    duration: '3:58',
-    price: 1.99,
-    cover: 'https://images.unsplash.com/photo-1526142684086-7ebd69df27a5?w=400&q=80',
-    preview: '',
-    album: 'African Rhythm Vol.1',
-  },
-  {
-    id: 't7',
-    title: 'Joburg Piano',
-    artist: 'Amapiano Kings',
-    genre: 'Amapiano',
-    duration: '5:10',
-    price: 1.99,
-    cover: 'https://images.unsplash.com/photo-1598387993441-a364f854cde4?w=400&q=80',
-    preview: '',
-    album: 'Piano Sessions',
-    badge: 'Best Seller',
-  },
-  {
-    id: 't8',
-    title: 'Diaspora Groove',
-    artist: 'Amara Diallo',
-    genre: 'Afro-Fusion',
-    duration: '4:30',
-    price: 1.99,
-    cover: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&q=80',
-    preview: '',
-    album: 'Fusion Collective',
-  },
-]
+interface Album {
+  id: string
+  title: string
+  artist: string
+  genre: string
+  price: number
+  cover: string
+  track_count: number
+}
 
 const genres: MusicGenre[] = ['All', 'Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
 
-const albums = [
-  { id: 'a1', title: 'African Rhythm Vol.1', artist: 'DJ AfroBreak', tracks: 8, price: 9.99, cover: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80', genre: 'Afrobeats' },
-  { id: 'a2', title: 'Piano Sessions', artist: 'Amapiano Kings', tracks: 10, price: 12.99, cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80', genre: 'Amapiano' },
-  { id: 'a3', title: 'Fusion Collective', artist: 'Various Artists', tracks: 12, price: 11.99, cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80', genre: 'Afro-Fusion' },
-]
-
 export default function MusicPage() {
+  const [tracks, setTracks] = useState<Track[]>([])
+  const [albums, setAlbums] = useState<Album[]>([])
   const [activeGenre, setActiveGenre] = useState<MusicGenre>('All')
   const [playingId, setPlayingId] = useState<string | null>(null)
   const [cart, setCart] = useState<string[]>([])
@@ -133,18 +43,50 @@ export default function MusicPage() {
   const [addedId, setAddedId] = useState<string | null>(null)
   const [tab, setTab] = useState<'tracks' | 'albums'>('tracks')
   const [checkoutOpen, setCheckoutOpen] = useState(false)
-  const [albumCheckout, setAlbumCheckout] = useState<typeof albums[0] | null>(null)
+  const [albumCheckout, setAlbumCheckout] = useState<Album | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    Promise.all([getTracks(), getAlbums()]).then(([rawTracks, rawAlbums]) => {
+      setTracks((rawTracks as Record<string, unknown>[]).map(t => ({
+        id: t.id as string,
+        title: t.title as string,
+        artist: t.artist as string,
+        genre: t.genre as string,
+        duration: (t.duration as string) || '',
+        price: (t.price as number) || 0,
+        cover: (t.cover as string) || '',
+        preview: (t.preview_url as string) || '',
+        album: (t.album as string) || '',
+        badge: (t.badge as string) || '',
+      })))
+      setAlbums((rawAlbums as Record<string, unknown>[]).map(a => ({
+        id: a.id as string,
+        title: a.title as string,
+        artist: a.artist as string,
+        genre: (a.genre as string) || '',
+        price: (a.price as number) || 0,
+        cover: (a.cover as string) || '',
+        track_count: (a.track_count as number) || 0,
+      })))
+    })
+    return () => { audioRef.current?.pause() }
+  }, [])
 
   const filtered = activeGenre === 'All' ? tracks : tracks.filter(t => t.genre === activeGenre)
   const cartItems = tracks.filter(t => cart.includes(t.id))
-  const cartTotal = cartItems.reduce((sum, t) => sum + t.price, 0)
+  const cartTotal = cartItems.reduce((sum: number, t: Track) => sum + t.price, 0)
 
   const togglePlay = (track: Track) => {
     if (playingId === track.id) {
       setPlayingId(null)
       audioRef.current?.pause()
     } else {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = track.preview || ''
+        audioRef.current.play().catch(() => {})
+      }
       setPlayingId(track.id)
     }
   }
@@ -159,12 +101,11 @@ export default function MusicPage() {
 
   const removeFromCart = (trackId: string) => setCart(prev => prev.filter(id => id !== trackId))
 
-  useEffect(() => {
-    return () => { audioRef.current?.pause() }
-  }, [])
-
   return (
     <div className="min-h-screen pt-20 bg-background">
+      {/* Hidden audio element */}
+      <audio ref={audioRef} onEnded={() => setPlayingId(null)} preload="none" />
+
       {/* Hero */}
       <div className="relative bg-surface border-b border-white/5 py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10" />
@@ -285,7 +226,7 @@ export default function MusicPage() {
 
                   {/* Price + Buy */}
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="font-bold text-white">€{track.price.toFixed(2)}</span>
+                    <span className="font-bold text-white">GH₵{(track.price * 15.5).toFixed(2)}</span>
                     {cart.includes(track.id) ? (
                       <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-xl">
                         <Check size={12} /> Owned
@@ -324,11 +265,11 @@ export default function MusicPage() {
                   <h3 className="font-bold text-white mb-1">{album.title}</h3>
                   <p className="text-sm text-text-secondary mb-1">{album.artist}</p>
                   <p className="text-xs text-text-muted mb-4 flex items-center gap-1">
-                    <Music size={11} /> {album.tracks} tracks
+                    <Music size={11} /> {album.track_count} tracks
                   </p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-xl font-black text-white">€{album.price.toFixed(2)}</span>
+                      <span className="text-xl font-black text-white">GH₵{(album.price * 15.5).toFixed(2)}</span>
                       <p className="text-xs text-text-muted">Full album</p>
                     </div>
                     <Button variant="primary" size="sm" leftIcon={<Download size={14} />} onClick={() => setAlbumCheckout(album)}>
@@ -372,7 +313,7 @@ export default function MusicPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-white truncate">{track.title}</p>
                       <p className="text-xs text-text-muted">{track.artist}</p>
-                      <p className="text-sm font-bold text-primary-400 mt-1">€{track.price.toFixed(2)}</p>
+                      <p className="text-sm font-bold text-primary-400 mt-1">GH₵{(track.price * 15.5).toFixed(2)}</p>
                     </div>
                     <button onClick={() => removeFromCart(track.id)} className="p-1.5 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-all">
                       <X size={14} />
@@ -389,7 +330,7 @@ export default function MusicPage() {
                   <span className="text-xl font-black text-white">€{cartTotal.toFixed(2)}</span>
                 </div>
                 <Button variant="primary" fullWidth leftIcon={<Download size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
-                  Buy & Download — ${cartTotal.toFixed(2)}
+                  Buy & Download — GH₵{(cartTotal * 15.5).toFixed(2)}
                 </Button>
                 <p className="text-xs text-text-muted text-center">MP3 + WAV · Instant download · DRM-free</p>
               </div>

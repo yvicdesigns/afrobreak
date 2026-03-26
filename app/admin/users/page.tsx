@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, Crown, Search, Mail } from 'lucide-react'
+import { Users, Crown, Search, Mail, X, Check, Loader2 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 interface UserProfile {
@@ -17,6 +17,10 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState<UserProfile[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [editUser, setEditUser] = useState<UserProfile | null>(null)
+  const [editPremium, setEditPremium] = useState(false)
+  const [editEndDate, setEditEndDate] = useState('')
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     supabase
@@ -30,10 +34,40 @@ export default function AdminUsersPage() {
   }, [])
 
   const filtered = users.filter(u =>
-    u.name.toLowerCase().includes(search.toLowerCase())
+    u.name?.toLowerCase().includes(search.toLowerCase())
   )
 
   const premiumCount = users.filter(u => u.is_premium).length
+
+  const openEdit = (user: UserProfile) => {
+    setEditUser(user)
+    setEditPremium(user.is_premium)
+    // Default end date: 1 year from now if enabling, or existing date
+    if (user.subscription_end) {
+      setEditEndDate(user.subscription_end.slice(0, 10))
+    } else {
+      const d = new Date()
+      d.setFullYear(d.getFullYear() + 1)
+      setEditEndDate(d.toISOString().slice(0, 10))
+    }
+  }
+
+  const handleSave = async () => {
+    if (!editUser) return
+    setSaving(true)
+    const updates = {
+      is_premium: editPremium,
+      subscription_end: editPremium && editEndDate ? new Date(editEndDate).toISOString() : null,
+    }
+    await supabase.from('profiles').update(updates).eq('id', editUser.id)
+    setUsers(prev => prev.map(u =>
+      u.id === editUser.id
+        ? { ...u, is_premium: editPremium, subscription_end: updates.subscription_end }
+        : u
+    ))
+    setSaving(false)
+    setEditUser(null)
+  }
 
   return (
     <div className="space-y-6">
@@ -87,16 +121,18 @@ export default function AdminUsersPage() {
                 <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">User</th>
                 <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden sm:table-cell">Joined</th>
                 <th className="text-center p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Plan</th>
+                <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden md:table-cell">Expires</th>
+                <th className="p-4"></th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={3} className="p-8 text-center text-text-secondary text-sm">Loading users...</td>
+                  <td colSpan={5} className="p-8 text-center text-text-secondary text-sm">Loading users...</td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="p-8 text-center text-text-secondary text-sm">No users found.</td>
+                  <td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No users found.</td>
                 </tr>
               ) : (
                 filtered.map(user => (
@@ -128,6 +164,21 @@ export default function AdminUsersPage() {
                         : <span className="px-2 py-0.5 rounded-full bg-white/5 text-text-secondary text-[10px] font-bold">FREE</span>
                       }
                     </td>
+                    <td className="p-4 hidden md:table-cell">
+                      <span className="text-xs text-text-secondary">
+                        {user.subscription_end
+                          ? new Date(user.subscription_end).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                          : '—'}
+                      </span>
+                    </td>
+                    <td className="p-4">
+                      <button
+                        onClick={() => openEdit(user)}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-text-secondary hover:text-white transition-colors font-medium"
+                      >
+                        Edit
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -135,6 +186,75 @@ export default function AdminUsersPage() {
           </table>
         </div>
       </div>
+
+      {/* Edit Premium Modal */}
+      {editUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="w-full max-w-sm bg-surface border border-white/10 rounded-2xl shadow-2xl">
+            <div className="flex items-center justify-between p-5 border-b border-white/10">
+              <div>
+                <h2 className="font-bold text-white">Edit Membership</h2>
+                <p className="text-xs text-text-muted">{editUser.name}</p>
+              </div>
+              <button onClick={() => setEditUser(null)} className="p-2 rounded-xl hover:bg-white/10 text-text-muted transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+            <div className="p-5 space-y-5">
+              {/* Toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-white">Premium Access</p>
+                  <p className="text-xs text-text-muted">Unlock all premium content</p>
+                </div>
+                <button
+                  onClick={() => setEditPremium(!editPremium)}
+                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${editPremium ? 'bg-gold-DEFAULT' : 'bg-white/10'}`}
+                >
+                  <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${editPremium ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                </button>
+              </div>
+
+              {/* Subscription end date */}
+              {editPremium && (
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1.5">Access Until</label>
+                  <input
+                    type="date"
+                    value={editEndDate}
+                    onChange={e => setEditEndDate(e.target.value)}
+                    className="input-base"
+                    min={new Date().toISOString().slice(0, 10)}
+                  />
+                  <p className="text-xs text-text-muted mt-1">User loses premium access after this date.</p>
+                </div>
+              )}
+
+              {!editPremium && editUser.is_premium && (
+                <p className="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3">
+                  This will remove premium access immediately.
+                </p>
+              )}
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setEditUser(null)}
+                  className="flex-1 py-2.5 rounded-xl border border-white/10 text-sm text-text-secondary hover:text-white hover:border-white/30 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gold-DEFAULT hover:bg-gold-dark text-background font-bold text-sm transition-colors disabled:opacity-60"
+                >
+                  {saving ? <><Loader2 size={15} className="animate-spin" /> Saving…</> : <><Check size={15} /> Save</>}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

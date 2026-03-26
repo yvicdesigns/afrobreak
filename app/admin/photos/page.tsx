@@ -6,7 +6,7 @@ import ImageUpload from '@/components/ui/ImageUpload'
 import { supabase } from '@/lib/supabase'
 import Button from '@/components/ui/Button'
 
-const categories = ['Events', 'Classes', 'Battles', 'Backstage', 'Community']
+const categories = ['Events', 'Workshops', 'Battles', 'Schools Outreach', 'Community']
 
 const emptyForm = { src: '', title: '', category: 'Events', photographer: '', location: '' }
 type FormState = typeof emptyForm

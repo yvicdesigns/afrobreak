@@ -78,8 +78,8 @@ export default function AboutPage() {
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-4">Africa Breaking Academy</p>
           <h1 className="text-5xl lg:text-6xl font-black text-white mb-6">
-            Teach. Inspire.<br />
-            <span className="gradient-text-orange">Empower.</span>
+            Inspire. Empower<br />
+            <span className="gradient-text-orange">Breakthrough.</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
             ABA is an independent Creative Youth-Led Collective that utilizes Breakdance and Hip Hop culture as a learning tool to teach, inspire, empower and build young talents to effect positive social change in Ghana and Africa as a whole.
@@ -92,7 +92,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">Who We Are</p>
-            <h2 className="text-3xl font-black text-white mb-6">The Only African Breakdance Organization With 21+ Country Reach</h2>
+            <h2 className="text-3xl font-black text-white mb-6">The African Dance Organization with 21+ Country Reach</h2>
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>Africa Breaking Academy (ABA) is specialized in dance sports events, Hip Hop, educational workshops, dance and media commercials, dance activations, and productions.</p>
               <p>With the track record of the only African Break Dance organization with over 21 African countries plugs and collaborators through the flagship initiative Afrobreak Concepts.</p>

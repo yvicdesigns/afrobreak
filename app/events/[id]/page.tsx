@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
-  Calendar, Clock, MapPin, Users, Euro, ArrowLeft,
+  Calendar, Clock, MapPin, Users, ArrowLeft,
   Share2, ExternalLink, ChevronRight, X, Loader2, Check
 } from 'lucide-react'
 import { getEventById, getEvents } from '@/lib/db'
@@ -181,10 +181,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     {event.price === 0 ? (
                       <span className="text-2xl font-black text-emerald-400">Free</span>
                     ) : (
-                      <>
-                        <Euro size={18} className="text-gold-DEFAULT" />
-                        <span className="text-2xl font-black text-white">{event.price}</span>
-                      </>
+                      <span className="text-2xl font-black text-white">GH₵{(event.price * 15.5).toFixed(2)}</span>
                     )}
                   </div>
                 </div>
@@ -222,7 +219,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     disabled={soldOut}
                     onClick={() => event.price === 0 ? setShowRegModal(true) : setShowPayment(true)}
                   >
-                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — $${event.price}`}
+                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — GH₵${(event.price * 15.5).toFixed(2)}`}
                   </Button>
                 )}
 

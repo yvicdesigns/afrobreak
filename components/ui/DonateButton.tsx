@@ -13,9 +13,9 @@ declare global {
 }
 
 const currencies = [
+  { code: 'GHS', symbol: 'GH₵', label: 'GHS — Cedi' },
   { code: 'USD', symbol: '$', label: 'USD — Dollar' },
   { code: 'NGN', symbol: '₦', label: 'NGN — Naira' },
-  { code: 'GHS', symbol: 'GH₵', label: 'GHS — Cedi' },
 ]
 
 interface DonateButtonProps {
@@ -26,7 +26,7 @@ export default function DonateButton({ variant = 'hero' }: DonateButtonProps) {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [amount, setAmount] = useState('')
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState('GHS')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 

@@ -1,20 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Edit3, Trash2, X, Check, Music, Disc } from 'lucide-react'
+import { Plus, Edit3, Trash2, X, Check, Music, Disc, ChevronDown, ChevronUp, Link2 } from 'lucide-react'
 import { getTracks, createTrack, updateTrack, deleteTrack, getAlbums, createAlbum, updateAlbum, deleteAlbum } from '@/lib/db'
 import Button from '@/components/ui/Button'
 import ImageUpload from '@/components/ui/ImageUpload'
+import AudioUpload from '@/components/ui/AudioUpload'
 
 const genres = ['Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
 
 const emptyTrack = { title: '', artist: '', genre: 'Afrobeats', duration: '', price: '1.99', cover: '', preview_url: '', download_url: '', album: '', badge: '' }
-const emptyAlbum = { title: '', artist: '', genre: 'Afrobeats', price: '9.99', cover: '', track_count: '0' }
+const emptyAlbum = { title: '', artist: '', genre: 'Afrobeats', price: '9.99', cover: '', track_count: '0', description: '', download_url: '' }
 
 type TrackForm = typeof emptyTrack
 type AlbumForm = typeof emptyAlbum
 type TrackRow = { id: string; title: string; artist: string; genre: string; duration: string; price: number; cover: string; preview_url: string; download_url: string; album: string; badge: string; in_stock: boolean }
-type AlbumRow = { id: string; title: string; artist: string; genre: string; price: number; cover: string; track_count: number }
+type AlbumRow = { id: string; title: string; artist: string; genre: string; price: number; cover: string; track_count: number; description: string; download_url: string }
 
 function Field({ label, value, onChange, placeholder, required, type = 'text' }: {
   label: string; value: string; onChange: (v: string) => void
@@ -44,6 +45,7 @@ export default function AdminMusicPage() {
     getAlbums().then(data => setAlbums(data as AlbumRow[]))
   }, [])
 
+  const [formError, setFormError] = useState('')
   const flash = (msg: string) => { setSuccess(msg); setTimeout(() => setSuccess(''), 3000) }
 
   // --- TRACK HANDLERS ---
@@ -102,14 +104,22 @@ export default function AdminMusicPage() {
       flash('Album updated!')
     } else {
       const created = await createAlbum(payload)
-      if (created) setAlbums(prev => [created as AlbumRow, ...prev])
-      flash('Album added!')
+      if (created) {
+        setAlbums(prev => [created as AlbumRow, ...prev])
+        flash('Album added!')
+      } else {
+        setFormError('Failed to save album. Make sure you ran the SQL to add description and download_url columns in Supabase.')
+        setSaving(false)
+        return
+      }
     }
     setSaving(false)
     setAlbumForm(emptyAlbum)
     setShowForm(false)
     setEditId(null)
   }
+
+  const [expandedAlbum, setExpandedAlbum] = useState<string | null>(null)
 
   const handleAlbumEdit = (a: AlbumRow) => {
     setAlbumForm({
@@ -119,6 +129,8 @@ export default function AdminMusicPage() {
       price: String(a.price || '9.99'),
       cover: a.cover || '',
       track_count: String(a.track_count || '0'),
+      description: a.description || '',
+      download_url: a.download_url || '',
     })
     setEditId(a.id)
     setShowForm(true)
@@ -189,10 +201,20 @@ export default function AdminMusicPage() {
                 <ImageUpload label="Cover Image" value={trackForm.cover} onChange={v => setTrackForm(f => ({ ...f, cover: v }))} folder="music" />
               </div>
               <div className="md:col-span-2">
-                <Field label="Preview URL (30 sec MP3)" value={trackForm.preview_url} onChange={v => setTrackForm(f => ({ ...f, preview_url: v }))} placeholder="https://..." />
+                <AudioUpload
+                  label="Preview File (30-sec clip — plays on the music page)"
+                  value={trackForm.preview_url}
+                  onChange={v => setTrackForm(f => ({ ...f, preview_url: v }))}
+                  maxMB={10}
+                />
               </div>
               <div className="md:col-span-2">
-                <Field label="Download URL (Full MP3/WAV)" value={trackForm.download_url} onChange={v => setTrackForm(f => ({ ...f, download_url: v }))} placeholder="https://..." />
+                <AudioUpload
+                  label="Full Track Download (sent to buyer after purchase)"
+                  value={trackForm.download_url}
+                  onChange={v => setTrackForm(f => ({ ...f, download_url: v }))}
+                  maxMB={100}
+                />
               </div>
               <Field label="Badge (optional)" value={trackForm.badge} onChange={v => setTrackForm(f => ({ ...f, badge: v }))} placeholder="New, Hot, Best Seller..." />
             </div>
@@ -221,15 +243,59 @@ export default function AdminMusicPage() {
                   {genres.map(g => <option key={g} value={g} className="bg-surface">{g}</option>)}
                 </select>
               </div>
-              <Field label="Number of Tracks" type="number" value={albumForm.track_count} onChange={v => setAlbumForm(f => ({ ...f, track_count: v }))} placeholder="10" />
-              <Field label="Price (€)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
+              <Field label="Price (GH₵)" type="number" value={albumForm.price} onChange={v => setAlbumForm(f => ({ ...f, price: v }))} placeholder="9.99" />
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-white mb-1.5">Description</label>
+                <textarea
+                  value={albumForm.description}
+                  onChange={e => setAlbumForm(f => ({ ...f, description: e.target.value }))}
+                  placeholder="Describe this album..."
+                  rows={3}
+                  className="input-base resize-none"
+                />
+              </div>
               <div className="md:col-span-2">
                 <ImageUpload label="Cover Image" value={albumForm.cover} onChange={v => setAlbumForm(f => ({ ...f, cover: v }))} folder="music" />
               </div>
+              <div className="md:col-span-2">
+                <Field
+                  label="Full Album Download URL"
+                  value={albumForm.download_url}
+                  onChange={v => setAlbumForm(f => ({ ...f, download_url: v }))}
+                  placeholder="https://drive.google.com/... or Dropbox link to ZIP"
+                />
+                <p className="text-xs text-text-muted mt-1">Buyers receive this link by email after purchase. Use Google Drive, Dropbox, or any direct download URL.</p>
+              </div>
+              <div className="bg-white/3 border border-white/10 rounded-xl p-4 md:col-span-2">
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">Linked Tracks</p>
+                {tracks.filter(t => t.album === albumForm.title).length === 0 ? (
+                  <p className="text-xs text-text-muted">
+                    No tracks linked yet. Add tracks and set their <strong className="text-white">Album</strong> field to <strong className="text-primary-400">&quot;{albumForm.title || 'this album title'}&quot;</strong>.
+                  </p>
+                ) : (
+                  <div className="space-y-1.5">
+                    {tracks.filter(t => t.album === albumForm.title).map(t => (
+                      <div key={t.id} className="flex items-center gap-2 text-xs text-text-secondary">
+                        <Music size={10} className="text-primary-400" />
+                        <span className="text-white">{t.title}</span>
+                        <span>·</span>
+                        <span>{t.artist}</span>
+                        <span>·</span>
+                        <span>{t.duration}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
+            {formError && (
+              <div className="mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs">
+                {formError}
+              </div>
+            )}
             <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">
               <Button type="submit" variant="primary" loading={saving}>{editId ? 'Update Album' : 'Save Album'}</Button>
-              <Button type="button" variant="ghost" onClick={() => { setShowForm(false); setEditId(null) }}>Cancel</Button>
+              <Button type="button" variant="ghost" onClick={() => { setShowForm(false); setEditId(null); setFormError('') }}>Cancel</Button>
             </div>
           </form>
         </div>
@@ -294,39 +360,86 @@ export default function AdminMusicPage() {
                   <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Album</th>
                   <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden sm:table-cell">Genre</th>
                   <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden md:table-cell">Tracks</th>
+                  <th className="text-left p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider hidden md:table-cell">Download</th>
                   <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Price</th>
                   <th className="text-right p-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {albums.length === 0 ? (
-                  <tr><td colSpan={5} className="p-8 text-center text-text-secondary text-sm">No albums yet. Add your first album!</td></tr>
-                ) : albums.map(album => (
-                  <tr key={album.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        {!!album.cover && (
-                          <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-                            <img src={album.cover} alt={album.title} className="w-full h-full object-cover" />
+                  <tr><td colSpan={6} className="p-8 text-center text-text-secondary text-sm">No albums yet. Add your first album!</td></tr>
+                ) : albums.map(album => {
+                  const linkedTracks = tracks.filter(t => t.album === album.title)
+                  const isExpanded = expandedAlbum === album.id
+                  return (
+                    <>
+                      <tr key={album.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            {!!album.cover && (
+                              <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                                <img src={album.cover} alt={album.title} className="w-full h-full object-cover" />
+                              </div>
+                            )}
+                            <div>
+                              <p className="text-sm font-medium text-white">{album.title}</p>
+                              <p className="text-xs text-text-secondary">{album.artist}</p>
+                              {album.description && <p className="text-xs text-text-muted mt-0.5 line-clamp-1 max-w-[200px]">{album.description}</p>}
+                            </div>
                           </div>
-                        )}
-                        <div>
-                          <p className="text-sm font-medium text-white">{album.title}</p>
-                          <p className="text-xs text-text-secondary">{album.artist}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre}</span></td>
-                    <td className="p-4 hidden md:table-cell"><span className="text-xs text-text-secondary">{album.track_count} tracks</span></td>
-                    <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{album.price?.toFixed(2)}</span></td>
-                    <td className="p-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
-                        <button onClick={() => handleAlbumDelete(album.id)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                        </td>
+                        <td className="p-4 hidden sm:table-cell"><span className="text-xs text-text-secondary">{album.genre}</span></td>
+                        <td className="p-4 hidden md:table-cell">
+                          <button
+                            onClick={() => setExpandedAlbum(isExpanded ? null : album.id)}
+                            className="flex items-center gap-1 text-xs text-text-secondary hover:text-white transition-colors"
+                          >
+                            <Music size={11} className="text-primary-400" />
+                            {linkedTracks.length} linked
+                            {isExpanded ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+                          </button>
+                        </td>
+                        <td className="p-4 hidden md:table-cell">
+                          {album.download_url
+                            ? <span className="flex items-center gap-1 text-xs text-emerald-400"><Link2 size={11} /> Set</span>
+                            : <span className="text-xs text-text-muted">—</span>
+                          }
+                        </td>
+                        <td className="p-4 text-right"><span className="text-sm font-bold text-white">GH₵{album.price?.toFixed(2)}</span></td>
+                        <td className="p-4 text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <button onClick={() => handleAlbumEdit(album)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>
+                            <button onClick={() => handleAlbumDelete(album.id)} className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={15} /></button>
+                          </div>
+                        </td>
+                      </tr>
+                      {isExpanded && (
+                        <tr key={`${album.id}-tracks`} className="border-b border-white/5 bg-white/2">
+                          <td colSpan={6} className="px-6 py-4">
+                            {linkedTracks.length === 0 ? (
+                              <p className="text-xs text-text-muted">No tracks linked to this album yet. Add tracks and set their Album field to &quot;{album.title}&quot;.</p>
+                            ) : (
+                              <div className="space-y-2">
+                                {linkedTracks.map((t, i) => (
+                                  <div key={t.id} className="flex items-center gap-3 text-xs">
+                                    <span className="text-text-muted w-4">{i + 1}</span>
+                                    {t.cover && <img src={t.cover} alt={t.title} className="w-7 h-7 rounded object-cover" />}
+                                    <span className="text-white font-medium">{t.title}</span>
+                                    <span className="text-text-muted">·</span>
+                                    <span className="text-text-secondary">{t.artist}</span>
+                                    <span className="text-text-muted">·</span>
+                                    <span className="text-text-muted">{t.duration}</span>
+                                    <span className="ml-auto text-primary-400 font-bold">GH₵{(t.price * 15.5).toFixed(2)}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      )}
+                    </>
+                  )
+                })}
               </tbody>
             </table>
           </div>

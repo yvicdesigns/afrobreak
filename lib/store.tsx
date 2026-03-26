@@ -87,6 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (updates.name !== undefined) profileUpdates.name = updates.name
     if (updates.avatar !== undefined) profileUpdates.avatar = updates.avatar
     if (updates.isPremium !== undefined) profileUpdates.is_premium = updates.isPremium
+    if (updates.subscriptionEnd !== undefined) profileUpdates.subscription_end = updates.subscriptionEnd
     if (updates.favorites !== undefined) profileUpdates.favorites = updates.favorites
     if (updates.watchLater !== undefined) profileUpdates.watch_later = updates.watchLater
 
