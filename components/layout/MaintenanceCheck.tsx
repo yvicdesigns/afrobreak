@@ -18,39 +18,45 @@ export default function MaintenanceCheck({ children }: { children: React.ReactNo
     if (bypassRoutes) { setChecked(true); return }
 
     async function check() {
-      // Check maintenance mode setting
-      const { data: setting } = await supabase
-        .from('settings')
-        .select('value')
-        .eq('key', 'maintenance_mode')
-        .single()
-
-      const maintenanceOn = setting?.value === 'true'
-
-      if (!maintenanceOn) {
-        setMaintenance(false)
-        setChecked(true)
-        return
-      }
-
-      // Check if current user is admin
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('is_admin')
-          .eq('id', session.user.id)
+      try {
+        // Check maintenance mode setting
+        const { data: setting } = await supabase
+          .from('settings')
+          .select('value')
+          .eq('key', 'maintenance_mode')
           .single()
-        if (profile?.is_admin) {
-          setIsAdmin(true)
+
+        const maintenanceOn = setting?.value === 'true'
+
+        if (!maintenanceOn) {
           setMaintenance(false)
           setChecked(true)
           return
         }
-      }
 
-      setMaintenance(true)
-      setChecked(true)
+        // Check if current user is admin
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('is_admin')
+            .eq('id', session.user.id)
+            .single()
+          if (profile?.is_admin) {
+            setIsAdmin(true)
+            setMaintenance(false)
+            setChecked(true)
+            return
+          }
+        }
+
+        setMaintenance(true)
+        setChecked(true)
+      } catch {
+        // If anything fails (table missing, network error), just show the site
+        setMaintenance(false)
+        setChecked(true)
+      }
     }
 
     check()

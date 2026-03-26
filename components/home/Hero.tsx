@@ -7,10 +7,10 @@ import Button from '@/components/ui/Button'
 import DonateButton from '@/components/ui/DonateButton'
 
 const stats = [
-  { value: '500+', label: 'Videos' },
+  { value: '79+', label: 'Videos' },
   { value: '50+', label: 'Instructors' },
   { value: '10K+', label: 'Members' },
-  { value: '6', label: 'Countries' },
+  { value: '38+', label: 'Countries' },
 ]
 
 const PARTICLE_COUNT = 15
