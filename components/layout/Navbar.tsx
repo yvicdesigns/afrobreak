@@ -31,10 +31,10 @@ const eventsLinks = [
 ]
 
 const platformLinks = [
-  { label: 'Videos', href: '/videos', icon: Video },
-  { label: 'Music', href: '/music', icon: Music },
-  { label: 'Blog', href: '/blog', icon: BookOpen },
   { label: 'Gallery', href: '/photos', icon: Camera },
+  { label: 'Music', href: '/music', icon: Music },
+  { label: 'Videos', href: '/videos', icon: Video },
+  { label: 'Blog', href: '/blog', icon: BookOpen },
 ]
 
 function NavDropdown({ label, links, pathname }: {
@@ -157,7 +157,6 @@ export default function Navbar() {
               <NavDropdown label="About" links={aboutLinks} pathname={pathname} />
               <NavDropdown label="Events" links={eventsLinks} pathname={pathname} />
               <Link href="/awards" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Awards</Link>
-              <Link href="/photos" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/photos' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Gallery</Link>
               <NavDropdown label="Platform" links={platformLinks} pathname={pathname} />
               <Link href="/store" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/store' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Shop</Link>
               <Link href="/contact" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/contact' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Contact</Link>
@@ -248,7 +247,6 @@ export default function Navbar() {
               ))}
 
               <Link href="/awards" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Awards</Link>
-              <Link href="/photos" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/photos' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Gallery</Link>
 
               {/* Platform accordion */}
               <button onClick={() => setMobileSection(mobileSection === 'platform' ? null : 'platform')} className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all">
