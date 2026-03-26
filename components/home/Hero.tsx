@@ -95,7 +95,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1547153760-18fc86324498?w=1920&q=85"
+          src="https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg"
           alt="Dancer"
           className="w-full h-full object-cover object-center"
         />
