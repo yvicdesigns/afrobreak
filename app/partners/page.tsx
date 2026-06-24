@@ -72,7 +72,7 @@ const testimonials = [
   {
     quote: "Africa Breaking Academy continues to raise the bar in youth-led education initiatives. Their innovative workshops and programs bring practical, real-world value to our students. It's a privilege to work alongside a team that so deeply understands the pulse of Africa's next generation.",
     name: 'Madam Precious',
-    org: 'Head Mistress, Elavanyo School',
+    org: 'Head Mistress Elavanyo School',
   },
   {
     quote: "We've worked with many youth organizations, but Africa Breaking Academy stands out. Their passion, structure, and ability to mobilize young leaders is exceptional. Together, we've reached thousands with training, mentorship, and opportunity.",
