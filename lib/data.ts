@@ -208,15 +208,15 @@ export const events: Event[] = [
     description: 'A two-day deep dive into Afrobeats dance with instructors from Nigeria, Ghana, and Senegal. Expect high-energy sessions, cultural context, and unforgettable connections with the global Afro dance community.',
     date: '2026-04-12',
     time: '10:00',
-    location: 'Studio Groove, 45 Rue de la Danse',
-    city: 'Paris',
+    location: 'Studio Groove, 45 Liberation Road',
+    city: 'Accra',
     type: 'Workshop',
     price: 120,
     image: 'https://images.unsplash.com/photo-1483362271674-7461064d5e66?w=800&q=80',
     instructor: 'Kemi Adeyemi',
     capacity: 40,
     registered: 32,
-    tags: ['afrobeats', 'intensive', 'weekend', 'paris'],
+    tags: ['afrobeats', 'intensive', 'weekend', 'accra'],
   },
   {
     id: 'e2',
@@ -224,15 +224,15 @@ export const events: Event[] = [
     description: 'The biggest urban dance battle of the season. Open to all styles with special categories for Afro-fusion. Cash prizes, industry judges, and legendary freestyles await.',
     date: '2026-04-26',
     time: '19:00',
-    location: 'La Grande Halle',
-    city: 'Lyon',
+    location: 'Accra Sports Complex',
+    city: 'Accra',
     type: 'Battle',
     price: 25,
     image: 'https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?w=800&q=80',
     instructor: 'Marcus "Flow" Johnson',
     capacity: 500,
     registered: 287,
-    tags: ['battle', 'hip-hop', 'competition', 'lyon'],
+    tags: ['battle', 'hip-hop', 'competition', 'accra'],
   },
   {
     id: 'e3',
@@ -241,14 +241,14 @@ export const events: Event[] = [
     date: '2026-04-07',
     time: '19:30',
     location: 'AfroGroove Studio',
-    city: 'Marseille',
+    city: 'Kumasi',
     type: 'Class',
     price: 18,
     image: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80',
     instructor: 'Yaya Kingston',
     capacity: 25,
     registered: 18,
-    tags: ['dancehall', 'weekly', 'all levels', 'marseille'],
+    tags: ['dancehall', 'weekly', 'all levels', 'kumasi'],
   },
   {
     id: 'e4',
@@ -256,8 +256,8 @@ export const events: Event[] = [
     description: 'An evening of breathtaking performances blending African traditions with contemporary dance forms. Featuring soloists and ensembles from across the African diaspora.',
     date: '2026-05-03',
     time: '20:00',
-    location: 'Théâtre de la Ville',
-    city: 'Paris',
+    location: 'National Theatre',
+    city: 'Accra',
     type: 'Show',
     price: 45,
     image: 'https://images.unsplash.com/photo-1508700929628-c3d7819c1498?w=800&q=80',
@@ -272,15 +272,15 @@ export const events: Event[] = [
     description: 'Five days of dancing, games, and cultural discovery for children aged 6-14. Kids will learn Afro dance, hip-hop basics, and put together a final performance for their families.',
     date: '2026-07-14',
     time: '09:00',
-    location: 'Centre Culturel Arc-en-Ciel',
-    city: 'Bordeaux',
+    location: 'Accra Cultural Centre',
+    city: 'Cape Coast',
     type: 'Workshop',
     price: 199,
     image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
     instructor: 'Mama Bella',
     capacity: 30,
     registered: 22,
-    tags: ['kids', 'summer', 'camp', 'bordeaux'],
+    tags: ['kids', 'summer', 'camp', 'cape coast'],
   },
   {
     id: 'e6',
@@ -289,14 +289,14 @@ export const events: Event[] = [
     date: '2026-05-17',
     time: '14:00',
     location: 'Urban Dance Academy',
-    city: 'Toulouse',
+    city: 'Kumasi',
     type: 'Workshop',
     price: 65,
     image: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80',
     instructor: 'B-Boy Saka',
     capacity: 20,
     registered: 20,
-    tags: ['breaking', 'bboy', 'masterclass', 'toulouse'],
+    tags: ['breaking', 'bboy', 'masterclass', 'kumasi'],
   },
 ]
 
@@ -304,15 +304,15 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'b1',
     slug: 'history-of-afrobeats-dance',
-    title: 'The Rich History of Afrobeats Dance: From Lagos to Paris',
-    excerpt: 'How a music and dance revolution that started in the streets of Lagos transformed global culture and found a passionate home in the heart of Europe.',
+    title: 'The Rich History of Afrobeats Dance: From Lagos to Accra',
+    excerpt: 'How a music and dance revolution that started in the streets of Lagos transformed global culture and found a passionate home across West Africa — with Accra at its heart.',
     content: `Afrobeats dance is not simply choreography—it is a living language. Born from the vibrant streets of Lagos, Accra, and Dakar, it carries the stories, struggles, and celebrations of an entire continent.
 
 The origins trace back decades, weaving through highlife, jùjú music, and the township sounds of South Africa. But the contemporary Afrobeats wave, which exploded globally in the 2010s, brought with it a new vocabulary of movement: the Shaku Shaku, the Zanku, the Leg Work.
 
 What makes Afrobeats dance so compelling is its democratic nature. Unlike many dance forms gatekept by expensive studios and rigid technique requirements, Afrobeats invites everyone. The dance floor is the classroom. The community is the teacher.
 
-In Paris, this democracy of movement found fertile ground. The city's diverse African and Caribbean diaspora had always carried these rhythms. When Afrobeats broke into mainstream consciousness, Paris was ready. Studios like those in Château Rouge and Belleville became incubators for a European Afro dance scene that now exports talent back to the continent.
+In Accra, this democracy of movement has always had deep roots. Ghana's vibrant cultural scene — from the Highlife halls of Jamestown to the open-air dance arenas of Osu — has long been a proving ground for West African movement. As Afrobeats broke into mainstream global consciousness, Accra was not just ready — it was already leading. Studios in Osu, Labone, and East Legon became hubs where local talent refined and shaped the continental sound.
 
 Today, Afrobeats dance is taught at major institutions, featured in global advertising campaigns, and performed at events from São Paulo to Seoul. But its heart remains in the community—in the informal sessions, the late-night studio jams, the WhatsApp groups coordinating the next cypher.
 
@@ -360,10 +360,10 @@ Dancing alone will only take you so far. Find a class, join an online group, att
     id: 'b3',
     slug: 'interview-amara-diallo-contemporary',
     title: 'Interview: Amara Diallo on Bridging Traditions and Modernity',
-    excerpt: 'We sat down with one of France\'s most celebrated Afro-contemporary choreographers to discuss her creative process, cultural responsibility, and the future of African dance.',
-    content: `Amara Diallo needs no introduction in the Afro-contemporary dance world. Her work has graced stages from Avignon to Johannesburg, and her classes at AfroBreak regularly sell out within hours of opening.
+    excerpt: 'We sat down with one of Ghana\'s most celebrated Afro-contemporary choreographers to discuss her creative process, cultural responsibility, and the future of African dance.',
+    content: `Amara Diallo needs no introduction in the Afro-contemporary dance world. Her work has graced stages from Accra to Johannesburg, and her classes at AfroBreak regularly sell out within hours of opening.
 
-We caught up with her at her Paris studio between rehearsals for her upcoming piece, "Mémoire des Corps."
+We caught up with her at her Accra studio between rehearsals for her upcoming piece, "Mémoire des Corps."
 
 **AfroBreak: Your work sits at the intersection of traditional African movement and contemporary dance. How do you navigate that space?**
 
@@ -394,7 +394,7 @@ Amara: Learn everything you can—ballet, contemporary, hip-hop, breaking. But n
 
 The dance itself is inseparable from the music. Riddims dictate rhythms. The culture is explicitly social—Dancehall is not a solo pursuit but a communal practice. This is why it's impossible to truly learn Dancehall from videos alone. You need the dance floor.
 
-The global spread of Dancehall has been both exciting and complicated. Its influence on UK grime and garage, on American trap, on French urbain, is undeniable. But with influence comes appropriation, and the Dancehall community has been vocal about wanting credit and compensation for its cultural gifts.
+The global spread of Dancehall has been both exciting and complicated. Its influence on UK grime and garage, on American trap, on Afrobeats and Amapiano, is undeniable. But with influence comes appropriation, and the Dancehall community has been vocal about wanting credit and compensation for its cultural gifts.
 
 As we teach and celebrate Dancehall at AfroBreak, we do so with an explicit commitment to cultural acknowledgment. Our instructors bring not just the movements but the stories, the political context, and the living culture that gives those movements meaning.
 
@@ -471,7 +471,7 @@ export const instructors: Instructor[] = [
   {
     id: 'i1',
     name: 'Kemi Adeyemi',
-    bio: 'Born in Lagos and based in Paris, Kemi has been teaching Afrobeats dance for over 12 years. She has choreographed for major African artists and leads workshops across Europe.',
+    bio: 'Born in Lagos and based in Accra, Kemi has been teaching Afrobeats dance for over 12 years. She has choreographed for major African artists and leads workshops across West Africa.',
     avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80',
     specialties: ['Afrobeats', 'Afro Fusion', 'Choreography'],
     videoCount: 24,
@@ -480,7 +480,7 @@ export const instructors: Instructor[] = [
   {
     id: 'i2',
     name: 'Marcus "Flow" Johnson',
-    bio: 'A veteran of the hip-hop dance scene with 20 years of experience spanning New York, London, and Paris. Marcus specializes in urban styles and battle culture.',
+    bio: 'A veteran of the hip-hop dance scene with 20 years of experience spanning New York, London, and Accra. Marcus specializes in urban styles and battle culture.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
     specialties: ['Hip-Hop', 'Breaking', 'Freestyle', 'Locking', 'Popping'],
     videoCount: 31,
@@ -498,7 +498,7 @@ export const instructors: Instructor[] = [
   {
     id: 'i4',
     name: 'Yaya Kingston',
-    bio: 'Jamaican-born, Marseille-based Dancehall ambassador who has spent two decades spreading Caribbean dance culture across Europe. Yaya brings unmatched authenticity and infectious energy.',
+    bio: 'Jamaican-born, Accra-based Dancehall ambassador who has spent two decades spreading Caribbean dance culture across Africa and the diaspora. Yaya brings unmatched authenticity and infectious energy.',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
     specialties: ['Dancehall', 'Caribbean', 'Afro-Caribbean'],
     videoCount: 15,

@@ -200,7 +200,7 @@ export default function AdminVideosPage() {
                 </button>
                 {form.isPremium && (
                   <div className="flex items-center gap-2">
-                    <label className="text-sm text-text-secondary">Price (€)</label>
+                    <label className="text-sm text-text-secondary">Price (₵)</label>
                     <input type="number" value={form.price} onChange={e => setForm(f => ({...f, price: parseFloat(e.target.value)}))} min={0} step={0.99} className="input-base w-28" />
                   </div>
                 )}

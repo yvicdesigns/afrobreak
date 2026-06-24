@@ -253,7 +253,7 @@ export default function AdminEventsPage() {
                   <td className="p-4 hidden md:table-cell text-sm text-text-secondary">{formatDate(event.date)} at {event.time}</td>
                   <td className="p-4 hidden lg:table-cell text-sm text-text-secondary">{event.city}</td>
                   <td className="p-4 text-right text-sm text-white">
-                    {event.price === 0 ? <span className="text-emerald-400">Free</span> : `€${event.price}`}
+                    {event.price === 0 ? <span className="text-emerald-400">Free</span> : `₵${event.price}`}
                   </td>
                   <td className="p-4 text-center text-xs text-text-secondary">{event.registered}/{event.capacity}</td>
                   <td className="p-4 text-right">

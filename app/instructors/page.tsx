@@ -1,25 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Star, Users, Video, ArrowRight, CheckCircle } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { getInstructors } from '@/lib/db'
 
-const instructors = [
+const defaultInstructors = [
   {
     id: 'i1', name: 'Kemi Adeyemi', role: 'Afrobeats Specialist',
     avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80',
     cover: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80',
-    bio: 'Born in Lagos and based in Paris, Kemi has been teaching Afrobeats dance for over 12 years. She has choreographed for major African artists and leads workshops across Europe.',
+    bio: 'Born in Lagos and based in Accra, Kemi has been teaching Afrobeats dance for over 12 years. She has choreographed for major African artists and leads workshops across West Africa.',
     specialties: ['Afrobeats', 'Afro Fusion', 'Choreography'],
     videos: 24, followers: 18500, rating: 4.9,
-    location: 'Paris, France',
+    location: 'Accra, Ghana',
   },
   {
     id: 'i2', name: 'Marcus "Flow" Johnson', role: 'Hip-Hop & Urban Styles',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
     cover: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-    bio: 'A veteran of the hip-hop dance scene with 20 years of experience spanning New York, London, and Paris. Marcus specializes in urban styles and battle culture.',
+    bio: 'A veteran of the hip-hop dance scene with 20 years of experience spanning New York, London, and Accra. Marcus specializes in urban styles and battle culture.',
     specialties: ['Hip-Hop', 'Breaking', 'Freestyle', 'Locking', 'Popping'],
     videos: 31, followers: 24300, rating: 4.8,
     location: 'London, UK',
@@ -31,25 +32,25 @@ const instructors = [
     bio: 'Choreographer and performer whose work bridges traditional West African dance with contemporary forms. Her company has toured internationally.',
     specialties: ['Contemporary', 'West African', 'Afro Fusion'],
     videos: 18, followers: 14200, rating: 4.9,
-    location: 'Paris, France',
+    location: 'Kumasi, Ghana',
   },
   {
     id: 'i4', name: 'Yaya Kingston', role: 'Dancehall Ambassador',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
     cover: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80',
-    bio: 'Jamaican-born, Marseille-based Dancehall ambassador who has spent two decades spreading Caribbean dance culture across Europe.',
+    bio: 'Jamaican-born, Accra-based Dancehall ambassador who has spent two decades spreading Caribbean dance culture across Africa and the diaspora.',
     specialties: ['Dancehall', 'Caribbean', 'Afro-Caribbean'],
     videos: 15, followers: 11800, rating: 4.7,
-    location: 'Marseille, France',
+    location: 'Accra, Ghana',
   },
   {
     id: 'i5', name: 'Mama Bella', role: 'Kids Dance Coach',
     avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80',
     cover: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
-    bio: 'Specialist in children\'s dance education with a warm, encouraging approach. Mama Bella has taught thousands of children across France and West Africa.',
+    bio: 'Specialist in children\'s dance education with a warm, encouraging approach. Mama Bella has taught thousands of children across Ghana and West Africa.',
     specialties: ['Kids Dance', 'Afrobeats', 'Fun Movement'],
     videos: 12, followers: 8900, rating: 5.0,
-    location: 'Bordeaux, France',
+    location: 'Takoradi, Ghana',
   },
   {
     id: 'i6', name: 'B-Boy Saka', role: 'Breaking & Power Moves',
@@ -58,16 +59,30 @@ const instructors = [
     bio: 'World-renowned B-Boy and breaking champion. Saka has competed at the highest level globally and brings unmatched technical expertise to his teaching.',
     specialties: ['Breaking', 'Power Moves', 'Footwork', 'Freezes'],
     videos: 20, followers: 19400, rating: 4.9,
-    location: 'Toulouse, France',
+    location: 'Tamale, Ghana',
   },
 ]
+
+type PageInstructor = typeof defaultInstructors[0]
 
 function formatNumber(n: number) {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}K` : n.toString()
 }
 
 export default function InstructorsPage() {
-  const [selected, setSelected] = useState<typeof instructors[0] | null>(null)
+  const [instructors, setInstructors] = useState<PageInstructor[]>(defaultInstructors)
+  const [selected, setSelected] = useState<PageInstructor | null>(null)
+
+  useEffect(() => {
+    getInstructors().then(data => {
+      if (data.length === 0) return
+      setInstructors(prev => prev.map(d => {
+        const db = data.find(i => i.id === d.id)
+        if (!db) return d
+        return { ...d, bio: db.bio, specialties: db.specialties, followers: db.followers, videos: db.videoCount }
+      }))
+    })
+  }, [])
 
   return (
     <div className="min-h-screen pt-20 bg-background">

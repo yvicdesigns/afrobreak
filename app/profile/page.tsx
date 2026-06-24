@@ -57,7 +57,7 @@ export default function ProfilePage() {
 
   const favoriteVideos = allVideos.filter(v => favorites.includes(v.id))
   const watchLaterVideos = allVideos.filter(v => watchLater.includes(v.id))
-  const historyVideos = allVideos.slice(0, 3)
+  const historyVideos: Video[] = []
 
   const tabVideos: Record<Tab, Video[]> = {
     favorites: favoriteVideos,
@@ -94,8 +94,8 @@ export default function ProfilePage() {
     updateUser({ watchLater: updated })
   }
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     router.push('/')
   }
 
@@ -209,7 +209,7 @@ export default function ProfilePage() {
             <div className="mt-6 bg-gradient-to-r from-gold-dark/20 to-gold-DEFAULT/10 border border-gold-DEFAULT/30 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <p className="font-semibold text-white mb-1">Unlock Premium Access</p>
-                <p className="text-sm text-text-secondary">Get unlimited access to all 500+ videos for just €9.99/month</p>
+                <p className="text-sm text-text-secondary">Get unlimited access to all 500+ videos for just ₵9.99/month</p>
               </div>
               <Link href="/subscribe">
                 <Button variant="gold" size="sm" leftIcon={<Crown size={14} />}>Upgrade Now</Button>

@@ -307,14 +307,14 @@ export default function SubscribePage() {
                       <span className="text-4xl font-black text-white">Free</span>
                     ) : (
                       <>
-                        <span className="text-4xl font-black text-white">€{plan.priceUSD.toFixed(2)}</span>
+                        <span className="text-4xl font-black text-white">₵{plan.priceUSD.toFixed(2)}</span>
                         <span className="text-text-secondary mb-1">/{plan.period}</span>
                       </>
                     )}
                   </div>
                   {plan.id === 'annual' && (
                     <p className="text-xs text-emerald-400 mt-1 font-medium">
-                      Equivalent to €6.67/month — save €40
+                      Equivalent to ₵6.67/month — save ₵40
                     </p>
                   )}
                 </div>
@@ -350,7 +350,7 @@ export default function SubscribePage() {
                     ? 'Current Plan'
                     : plan.priceUSD === 0
                     ? 'Get Started Free'
-                    : `Subscribe — €${plan.priceUSD.toFixed(2)}/${plan.period}`}
+                    : `Subscribe — ₵${plan.priceUSD.toFixed(2)}/${plan.period}`}
                 </button>
               </div>
             ))}

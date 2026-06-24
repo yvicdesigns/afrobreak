@@ -45,8 +45,8 @@ export default function ContactPage() {
 
               {[
                 { icon: Mail, label: 'Email', value: 'contact@afrobreak.com', href: 'mailto:contact@afrobreak.com' },
-                { icon: Phone, label: 'Phone', value: '+33 1 23 45 67 89', href: 'tel:+33123456789' },
-                { icon: MapPin, label: 'Based in', value: 'Paris, France — Global', href: null },
+                { icon: Phone, label: 'Phone', value: '+233 30 270 1234', href: 'tel:+233302701234' },
+                { icon: MapPin, label: 'Based in', value: 'Accra, Ghana — Global', href: null },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center flex-shrink-0">

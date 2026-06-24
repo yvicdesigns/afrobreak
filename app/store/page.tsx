@@ -154,7 +154,7 @@ export default function StorePage() {
           {/* Trust badges */}
           <div className="flex items-center justify-center gap-8 mt-8 flex-wrap">
             {[
-              { icon: Truck, text: 'Free shipping over €50' },
+              { icon: Truck, text: 'Free shipping over ₵50' },
               { icon: Shield, text: 'Secure payment' },
               { icon: RotateCcw, text: '30-day returns' },
             ].map(({ icon: Icon, text }) => (
@@ -228,7 +228,7 @@ export default function StorePage() {
                 <h3 className="font-bold text-white mb-1 line-clamp-1">{product.name}</h3>
                 <p className="text-sm text-text-secondary line-clamp-2 mb-3">{product.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-black text-white">€{product.price.toFixed(2)}</span>
+                  <span className="text-lg font-black text-white">₵{product.price.toFixed(2)}</span>
                   <Button variant="primary" size="sm" onClick={() => openProduct(product)}>
                     Add to Cart
                   </Button>
@@ -255,7 +255,7 @@ export default function StorePage() {
               </div>
               <div className="flex-1 space-y-4">
                 <p className="text-sm text-text-secondary">{selectedProduct.description}</p>
-                <p className="text-xl font-black text-white">€{selectedProduct.price.toFixed(2)}</p>
+                <p className="text-xl font-black text-white">₵{selectedProduct.price.toFixed(2)}</p>
 
                 {selectedProduct.sizes && (
                   <div>
@@ -307,7 +307,7 @@ export default function StorePage() {
                 leftIcon={<ShoppingCart size={16} />}
                 onClick={() => addToCart(selectedProduct, selectedSize, selectedColor)}
               >
-                Add to Cart — €{selectedProduct.price.toFixed(2)}
+                Add to Cart — ₵{selectedProduct.price.toFixed(2)}
               </Button>
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function StorePage() {
                             <Plus size={10} />
                           </button>
                         </div>
-                        <span className="text-sm font-bold text-white">€{(item.product.price * item.quantity).toFixed(2)}</span>
+                        <span className="text-sm font-bold text-white">₵{(item.product.price * item.quantity).toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -366,15 +366,15 @@ export default function StorePage() {
               <div className="p-5 border-t border-white/10 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-text-secondary">Total</span>
-                  <span className="text-xl font-black text-white">€{cartTotal.toFixed(2)}</span>
+                  <span className="text-xl font-black text-white">₵{cartTotal.toFixed(2)}</span>
                 </div>
                 {cartTotal < 50 && (
                   <p className="text-xs text-text-muted text-center">
-                    Add €{(50 - cartTotal).toFixed(2)} more for free shipping
+                    Add ₵{(50 - cartTotal).toFixed(2)} more for free shipping
                   </p>
                 )}
                 <Button variant="primary" fullWidth leftIcon={<ShoppingCart size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
-                  Checkout — €{cartTotal.toFixed(2)}
+                  Checkout — ₵{cartTotal.toFixed(2)}
                 </Button>
                 <Button variant="ghost" fullWidth onClick={() => setCartOpen(false)}>
                   Continue Shopping

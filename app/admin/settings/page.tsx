@@ -18,7 +18,7 @@ export default function AdminSettingsPage() {
     newSubscriberNotif: true,
     allowSignup: true,
     premiumPrice: '9.99',
-    currency: 'EUR',
+    currency: 'GHS',
   })
 
   useEffect(() => {
@@ -102,6 +102,7 @@ export default function AdminSettingsPage() {
           <div>
             <label className="block text-sm font-medium text-white mb-1.5">Currency</label>
             <select value={form.currency} onChange={e => setForm(f => ({...f, currency: e.target.value}))} className="input-base">
+              <option value="GHS" className="bg-surface">GHS ₵</option>
               <option value="EUR" className="bg-surface">EUR €</option>
               <option value="USD" className="bg-surface">USD $</option>
               <option value="GBP" className="bg-surface">GBP £</option>

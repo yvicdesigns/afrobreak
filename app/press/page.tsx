@@ -6,12 +6,12 @@ import Button from '@/components/ui/Button'
 import { getPresscoverage } from '@/lib/db'
 
 const defaultCoverage = [
-  { id: 'd1', outlet: 'Le Monde', title: 'AfroBreak: La plateforme qui démocratise la danse afro en Europe', date: 'March 2025', type: 'Feature', logo: '🗞️', url: '' },
-  { id: 'd2', outlet: 'TechCrunch', title: 'AfroBreak raises €2M to bring African dance culture online', date: 'January 2025', type: 'News', logo: '💻', url: '' },
+  { id: 'd1', outlet: 'Joy Online', title: 'AfroBreak: The platform democratising Afro dance education in Ghana', date: 'March 2025', type: 'Feature', logo: '🗞️', url: '' },
+  { id: 'd2', outlet: 'TechCrunch', title: 'AfroBreak raises $2M to bring African dance culture online', date: 'January 2025', type: 'News', logo: '💻', url: '' },
   { id: 'd3', outlet: 'BBC Culture', title: 'How AfroBreak is preserving African dance traditions for a new generation', date: 'November 2024', type: 'Feature', logo: '📺', url: '' },
   { id: 'd4', outlet: 'Forbes', title: '30 Under 30: The entrepreneurs building platforms for underrepresented cultures', date: 'October 2024', type: 'List', logo: '📊', url: '' },
   { id: 'd5', outlet: 'The Guardian', title: 'Afrobeats, Amapiano, Dancehall: The rise of African dance platforms', date: 'August 2024', type: 'Feature', logo: '📰', url: '' },
-  { id: 'd6', outlet: 'Vogue France', title: 'AfroBreak: Quand la danse africaine conquiert l\'Europe', date: 'June 2024', type: 'Feature', logo: '✨', url: '' },
+  { id: 'd6', outlet: 'Pulse Ghana', title: 'AfroBreak: How African dance is taking over the world from Accra', date: 'June 2024', type: 'Feature', logo: '✨', url: '' },
 ]
 
 const assets = [
@@ -25,7 +25,7 @@ const stats = [
   { value: '10,000+', label: 'Active Members' },
   { value: '40+', label: 'Countries' },
   { value: '500+', label: 'Video Lessons' },
-  { value: '€2M', label: 'Raised' },
+  { value: '$2M', label: 'Raised' },
 ]
 
 export default function PressPage() {

@@ -126,7 +126,7 @@ export default function AdminStorePage() {
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <Field label="Product Name" required value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} placeholder="AfroBreak Hoodie" />
-              <Field label="Price (€)" required type="number" value={form.price} onChange={v => setForm(f => ({ ...f, price: v }))} placeholder="29.99" />
+              <Field label="Price (₵)" required type="number" value={form.price} onChange={v => setForm(f => ({ ...f, price: v }))} placeholder="29.99" />
               <div className="md:col-span-2">
                 <Field label="Description" value={form.description} onChange={v => setForm(f => ({ ...f, description: v }))} placeholder="Describe the product..." textarea />
               </div>
@@ -194,7 +194,7 @@ export default function AdminStorePage() {
                       : <span className="px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 text-[10px] font-bold">OUT</span>
                     }
                   </td>
-                  <td className="p-4 text-right"><span className="text-sm font-bold text-white">€{product.price?.toFixed(2)}</span></td>
+                  <td className="p-4 text-right"><span className="text-sm font-bold text-white">₵{product.price?.toFixed(2)}</span></td>
                   <td className="p-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => handleEdit(product)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>

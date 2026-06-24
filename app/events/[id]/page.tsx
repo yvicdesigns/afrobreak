@@ -158,7 +158,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                 <div className="text-center relative z-10">
                   <MapPin size={32} className="text-primary-500 mx-auto mb-2" />
                   <p className="font-semibold text-white">{event.location}</p>
-                  <p className="text-sm text-text-secondary mb-4">{event.city}, France</p>
+                  <p className="text-sm text-text-secondary mb-4">{event.city}, Ghana</p>
                   <a
                     href={`https://maps.google.com/?q=${encodeURIComponent(event.location + ', ' + event.city)}`}
                     target="_blank"
@@ -181,7 +181,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     {event.price === 0 ? (
                       <span className="text-2xl font-black text-emerald-400">Free</span>
                     ) : (
-                      <span className="text-2xl font-black text-white">€{event.price.toFixed(2)}</span>
+                      <span className="text-2xl font-black text-white">₵{event.price.toFixed(2)}</span>
                     )}
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     disabled={soldOut}
                     onClick={() => event.price === 0 ? setShowRegModal(true) : setShowPayment(true)}
                   >
-                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — €${event.price.toFixed(2)}`}
+                    {soldOut ? 'Sold Out' : event.price === 0 ? 'Register Free' : `Register — ₵${event.price.toFixed(2)}`}
                   </Button>
                 )}
 

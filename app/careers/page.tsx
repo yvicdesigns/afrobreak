@@ -18,24 +18,24 @@ type Job = {
 
 const defaultJobs: Job[] = [
   {
-    id: '1', title: 'Senior Full-Stack Developer', department: 'Engineering', location: 'Paris / Remote', type: 'Full-time', active: true,
+    id: '1', title: 'Senior Full-Stack Developer', department: 'Engineering', location: 'Accra / Remote', type: 'Full-time', active: true,
     description: 'Build and scale the AfroBreak platform. You\'ll work on our Next.js frontend, Node.js backend, and Supabase infrastructure.',
     requirements: ['5+ years of experience with React / Next.js', 'Strong TypeScript skills', 'Experience with Supabase or PostgreSQL', 'Passion for culture and community products'],
   },
   {
-    id: '2', title: 'Content & Video Producer', department: 'Content', location: 'Paris', type: 'Full-time', active: true,
+    id: '2', title: 'Content & Video Producer', department: 'Content', location: 'Accra', type: 'Full-time', active: true,
     description: 'Lead the production of dance tutorials and documentary content. Work directly with our instructor team to create world-class video lessons.',
     requirements: ['3+ years video production experience', 'Experience with dance or sports content', 'Proficiency in Adobe Premiere or Final Cut', 'Strong eye for cultural authenticity'],
   },
   {
-    id: '3', title: 'Community Manager', department: 'Community', location: 'Paris / Remote', type: 'Full-time', active: true,
+    id: '3', title: 'Community Manager', department: 'Community', location: 'Accra / Remote', type: 'Full-time', active: true,
     description: 'Grow and nurture the AfroBreak community across platforms. Build relationships with dancers, organizers, and cultural influencers.',
-    requirements: ['2+ years community management', 'Active in Afro or urban dance scenes', 'Fluent in French and English', 'Social media expertise (Instagram, TikTok)'],
+    requirements: ['2+ years community management', 'Active in Afro or urban dance scenes', 'Fluent in English', 'Social media expertise (Instagram, TikTok)'],
   },
   {
-    id: '4', title: 'Dance Content Creator (Intern)', department: 'Content', location: 'Paris', type: 'Internship', active: true,
+    id: '4', title: 'Dance Content Creator (Intern)', department: 'Content', location: 'Accra', type: 'Internship', active: true,
     description: 'Support our content team in creating engaging social media content, short-form videos, and behind-the-scenes coverage.',
-    requirements: ['Passion for Afro and urban dance', 'Basic video editing skills', 'Active social media presence', 'Based in or near Paris'],
+    requirements: ['Passion for Afro and urban dance', 'Basic video editing skills', 'Active social media presence', 'Based in or near Accra'],
   },
   {
     id: '5', title: 'Marketing Manager', department: 'Marketing', location: 'Remote', type: 'Full-time', active: true,

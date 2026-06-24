@@ -99,7 +99,7 @@ export default function AdminDashboard() {
           <div className="flex items-end gap-3 h-40">
             {barData.map((bar, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-2">
-                <span className="text-xs text-text-secondary">€{(bar.value * 100).toLocaleString()}</span>
+                <span className="text-xs text-text-secondary">₵{(bar.value * 100).toLocaleString()}</span>
                 <div
                   className="w-full rounded-t-lg bg-gradient-to-t from-primary-600 to-primary-400 transition-all duration-500 hover:from-primary-500 hover:to-primary-300"
                   style={{ height: `${bar.value}%` }}
