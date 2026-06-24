@@ -37,7 +37,7 @@ export interface Event {
   youtubeUrl?: string
 }
 
-export type EventType = 'Workshop' | 'Class' | 'Show' | 'Battle'
+export type EventType = 'Workshop' | 'Class' | 'Show' | 'Battle' | 'Qualifier'
 
 export interface BlogPost {
   id: string

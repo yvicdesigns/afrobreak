@@ -45,6 +45,7 @@ const variantMap: Record<string, string> = {
   'Class': 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30',
   'Show': 'bg-rose-500/20 text-rose-400 border border-rose-500/30',
   'Battle': 'bg-red-500/20 text-red-400 border border-red-500/40',
+  'Qualifier': 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
   // Blog categories
   'Dance Tips': 'bg-teal-500/20 text-teal-400 border border-teal-500/30',
   'Lifestyle': 'bg-lime-500/20 text-lime-400 border border-lime-500/30',

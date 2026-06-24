@@ -20,9 +20,9 @@ const tabs = [
 // Map tab keys to event types in the DB
 const tabTypeMap: Record<string, string[]> = {
   all: [],
-  history: ['Show', 'Battle'],
+  history: ['Show'],
   projects: ['Workshop', 'Class'],
-  qualifiers: ['Battle'],
+  qualifiers: ['Qualifier'],
   'africa-final': ['Show'],
 }
 
