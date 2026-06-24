@@ -100,10 +100,10 @@ export default function InstructorsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">World-Class Instructors</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
-            Learn from the <span className="gradient-text-orange">Best</span>
+            Learn from the <span className="gradient-text-orange">culture Icons</span>
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto">
-            Our instructors are masters of their craft — professional dancers, choreographers, and champions who bring decades of experience to every lesson.
+            Our ambassadors are well versed in the craft - Cultural practitioners, Choreographers, Professional Dancers and champions who bring their unique experience and approach to every the dance culture
           </p>
         </div>
       </div>

@@ -85,7 +85,7 @@ const testimonials = [
     org: 'Netherlands',
   },
   {
-    quote: "Afrobreak's intention of building mind, body, and soul connections in Africa is incredibly important. Staying connected to our roots while uplifting one another and creating opportunities is key to our growth. If you continue to stay true to this vision, I have no doubt that this event will thrive and have a lasting impact.",
+    quote: "Afrobreak concepts events is intention of building mind, body, and soul connections in Africa is incredibly important. Staying connected to our roots while uplifting one another and creating opportunities is key to our growth. If you continue to stay true to this vision, I have no doubt that this event will thrive and have a lasting impact. Keep fostering this spirit, and the community will only continue to flourish.",
     name: 'Elvina Vee',
     org: 'WDSF Licensed Judge, South Africa',
   },

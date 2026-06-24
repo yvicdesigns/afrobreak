@@ -83,6 +83,10 @@ const plans = [
       { label: 'HD/4K quality', included: true },
       { label: 'Priority support', included: true },
       { label: 'Exclusive masterclasses', included: true },
+      { label: 'Free afrobreak merch', included: true },
+      { label: 'Access practice and sessions', included: true },
+      { label: 'Discount dance trips', included: true },
+      { label: 'Premium access to job opportunities', included: true },
     ],
   },
 ]
