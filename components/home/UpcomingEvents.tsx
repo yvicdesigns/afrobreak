@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { getEvents } from '@/lib/db'
+import { events as defaultEvents } from '@/lib/data'
 import type { Event } from '@/lib/types'
 import EventCard from '@/components/events/EventCard'
 
@@ -11,7 +12,11 @@ export default function UpcomingEvents() {
   const [events, setEvents] = useState<Event[]>([])
 
   useEffect(() => {
-    getEvents().then(all => setEvents(all.slice(0, 5)))
+    getEvents().then(all => {
+      const source = all.length > 0 ? all : defaultEvents
+      const upcoming = source.filter(e => new Date(e.date) >= new Date())
+      setEvents(upcoming.slice(0, 5))
+    })
   }, [])
 
   return (

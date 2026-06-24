@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { Calendar, History, FolderOpen, MapPin, Trophy } from 'lucide-react'
 import clsx from 'clsx'
 import { getEvents } from '@/lib/db'
+import { events as defaultEvents } from '@/lib/data'
 import type { Event } from '@/lib/types'
 import EventCard from '@/components/events/EventCard'
 
@@ -33,7 +34,10 @@ function EventsContent() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getEvents().then(data => { setEvents(data); setLoading(false) })
+    getEvents().then(data => {
+      setEvents(data.length > 0 ? data : defaultEvents)
+      setLoading(false)
+    })
   }, [])
 
   const filtered = useMemo(() => {
