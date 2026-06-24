@@ -25,10 +25,28 @@ const timeline = [
 ]
 
 const countries = [
-  'Ghana', 'Nigeria', 'Benin', 'Togo', 'Ivory Coast', 'Senegal',
-  'Guinea Conakry', 'DR Congo', 'Uganda', 'Kenya', 'Tanzania', 'Rwanda',
-  'Zimbabwe', 'South Africa', 'Burkina Faso', 'Niger', 'Sierra Leone', 'Angola',
-  'Mauritius', 'Algeria', 'Morocco', 'Cameroon',
+  { name: 'Ghana', flag: '🇬🇭', desc: 'Home of Bboy Lyricx and Africa Breaking Academy. Ghana\'s breaking scene is one of the most vibrant on the continent, producing champions like Blesso, Tris Naomi, Nagi, Viks, and Roxy. Accra and Tamale are major hotbeds of hiphop culture and breaking.' },
+  { name: 'Nigeria', flag: '🇳🇬', desc: 'Africa\'s most populous nation has produced elite breakers including Lil Vic (AfroBreak African Champion 2023) and Kris (Girls Champion 2025). Nigeria\'s Afrobeats and hiphop scene is globally influential, fueling a powerhouse breaking community.' },
+  { name: 'Benin', flag: '🇧🇯', desc: 'A rising powerhouse in African breaking. Smith (AfroBreak African Champion 2024), Sandrine (Girls Champion 2023), ZH, and Ola represent Benin\'s growing and talented hiphop movement on the continental stage.' },
+  { name: 'Togo', flag: '🇹🇬', desc: 'Home of Chris Paul and Zira, two standout regional champions. Togo\'s urban youth culture and breaking community have grown rapidly, producing dancers with raw energy and technical brilliance.' },
+  { name: 'Ivory Coast', flag: '🇨🇮', desc: 'Blanchard is one of Ivory Coast\'s finest breakers. The country\'s deep musical roots in Coupé-Décalé and Afrobeats fuel a rich urban dance scene connecting street culture with artistic expression.' },
+  { name: 'Senegal', flag: '🇸🇳', desc: 'Pape from Senegal was the AfroBreak African Champion 2022. Dakar\'s thriving hiphop scene — one of Africa\'s oldest and most respected — continues to inspire breakers across the continent.' },
+  { name: 'Guinea Conakry', flag: '🇬🇳', desc: 'Guinea\'s vibrant musical heritage in traditional djembe rhythms and instruments has produced passionate hiphop practitioners who bridge deep cultural roots with the global language of breaking.' },
+  { name: 'DR Congo', flag: '🇨🇩', desc: 'Kinshasa\'s legendary Rumba and Ndombolo tradition meets contemporary hiphop, producing dancers with extraordinary musicality and rhythm. The Congo\'s creative energy is unmatched across the continent.' },
+  { name: 'Uganda', flag: '🇺🇬', desc: 'Pencil is one of Uganda\'s finest ambassadors on the AfroBreak stage. Kampala hosts the East Africa Qualifier and a rapidly growing breaking scene driven by passionate youth communities.' },
+  { name: 'Kenya', flag: '🇰🇪', desc: 'Lil Dan represents Kenya\'s growing breaking movement. Nairobi\'s thriving youth culture and Gengetone urban music scene continue to produce talented breakers pushing East African hiphop forward.' },
+  { name: 'Tanzania', flag: '🇹🇿', desc: 'East Africa\'s hiphop scene, known locally as Bongo Flava, blends Swahili lyricism with global influences, creating a unique and powerful foundation for breaking culture across the region.' },
+  { name: 'Rwanda', flag: '🇷🇼', desc: 'Rwanda\'s youth-driven cultural renaissance includes a growing hiphop and breaking movement, particularly in Kigali, reflecting the country\'s forward-looking spirit and investment in young people.' },
+  { name: 'Zimbabwe', flag: '🇿🇼', desc: 'Zimbabwe\'s deep roots in music and rhythm — from mbira to contemporary Zimdancehall — fuel a passionate breaking and hiphop community with its own distinctive flavor and identity.' },
+  { name: 'South Africa', flag: '🇿🇦', desc: 'Courtnea Paul (Girls Champion 2024), The Curse, and Elvina Vee (WDSF judge) represent South Africa\'s rich breaking scene. Cape Town, Johannesburg, and Durban have produced world-class talent.' },
+  { name: 'Burkina Faso', flag: '🇧🇫', desc: 'Dansi from Burkina Faso is a standout regional champion. Ouagadougou\'s cultural scene has long been a beacon for African arts, now fully embracing hiphop and breaking as youth expressions.' },
+  { name: 'Niger', flag: '🇳🇪', desc: 'Niger\'s youth are increasingly connecting with hiphop culture as a vehicle for expression, resilience, and community. Breaking offers a powerful stage for a generation ready to show their voice.' },
+  { name: 'Sierra Leone', flag: '🇸🇱', desc: 'Freetown\'s vibrant street culture has embraced breaking and hiphop as powerful tools for youth empowerment, creative expression, and community building in West Africa.' },
+  { name: 'Angola', flag: '🇦🇴', desc: 'Luanda\'s legendary Kuduro dance tradition shares deep DNA with breaking — energy, creativity, and street origins. Angola\'s hiphop scene is one of Southern Africa\'s most distinctive.' },
+  { name: 'Mauritius', flag: '🇲🇺', desc: 'David represents Mauritius on the AfroBreak stage. This island nation\'s diverse cultural mix — African, Indian, and French — creates a unique and colorful hiphop flavor unlike anywhere else.' },
+  { name: 'Algeria', flag: '🇩🇿', desc: 'Zinji from Algeria is the AfroBreak African Champion 2025, putting North Africa firmly on the continental breaking map. Algeria\'s urban youth culture and breaking scene are thriving.' },
+  { name: 'Morocco', flag: '🇲🇦', desc: 'Morocco\'s cosmopolitan cities — Casablanca and Rabat — have a growing breaking scene, connecting North African urban culture with the pan-African and global hiphop movement.' },
+  { name: 'Cameroon', flag: '🇨🇲', desc: 'Cameroon\'s rich musical tradition — from Bikutsi to Makossa — creates a vibrant foundation for hiphop and breaking culture across this culturally diverse and creatively explosive nation.' },
 ]
 
 const services = [
@@ -68,6 +86,7 @@ const defaultTeam = [
 
 export default function AboutPage() {
   const [team, setTeam] = useState(defaultTeam)
+  const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null)
 
   useEffect(() => {
     getTeamMembers().then(data => { if (data.length > 0) setTeam(data as typeof defaultTeam) })
@@ -171,14 +190,51 @@ export default function AboutPage() {
         {/* Countries */}
         <div className="bg-surface border border-white/5 rounded-2xl p-8">
           <p className="text-center text-sm font-semibold text-primary-500 uppercase tracking-widest mb-6">Represented Countries</p>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-3 justify-center">
             {countries.map(country => (
-              <span key={country} className="px-3 py-1.5 rounded-full text-sm font-medium bg-white/5 border border-white/10 text-text-secondary hover:text-white hover:border-white/20 transition-all">
-                {country}
-              </span>
+              <button
+                key={country.name}
+                onClick={() => setSelectedCountry(country)}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-text-secondary hover:text-white hover:border-primary-500/40 hover:bg-primary-500/10 transition-all duration-200 group"
+              >
+                <span className="text-xl leading-none">{country.flag}</span>
+                <span className="text-sm font-medium">{country.name}</span>
+              </button>
             ))}
           </div>
         </div>
+
+        {/* Country Modal */}
+        {selectedCountry && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            onClick={() => setSelectedCountry(null)}
+          >
+            <div
+              onClick={e => e.stopPropagation()}
+              className="w-full max-w-sm bg-surface border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              {/* Header */}
+              <div className="relative bg-gradient-to-br from-primary-500/20 to-secondary-500/10 p-8 text-center border-b border-white/10">
+                <button
+                  onClick={() => setSelectedCountry(null)}
+                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-xl bg-black/30 text-white/60 hover:text-white hover:bg-black/50 transition-all text-lg"
+                >
+                  ✕
+                </button>
+                <div className="text-7xl mb-3 leading-none">{selectedCountry.flag}</div>
+                <h3 className="text-2xl font-black text-white">{selectedCountry.name}</h3>
+                <span className="inline-block mt-2 text-xs px-3 py-1 rounded-full bg-primary-500/20 border border-primary-500/30 text-primary-400 font-semibold uppercase tracking-widest">
+                  Hiphop Culture
+                </span>
+              </div>
+              {/* Body */}
+              <div className="p-6">
+                <p className="text-text-secondary text-sm leading-relaxed">{selectedCountry.desc}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Founder */}
