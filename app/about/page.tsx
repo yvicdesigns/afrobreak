@@ -49,13 +49,13 @@ const countries = [
 ]
 
 const services = [
-  { icon: Film, title: 'Documentary Production', desc: 'High-quality documentaries capturing cultural movements, artistic journeys, and social impact projects — from concept to final edit.' },
-  { icon: Music2, title: 'DJ Services & Equipment Rental', desc: 'Professional DJ services for all scales of events, plus sound systems, turntables, mixers and accessories for rental.' },
-  { icon: Camera, title: 'Camera & Media Equipment', desc: 'Access high-quality video and photography gear. Ideal for content creators, production teams, and live events.' },
-  { icon: CalendarDays, title: 'Event Planning & Management', desc: 'Full-service planning for cultural festivals, dance competitions, workshops, and corporate gatherings from concept to execution.' },
-  { icon: Image, title: 'Photography & Videography', desc: 'Professional photo and video services for performances, campaigns, interviews, and branded content.' },
-  { icon: Megaphone, title: 'Marketing & Creative Branding', desc: 'Branding, content creation, and social media strategy for artists, startups, and organizations building their identity.' },
-  { icon: Dumbbell, title: 'Dance Training & Workshops', desc: 'One-on-one training, group classes, and team-building workshops for schools, communities, and corporate organizations.' },
+  { icon: Film, title: 'Documentary Production', desc: 'We specialize in producing high-quality documentaries that capture compelling stories, cultural movements, artistic journeys, and social impact projects. From concept development to final editing, our team handles the full production process.' },
+  { icon: Music2, title: 'DJ Services & Equipment Rental', desc: 'We provide professional DJ services for events of all scales—from dance battles to corporate functions. Our DJ equipment rental service includes sound systems, turntables, mixers, and accessories to meet your audio needs.' },
+  { icon: Camera, title: 'Camera & Media Equipment Rentals', desc: 'Access high-quality video and photography gear through our rental service. Ideal for content creators, production teams, and freelancers working on short-term projects, workshops, or live events.' },
+  { icon: CalendarDays, title: 'Event Planning & Management', desc: 'From concept to execution, we offer comprehensive event planning services for cultural festivals, dance competitions, educational workshops, and corporate gatherings. Our team ensures smooth coordination and impactful experiences.' },
+  { icon: Image, title: 'Photography & Videography Services', desc: 'We offer professional photography and videography services for performances, campaigns, interviews, and branded content. Whether for social media, marketing, or archival purposes, we capture moments that matter.' },
+  { icon: Megaphone, title: 'Marketing & Creative Branding', desc: 'Our creative team supports artists, startups, and organizations with branding, content creation, and social media strategy. We help you communicate your message effectively and build a memorable visual identity.' },
+  { icon: Dumbbell, title: 'Dance Training & Workshops', desc: 'We offer personalized one-on-one training, group classes, and team-building dance workshops for schools, communities, and corporate organizations. Our fitness-focused workshops promote health and creativity in an engaging and inclusive environment.' },
 ]
 
 const testimonials = [
@@ -333,7 +333,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">What We Offer</p>
             <h2 className="text-3xl font-black text-white">Our Services</h2>
-            <p className="text-text-secondary mt-3 max-w-xl mx-auto">Creative and technical services designed to support individuals, organizations, and brands in the arts, culture, and entertainment sectors.</p>
+            <p className="text-text-secondary mt-3 max-w-xl mx-auto">At Afro Break Concepts, we offer a range of creative and technical services designed to support individuals, organizations, and brands in the arts, culture, and entertainment sectors.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {services.slice(0, 6).map(({ icon: Icon, title, desc }) => (
@@ -352,8 +352,8 @@ export default function AboutPage() {
               <Dumbbell size={22} className="text-primary-500" />
             </div>
             <div>
-              <h3 className="font-bold text-white mb-1">Dance Training & Workshops</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">Personalized one-on-one training, group classes, and team-building dance workshops for schools, communities, and corporate organizations. Our fitness-focused workshops promote health and creativity in an engaging and inclusive environment.</p>
+              <h3 className="font-bold text-white mb-1">Africa Breaking Academy Dance Training & Workshops</h3>
+              <p className="text-sm text-text-secondary leading-relaxed">We offer personalized one-on-one training, group classes, and team-building dance workshops for schools, communities, and corporate organizations. Our fitness-focused workshops promote health and creativity in an engaging and inclusive environment.</p>
             </div>
           </div>
         </div>
