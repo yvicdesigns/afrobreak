@@ -127,12 +127,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) { router.replace('/'); return }
-      const { data } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', user.id)
-        .single()
-      if (!data?.is_admin) { router.replace('/'); return }
+
+      // Try profiles table first, fall back to email allowlist
+      const ADMIN_EMAILS = ['afrobreakconcepts@gmail.com', 'yvicdesigns@gmail.com']
+      try {
+        const { data } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', user.id)
+          .single()
+        const isAdmin = data?.is_admin || ADMIN_EMAILS.includes(user.email ?? '')
+        if (!isAdmin) { router.replace('/'); return }
+      } catch {
+        if (!ADMIN_EMAILS.includes(user.email ?? '')) { router.replace('/'); return }
+      }
       setChecking(false)
     })
   }, [router])
