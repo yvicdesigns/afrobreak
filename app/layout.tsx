@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { AuthProvider } from '@/lib/store'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: {
@@ -65,6 +66,7 @@ export default function RootLayout({
           <ConditionalLayout>
             {children}
           </ConditionalLayout>
+          <WhatsAppButton />
         </AuthProvider>
       </body>
     </html>
