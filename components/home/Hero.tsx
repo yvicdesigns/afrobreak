@@ -11,6 +11,7 @@ const stats = [
   { value: '1000+', label: 'Workshops' },
   { value: '270+', label: 'Events' },
   { value: '28+', label: 'Countries' },
+  { value: '100K+', label: 'Social Media' },
 ]
 
 const PARTICLE_COUNT = 15

@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button'
 const features = [
   {
     icon: Video,
-    title: '500+ Premium Videos',
+    title: '100+ Premium Videos',
     desc: 'From beginner fundamentals to advanced masterclasses across all Afro and urban styles.',
   },
   {
@@ -121,10 +121,10 @@ export default function AboutSection() {
                 <span className="gradient-text-orange">Built for You</span>
               </h2>
               <p className="text-text-secondary leading-relaxed mb-4">
-                AfroBreak was born from a simple idea: that Afro and urban dance is more than movement—it&apos;s culture, history, and community. We built this platform because we wanted a space that treats dancers with the respect and depth they deserve.
+                Afrobreak was born from a simple idea: that afro and urban dance is more than movement — it&apos;s cultural identity, history and community. We built this platform because we wanted a space that treats dance practitioners with the respect and depth they deserve.
               </p>
               <p className="text-text-secondary leading-relaxed">
-                Whether you&apos;re learning your first Afrobeat move or preparing for the AfroBreak Africa Final, AfroBreak has the content, community, and context you need.
+                Whether you&apos;re learning your first dance move or preparing for dance battles or championships, Afrobreak has the knowledge, content and context you need.
               </p>
             </div>
 

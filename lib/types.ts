@@ -34,6 +34,7 @@ export interface Event {
   capacity: number
   registered: number
   tags: string[]
+  youtubeUrl?: string
 }
 
 export type EventType = 'Workshop' | 'Class' | 'Show' | 'Battle'

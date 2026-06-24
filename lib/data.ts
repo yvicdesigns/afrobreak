@@ -299,6 +299,7 @@ export const events: Event[] = [
     capacity: 800,
     registered: 800,
     tags: ['africa final', '2025', 'champions', 'accra'],
+    youtubeUrl: 'https://youtube.com/live/95xXH9iaSnE?feature=share',
   },
   {
     id: 'e_final2024',
@@ -315,6 +316,7 @@ export const events: Event[] = [
     capacity: 600,
     registered: 600,
     tags: ['africa final', '2024', 'champions', 'accra'],
+    youtubeUrl: 'https://youtube.com/live/snT-2V8Uf3s?feature=share',
   },
   {
     id: 'e_final2023',

@@ -69,8 +69,8 @@ export default function ContactPage() {
               <h2 className="text-lg font-bold text-white mb-4">Follow Us</h2>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: Instagram, href: 'https://www.instagram.com/afrobreakgh/', label: 'Instagram AfroBreak' },
-                  { icon: Instagram, href: 'https://www.instagram.com/africabreakingyouth/', label: 'Instagram ABA' },
+                  { icon: Instagram, href: 'https://www.instagram.com/afrobreak_concepts/', label: 'Instagram AfroBreak' },
+                  { icon: Instagram, href: 'https://www.instagram.com/africabreakingacademy/', label: 'Instagram ABA' },
                   { icon: Youtube, href: 'https://www.youtube.com/@afrobreakghana', label: 'YouTube' },
                   { icon: Facebook, href: 'https://www.facebook.com/afrobreakghana', label: 'Facebook' },
                   { icon: Twitter, href: 'https://twitter.com/AfrobreakGhana', label: 'Twitter / X' },

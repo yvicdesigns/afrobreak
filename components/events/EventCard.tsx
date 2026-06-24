@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Calendar, MapPin, Users } from 'lucide-react'
+import { Calendar, MapPin, Users, Play } from 'lucide-react'
 import clsx from 'clsx'
 import type { Event } from '@/lib/types'
 import Badge from '@/components/ui/Badge'
@@ -52,7 +52,7 @@ export default function EventCard({ event, className }: EventCardProps) {
           {event.price === 0 ? (
             <span className="text-sm font-bold text-emerald-400">Free</span>
           ) : (
-            <span className="text-sm font-bold text-white">€{event.price.toFixed(2)}</span>
+            <span className="text-sm font-bold text-white">₵{event.price.toFixed(2)}</span>
           )}
         </div>
       </div>
@@ -100,16 +100,19 @@ export default function EventCard({ event, className }: EventCardProps) {
           </div>
         </div>
 
-        <Link href={`/events/${event.id}`}>
-          <Button
-            variant={soldOut ? 'ghost' : 'primary'}
-            size="sm"
-            fullWidth
-            disabled={soldOut}
-          >
-            {soldOut ? 'Sold Out' : 'Register Now'}
-          </Button>
-        </Link>
+        {event.youtubeUrl ? (
+          <a href={event.youtubeUrl} target="_blank" rel="noopener noreferrer">
+            <Button variant="secondary" size="sm" fullWidth leftIcon={<Play size={13} className="fill-primary-500" />}>
+              Watch Recording
+            </Button>
+          </a>
+        ) : (
+          <Link href={`/events/${event.id}`}>
+            <Button variant={soldOut ? 'ghost' : 'primary'} size="sm" fullWidth disabled={soldOut}>
+              {soldOut ? 'Sold Out' : 'Register Now'}
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   )
