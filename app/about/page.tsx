@@ -87,6 +87,7 @@ export default function AboutPage() {
   const [team, setTeam] = useState(defaultTeam)
   const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null)
   const [bioExpanded, setBioExpanded] = useState(false)
+  const [champExpanded, setChampExpanded] = useState(false)
 
   useEffect(() => {
     getTeamMembers().then(data => { if (data.length > 0) setTeam(data as typeof defaultTeam) })
@@ -185,15 +186,27 @@ export default function AboutPage() {
           <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
             A high-level community development concept for building a sustainable dance sport, art, and Hip Hop industry in Ghana — leveraging the huge success of breakdancing at Paris 2024 Olympics and the upcoming Dakar 2026 Youth Olympics. Afrobreak, a fusion of Afro and breaking, blends the mesmerizing rhythms of Afro-music with the acrobatic artistry of breakdancing. It is more than a competition — it&apos;s a celebration of diversity, a collision of traditions, and a stage where talent knows no boundaries.
           </p>
-          <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed mt-4">
-            The Afrobreak Concepts by Africa Breaking Academy is a Leading Community Event hub that celebrates Dance culture through high-level competition, cultural exchange, and creative expression. The Africa Final Bringing together top dancers from Africa and International Guests around the world. Alongside the competition, the championship offers rich cultural programming, including documentary screenings, educational workshops, and live street culture showcases. Afrobreak is more than a battle—it&apos;s a global platform amplifying African Talents Breakthroughs, empowering young talent, and uniting communities through dance.
-          </p>
-          <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed mt-4">
-            From 2021 Afrobreak International Championship has provided the biggest platform and infrastructure for Ghanaian and African talents to learn, contest and compete to earn a good status and opportunities to take their talent to the next level. Dancers across the Globe gather to showcase their powers and creative expression.
-          </p>
-          <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed mt-4">
-            AfroBreak has gained recognition across the African continent as the most prestigious break dance event celebrating Hip Hop Culture, fostering cultural exchange and youth empowerment providing spotlight for African&apos;s talents as they showcase their talents and skills to an attracted audience. Winners get the chance to represent the African continent in France, Netherlands and Europe.
-          </p>
+
+          {champExpanded && (
+            <div className="space-y-4 mt-4">
+              <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
+                The Afrobreak Concepts by Africa Breaking Academy is a Leading Community Event hub that celebrates Dance culture through high-level competition, cultural exchange, and creative expression. The Africa Final Bringing together top dancers from Africa and International Guests around the world. Alongside the competition, the championship offers rich cultural programming, including documentary screenings, educational workshops, and live street culture showcases. Afrobreak is more than a battle—it&apos;s a global platform amplifying African Talents Breakthroughs, empowering young talent, and uniting communities through dance.
+              </p>
+              <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
+                From 2021 Afrobreak International Championship has provided the biggest platform and infrastructure for Ghanaian and African talents to learn, contest and compete to earn a good status and opportunities to take their talent to the next level. Dancers across the Globe gather to showcase their powers and creative expression.
+              </p>
+              <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
+                AfroBreak has gained recognition across the African continent as the most prestigious break dance event celebrating Hip Hop Culture, fostering cultural exchange and youth empowerment providing spotlight for African&apos;s talents as they showcase their talents and skills to an attracted audience. Winners get the chance to represent the African continent in France, Netherlands and Europe.
+              </p>
+            </div>
+          )}
+
+          <button
+            onClick={() => setChampExpanded(v => !v)}
+            className="mt-5 inline-flex items-center gap-1.5 text-primary-400 hover:text-primary-300 font-semibold transition-colors text-xs uppercase tracking-widest"
+          >
+            {champExpanded ? '↑ Show less' : '↓ Read more'}
+          </button>
         </div>
 
         {/* Countries */}
