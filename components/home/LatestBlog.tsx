@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { getBlogPosts } from '@/lib/db'
+import { blogPosts as defaultPosts } from '@/lib/data'
 import type { BlogPost } from '@/lib/types'
 import BlogCard from '@/components/blog/BlogCard'
 
@@ -11,7 +12,10 @@ export default function LatestBlog() {
   const [posts, setPosts] = useState<BlogPost[]>([])
 
   useEffect(() => {
-    getBlogPosts().then(all => setPosts(all.slice(0, 3)))
+    getBlogPosts().then(all => {
+      const source = all.length > 0 ? all : defaultPosts
+      setPosts(source.slice(0, 3))
+    })
   }, [])
 
   return (

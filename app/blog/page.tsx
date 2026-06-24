@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import clsx from 'clsx'
 import { getBlogPosts } from '@/lib/db'
+import { blogPosts as defaultPosts } from '@/lib/data'
 import type { BlogPost, BlogCategory } from '@/lib/types'
 import BlogCard from '@/components/blog/BlogCard'
 import { BookOpen } from 'lucide-react'
@@ -32,7 +33,7 @@ export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | 'All'>('All')
 
   useEffect(() => {
-    getBlogPosts().then(setPosts)
+    getBlogPosts().then(data => setPosts(data.length > 0 ? data : defaultPosts))
   }, [])
 
   const featured = posts.find(p => p.featured)
