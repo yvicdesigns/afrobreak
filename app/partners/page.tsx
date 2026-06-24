@@ -1,8 +1,57 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake, Quote } from 'lucide-react'
+import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake, Quote, Star } from 'lucide-react'
 import Button from '@/components/ui/Button'
+
+function PartnerFeedbackForm() {
+  const [fb, setFb] = useState({ name: '', org: '', rating: 0, message: '' })
+  const [hovered, setHovered] = useState(0)
+  const [sent, setSent] = useState(false)
+
+  if (sent) return (
+    <div className="bg-emerald-500/15 border border-emerald-500/30 rounded-2xl p-8 text-center">
+      <CheckCircle size={36} className="text-emerald-400 mx-auto mb-3" />
+      <h3 className="text-lg font-bold text-white mb-1">Thank you for your feedback!</h3>
+      <p className="text-text-secondary text-sm">We appreciate you sharing your experience with us.</p>
+    </div>
+  )
+
+  return (
+    <form onSubmit={e => { e.preventDefault(); if (fb.rating === 0 || !fb.message) return; setSent(true) }}
+      className="bg-surface border border-white/10 rounded-2xl p-8 space-y-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label className="block text-sm font-medium text-white mb-1.5">Your Name *</label>
+          <input type="text" required value={fb.name} onChange={e => setFb(f => ({ ...f, name: e.target.value }))} placeholder="Your name" className="input-base" />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-white mb-1.5">Organization</label>
+          <input type="text" value={fb.org} onChange={e => setFb(f => ({ ...f, org: e.target.value }))} placeholder="Your org or project" className="input-base" />
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">Rating *</label>
+        <div className="flex gap-1">
+          {[1, 2, 3, 4, 5].map(n => (
+            <button type="button" key={n}
+              onMouseEnter={() => setHovered(n)} onMouseLeave={() => setHovered(0)}
+              onClick={() => setFb(f => ({ ...f, rating: n }))}>
+              <Star size={28} className={`transition-colors ${n <= (hovered || fb.rating) ? 'text-gold-DEFAULT fill-gold-DEFAULT' : 'text-white/20'}`} />
+            </button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-white mb-1.5">Your feedback *</label>
+        <textarea required rows={4} value={fb.message} onChange={e => setFb(f => ({ ...f, message: e.target.value }))} placeholder="How has the partnership been? What's working well? Any suggestions?" className="input-base resize-none" />
+      </div>
+      <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />}>
+        Submit Feedback
+      </Button>
+    </form>
+  )
+}
 
 const partnerTypes = [
   {
@@ -183,6 +232,16 @@ export default function PartnersPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Partners Feedback */}
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Partners Feedback</p>
+            <h2 className="text-2xl font-bold text-white mb-2">Share Your Experience</h2>
+            <p className="text-text-secondary">Already working with us? We'd love to hear how the partnership is going.</p>
+          </div>
+          <PartnerFeedbackForm />
         </div>
 
         {/* Contact Form */}

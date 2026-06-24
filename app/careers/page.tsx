@@ -42,6 +42,21 @@ const defaultJobs: Job[] = [
     description: 'Drive growth through digital marketing, event promotion, partnerships, and community campaigns. Own AfroBreak\'s acquisition and retention strategy across Africa and the diaspora.',
     requirements: ['4+ years digital marketing experience', 'Experience with cultural or community-led brands', 'Strong understanding of social media (Instagram, TikTok, YouTube)', 'Data-driven approach with creative sensibility'],
   },
+  {
+    id: '6', title: 'Community Manager', department: 'Community', location: 'Accra / Remote', type: 'Full-time', active: true,
+    description: 'Build and manage the AfroBreak community across online platforms and in-person events. Engage members, onboard new participants, and create a welcoming space for dancers, artists, and hiphop practitioners across Africa.',
+    requirements: ['2+ years community management experience', 'Deep passion for hiphop and dance culture', 'Excellent communication skills in English', 'Experience managing social media communities and events'],
+  },
+  {
+    id: '7', title: 'Coach', department: 'Training', location: 'Accra', type: 'Full-time', active: true,
+    description: 'Lead training sessions and camps for dancers at all levels — from youth beginners to competitive athletes. Work alongside our instructors and Global Ambassadors to develop talent and prepare participants for local and international competitions.',
+    requirements: ['Proven coaching experience in dance or sports', 'Knowledge of breaking, hiphop, and Afro dance disciplines', 'Ability to motivate and develop young athletes', 'Experience with competition preparation and performance training'],
+  },
+  {
+    id: '8', title: 'Instructor', department: 'Training', location: 'Accra / Remote', type: 'Part-time', active: true,
+    description: 'Teach dance classes and workshops in person and online. Deliver high-quality instruction in breaking, hiphop, Afro dance, or related styles to students of all ages and skill levels, representing AfroBreak\'s values of culture, excellence, and empowerment.',
+    requirements: ['Proficiency in at least one hiphop/breaking/Afro dance style', 'Experience teaching or facilitating dance workshops', 'Ability to engage and inspire diverse groups', 'Passion for cultural education and youth development'],
+  },
 ]
 
 const perks = [

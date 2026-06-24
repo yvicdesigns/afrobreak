@@ -68,9 +68,9 @@ const plans = [
   {
     id: 'annual',
     name: 'Premium Annual',
-    priceUSD: 79.99,
+    priceUSD: 500,
     period: 'year',
-    description: 'Best value — save 33%',
+    description: 'Best value — ₵500/year',
     highlight: false,
     badge: 'Best Value',
     features: [
@@ -318,7 +318,7 @@ export default function SubscribePage() {
                   </div>
                   {plan.id === 'annual' && (
                     <p className="text-xs text-emerald-400 mt-1 font-medium">
-                      Equivalent to ₵6.67/month — save ₵40
+                      Equivalent to ₵41.67/month — best annual deal
                     </p>
                   )}
                 </div>
