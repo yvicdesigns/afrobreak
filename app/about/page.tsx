@@ -387,8 +387,8 @@ export default function AboutPage() {
       <div className="bg-surface border-y border-white/5 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Real Stories</p>
-            <h2 className="text-3xl font-black text-white">From Our Champions</h2>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Beneficiaries & Participants</p>
+            <h2 className="text-3xl font-black text-white">What They Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
