@@ -8,22 +8,24 @@ import type { BlogPost, BlogCategory } from '@/lib/types'
 import BlogCard from '@/components/blog/BlogCard'
 import { BookOpen } from 'lucide-react'
 
-const categories: (BlogCategory | 'All')[] = ['All', 'Dance Tips', 'Culture', 'Interviews', 'Lifestyle', 'News']
+const categories: (BlogCategory | 'All')[] = ['All', 'Interviews', 'Documentary', 'Podcast', 'Talks', 'Lifestyle', 'News']
 
 const catColors: Record<string, string> = {
   All: 'bg-white/10 text-white border-white/20 hover:border-white/40',
-  'Dance Tips': 'bg-teal-500/10 text-teal-400 border-teal-500/30 hover:border-teal-400',
-  Culture: 'bg-orange-500/10 text-orange-400 border-orange-500/30 hover:border-orange-400',
   Interviews: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30 hover:border-indigo-400',
+  Documentary: 'bg-violet-500/10 text-violet-400 border-violet-500/30 hover:border-violet-400',
+  Podcast: 'bg-orange-500/10 text-orange-400 border-orange-500/30 hover:border-orange-400',
+  Talks: 'bg-teal-500/10 text-teal-400 border-teal-500/30 hover:border-teal-400',
   Lifestyle: 'bg-lime-500/10 text-lime-400 border-lime-500/30 hover:border-lime-400',
   News: 'bg-sky-500/10 text-sky-400 border-sky-500/30 hover:border-sky-400',
 }
 
 const catActiveColors: Record<string, string> = {
   All: 'bg-white text-background border-white',
-  'Dance Tips': 'bg-teal-500 text-white border-teal-500',
-  Culture: 'bg-orange-500 text-white border-orange-500',
   Interviews: 'bg-indigo-500 text-white border-indigo-500',
+  Documentary: 'bg-violet-500 text-white border-violet-500',
+  Podcast: 'bg-orange-500 text-white border-orange-500',
+  Talks: 'bg-teal-500 text-white border-teal-500',
   Lifestyle: 'bg-lime-500 text-background border-lime-500',
   News: 'bg-sky-500 text-white border-sky-500',
 }

@@ -16,7 +16,7 @@ export interface Video {
   createdAt: string
 }
 
-export type VideoCategory = 'Afro' | 'Hip-Hop' | 'Tutorial' | 'Dancehall' | 'Contemporary' | 'Kids'
+export type VideoCategory = 'Interview' | 'Battle' | 'Workshop' | 'Documentary' | 'Tutorial' | 'Podcast' | 'Talks' | 'After Movie' | 'Contemporary'
 export type VideoLevel = 'Beginner' | 'Intermediate' | 'Advanced'
 
 export interface Event {
@@ -55,7 +55,7 @@ export interface BlogPost {
   featured: boolean
 }
 
-export type BlogCategory = 'Dance Tips' | 'Lifestyle' | 'Culture' | 'Interviews' | 'News'
+export type BlogCategory = 'Interviews' | 'Documentary' | 'Podcast' | 'Talks' | 'Lifestyle' | 'News'
 
 export interface User {
   id: string

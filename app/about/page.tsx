@@ -20,6 +20,7 @@ const timeline = [
   { year: '2022', title: 'Continental Expansion', desc: 'Grew to 17+ African country collaborators. Dancers from DR Congo, Ivory Coast, Nigeria, Togo, Senegal, Kenya, Uganda, South Africa and more joined the AfroBreak family.' },
   { year: '2023', title: 'Africa Final & Champions', desc: 'Hosted the most prestigious break dance event on the continent. Lil Vic became AfroBreak African Champion. Tris Naomi dominated at national and international level.' },
   { year: '2024', title: 'Paris Olympics Recognition', desc: 'Bboy Lyricx was inducted into the Hall of Fame at the Paris 2024 Olympic and Paralympic Games through the Future Leaders Invitation Program (PIPA) on Sports and Diplomacy.' },
+  { year: '2025', title: 'AfroBreak 5th Edition', desc: 'Zinji (Algeria) and Kris (Nigeria) crowned AfroBreak African Champions at the 5th Africa Final. Algeria joins the continental map as a breaking powerhouse. 22+ nations represented.' },
   { year: '2026', title: 'Dakar Youth Olympics', desc: 'Preparing Africa\'s finest breakers for the Dakar 2026 Youth Olympics Games as breaking cements its place as one of the most youthful sports in the world.' },
 ]
 
@@ -63,16 +64,19 @@ const testimonials = [
     quote: "Winning AfroBreak wasn't just about the title — it was about proving to myself and my community that African breakers have a global voice. What I love about AfroBreak is it's not just about battling. It's about community building. The workshops, the organizers are very receptive, good floor, ambulance to take care of dancers, the energy — they invest in you beyond the stage. I left with new skills, friends across the continent, and big dreams.",
     name: 'Lil Vic',
     title: 'AfroBreak African Champion 2023',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
   },
   {
     quote: "Before AfroBreak, I was only dancing in crews. The training camp and workshops by Africa Breaking Academy changed my whole mindset and perspective. I got mentored by Bboy Lyricx, learned new styles, and even gained educational scholarships to complete my education. I'm not just a dancer now.",
     name: 'Tris Naomi',
     title: 'AfroBreak Ghana National & Ivorie Breaking Competition African Champion 2023',
+    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80',
   },
   {
     quote: "AfroBreak changed everything for me. I was lucky enough to represent Benin three consecutive years at the event. After winning, I received international exposure, mentorship, and even a chance to travel for a cultural exchange program. It was more than a competition — it was a life-changer.",
     name: 'Bboy Smith',
     title: 'AfroBreak African and France Champion 2024',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
   },
 ]
 
@@ -395,9 +399,12 @@ export default function AboutPage() {
               <div key={i} className="bg-background border border-white/5 rounded-2xl p-6 flex flex-col">
                 <Quote size={24} className="text-primary-500/40 mb-4 flex-shrink-0" />
                 <p className="text-text-secondary text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
-                <div className="mt-6 pt-4 border-t border-white/10">
-                  <p className="font-bold text-white text-sm">{t.name}</p>
-                  <p className="text-primary-500 text-xs mt-0.5">{t.title}</p>
+                <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-3">
+                  <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary-500/30 flex-shrink-0" />
+                  <div>
+                    <p className="font-bold text-white text-sm">{t.name}</p>
+                    <p className="text-primary-500 text-xs mt-0.5">{t.title}</p>
+                  </div>
                 </div>
               </div>
             ))}

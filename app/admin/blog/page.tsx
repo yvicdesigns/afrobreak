@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button'
 import ImageUpload from '@/components/ui/ImageUpload'
 import Badge from '@/components/ui/Badge'
 
-const categories: BlogCategory[] = ['Dance Tips', 'Lifestyle', 'Culture', 'Interviews', 'News']
+const categories: BlogCategory[] = ['Interviews', 'Documentary', 'Podcast', 'Talks', 'Lifestyle', 'News']
 
 const emptyForm = {
   title: '',

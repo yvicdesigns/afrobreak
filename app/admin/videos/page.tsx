@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import ImageUpload from '@/components/ui/ImageUpload'
 
-const categories: VideoCategory[] = ['Afro', 'Hip-Hop', 'Tutorial', 'Dancehall', 'Contemporary', 'Kids']
+const categories: VideoCategory[] = ['Interview', 'Battle', 'Workshop', 'Documentary', 'Tutorial', 'Podcast', 'Talks', 'After Movie', 'Contemporary']
 const levels: VideoLevel[] = ['Beginner', 'Intermediate', 'Advanced']
 
 const emptyForm = {
@@ -17,7 +17,7 @@ const emptyForm = {
   description: '',
   videoUrl: '',
   thumbnail: '',
-  category: 'Afro' as VideoCategory,
+  category: 'Tutorial' as VideoCategory,
   level: 'Beginner' as VideoLevel,
   instructor: '',
   duration: '',

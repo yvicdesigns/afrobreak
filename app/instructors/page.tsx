@@ -152,8 +152,8 @@ export default function InstructorsPage() {
         {/* Become an instructor CTA */}
         <div className="mt-16 bg-gradient-to-r from-primary-500/15 to-secondary-500/10 border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
           <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-xl font-bold text-white mb-2">Are you a dance instructor?</h3>
-            <p className="text-text-secondary text-sm">Join the AfroBreak instructor team and reach thousands of students across the world.</p>
+            <h3 className="text-xl font-bold text-white mb-2">Are you a dance practitioner?</h3>
+            <p className="text-text-secondary text-sm">Join the Afrobreak icons and reach thousands of people across the world.</p>
           </div>
           <Link href="/partners"><Button variant="primary" rightIcon={<ArrowRight size={16} />}>Apply to Teach</Button></Link>
         </div>

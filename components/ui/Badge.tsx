@@ -29,13 +29,14 @@ const variantMap: Record<string, string> = {
   danger: 'bg-red-500/20 text-red-400 border border-red-500/30',
   muted: 'bg-white/5 text-text-secondary border border-white/10',
   premium: 'bg-gradient-to-r from-gold-dark/30 to-gold-DEFAULT/30 text-gold-DEFAULT border border-gold-DEFAULT/40',
-  // Categories
-  'Afro': 'bg-orange-500/20 text-orange-400 border border-orange-500/30',
-  'Hip-Hop': 'bg-purple-500/20 text-purple-400 border border-purple-500/30',
+  // Video categories
+  'Interview': 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30',
+  'Documentary': 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
   'Tutorial': 'bg-blue-500/20 text-blue-400 border border-blue-500/30',
-  'Dancehall': 'bg-green-500/20 text-green-400 border border-green-500/30',
+  'Podcast': 'bg-orange-500/20 text-orange-400 border border-orange-500/30',
+  'Talks': 'bg-teal-500/20 text-teal-400 border border-teal-500/30',
+  'After Movie': 'bg-green-500/20 text-green-400 border border-green-500/30',
   'Contemporary': 'bg-pink-500/20 text-pink-400 border border-pink-500/30',
-  'Kids': 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
   // Levels
   'Beginner': 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
   'Intermediate': 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
@@ -47,10 +48,8 @@ const variantMap: Record<string, string> = {
   'Battle': 'bg-red-500/20 text-red-400 border border-red-500/40',
   'Qualifier': 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
   // Blog categories
-  'Dance Tips': 'bg-teal-500/20 text-teal-400 border border-teal-500/30',
-  'Lifestyle': 'bg-lime-500/20 text-lime-400 border border-lime-500/30',
-  'Culture': 'bg-orange-500/20 text-orange-400 border border-orange-500/30',
   'Interviews': 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30',
+  'Lifestyle': 'bg-lime-500/20 text-lime-400 border border-lime-500/30',
   'News': 'bg-sky-500/20 text-sky-400 border border-sky-500/30',
 }
 

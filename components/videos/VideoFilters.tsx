@@ -4,27 +4,33 @@ import { SlidersHorizontal } from 'lucide-react'
 import clsx from 'clsx'
 import type { VideoCategory, VideoLevel } from '@/lib/types'
 
-const categories: (VideoCategory | 'All')[] = ['All', 'Afro', 'Hip-Hop', 'Tutorial', 'Dancehall', 'Contemporary', 'Kids']
+const categories: (VideoCategory | 'All')[] = ['All', 'Interview', 'Battle', 'Workshop', 'Documentary', 'Tutorial', 'Podcast', 'Talks', 'After Movie', 'Contemporary']
 const levels: (VideoLevel | 'All')[] = ['All', 'Beginner', 'Intermediate', 'Advanced']
 
 const categoryColors: Record<string, string> = {
   All: 'bg-white/10 text-white border-white/20 hover:border-white/40',
-  Afro: 'bg-orange-500/10 text-orange-400 border-orange-500/30 hover:border-orange-400',
-  'Hip-Hop': 'bg-purple-500/10 text-purple-400 border-purple-500/30 hover:border-purple-400',
+  Interview: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30 hover:border-indigo-400',
+  Battle: 'bg-red-500/10 text-red-400 border-red-500/30 hover:border-red-400',
+  Workshop: 'bg-violet-500/10 text-violet-400 border-violet-500/30 hover:border-violet-400',
+  Documentary: 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:border-amber-400',
   Tutorial: 'bg-blue-500/10 text-blue-400 border-blue-500/30 hover:border-blue-400',
-  Dancehall: 'bg-green-500/10 text-green-400 border-green-500/30 hover:border-green-400',
+  Podcast: 'bg-orange-500/10 text-orange-400 border-orange-500/30 hover:border-orange-400',
+  Talks: 'bg-teal-500/10 text-teal-400 border-teal-500/30 hover:border-teal-400',
+  'After Movie': 'bg-green-500/10 text-green-400 border-green-500/30 hover:border-green-400',
   Contemporary: 'bg-pink-500/10 text-pink-400 border-pink-500/30 hover:border-pink-400',
-  Kids: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30 hover:border-yellow-400',
 }
 
 const categoryActiveColors: Record<string, string> = {
   All: 'bg-white text-background border-white',
-  Afro: 'bg-orange-500 text-white border-orange-500',
-  'Hip-Hop': 'bg-purple-500 text-white border-purple-500',
+  Interview: 'bg-indigo-500 text-white border-indigo-500',
+  Battle: 'bg-red-500 text-white border-red-500',
+  Workshop: 'bg-violet-500 text-white border-violet-500',
+  Documentary: 'bg-amber-500 text-white border-amber-500',
   Tutorial: 'bg-blue-500 text-white border-blue-500',
-  Dancehall: 'bg-green-500 text-white border-green-500',
+  Podcast: 'bg-orange-500 text-white border-orange-500',
+  Talks: 'bg-teal-500 text-white border-teal-500',
+  'After Movie': 'bg-green-500 text-white border-green-500',
   Contemporary: 'bg-pink-500 text-white border-pink-500',
-  Kids: 'bg-yellow-500 text-background border-yellow-500',
 }
 
 interface VideoFiltersProps {
