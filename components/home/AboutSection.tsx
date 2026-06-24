@@ -10,7 +10,7 @@ const features = [
   },
   {
     icon: Users,
-    title: 'World-Class Instructors',
+    title: 'Global Ambassadors',
     desc: 'Global Ambassadors and certified instructors from Ghana, Nigeria, South Africa, and beyond.',
   },
   {
@@ -58,16 +58,28 @@ export default function AboutSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {features.map(({ icon: Icon, title, desc }) => (
-            <div
-              key={title}
-              className="group p-6 rounded-2xl bg-surface border border-white/5 hover:border-primary-500/20 hover:bg-surface-2 transition-all duration-300"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary-500/15 border border-primary-500/20 flex items-center justify-center mb-4 group-hover:bg-primary-500/25 transition-colors">
-                <Icon size={22} className="text-primary-500" />
+            title === '100+ Premium Videos' ? (
+              <Link key={title} href="/videos"
+                className="group p-6 rounded-2xl bg-surface border border-white/5 hover:border-primary-500/20 hover:bg-surface-2 transition-all duration-300 block"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary-500/15 border border-primary-500/20 flex items-center justify-center mb-4 group-hover:bg-primary-500/25 transition-colors">
+                  <Icon size={22} className="text-primary-500" />
+                </div>
+                <h3 className="font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
+                <p className="text-xs text-primary-400 font-semibold mt-3 group-hover:text-primary-300 transition-colors">Browse tutorials →</p>
+              </Link>
+            ) : (
+              <div key={title}
+                className="group p-6 rounded-2xl bg-surface border border-white/5 hover:border-primary-500/20 hover:bg-surface-2 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary-500/15 border border-primary-500/20 flex items-center justify-center mb-4 group-hover:bg-primary-500/25 transition-colors">
+                  <Icon size={22} className="text-primary-500" />
+                </div>
+                <h3 className="font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
               </div>
-              <h3 className="font-bold text-white mb-2">{title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
-            </div>
+            )
           ))}
         </div>
 
