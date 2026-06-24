@@ -25,9 +25,10 @@ const timeline = [
 ]
 
 const countries = [
-  'DR Congo', 'Ivory Coast', 'Guinea Conakry', 'Nigeria', 'Togo', 'Benin',
-  'Uganda', 'Kenya', 'Zimbabwe', 'South Africa', 'Senegal', 'Sierra Leone',
-  'Tanzania', 'Rwanda', 'Niger', 'Burkina Faso', 'Angola', 'Ghana',
+  'Ghana', 'Nigeria', 'Benin', 'Togo', 'Ivory Coast', 'Senegal',
+  'Guinea Conakry', 'DR Congo', 'Uganda', 'Kenya', 'Tanzania', 'Rwanda',
+  'Zimbabwe', 'South Africa', 'Burkina Faso', 'Niger', 'Sierra Leone', 'Angola',
+  'Mauritius', 'Algeria', 'Morocco', 'Cameroon',
 ]
 
 const services = [
@@ -59,7 +60,10 @@ const testimonials = [
 ]
 
 const defaultTeam = [
-  { id: 'd1', name: 'Bboy Lyricx', role: 'Founder & Pioneer', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80', bio: 'Nana Tuffour Okai, professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Hall of Fame inductee at Paris 2024 Olympics.', display_order: 0 },
+  { id: 'd1', name: 'Nana Tuffour Okai', role: 'Founder & Creative Director', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80', bio: 'Professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Paris 2024 Olympics Hall of Fame inductee.', display_order: 0 },
+  { id: 'd2', name: 'Francis Feby', role: 'Finance & Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80', bio: 'Oversees the financial management and administrative operations of Africa Breaking Academy, ensuring sustainable growth and transparency.', display_order: 1 },
+  { id: 'd3', name: 'Christable Okai', role: 'Communication & Relationship Manager', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80', bio: 'Leads communications, media relations, and community partnerships for ABA and AfroBreak across Africa and the global diaspora.', display_order: 2 },
+  { id: 'd4', name: 'Maxwell Tetteh Neur', role: 'Project Coordinator & Advisory Board', avatar: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&q=80', bio: 'Project Coordinator and Advisory Board Member, supporting program delivery, stakeholder engagement, and strategic planning.', display_order: 3 },
 ]
 
 export default function AboutPage() {
@@ -105,10 +109,10 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { value: '21+', label: 'African Countries' },
+              { value: '28+', label: 'African Countries' },
               { value: '2021', label: 'Championship Founded' },
-              { value: '38+', label: 'Countries Represented' },
-              { value: '10K+', label: 'Community Members' },
+              { value: '270+', label: 'Events Organized' },
+              { value: '11K+', label: 'Beneficiaries' },
             ].map(stat => (
               <div key={stat.label} className="bg-surface border border-white/5 rounded-2xl p-6 text-center">
                 <p className="text-3xl font-black gradient-text-orange mb-1">{stat.value}</p>

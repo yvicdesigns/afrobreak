@@ -1,64 +1,54 @@
 'use client'
 
-import { Trophy, Star, Medal, Award, Crown, Globe } from 'lucide-react'
+import { Trophy, Crown, Medal, Globe } from 'lucide-react'
 
-const awards = [
+const africaFinalChampions = [
+  {
+    year: '2025',
+    boys: { name: 'Zinji', country: '🇩🇿 Algeria' },
+    girls: { name: 'Kris', country: '🇳🇬 Nigeria' },
+  },
   {
     year: '2024',
-    title: 'Best African Dance Platform',
-    organization: 'African Entertainment Awards',
-    category: 'Digital Innovation',
-    icon: Trophy,
-    color: 'from-gold-DEFAULT to-yellow-600',
+    boys: { name: 'Smith', country: '🇧🇯 Benin' },
+    girls: { name: 'Courtnea Paul', country: '🇿🇦 South Africa' },
   },
   {
     year: '2023',
-    title: 'Africa Final Champion',
-    organization: 'AfroBreak World Championship',
-    category: 'Dance Competition',
-    icon: Crown,
-    color: 'from-primary-500 to-primary-700',
-  },
-  {
-    year: '2023',
-    title: 'Community Impact Award',
-    organization: 'Diaspora Culture Festival',
-    category: 'Cultural Contribution',
-    icon: Star,
-    color: 'from-secondary-500 to-purple-700',
+    boys: { name: 'Lil Vic', country: '🇳🇬 Nigeria' },
+    girls: { name: 'Sandrine', country: '🇧🇯 Benin' },
   },
   {
     year: '2022',
-    title: 'Top Dance Qualifier — Europe',
-    organization: 'AfroBreak European Cup',
-    category: 'Qualifiers',
-    icon: Medal,
-    color: 'from-emerald-500 to-teal-700',
-  },
-  {
-    year: '2022',
-    title: 'Best Online Dance School',
-    organization: 'Global Dance Awards',
-    category: 'Education',
-    icon: Award,
-    color: 'from-blue-500 to-blue-700',
-  },
-  {
-    year: '2021',
-    title: 'International Expansion Award',
-    organization: 'African Diaspora Summit',
-    category: 'Global Reach',
-    icon: Globe,
-    color: 'from-rose-500 to-pink-700',
+    boys: { name: 'Pape', country: '🇸🇳 Senegal' },
+    girls: null,
   },
 ]
 
-const champions = [
-  { name: 'Kofi Mensah', country: '🇬🇭 Ghana', year: '2024', title: 'Africa Final Champion', avatar: 'KM' },
-  { name: 'Aminata Diallo', country: '🇸🇳 Senegal', year: '2023', title: 'AfroBreak World Champion', avatar: 'AD' },
-  { name: 'David Okafor', country: '🇳🇬 Nigeria', year: '2022', title: 'Qualifier — Europe Winner', avatar: 'DO' },
-  { name: 'Fatou Ndiaye', country: '🇸🇳 Senegal', year: '2021', title: 'Best Female Performer', avatar: 'FN' },
+const regionalChampions = [
+  { year: '2025', name: 'Zinji', country: '🇫🇷 France' },
+  { year: '2025', name: 'David', country: '🇲🇺 Mauritius' },
+  { year: '2025', name: 'Pencil', country: '🇺🇬 Uganda' },
+  { year: '2025', name: 'Lil Dan', country: '🇰🇪 Kenya' },
+  { year: '2025', name: 'Blesso', country: '🇬🇭 Ghana' },
+  { year: '2025', name: 'Tris Naomi', country: '🇬🇭 Ghana' },
+  { year: '2025', name: 'Blanchard', country: '🇨🇮 Ivory Coast' },
+  { year: '2024', name: 'Dansi', country: '🇧🇫 Burkina Faso' },
+  { year: '2024', name: 'ZH', country: '🇧🇯 Benin' },
+  { year: '2024', name: 'Nagi', country: '🇬🇭 Ghana' },
+  { year: '2024', name: 'Viks', country: '🇬🇭 Ghana' },
+  { year: '2023', name: 'Chris Paul', country: '🇹🇬 Togo' },
+  { year: '2023', name: 'Zira', country: '🇹🇬 Togo' },
+  { year: '2023', name: 'Ola', country: '🇧🇯 Benin' },
+  { year: '2023', name: 'Lil Vic', country: '🇳🇬 Nigeria' },
+  { year: '2023', name: 'Vicky', country: '🇳🇬 Nigeria' },
+  { year: '2023', name: 'The Curse', country: '🇿🇦 South Africa' },
+  { year: '2023', name: 'Blesso', country: '🇬🇭 Ghana' },
+  { year: '2023', name: 'Tris Naomi', country: '🇬🇭 Ghana' },
+  { year: '2022', name: 'Roxy', country: '🇬🇭 Ghana' },
 ]
+
+const years = ['2025', '2024', '2023', '2022']
 
 export default function AwardsPage() {
   return (
@@ -69,67 +59,113 @@ export default function AwardsPage() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 mb-6">
             <Trophy size={14} className="text-gold-DEFAULT" />
-            <span className="text-sm font-semibold text-gold-DEFAULT tracking-widest uppercase">Recognition & Achievements</span>
+            <span className="text-sm font-semibold text-gold-DEFAULT tracking-widest uppercase">AfroBreak Dance Culture Awards</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-DEFAULT to-yellow-400">Awards</span>
+            Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-DEFAULT to-yellow-400">Champions</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Celebrating excellence in African dance culture, community building, and global impact.
+            Recognize, celebrate and evaluate excellence in breaking and Hip Hop culture across Africa and the global dance community.
           </p>
         </div>
 
-        {/* Awards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {awards.map((award, i) => (
-            <div key={i} className="bg-surface border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all duration-300 group">
-              <div className="flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${award.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                  <award.icon size={20} className="text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs font-bold text-primary-500 uppercase tracking-widest">{award.year}</span>
-                  <h3 className="text-base font-bold text-white mt-0.5 leading-snug">{award.title}</h3>
-                  <p className="text-sm text-text-secondary mt-1">{award.organization}</p>
-                  <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-text-muted">
-                    {award.category}
-                  </span>
-                </div>
-              </div>
+        {/* Africa Final Champions */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-DEFAULT to-yellow-600 flex items-center justify-center">
+              <Crown size={18} className="text-white" />
             </div>
-          ))}
-        </div>
-
-        {/* Champions section */}
-        <div className="mb-16">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-white mb-2">Hall of Champions</h2>
-            <p className="text-text-secondary">The dancers who made history on the AfroBreak stage</p>
+            <div>
+              <h2 className="text-2xl font-black text-white">Africa Final Champions</h2>
+              <p className="text-text-secondary text-sm">AfroBreak Africa Final — Accra, Ghana</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {champions.map((c, i) => (
-              <div key={i} className="bg-surface border border-white/5 rounded-2xl p-6 text-center hover:border-gold-DEFAULT/20 transition-all duration-300 group">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-DEFAULT to-yellow-600 flex items-center justify-center mx-auto mb-4 text-xl font-black text-white shadow-lg">
-                  {c.avatar}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {africaFinalChampions.map(edition => (
+              <div key={edition.year} className="bg-surface border border-white/5 rounded-2xl p-6 hover:border-gold-DEFAULT/20 transition-all">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-xs font-black text-gold-DEFAULT uppercase tracking-widest px-3 py-1 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/20">
+                    {edition.year}
+                  </span>
+                  <span className="text-xs text-text-muted">AfroBreak Africa Final</span>
                 </div>
-                <h3 className="font-bold text-white">{c.name}</h3>
-                <p className="text-sm text-text-secondary mt-0.5">{c.country}</p>
-                <p className="text-xs text-primary-500 font-semibold mt-2">{c.title}</p>
-                <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/20 text-gold-DEFAULT">{c.year}</span>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center bg-background rounded-xl p-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-DEFAULT to-yellow-600 flex items-center justify-center mx-auto mb-2 text-lg font-black text-white shadow-lg">
+                      {edition.boys.name[0]}
+                    </div>
+                    <p className="font-bold text-white text-sm">{edition.boys.name}</p>
+                    <p className="text-text-secondary text-xs mt-0.5">{edition.boys.country}</p>
+                    <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-primary-500/15 text-primary-400 font-bold">Boys</span>
+                  </div>
+                  {edition.girls ? (
+                    <div className="text-center bg-background rounded-xl p-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary-500 to-purple-700 flex items-center justify-center mx-auto mb-2 text-lg font-black text-white shadow-lg">
+                        {edition.girls.name[0]}
+                      </div>
+                      <p className="font-bold text-white text-sm">{edition.girls.name}</p>
+                      <p className="text-text-secondary text-xs mt-0.5">{edition.girls.country}</p>
+                      <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-secondary-500/15 text-secondary-400 font-bold">Girls</span>
+                    </div>
+                  ) : (
+                    <div className="text-center bg-background/50 rounded-xl p-4 flex items-center justify-center">
+                      <p className="text-text-muted text-xs">Girls category introduced in 2023</p>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Regional Champions */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+              <Medal size={18} className="text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-black text-white">National & Regional Champions</h2>
+              <p className="text-text-secondary text-sm">AfroBreak Qualifiers — Across Africa & the Diaspora</p>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            {years.map(year => {
+              const champs = regionalChampions.filter(c => c.year === year)
+              return (
+                <div key={year}>
+                  <p className="text-primary-500 font-black text-sm uppercase tracking-widest mb-3">{year}</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {champs.map((c, i) => (
+                      <div key={i} className="bg-surface border border-white/5 rounded-xl p-4 text-center hover:border-primary-500/20 transition-all">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500/20 to-secondary-500/10 flex items-center justify-center mx-auto mb-2 text-base font-black text-white border border-white/10">
+                          {c.name[0]}
+                        </div>
+                        <p className="font-bold text-white text-sm leading-tight">{c.name}</p>
+                        <p className="text-text-secondary text-xs mt-0.5">{c.country}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
         {/* Stats banner */}
         <div className="bg-gradient-to-r from-primary-500/10 to-secondary-500/10 border border-white/5 rounded-2xl p-8">
+          <div className="flex items-center gap-3 justify-center mb-6">
+            <Globe size={18} className="text-primary-500" />
+            <span className="text-sm font-semibold text-primary-400 uppercase tracking-widest">AfroBreak by the numbers</span>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: '6+', label: 'International Awards' },
-              { value: '38+', label: 'Countries Represented' },
-              { value: '10K+', label: 'Community Members' },
-              { value: '5+', label: 'Years of Excellence' },
+              { value: '5', label: 'Editions' },
+              { value: '28+', label: 'Countries Represented' },
+              { value: '11K+', label: 'Beneficiaries' },
+              { value: '270+', label: 'Events Organized' },
             ].map((stat, i) => (
               <div key={i}>
                 <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">{stat.value}</div>
@@ -138,6 +174,7 @@ export default function AwardsPage() {
             ))}
           </div>
         </div>
+
       </div>
     </div>
   )

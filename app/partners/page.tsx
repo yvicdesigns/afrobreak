@@ -50,11 +50,17 @@ const partnerTypes = [
 ]
 
 const currentPartners = [
-  { name: 'Ghana Olympic Committee', type: 'Sports', logo: '🏅' },
   { name: 'KGL Foundation', type: 'Foundation', logo: '🌍' },
-  { name: 'The Ruggeds Crew', type: 'Netherlands', logo: '💪' },
+  { name: 'France Ghana', type: 'Partnership', logo: '🤝' },
+  { name: 'Tropisme', type: 'Arts & Culture', logo: '🎭' },
   { name: 'Elavanyo School', type: 'Education', logo: '🏫' },
-  { name: 'WDSF', type: 'Dance Sport', logo: '🕺' },
+  { name: 'Fitrip Ghana', type: 'Sports', logo: '🏃' },
+  { name: 'The Ruggeds', type: 'Netherlands', logo: '💪' },
+  { name: 'Street Off', type: 'Events', logo: '🎪' },
+  { name: 'Red Bull', type: 'Beverage', logo: '🔴' },
+  { name: 'Institut Français', type: 'Cultural', logo: '🇫🇷' },
+  { name: 'European Union', type: 'Institution', logo: '🇪🇺' },
+  { name: 'Ministry of Europe', type: 'Government', logo: '🏛️' },
 ]
 
 const testimonials = [

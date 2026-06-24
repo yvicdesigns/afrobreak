@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Instagram, Youtube, Facebook, Send, Check } from 'lucide-react'
+import { Mail, Phone, MapPin, Instagram, Youtube, Facebook, Twitter, Music, Send, Check } from 'lucide-react'
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
@@ -45,7 +45,7 @@ export default function ContactPage() {
 
               {[
                 { icon: Mail, label: 'Email', value: 'contact@afrobreak.com', href: 'mailto:contact@afrobreak.com' },
-                { icon: Phone, label: 'Phone', value: '+233 30 270 1234', href: 'tel:+233302701234' },
+                { icon: Phone, label: 'Phone', value: '+233 543 973 224', href: 'tel:+233543973224' },
                 { icon: MapPin, label: 'Based in', value: 'Accra, Ghana — Global', href: null },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
@@ -67,11 +67,14 @@ export default function ContactPage() {
             {/* Social */}
             <div className="bg-surface border border-white/5 rounded-2xl p-6">
               <h2 className="text-lg font-bold text-white mb-4">Follow Us</h2>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-                  { icon: Youtube, href: 'https://youtube.com', label: 'YouTube' },
-                  { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+                  { icon: Instagram, href: 'https://www.instagram.com/afrobreakgh/', label: 'Instagram AfroBreak' },
+                  { icon: Instagram, href: 'https://www.instagram.com/africabreakingyouth/', label: 'Instagram ABA' },
+                  { icon: Youtube, href: 'https://www.youtube.com/@afrobreakghana', label: 'YouTube' },
+                  { icon: Facebook, href: 'https://www.facebook.com/afrobreakghana', label: 'Facebook' },
+                  { icon: Twitter, href: 'https://twitter.com/AfrobreakGhana', label: 'Twitter / X' },
+                  { icon: Music, href: 'https://open.spotify.com/artist/afrobreak', label: 'Spotify' },
                 ].map(({ icon: Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                     className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-text-secondary hover:text-primary-500 hover:bg-primary-500/10 hover:border-primary-500/30 transition-all">

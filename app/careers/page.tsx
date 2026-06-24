@@ -18,29 +18,29 @@ type Job = {
 
 const defaultJobs: Job[] = [
   {
-    id: '1', title: 'Senior Full-Stack Developer', department: 'Engineering', location: 'Accra / Remote', type: 'Full-time', active: true,
-    description: 'Build and scale the AfroBreak platform. You\'ll work on our Next.js frontend, Node.js backend, and Supabase infrastructure.',
-    requirements: ['5+ years of experience with React / Next.js', 'Strong TypeScript skills', 'Experience with Supabase or PostgreSQL', 'Passion for culture and community products'],
+    id: '1', title: 'Photographer', department: 'Creative', location: 'Accra / Remote', type: 'Full-time', active: true,
+    description: 'Capture the energy, culture, and emotion of AfroBreak events, workshops, and artists. Your images will tell the story of Africa\'s breaking movement to the world.',
+    requirements: ['3+ years professional photography experience', 'Strong portfolio in events, dance, or sports photography', 'Proficiency in Adobe Lightroom / Photoshop', 'Based in or near Accra, Ghana'],
   },
   {
-    id: '2', title: 'Content & Video Producer', department: 'Content', location: 'Accra', type: 'Full-time', active: true,
-    description: 'Lead the production of dance tutorials and documentary content. Work directly with our instructor team to create world-class video lessons.',
-    requirements: ['3+ years video production experience', 'Experience with dance or sports content', 'Proficiency in Adobe Premiere or Final Cut', 'Strong eye for cultural authenticity'],
+    id: '2', title: 'Editorial Director', department: 'Editorial', location: 'Accra / Remote', type: 'Full-time', active: true,
+    description: 'Lead AfroBreak\'s editorial vision across digital content, blog, press releases, and brand communications. Shape how we tell the story of breaking and hiphop culture in Africa.',
+    requirements: ['5+ years editorial or content leadership experience', 'Deep knowledge of African music and dance culture', 'Fluent in English', 'Experience managing writers and creative contributors'],
   },
   {
-    id: '3', title: 'Community Manager', department: 'Community', location: 'Accra / Remote', type: 'Full-time', active: true,
-    description: 'Grow and nurture the AfroBreak community across platforms. Build relationships with dancers, organizers, and cultural influencers.',
-    requirements: ['2+ years community management', 'Active in Afro or urban dance scenes', 'Fluent in English', 'Social media expertise (Instagram, TikTok)'],
+    id: '3', title: 'Content & Video Producer', department: 'Content', location: 'Accra', type: 'Full-time', active: true,
+    description: 'Lead the production of dance tutorials, event recaps, and documentary content. Work directly with our instructor team and Global Ambassadors to create world-class video content.',
+    requirements: ['3+ years video production experience', 'Experience with dance or sports content', 'Proficiency in Adobe Premiere or Final Cut Pro', 'Strong eye for cultural authenticity'],
   },
   {
-    id: '4', title: 'Dance Content Creator (Intern)', department: 'Content', location: 'Accra', type: 'Internship', active: true,
-    description: 'Support our content team in creating engaging social media content, short-form videos, and behind-the-scenes coverage.',
-    requirements: ['Passion for Afro and urban dance', 'Basic video editing skills', 'Active social media presence', 'Based in or near Accra'],
+    id: '4', title: 'Creative Writer', department: 'Editorial', location: 'Accra / Remote', type: 'Part-time', active: true,
+    description: 'Write compelling articles, artist profiles, event coverage, and cultural pieces for the AfroBreak platform and blog. Bring breaking culture to life through words.',
+    requirements: ['Strong writing and storytelling skills', 'Passion for Afro and urban dance culture', 'Experience writing for digital media or blogs', 'Ability to deliver quality work on deadline'],
   },
   {
-    id: '5', title: 'Marketing Manager', department: 'Marketing', location: 'Remote', type: 'Full-time', active: true,
-    description: 'Drive growth through digital marketing, partnerships, and community campaigns. Own our acquisition and retention strategy.',
-    requirements: ['4+ years digital marketing', 'Experience with subscription products', 'Data-driven approach', 'Passion for African diaspora culture'],
+    id: '5', title: 'Marketing Manager', department: 'Marketing', location: 'Accra / Remote', type: 'Full-time', active: true,
+    description: 'Drive growth through digital marketing, event promotion, partnerships, and community campaigns. Own AfroBreak\'s acquisition and retention strategy across Africa and the diaspora.',
+    requirements: ['4+ years digital marketing experience', 'Experience with cultural or community-led brands', 'Strong understanding of social media (Instagram, TikTok, YouTube)', 'Data-driven approach with creative sensibility'],
   },
 ]
 

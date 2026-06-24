@@ -6,12 +6,15 @@ import Button from '@/components/ui/Button'
 import { getPresscoverage } from '@/lib/db'
 
 const defaultCoverage = [
-  { id: 'd1', outlet: 'Joy Online', title: 'AfroBreak: The platform democratising Afro dance education in Ghana', date: 'March 2025', type: 'Feature', logo: '🗞️', url: '' },
-  { id: 'd2', outlet: 'TechCrunch', title: 'AfroBreak raises $2M to bring African dance culture online', date: 'January 2025', type: 'News', logo: '💻', url: '' },
-  { id: 'd3', outlet: 'BBC Culture', title: 'How AfroBreak is preserving African dance traditions for a new generation', date: 'November 2024', type: 'Feature', logo: '📺', url: '' },
-  { id: 'd4', outlet: 'Forbes', title: '30 Under 30: The entrepreneurs building platforms for underrepresented cultures', date: 'October 2024', type: 'List', logo: '📊', url: '' },
-  { id: 'd5', outlet: 'The Guardian', title: 'Afrobeats, Amapiano, Dancehall: The rise of African dance platforms', date: 'August 2024', type: 'Feature', logo: '📰', url: '' },
-  { id: 'd6', outlet: 'Pulse Ghana', title: 'AfroBreak: How African dance is taking over the world from Accra', date: 'June 2024', type: 'Feature', logo: '✨', url: '' },
+  { id: 'd1', outlet: 'MyJoyOnline', title: 'Afro Break championship set for October 27 in Accra', date: 'October 2024', type: 'News', logo: '🗞️', url: 'https://www.myjoyonline.com/afro-break-championship-set-for-october-27-in-accra/' },
+  { id: 'd2', outlet: 'News Ghana', title: 'Ghana hosts fourth AfroBreak championship amid breaking\'s Olympic recognition', date: 'November 2024', type: 'Feature', logo: '📰', url: 'https://www.newsghana.com.gh/ghana-hosts-fourth-afrobreak-championship-amid-breakings-olympic-recognition/' },
+  { id: 'd3', outlet: 'MyJoyOnline', title: 'South Africa, Benin claim top prizes at AfroBreak championships', date: 'November 2024', type: 'News', logo: '🗞️', url: 'https://www.myjoyonline.com/south-africa-benin-claim-top-prizes-at-afrobreak-championships/' },
+  { id: 'd4', outlet: 'News Ghana', title: 'Ghana breakdance pioneer launches Cultural Journey exhibition', date: 'October 2024', type: 'Feature', logo: '📰', url: 'https://www.newsghana.com.gh/ghana-breakdance-pioneer-launches-cultural-journey-exhibition/' },
+  { id: 'd5', outlet: 'AfroBreak', title: 'Root of the Culture — Premiere on July 19, 2025', date: 'July 2025', type: 'Event', logo: '🎬', url: 'https://afrobreak.com/root-of-the-culture-premiere-on-july-19-2025/' },
+  { id: 'd6', outlet: 'AfroBreak', title: 'Akwaaba AfroBreak Music — Official Dance Video', date: 'June 2025', type: 'Release', logo: '🎵', url: 'https://afrobreak.com/akwaaba-afrobreak-music-official-dance-video/' },
+  { id: 'd7', outlet: 'AfroBreak', title: 'Ghana breakdance pioneer Bboy Lyricx launches Cultural Journey exhibition', date: 'October 2024', type: 'Feature', logo: '🎨', url: 'https://afrobreak.com/ghana-breakdance-pioneer-bboy-lyricx-launches-cultural-journey-exhibition/' },
+  { id: 'd8', outlet: 'Ghana Talk News', title: 'Breaking Federation of Ghana start preparations for 2026 Youth Olympics', date: 'January 2025', type: 'News', logo: '🏅', url: 'https://www.ghanatalknews.com/breaking-federation-of-ghana-start-preparations-for-2026-youth-olympics/' },
+  { id: 'd9', outlet: 'AfroBreak', title: 'KGL Foundation and ABA partner to empower girls using break dance and hiphop culture in Tamale', date: 'February 2025', type: 'Impact', logo: '🌍', url: 'https://afrobreak.com/kgl-foundation-and-aba-partnered-to-empower-girls-using-break-dance-and-hiphop-culture-in-tamale-northern-ghana/' },
 ]
 
 const assets = [
@@ -22,10 +25,10 @@ const assets = [
 ]
 
 const stats = [
-  { value: '10,000+', label: 'Active Members' },
-  { value: '40+', label: 'Countries' },
-  { value: '500+', label: 'Video Lessons' },
-  { value: '$2M', label: 'Raised' },
+  { value: '11K+', label: 'Beneficiaries' },
+  { value: '28+', label: 'Countries' },
+  { value: '270+', label: 'Events Organized' },
+  { value: '1000+', label: 'Workshops' },
 ]
 
 export default function PressPage() {

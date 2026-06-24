@@ -11,17 +11,17 @@ const features = [
   {
     icon: Users,
     title: 'World-Class Instructors',
-    desc: '50+ certified instructors from Nigeria, Jamaica, France, and beyond.',
+    desc: 'Global Ambassadors and certified instructors from Ghana, Nigeria, South Africa, and beyond.',
   },
   {
     icon: Globe,
     title: 'Global Community',
-    desc: 'Connect with 10,000+ dancers from the African diaspora and allies worldwide.',
+    desc: 'Connect with 11K+ beneficiaries from the African diaspora and allies worldwide.',
   },
   {
     icon: Star,
     title: 'Live Events',
-    desc: 'Workshops, shows, and battles across major European cities every month.',
+    desc: 'Workshops, shows, and battles across African cities and the global diaspora.',
   },
 ]
 
@@ -124,7 +124,7 @@ export default function AboutSection() {
                 AfroBreak was born from a simple idea: that Afro and urban dance is more than movement—it&apos;s culture, history, and community. We built this platform because we wanted a space that treats dancers with the respect and depth they deserve.
               </p>
               <p className="text-text-secondary leading-relaxed">
-                Whether you&apos;re learning your first Afrobeat move or preparing for a European battle championship, AfroBreak has the content, community, and context you need.
+                Whether you&apos;re learning your first Afrobeat move or preparing for the AfroBreak Africa Final, AfroBreak has the content, community, and context you need.
               </p>
             </div>
 
