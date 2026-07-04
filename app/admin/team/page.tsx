@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, X, Save, Instagram, Twitter, Youtube, Facebook, Check } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Save, Instagram, Twitter, Youtube, Facebook } from 'lucide-react'
 import ImageUpload from '@/components/ui/ImageUpload'
 import { getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from '@/lib/db'
 
@@ -11,11 +11,6 @@ const TikTokIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 )
 
-const SQL_MIGRATION = `alter table team_members add column if not exists instagram text;
-alter table team_members add column if not exists tiktok text;
-alter table team_members add column if not exists facebook text;
-alter table team_members add column if not exists twitter text;
-alter table team_members add column if not exists youtube text;`
 
 type Member = {
   id: string
@@ -42,7 +37,6 @@ export default function AdminTeamPage() {
   const [modal, setModal] = useState<null | 'create' | Member>(null)
   const [form, setForm] = useState<Omit<Member, 'id'>>(empty)
   const [saving, setSaving] = useState(false)
-  const [sqlCopied, setSqlCopied] = useState(false)
 
   useEffect(() => {
     getTeamMembers().then(data => { setMembers(data as Member[]); setLoading(false) })
@@ -58,11 +52,6 @@ export default function AdminTeamPage() {
     setModal(m)
   }
 
-  const copySQL = () => {
-    navigator.clipboard.writeText(SQL_MIGRATION)
-    setSqlCopied(true)
-    setTimeout(() => setSqlCopied(false), 2000)
-  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -95,16 +84,6 @@ export default function AdminTeamPage() {
         </button>
       </div>
 
-      {/* SQL migration notice */}
-      <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-sm text-amber-300">
-        <p className="font-semibold mb-2 flex items-center justify-between">
-          Run this SQL once in Supabase to enable social media columns:
-          <button onClick={copySQL} className="text-xs px-3 py-1 bg-amber-500/20 hover:bg-amber-500/30 rounded-lg transition-colors flex items-center gap-1">
-            {sqlCopied ? <><Check size={12} /> Copied!</> : 'Copy SQL'}
-          </button>
-        </p>
-        <pre className="text-xs bg-black/30 p-3 rounded-lg overflow-auto">{SQL_MIGRATION}</pre>
-      </div>
 
       {loading ? (
         <div className="text-text-secondary text-center py-20">Loading...</div>
