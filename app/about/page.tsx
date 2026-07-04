@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
-  Heart, Globe, Users, Zap, ArrowRight,
-  Film, Music2, Camera, CalendarDays, Image, Megaphone, Dumbbell, Quote
+  Heart, Globe, Users, Zap, ArrowRight, X,
+  Film, Music2, Camera, CalendarDays, Image, Megaphone, Dumbbell, Quote,
+  Instagram, Twitter, Youtube, Facebook
 } from 'lucide-react'
 import Button from '@/components/ui/Button'
-import { getTeamMembers } from '@/lib/db'
+import { getTeamMembers, getSetting } from '@/lib/db'
 
 const values = [
   { icon: Zap, title: 'Inspiration', desc: 'We ignite passion and creativity in every young talent we work with, using the power of Hip Hop and breakdance as a catalyst.' },
@@ -80,21 +81,41 @@ const testimonials = [
   },
 ]
 
+const TikTokIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.41a8.16 8.16 0 004.77 1.52V7.47a4.85 4.85 0 01-1-.78z" />
+  </svg>
+)
+
 const defaultTeam = [
-  { id: 'd1', name: 'Nana Tuffour Okai', role: 'Founder & Creative Director', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80', bio: 'Professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Paris 2024 Olympics Hall of Fame inductee.', display_order: 0 },
-  { id: 'd2', name: 'Francis Feby', role: 'Finance & Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80', bio: 'Oversees the financial management and administrative operations of Africa Breaking Academy, ensuring sustainable growth and transparency.', display_order: 1 },
-  { id: 'd3', name: 'Christable Okai', role: 'Communication & Relationship Manager', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80', bio: 'Leads communications, media relations, and community partnerships for ABA and AfroBreak across Africa and the global diaspora.', display_order: 2 },
-  { id: 'd4', name: 'Maxwell Tetteh Neur', role: 'Project Coordinator & Advisory Board', avatar: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&q=80', bio: 'Project Coordinator and Advisory Board Member, supporting program delivery, stakeholder engagement, and strategic planning.', display_order: 3 },
+  { id: 'd1', name: 'Nana Tuffour Okai', role: 'Founder & Creative Director', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80', bio: 'Professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Paris 2024 Olympics Hall of Fame inductee.', display_order: 0, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd2', name: 'Francis Feby', role: 'Finance & Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80', bio: 'Oversees the financial management and administrative operations of Africa Breaking Academy, ensuring sustainable growth and transparency.', display_order: 1, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd3', name: 'Christable Okai', role: 'Communication & Relationship Manager', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80', bio: 'Leads communications, media relations, and community partnerships for ABA and AfroBreak across Africa and the global diaspora.', display_order: 2, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd4', name: 'Maxwell Tetteh Neur', role: 'Project Coordinator & Advisory Board', avatar: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&q=80', bio: 'Project Coordinator and Advisory Board Member, supporting program delivery, stakeholder engagement, and strategic planning.', display_order: 3, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
 ]
 
 export default function AboutPage() {
   const [team, setTeam] = useState(defaultTeam)
+  const [stats, setStats] = useState([
+    { value: '28+', label: 'African Countries' },
+    { value: '2021', label: 'Championship Founded' },
+    { value: '270+', label: 'Events Organized' },
+    { value: '11K+', label: 'Beneficiaries' },
+  ])
+  const [activeTestimonials, setActiveTestimonials] = useState(testimonials)
+  const [activeTimeline, setActiveTimeline] = useState(timeline)
+  const [pioneerPhoto, setPioneerPhoto] = useState('')
   const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null)
   const [bioExpanded, setBioExpanded] = useState(false)
   const [champExpanded, setChampExpanded] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<typeof defaultTeam[0] | null>(null)
 
   useEffect(() => {
     getTeamMembers().then(data => { if (data.length > 0) setTeam(data as typeof defaultTeam) })
+    getSetting('about_stats').then(v => { if (v) try { setStats(JSON.parse(v)) } catch {} })
+    getSetting('about_testimonials').then(v => { if (v) try { setActiveTestimonials(JSON.parse(v)) } catch {} })
+    getSetting('about_timeline').then(v => { if (v) try { setActiveTimeline(JSON.parse(v)) } catch {} })
+    getSetting('pioneer_photo').then(v => { if (v) setPioneerPhoto(v) })
   }, [])
 
   return (
@@ -132,12 +153,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {[
-              { value: '28+', label: 'African Countries' },
-              { value: '2021', label: 'Championship Founded' },
-              { value: '270+', label: 'Events Organized' },
-              { value: '11K+', label: 'Beneficiaries' },
-            ].map(stat => (
+            {stats.map(stat => (
               <div key={stat.label} className="bg-surface border border-white/5 rounded-2xl p-6 text-center">
                 <p className="text-3xl font-black gradient-text-orange mb-1">{stat.value}</p>
                 <p className="text-text-secondary text-sm">{stat.label}</p>
@@ -272,7 +288,10 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
             <div className="text-center">
-              <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mx-auto mb-4 text-4xl font-black text-white shadow-glow-orange">BL</div>
+              {pioneerPhoto
+                ? <img src={pioneerPhoto} alt="Bboy Lyricx" className="w-32 h-32 rounded-2xl object-cover mx-auto mb-4 shadow-glow-orange ring-2 ring-primary-500/40" />
+                : <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mx-auto mb-4 text-4xl font-black text-white shadow-glow-orange">BL</div>
+              }
               <h3 className="text-xl font-black text-white">Bboy Lyricx</h3>
               <p className="text-primary-500 text-sm font-semibold mt-1">Nana Tuffour Okai</p>
               <p className="text-text-secondary text-xs mt-1">Co-Founder, Africa Breaking Academy</p>
@@ -315,7 +334,7 @@ export default function AboutPage() {
         <div className="relative">
           <div className="absolute left-16 top-0 bottom-0 w-px bg-white/10" />
           <div className="space-y-8">
-            {timeline.map(item => (
+            {activeTimeline.map(item => (
               <div key={item.year} className="flex gap-6 items-start">
                 <div className="w-14 text-right flex-shrink-0">
                   <span className="text-primary-500 font-black text-sm">{item.year}</span>
@@ -373,14 +392,25 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {team.map(member => (
-                <div key={member.id} className="bg-surface border border-white/5 rounded-2xl p-6 text-center hover:border-primary-500/20 transition-all">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4 ring-2 ring-primary-500/20">
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                <button
+                  key={member.id}
+                  onClick={() => setSelectedMember(member)}
+                  className="group bg-surface border border-white/5 rounded-2xl p-6 text-center hover:border-primary-500/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer w-full"
+                >
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4 ring-2 ring-primary-500/20 group-hover:ring-primary-500/50 transition-all">
+                    {member.avatar ? (
+                      <img src={member.avatar} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-2xl font-black text-white">
+                        {member.name[0]}
+                      </div>
+                    )}
                   </div>
                   <h3 className="font-bold text-white mb-1">{member.name}</h3>
-                  <p className="text-primary-500 text-xs font-semibold mb-3">{member.role}</p>
-                  <p className="text-xs text-text-secondary leading-relaxed">{member.bio}</p>
-                </div>
+                  <p className="text-primary-500 text-xs font-semibold mb-2">{member.role}</p>
+                  <p className="text-xs text-text-secondary leading-relaxed line-clamp-2">{member.bio}</p>
+                  <p className="text-[10px] text-primary-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">View profile →</p>
+                </button>
               ))}
             </div>
           </div>
@@ -395,7 +425,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-black text-white">What They Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
+            {activeTestimonials.map((t, i) => (
               <div key={i} className="bg-background border border-white/5 rounded-2xl p-6 flex flex-col">
                 <Quote size={24} className="text-primary-500/40 mb-4 flex-shrink-0" />
                 <p className="text-text-secondary text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
@@ -420,6 +450,75 @@ export default function AboutPage() {
           <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>Get Started Free</Button>
         </Link>
       </div>
+
+      {/* Team Member Modal */}
+      {selectedMember && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setSelectedMember(null)}
+          style={{ animation: 'fadeIn 0.2s ease' }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            className="w-full max-w-sm bg-surface border border-white/10 rounded-3xl overflow-hidden"
+            style={{ animation: 'slideUp 0.3s cubic-bezier(0.16,1,0.3,1)' }}
+          >
+            <div className="relative h-44 bg-gradient-to-br from-primary-500/20 to-secondary-500/10 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
+              {selectedMember.avatar ? (
+                <img src={selectedMember.avatar} alt={selectedMember.name} className="w-28 h-28 rounded-2xl object-cover ring-4 ring-white/20 z-10 relative shadow-2xl" style={{ animation: 'popIn 0.4s cubic-bezier(0.16,1,0.3,1) 0.1s both' }} />
+              ) : (
+                <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-4xl font-black text-white z-10 relative ring-4 ring-white/20 shadow-2xl" style={{ animation: 'popIn 0.4s cubic-bezier(0.16,1,0.3,1) 0.1s both' }}>
+                  {selectedMember.name[0]}
+                </div>
+              )}
+              <button onClick={() => setSelectedMember(null)} className="absolute top-3 right-3 z-20 p-1.5 rounded-full bg-black/40 hover:bg-black/60 text-white transition-all">
+                <X size={15} />
+              </button>
+            </div>
+            <div className="p-6" style={{ animation: 'fadeIn 0.3s ease 0.15s both' }}>
+              <h2 className="text-xl font-black text-white mb-1">{selectedMember.name}</h2>
+              <p className="text-primary-400 text-sm font-semibold mb-4">{selectedMember.role}</p>
+              <p className="text-text-secondary text-sm leading-relaxed">{selectedMember.bio}</p>
+              {(selectedMember.instagram || selectedMember.tiktok || selectedMember.facebook || selectedMember.twitter || selectedMember.youtube) && (
+                <div className="flex items-center gap-2 mt-5 pt-4 border-t border-white/10 flex-wrap">
+                  {selectedMember.instagram && (
+                    <a href={selectedMember.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-pink-400 hover:bg-pink-500/10 hover:border-pink-500/30 transition-all">
+                      <Instagram size={15} />
+                    </a>
+                  )}
+                  {selectedMember.tiktok && (
+                    <a href={selectedMember.tiktok} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all">
+                      <TikTokIcon size={15} />
+                    </a>
+                  )}
+                  {selectedMember.facebook && (
+                    <a href={selectedMember.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-400 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all">
+                      <Facebook size={15} />
+                    </a>
+                  )}
+                  {selectedMember.twitter && (
+                    <a href={selectedMember.twitter} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 hover:bg-sky-500/10 hover:border-sky-500/30 transition-all">
+                      <Twitter size={15} />
+                    </a>
+                  )}
+                  {selectedMember.youtube && (
+                    <a href={selectedMember.youtube} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-red-400 hover:bg-red-500/10 hover:border-red-500/30 transition-all">
+                      <Youtube size={15} />
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        @keyframes slideUp { from { opacity:0; transform:translateY(40px) scale(0.95) } to { opacity:1; transform:translateY(0) scale(1) } }
+        @keyframes popIn { from { opacity:0; transform:scale(0.6) } to { opacity:1; transform:scale(1) } }
+      `}</style>
     </div>
   )
 }

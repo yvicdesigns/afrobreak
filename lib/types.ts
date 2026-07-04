@@ -35,6 +35,8 @@ export interface Event {
   registered: number
   tags: string[]
   youtubeUrl?: string
+  is_international?: boolean
+  country?: string
 }
 
 export type EventType = 'Workshop' | 'Class' | 'Show' | 'Battle' | 'Qualifier'

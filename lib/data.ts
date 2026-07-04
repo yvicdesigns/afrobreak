@@ -218,6 +218,7 @@ export const events: Event[] = [
     capacity: 300,
     registered: 0,
     tags: ['breaking', 'battle', 'nigeria', 'cypher'],
+    is_international: true, country: 'Nigeria',
   },
   {
     id: 'e_floormot',
@@ -234,6 +235,7 @@ export const events: Event[] = [
     capacity: 80,
     registered: 0,
     tags: ['workshop', 'uganda', 'east africa', 'hiphop'],
+    is_international: true, country: 'Uganda',
   },
   {
     id: 'e_eaqualif',
@@ -250,6 +252,7 @@ export const events: Event[] = [
     capacity: 200,
     registered: 0,
     tags: ['battle', 'qualifier', 'east africa', 'kampala'],
+    is_international: true, country: 'Uganda',
   },
   {
     id: 'e_roots2026',
@@ -368,6 +371,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1508700929628-c3d7819c1498?w=800&q=80',
     instructor: 'ABA', capacity: 100, registered: 100,
     tags: ['qualifier', 'benin', 'breaking', 'west africa'],
+    is_international: true, country: 'Benin',
   },
   {
     id: 'e_qual_uganda', title: 'AfroBreak Uganda Qualifier',
@@ -377,6 +381,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?w=800&q=80',
     instructor: 'ABA', capacity: 120, registered: 120,
     tags: ['qualifier', 'uganda', 'east africa', 'breaking'],
+    is_international: true, country: 'Uganda',
   },
   {
     id: 'e_qual_ivorycoast', title: 'AfroBreak Ivory Coast Qualifier',
@@ -386,6 +391,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80',
     instructor: 'ABA', capacity: 100, registered: 100,
     tags: ['qualifier', 'ivory coast', 'west africa', 'breaking'],
+    is_international: true, country: "Côte d'Ivoire",
   },
   {
     id: 'e_qual_togo', title: 'AfroBreak Togo Qualifier',
@@ -395,6 +401,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80',
     instructor: 'ABA', capacity: 80, registered: 80,
     tags: ['qualifier', 'togo', 'west africa', 'breaking'],
+    is_international: true, country: 'Togo',
   },
   {
     id: 'e_qual_france', title: 'AfroBreak France Qualifier',
@@ -404,6 +411,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1526483291330-fe44429f3e0d?w=800&q=80',
     instructor: 'ABA', capacity: 100, registered: 100,
     tags: ['qualifier', 'france', 'europe', 'diaspora', 'breaking'],
+    is_international: true, country: 'France',
   },
   {
     id: 'e_qual_burkina', title: 'AfroBreak Burkina Faso Qualifier',
@@ -413,6 +421,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1483362271674-7461064d5e66?w=800&q=80',
     instructor: 'ABA', capacity: 80, registered: 80,
     tags: ['qualifier', 'burkina faso', 'west africa', 'breaking'],
+    is_international: true, country: 'Burkina Faso',
   },
   {
     id: 'e_qual_nigeria', title: 'AfroBreak Nigeria Qualifier',
@@ -422,6 +431,7 @@ export const events: Event[] = [
     image: 'https://images.unsplash.com/photo-1535525153412-5a42439a210e?w=800&q=80',
     instructor: 'ABA', capacity: 200, registered: 200,
     tags: ['qualifier', 'nigeria', 'lagos', 'west africa', 'breaking'],
+    is_international: true, country: 'Nigeria',
   },
   // ── PROJECTS / WORKSHOPS ─────────────────────────────────────────────────────
   {

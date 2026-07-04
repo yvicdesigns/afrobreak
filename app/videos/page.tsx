@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { getVideos } from '@/lib/db'
-import type { Video, VideoCategory, VideoLevel } from '@/lib/types'
+import type { Video, VideoCategory } from '@/lib/types'
 import VideoCard from '@/components/videos/VideoCard'
 import VideoFilters from '@/components/videos/VideoFilters'
 import SearchBar from '@/components/ui/SearchBar'
@@ -12,7 +12,6 @@ export default function VideosPage() {
   const [videos, setVideos] = useState<Video[]>([])
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<VideoCategory | 'All'>('All')
-  const [selectedLevel, setSelectedLevel] = useState<VideoLevel | 'All'>('All')
   const [premiumOnly, setPremiumOnly] = useState(false)
 
   useEffect(() => {
@@ -28,12 +27,11 @@ export default function VideosPage() {
         v.tags.some(t => t.toLowerCase().includes(search.toLowerCase()))
 
       const matchCategory = selectedCategory === 'All' || v.category === selectedCategory
-      const matchLevel = selectedLevel === 'All' || v.level === selectedLevel
       const matchPremium = !premiumOnly || v.isPremium
 
-      return matchSearch && matchCategory && matchLevel && matchPremium
+      return matchSearch && matchCategory && matchPremium
     })
-  }, [videos, search, selectedCategory, selectedLevel, premiumOnly])
+  }, [videos, search, selectedCategory, premiumOnly])
 
   return (
     <div className="min-h-screen pt-16">
@@ -73,9 +71,7 @@ export default function VideosPage() {
         <div className="sticky top-16 z-20 py-4 bg-background/90 backdrop-blur-xl border-b border-white/5 mb-8 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <VideoFilters
             selectedCategory={selectedCategory}
-            selectedLevel={selectedLevel}
             onCategoryChange={setSelectedCategory}
-            onLevelChange={setSelectedLevel}
             showPremiumOnly={premiumOnly}
             onPremiumToggle={setPremiumOnly}
           />
@@ -84,7 +80,7 @@ export default function VideosPage() {
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-text-secondary">
             Showing <span className="text-white font-semibold">{filtered.length}</span> video{filtered.length !== 1 ? 's' : ''}
-            {(selectedCategory !== 'All' || selectedLevel !== 'All' || search) && (
+            {(selectedCategory !== 'All' || search) && (
               <span className="text-text-muted"> matching your filters</span>
             )}
           </p>
@@ -92,7 +88,6 @@ export default function VideosPage() {
             onClick={() => {
               setSearch('')
               setSelectedCategory('All')
-              setSelectedLevel('All')
               setPremiumOnly(false)
             }}
             className="text-xs text-primary-500 hover:text-primary-400 font-medium transition-colors"
@@ -110,7 +105,6 @@ export default function VideosPage() {
               onClick={() => {
                 setSearch('')
                 setSelectedCategory('All')
-                setSelectedLevel('All')
                 setPremiumOnly(false)
               }}
               className="text-primary-500 hover:text-primary-400 font-medium transition-colors"

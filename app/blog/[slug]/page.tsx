@@ -88,8 +88,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <article className="lg:col-span-3">
             <div className="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl overflow-hidden ring-2 ring-primary-500/30">
-                  <img src={post.authorAvatar} alt={post.author} className="w-full h-full object-cover" />
+                <div className="w-12 h-12 rounded-xl overflow-hidden ring-2 ring-primary-500/30 bg-primary-500/20 flex items-center justify-center">
+                  {post.authorAvatar
+                    ? <img src={post.authorAvatar} alt={post.author} className="w-full h-full object-cover" />
+                    : <span className="text-primary-400 font-bold text-lg">{post.author.charAt(0).toUpperCase()}</span>
+                  }
                 </div>
                 <div>
                   <p className="font-semibold text-white flex items-center gap-1.5">
@@ -137,8 +140,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <div className="mt-10 bg-surface rounded-2xl border border-white/5 p-6">
               <h3 className="font-bold text-white mb-4">About the Author</h3>
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 ring-2 ring-primary-500/20">
-                  <img src={post.authorAvatar} alt={post.author} className="w-full h-full object-cover" />
+                <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 ring-2 ring-primary-500/20 bg-primary-500/20 flex items-center justify-center">
+                  {post.authorAvatar
+                    ? <img src={post.authorAvatar} alt={post.author} className="w-full h-full object-cover" />
+                    : <span className="text-primary-400 font-bold text-2xl">{post.author.charAt(0).toUpperCase()}</span>
+                  }
                 </div>
                 <div>
                   <h4 className="font-bold text-white mb-1">{post.author}</h4>

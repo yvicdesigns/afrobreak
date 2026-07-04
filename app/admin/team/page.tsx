@@ -1,9 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, X, Save } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Save, Instagram, Twitter, Youtube, Facebook, Check } from 'lucide-react'
 import ImageUpload from '@/components/ui/ImageUpload'
 import { getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from '@/lib/db'
+
+const TikTokIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.41a8.16 8.16 0 004.77 1.52V7.47a4.85 4.85 0 01-1-.78z" />
+  </svg>
+)
+
+const SQL_MIGRATION = `alter table team_members add column if not exists instagram text;
+alter table team_members add column if not exists tiktok text;
+alter table team_members add column if not exists facebook text;
+alter table team_members add column if not exists twitter text;
+alter table team_members add column if not exists youtube text;`
 
 type Member = {
   id: string
@@ -12,9 +24,17 @@ type Member = {
   avatar: string
   bio: string
   display_order: number
+  instagram: string
+  tiktok: string
+  facebook: string
+  twitter: string
+  youtube: string
 }
 
-const empty: Omit<Member, 'id'> = { name: '', role: '', avatar: '', bio: '', display_order: 0 }
+const empty: Omit<Member, 'id'> = {
+  name: '', role: '', avatar: '', bio: '', display_order: 0,
+  instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '',
+}
 
 export default function AdminTeamPage() {
   const [members, setMembers] = useState<Member[]>([])
@@ -22,13 +42,27 @@ export default function AdminTeamPage() {
   const [modal, setModal] = useState<null | 'create' | Member>(null)
   const [form, setForm] = useState<Omit<Member, 'id'>>(empty)
   const [saving, setSaving] = useState(false)
+  const [sqlCopied, setSqlCopied] = useState(false)
 
   useEffect(() => {
     getTeamMembers().then(data => { setMembers(data as Member[]); setLoading(false) })
   }, [])
 
   const openCreate = () => { setForm(empty); setModal('create') }
-  const openEdit = (m: Member) => { setForm({ name: m.name, role: m.role, avatar: m.avatar, bio: m.bio, display_order: m.display_order }); setModal(m) }
+  const openEdit = (m: Member) => {
+    setForm({
+      name: m.name, role: m.role, avatar: m.avatar, bio: m.bio, display_order: m.display_order,
+      instagram: m.instagram || '', tiktok: m.tiktok || '', facebook: m.facebook || '',
+      twitter: m.twitter || '', youtube: m.youtube || '',
+    })
+    setModal(m)
+  }
+
+  const copySQL = () => {
+    navigator.clipboard.writeText(SQL_MIGRATION)
+    setSqlCopied(true)
+    setTimeout(() => setSqlCopied(false), 2000)
+  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -51,7 +85,7 @@ export default function AdminTeamPage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-black text-white">Team Members</h1>
           <p className="text-text-secondary text-sm mt-1">Manage the team shown on the About page</p>
@@ -59,6 +93,17 @@ export default function AdminTeamPage() {
         <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold">
           <Plus size={16} /> Add Member
         </button>
+      </div>
+
+      {/* SQL migration notice */}
+      <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-sm text-amber-300">
+        <p className="font-semibold mb-2 flex items-center justify-between">
+          Run this SQL once in Supabase to enable social media columns:
+          <button onClick={copySQL} className="text-xs px-3 py-1 bg-amber-500/20 hover:bg-amber-500/30 rounded-lg transition-colors flex items-center gap-1">
+            {sqlCopied ? <><Check size={12} /> Copied!</> : 'Copy SQL'}
+          </button>
+        </p>
+        <pre className="text-xs bg-black/30 p-3 rounded-lg overflow-auto">{SQL_MIGRATION}</pre>
       </div>
 
       {loading ? (
@@ -82,7 +127,17 @@ export default function AdminTeamPage() {
                   <p className="text-primary-400 text-xs truncate">{m.role}</p>
                 </div>
               </div>
-              <p className="text-text-secondary text-xs line-clamp-2 mb-4">{m.bio}</p>
+              <p className="text-text-secondary text-xs line-clamp-2 mb-3">{m.bio}</p>
+              {/* Social link indicators */}
+              {[m.instagram, m.tiktok, m.facebook, m.twitter, m.youtube].some(Boolean) && (
+                <div className="flex items-center gap-2 mb-3">
+                  {m.instagram && <Instagram size={11} className="text-pink-400" />}
+                  {m.tiktok && <TikTokIcon size={11} />}
+                  {m.facebook && <Facebook size={11} className="text-blue-400" />}
+                  {m.twitter && <Twitter size={11} className="text-sky-400" />}
+                  {m.youtube && <Youtube size={11} className="text-red-400" />}
+                </div>
+              )}
               <div className="flex gap-2">
                 <button onClick={() => openEdit(m)} className="flex-1 flex items-center justify-center gap-1 py-1.5 bg-white/5 hover:bg-white/10 text-white rounded-lg text-xs transition-colors">
                   <Pencil size={12} /> Edit
@@ -98,37 +153,72 @@ export default function AdminTeamPage() {
 
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="w-full max-w-lg bg-surface border border-white/10 rounded-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">{modal === 'create' ? 'Add Team Member' : 'Edit Team Member'}</h2>
-              <button onClick={() => setModal(null)} className="p-1.5 rounded-lg hover:bg-white/10 text-text-muted"><X size={18} /></button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-white mb-1">Name *</label>
-                <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="input-base" placeholder="Full name" />
+          <div className="w-full max-w-lg bg-surface border border-white/10 rounded-2xl overflow-y-auto max-h-[90vh]">
+            <div className="p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold text-white">{modal === 'create' ? 'Add Team Member' : 'Edit Team Member'}</h2>
+                <button onClick={() => setModal(null)} className="p-1.5 rounded-lg hover:bg-white/10 text-text-muted"><X size={18} /></button>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-medium text-white mb-1">Name *</label>
+                  <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="input-base" placeholder="Full name" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-white mb-1">Role *</label>
+                  <input value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} className="input-base" placeholder="e.g. Founder & CEO" />
+                </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-white mb-1">Role *</label>
-                <input value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} className="input-base" placeholder="e.g. Founder & CEO" />
+                <ImageUpload label="Avatar" value={form.avatar} onChange={v => setForm(f => ({ ...f, avatar: v }))} folder="avatars" />
               </div>
-            </div>
-            <div>
-              <ImageUpload label="Avatar" value={form.avatar} onChange={v => setForm(f => ({ ...f, avatar: v }))} folder="avatars" />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-white mb-1">Bio</label>
-              <textarea rows={3} value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} className="input-base resize-none" placeholder="Short bio..." />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-white mb-1">Display Order</label>
-              <input type="number" value={form.display_order} onChange={e => setForm(f => ({ ...f, display_order: Number(e.target.value) }))} className="input-base" />
-            </div>
-            <div className="flex gap-3 pt-2">
-              <button onClick={() => setModal(null)} className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm transition-colors">Cancel</button>
-              <button onClick={handleSave} disabled={saving || !form.name} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">
-                <Save size={14} /> {saving ? 'Saving...' : 'Save'}
-              </button>
+              <div>
+                <label className="block text-xs font-medium text-white mb-1">Bio</label>
+                <textarea rows={3} value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} className="input-base resize-none" placeholder="Short bio..." />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-white mb-1">Display Order</label>
+                <input type="number" value={form.display_order} onChange={e => setForm(f => ({ ...f, display_order: Number(e.target.value) }))} className="input-base" />
+              </div>
+
+              {/* Social Media */}
+              <div className="pt-2 border-t border-white/10">
+                <p className="text-xs font-bold text-white uppercase tracking-widest mb-3">Réseaux Sociaux</p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Instagram size={16} className="text-pink-400 flex-shrink-0" />
+                    <input value={form.instagram} onChange={e => setForm(f => ({ ...f, instagram: e.target.value }))}
+                      className="input-base flex-1" placeholder="https://instagram.com/username" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="flex-shrink-0 text-white/60"><TikTokIcon size={16} /></span>
+                    <input value={form.tiktok} onChange={e => setForm(f => ({ ...f, tiktok: e.target.value }))}
+                      className="input-base flex-1" placeholder="https://tiktok.com/@username" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Facebook size={16} className="text-blue-400 flex-shrink-0" />
+                    <input value={form.facebook} onChange={e => setForm(f => ({ ...f, facebook: e.target.value }))}
+                      className="input-base flex-1" placeholder="https://facebook.com/username" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Twitter size={16} className="text-sky-400 flex-shrink-0" />
+                    <input value={form.twitter} onChange={e => setForm(f => ({ ...f, twitter: e.target.value }))}
+                      className="input-base flex-1" placeholder="https://twitter.com/username" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Youtube size={16} className="text-red-400 flex-shrink-0" />
+                    <input value={form.youtube} onChange={e => setForm(f => ({ ...f, youtube: e.target.value }))}
+                      className="input-base flex-1" placeholder="https://youtube.com/@channel" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button onClick={() => setModal(null)} className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm transition-colors">Cancel</button>
+                <button onClick={handleSave} disabled={saving || !form.name} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">
+                  <Save size={14} /> {saving ? 'Saving...' : 'Save'}
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -6,14 +6,16 @@ import { usePathname } from 'next/navigation'
 import {
   Menu, X, Search, ChevronDown, LogOut, User, Settings,
   Heart, Clock, Crown, Play, Trophy, Mail, Users, Newspaper,
-  Briefcase, Handshake, History, FolderOpen, Star, MapPin,
+  Briefcase, Handshake, History, Star, Calendar, Globe,
   Video, Music, BookOpen, Camera
 } from 'lucide-react'
 import clsx from 'clsx'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
 import SearchBar from '@/components/ui/SearchBar'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 import { supabase } from '@/lib/supabase'
+import { getSetting } from '@/lib/db'
 
 const aboutLinks = [
   { label: 'About Us', href: '/about', icon: Users },
@@ -24,10 +26,9 @@ const aboutLinks = [
 ]
 
 const eventsLinks = [
+  { label: 'Upcoming', href: '/events?tab=upcoming', icon: Calendar },
+  { label: 'International', href: '/events?tab=international', icon: Globe },
   { label: 'History', href: '/events?tab=history', icon: History },
-  { label: 'Projects', href: '/events?tab=projects', icon: FolderOpen },
-  { label: 'Qualifiers', href: '/events?tab=qualifiers', icon: MapPin },
-  { label: 'Africa Final', href: '/events?tab=africa-final', icon: Trophy },
 ]
 
 const platformLinks = [
@@ -98,7 +99,14 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileSection, setMobileSection] = useState<string | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [logoUrl, setLogoUrl] = useState('')
+  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number } | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    getSetting('site_logo').then(v => { if (v) setLogoUrl(v) })
+    getSetting('logo_bg').then(v => { if (v) try { setLogoBg(JSON.parse(v)) } catch {} })
+  }, [])
 
   useEffect(() => {
     if (!currentUser) { setIsAdmin(false); return }
@@ -142,13 +150,33 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-glow-orange group-hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transition-shadow">
-                <Play size={14} className="text-white fill-white ml-0.5" />
-              </div>
-              <span className="text-xl font-black tracking-tight">
-                <span className="text-primary-500">AFRO</span>
-                <span className="text-white">BREAK</span>
-              </span>
+              {logoUrl ? (
+                <div
+                  className={`flex items-center justify-center overflow-hidden flex-shrink-0 transition-shadow group-hover:shadow-lg ${!logoBg ? '' : logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+                  style={logoBg ? {
+                    width: 32 + logoBg.padding,
+                    height: 32 + logoBg.padding,
+                    backgroundColor: (() => {
+                      const r = parseInt(logoBg.color.slice(1,3), 16)
+                      const g = parseInt(logoBg.color.slice(3,5), 16)
+                      const b = parseInt(logoBg.color.slice(5,7), 16)
+                      return `rgba(${r},${g},${b},${logoBg.opacity/100})`
+                    })(),
+                  } : {}}
+                >
+                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: 32, height: 32 }} />
+                </div>
+              ) : (
+                <>
+                  <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-glow-orange group-hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transition-shadow">
+                    <Play size={14} className="text-white fill-white ml-0.5" />
+                  </div>
+                  <span className="text-xl font-black tracking-tight">
+                    <span className="text-primary-500">AFRO</span>
+                    <span className="text-white">BREAK</span>
+                  </span>
+                </>
+              )}
             </Link>
 
             {/* Desktop Nav */}
@@ -164,6 +192,7 @@ export default function Navbar() {
 
             {/* Right side */}
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <button onClick={() => setSearchOpen(!searchOpen)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all duration-200">
                 <Search size={18} />
               </button>

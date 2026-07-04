@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight, Download, Instagram } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 type PhotoCategory = 'All' | 'Events' | 'Workshops' | 'Battles' | 'Schools Outreach' | 'Community'
 
@@ -14,7 +15,7 @@ interface Photo {
   location?: string
 }
 
-const photos: Photo[] = [
+const staticPhotos: Photo[] = [
   { id: '1', src: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80', title: 'Afrobeat Session', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Paris' },
   { id: '2', src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80', title: 'Hip-Hop Cypher', category: 'Events', photographer: 'AfroBreak Media', location: 'Lyon' },
   { id: '3', src: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80', title: 'Dancehall Vibes', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Marseille' },
@@ -35,8 +36,15 @@ const photos: Photo[] = [
 const categories: PhotoCategory[] = ['All', 'Events', 'Workshops', 'Battles', 'Schools Outreach', 'Community']
 
 export default function PhotosPage() {
+  const [photos, setPhotos] = useState<Photo[]>(staticPhotos)
   const [activeCategory, setActiveCategory] = useState<PhotoCategory>('All')
   const [lightbox, setLightbox] = useState<number | null>(null)
+
+  useEffect(() => {
+    supabase.from('photos').select('*').order('created_at', { ascending: false }).then(({ data }) => {
+      if (data && data.length > 0) setPhotos(data as Photo[])
+    })
+  }, [])
 
   const filtered = activeCategory === 'All' ? photos : photos.filter(p => p.category === activeCategory)
 
@@ -78,7 +86,7 @@ export default function PhotosPage() {
               {cat}
               {cat !== 'All' && (
                 <span className="ml-2 text-[10px] opacity-60">
-                  {photos.filter(p => p.category === cat).length}
+                  {photos.filter(p => p.category === (cat as PhotoCategory)).length}
                 </span>
               )}
             </button>
@@ -86,32 +94,38 @@ export default function PhotosPage() {
         </div>
 
         {/* Masonry Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-          {filtered.map((photo, index) => (
-            <div
-              key={photo.id}
-              onClick={() => openLightbox(index)}
-              className="group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-primary-500/30 transition-all duration-300"
-            >
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white font-semibold text-sm">{photo.title}</p>
-                  <p className="text-white/60 text-xs">{photo.location}</p>
-                </div>
-                <div className="absolute top-3 right-3">
-                  <span className="px-2 py-1 bg-primary-500/80 text-white text-[10px] font-bold rounded-lg">
-                    {photo.category}
-                  </span>
+        {filtered.length === 0 ? (
+          <div className="text-center py-24 text-text-muted">No photos in this category yet.</div>
+        ) : (
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3" style={{ columnGap: '12px' }}>
+            {filtered.map((photo, index) => (
+              <div
+                key={photo.id}
+                onClick={() => openLightbox(index)}
+                className="group relative break-inside-avoid mb-3 rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-primary-500/40 transition-all duration-300 shadow-lg hover:shadow-primary-500/10 hover:shadow-xl"
+                style={{ display: 'inline-block', width: '100%' }}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <p className="text-white font-bold text-sm">{photo.title}</p>
+                    <p className="text-white/60 text-xs mt-0.5">{photo.location}</p>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 bg-primary-500 text-white text-[10px] font-bold rounded-lg shadow">
+                      {photo.category}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Instagram CTA */}
         <div className="mt-16 bg-gradient-to-r from-purple-500/15 to-pink-500/10 border border-white/10 rounded-2xl p-8 text-center">
@@ -119,12 +133,12 @@ export default function PhotosPage() {
           <h3 className="text-xl font-bold text-white mb-2">Follow us on Instagram</h3>
           <p className="text-text-secondary mb-6">See more photos and videos from the AfroBreak community</p>
           <a
-            href="https://instagram.com/afrobreak"
+            href="https://www.instagram.com/afrobreakconcepts/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl hover:opacity-90 transition-opacity"
           >
-            <Instagram size={18} /> @afrobreak
+            <Instagram size={18} /> @afrobreakconcepts
           </a>
         </div>
       </div>
@@ -134,6 +148,7 @@ export default function PhotosPage() {
         <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
           onClick={closeLightbox}
+          style={{ animation: 'lbFadeIn 0.25s ease' }}
         >
           {/* Close */}
           <button
@@ -146,19 +161,24 @@ export default function PhotosPage() {
           {/* Prev */}
           <button
             onClick={e => { e.stopPropagation(); prev() }}
-            className="absolute left-4 p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all z-10"
+            className="absolute left-4 p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all z-10 hover:scale-110"
           >
             <ChevronLeft size={24} />
           </button>
 
           {/* Image */}
-          <div onClick={e => e.stopPropagation()} className="max-w-4xl w-full">
-            <img
-              src={currentPhoto.src}
-              alt={currentPhoto.title}
-              className="w-full max-h-[75vh] object-contain rounded-2xl"
-            />
-            <div className="flex items-center justify-between mt-4">
+          <div onClick={e => e.stopPropagation()} className="max-w-4xl w-full" style={{ animation: 'lbSlideUp 0.35s cubic-bezier(0.16,1,0.3,1)' }}>
+            <div className="relative overflow-hidden rounded-2xl">
+              <img
+                key={lightbox}
+                src={currentPhoto.src}
+                alt={currentPhoto.title}
+                className="w-full max-h-[75vh] object-contain rounded-2xl"
+                style={{ animation: 'lbZoom 0.4s cubic-bezier(0.16,1,0.3,1)' }}
+              />
+              <div className="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-white/10" />
+            </div>
+            <div className="flex items-center justify-between mt-4" style={{ animation: 'lbFadeIn 0.3s ease 0.1s both' }}>
               <div>
                 <p className="text-white font-bold">{currentPhoto.title}</p>
                 <p className="text-white/50 text-sm">{currentPhoto.location} · {currentPhoto.photographer}</p>
@@ -172,7 +192,7 @@ export default function PhotosPage() {
                   href={currentPhoto.src}
                   download
                   onClick={e => e.stopPropagation()}
-                  className="p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all"
+                  className="p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all hover:scale-110"
                 >
                   <Download size={16} />
                 </a>
@@ -183,12 +203,18 @@ export default function PhotosPage() {
           {/* Next */}
           <button
             onClick={e => { e.stopPropagation(); next() }}
-            className="absolute right-4 p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all z-10"
+            className="absolute right-4 p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all z-10 hover:scale-110"
           >
             <ChevronRight size={24} />
           </button>
         </div>
       )}
+
+      <style jsx global>{`
+        @keyframes lbFadeIn { from { opacity:0 } to { opacity:1 } }
+        @keyframes lbSlideUp { from { opacity:0; transform:translateY(30px) } to { opacity:1; transform:translateY(0) } }
+        @keyframes lbZoom { from { opacity:0; transform:scale(0.92) } to { opacity:1; transform:scale(1) } }
+      `}</style>
     </div>
   )
 }

@@ -98,7 +98,7 @@ export default function InstructorsPage() {
       {/* Hero */}
       <div className="bg-surface border-b border-white/5 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">World-Class Instructors</p>
+          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Global Ambassadors</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
             Learn from the <span className="gradient-text-orange">culture Icons</span>
           </h1>

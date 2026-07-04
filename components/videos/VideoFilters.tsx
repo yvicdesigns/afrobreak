@@ -2,10 +2,9 @@
 
 import { SlidersHorizontal } from 'lucide-react'
 import clsx from 'clsx'
-import type { VideoCategory, VideoLevel } from '@/lib/types'
+import type { VideoCategory } from '@/lib/types'
 
 const categories: (VideoCategory | 'All')[] = ['All', 'Interview', 'Battle', 'Workshop', 'Documentary', 'Tutorial', 'Podcast', 'Talks', 'After Movie', 'Contemporary']
-const levels: (VideoLevel | 'All')[] = ['All', 'Beginner', 'Intermediate', 'Advanced']
 
 const categoryColors: Record<string, string> = {
   All: 'bg-white/10 text-white border-white/20 hover:border-white/40',
@@ -35,18 +34,14 @@ const categoryActiveColors: Record<string, string> = {
 
 interface VideoFiltersProps {
   selectedCategory: VideoCategory | 'All'
-  selectedLevel: VideoLevel | 'All'
   onCategoryChange: (cat: VideoCategory | 'All') => void
-  onLevelChange: (level: VideoLevel | 'All') => void
   showPremiumOnly?: boolean
   onPremiumToggle?: (val: boolean) => void
 }
 
 export default function VideoFilters({
   selectedCategory,
-  selectedLevel,
   onCategoryChange,
-  onLevelChange,
   showPremiumOnly = false,
   onPremiumToggle,
 }: VideoFiltersProps) {
@@ -70,41 +65,18 @@ export default function VideoFilters({
             {cat}
           </button>
         ))}
-      </div>
-
-      {/* Level + premium filter row */}
-      <div className="flex items-center gap-4 flex-wrap">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-text-secondary font-medium">Level:</span>
-          <div className="flex items-center gap-1">
-            {levels.map(level => (
-              <button
-                key={level}
-                onClick={() => onLevelChange(level)}
-                className={clsx(
-                  'px-3 py-1 rounded-lg text-xs font-semibold border transition-all duration-200',
-                  selectedLevel === level
-                    ? 'bg-primary-500 text-white border-primary-500'
-                    : 'bg-surface-2 text-text-secondary border-white/10 hover:border-white/30 hover:text-white'
-                )}
-              >
-                {level}
-              </button>
-            ))}
-          </div>
-        </div>
 
         {onPremiumToggle && (
           <button
             onClick={() => onPremiumToggle(!showPremiumOnly)}
             className={clsx(
-              'flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-semibold border transition-all duration-200',
+              'flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200',
               showPremiumOnly
                 ? 'bg-gold-DEFAULT/20 text-gold-DEFAULT border-gold-DEFAULT/40'
-                : 'bg-surface-2 text-text-secondary border-white/10 hover:border-white/30 hover:text-white'
+                : 'bg-white/5 text-text-secondary border-white/10 hover:border-white/30 hover:text-white'
             )}
           >
-            Premium Only
+            ★ Premium Only
           </button>
         )}
       </div>

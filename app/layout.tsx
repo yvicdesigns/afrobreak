@@ -3,6 +3,7 @@ import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { AuthProvider } from '@/lib/store'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import ThemeProvider from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
   title: {
@@ -60,14 +61,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        {/* Prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('afrobreak-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}` }} />
+      </head>
       <body className="bg-background text-white antialiased min-h-screen flex flex-col">
-        <AuthProvider>
-          <ConditionalLayout>
-            {children}
-          </ConditionalLayout>
-          <WhatsAppButton />
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <ConditionalLayout>
+              {children}
+            </ConditionalLayout>
+            <WhatsAppButton />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

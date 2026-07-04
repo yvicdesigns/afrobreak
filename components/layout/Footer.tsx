@@ -1,6 +1,10 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Play, Instagram, Twitter, Youtube, Facebook, Mail, ArrowRight } from 'lucide-react'
 import DonateButton from '@/components/ui/DonateButton'
+import { getSetting } from '@/lib/db'
 
 const platformLinks = [
   { label: 'Gallery', href: '/photos' },
@@ -10,10 +14,9 @@ const platformLinks = [
 ]
 
 const eventsLinks = [
+  { label: 'Upcoming', href: '/events?tab=upcoming' },
+  { label: 'International', href: '/events?tab=international' },
   { label: 'History', href: '/events?tab=history' },
-  { label: 'Projects', href: '/events?tab=projects' },
-  { label: 'Qualifiers', href: '/events?tab=qualifiers' },
-  { label: 'Africa Final', href: '/events?tab=africa-final' },
 ]
 
 const companyLinks = [
@@ -26,18 +29,39 @@ const companyLinks = [
 const moreLinks = [
   { label: 'Awards', href: '/awards' },
   { label: 'Shop', href: '/store' },
-  { label: 'Instructors', href: '/instructors' },
+  { label: 'Ambassadors', href: '/instructors' },
   { label: 'Careers', href: '/careers' },
 ]
 
-const socialLinks = [
-  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: Youtube, href: 'https://youtube.com', label: 'YouTube' },
-  { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-]
+type SocialLinks = { instagram: string; youtube: string; twitter: string; facebook: string }
+
+const defaultSocial: SocialLinks = {
+  instagram: '',
+  youtube: '',
+  twitter: '',
+  facebook: '',
+}
 
 export default function Footer() {
+  const [logoUrl, setLogoUrl] = useState('')
+  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number } | null>(null)
+  const [social, setSocial] = useState<SocialLinks>(defaultSocial)
+
+  useEffect(() => {
+    getSetting('site_logo').then(v => { if (v) setLogoUrl(v) })
+    getSetting('logo_bg').then(v => { if (v) try { setLogoBg(JSON.parse(v)) } catch {} })
+    getSetting('social_links').then(v => {
+      if (v) try { setSocial(JSON.parse(v)) } catch {}
+    })
+  }, [])
+
+  const socialLinks = [
+    { icon: Instagram, href: social.instagram, label: 'Instagram', show: !!social.instagram },
+    { icon: Youtube, href: social.youtube, label: 'YouTube', show: !!social.youtube },
+    { icon: Twitter, href: social.twitter, label: 'Twitter', show: !!social.twitter },
+    { icon: Facebook, href: social.facebook, label: 'Facebook', show: !!social.facebook },
+  ].filter(s => s.show)
+
   return (
     <footer className="bg-surface border-t border-white/5 mt-auto">
       {/* Main Footer */}
@@ -46,13 +70,33 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-glow-orange">
-                <Play size={16} className="text-white fill-white ml-0.5" />
-              </div>
-              <span className="text-2xl font-black tracking-tight">
-                <span className="text-primary-500">AFRO</span>
-                <span className="text-white">BREAK</span>
-              </span>
+              {logoUrl ? (
+                <div
+                  className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${!logoBg ? '' : logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+                  style={logoBg ? {
+                    width: 40 + logoBg.padding,
+                    height: 40 + logoBg.padding,
+                    backgroundColor: (() => {
+                      const r = parseInt(logoBg.color.slice(1,3), 16)
+                      const g = parseInt(logoBg.color.slice(3,5), 16)
+                      const b = parseInt(logoBg.color.slice(5,7), 16)
+                      return `rgba(${r},${g},${b},${logoBg.opacity/100})`
+                    })(),
+                  } : {}}
+                >
+                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: 40, height: 40 }} />
+                </div>
+              ) : (
+                <>
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-glow-orange">
+                    <Play size={16} className="text-white fill-white ml-0.5" />
+                  </div>
+                  <span className="text-2xl font-black tracking-tight">
+                    <span className="text-primary-500">AFRO</span>
+                    <span className="text-white">BREAK</span>
+                  </span>
+                </>
+              )}
             </Link>
 
             <p className="text-text-secondary text-sm leading-relaxed max-w-xs">
@@ -60,20 +104,22 @@ export default function Footer() {
             </p>
 
             {/* Social */}
-            <div className="flex items-center gap-3">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-text-secondary hover:text-primary-500 hover:bg-primary-500/10 hover:border-primary-500/30 transition-all duration-200"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex items-center gap-3">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-text-secondary hover:text-primary-500 hover:bg-primary-500/10 hover:border-primary-500/30 transition-all duration-200"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
+              </div>
+            )}
 
             {/* Donate */}
             <div>

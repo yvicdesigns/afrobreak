@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
   Settings, Menu, X, Play, ChevronRight, Bell, Music, ShoppingBag, Image,
-  UserSquare, Newspaper, Briefcase
+  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake
 } from 'lucide-react'
 import clsx from 'clsx'
 import { supabase } from '@/lib/supabase'
@@ -15,11 +15,15 @@ const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
   { href: '/admin/videos', label: 'Videos', icon: Video },
   { href: '/admin/events', label: 'Events', icon: Calendar },
+  { href: '/admin/registrations', label: 'Registrations', icon: ClipboardList },
   { href: '/admin/blog', label: 'Blog Posts', icon: BookOpen },
   { href: '/admin/music', label: 'Music', icon: Music },
   { href: '/admin/store', label: 'Store', icon: ShoppingBag },
   { href: '/admin/photos', label: 'Photos', icon: Image },
   { href: '/admin/team', label: 'Team', icon: UserSquare },
+  { href: '/admin/about', label: 'About Page', icon: Info },
+  { href: '/admin/awards', label: 'Awards', icon: Trophy },
+  { href: '/admin/partners', label: 'Partners', icon: Handshake },
   { href: '/admin/press', label: 'Press', icon: Newspaper },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/users', label: 'Users', icon: Users },

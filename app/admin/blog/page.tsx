@@ -16,7 +16,7 @@ const emptyForm = {
   excerpt: '',
   content: '',
   author: '',
-  authorAvatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80',
+  authorAvatar: '',
   image: '',
   category: 'Dance Tips' as BlogCategory,
   tags: '',
@@ -222,6 +222,9 @@ export default function AdminBlogPage() {
                   <input type="text" value={form.author} onChange={e => setForm(f => ({...f, author: e.target.value}))}
                     placeholder="Author name" className={`input-base ${errors.author ? 'border-red-500/60' : ''}`} />
                   {errors.author && <p className="text-red-400 text-xs mt-1">{errors.author}</p>}
+                </div>
+                <div>
+                  <ImageUpload label="Author Photo" value={form.authorAvatar} onChange={v => setForm(f => ({...f, authorAvatar: v}))} folder="avatars" />
                 </div>
                 <div>
                   <ImageUpload label="Cover Image *" value={form.image} onChange={v => setForm(f => ({...f, image: v}))} folder="blog" />

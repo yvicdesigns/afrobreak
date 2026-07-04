@@ -323,6 +323,25 @@ export async function deleteTeamMember(id: string) {
   return !error
 }
 
+// ── CHAMPIONS ─────────────────────────────────────────────────────
+export async function getChampions() {
+  const { data } = await supabase.from('champions').select('*').order('year', { ascending: false })
+  return data || []
+}
+export async function createChampion(c: Record<string, unknown>) {
+  const { data, error } = await supabase.from('champions').insert({ id: `ch${Date.now()}`, ...c }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateChampion(id: string, c: Record<string, unknown>) {
+  const { error } = await supabase.from('champions').update(c).eq('id', id)
+  return !error
+}
+export async function deleteChampion(id: string) {
+  const { error } = await supabase.from('champions').delete().eq('id', id)
+  return !error
+}
+
 // ── PRESS COVERAGE ────────────────────────────────────────────────
 export async function getPresscoverage() {
   const { data } = await supabase.from('press_coverage').select('*').order('date', { ascending: false })
@@ -381,4 +400,23 @@ export async function toggleWatchLater(userId: string, videoId: string, currentW
     : [...currentWatchLater, videoId]
   await supabase.from('profiles').update({ watch_later: updated }).eq('id', userId)
   return updated
+}
+
+// ── PARTNERS ──────────────────────────────────────────────────────
+export async function getPartners() {
+  const { data } = await supabase.from('partners').select('*').order('display_order', { ascending: true })
+  return data || []
+}
+export async function createPartner(p: Record<string, unknown>) {
+  const { data, error } = await supabase.from('partners').insert({ id: `pt${Date.now()}`, ...p }).select().single()
+  if (error) return null
+  return data
+}
+export async function updatePartner(id: string, p: Record<string, unknown>) {
+  const { error } = await supabase.from('partners').update(p).eq('id', id)
+  return !error
+}
+export async function deletePartner(id: string) {
+  const { error } = await supabase.from('partners').delete().eq('id', id)
+  return !error
 }

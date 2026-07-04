@@ -23,6 +23,8 @@ const emptyForm = {
   instructor: '',
   capacity: 30,
   tags: '',
+  is_international: false,
+  country: '',
 }
 
 type FormState = typeof emptyForm
@@ -69,6 +71,7 @@ export default function AdminEventsPage() {
         time: form.time, location: form.location, city: form.city,
         type: form.type, price: form.price, image: form.image,
         instructor: form.instructor, capacity: form.capacity, tags,
+        is_international: form.is_international, country: form.country,
       })
       if (ok) {
         setEventList(prev => prev.map(ev =>
@@ -84,6 +87,7 @@ export default function AdminEventsPage() {
         time: form.time, location: form.location, city: form.city,
         type: form.type, price: form.price, image: form.image,
         instructor: form.instructor, capacity: form.capacity, tags,
+        is_international: form.is_international, country: form.country,
       })
       if (created) {
         setEventList(prev => [created, ...prev])
@@ -105,6 +109,8 @@ export default function AdminEventsPage() {
       type: event.type, price: event.price, image: event.image,
       instructor: event.instructor, capacity: event.capacity,
       tags: event.tags.join(', '),
+      is_international: event.is_international ?? false,
+      country: event.country ?? '',
     })
     setEditId(event.id)
     setShowForm(true)
@@ -211,6 +217,27 @@ export default function AdminEventsPage() {
                 <label className="block text-sm font-medium text-white mb-1.5">Tags (comma-separated)</label>
                 <input type="text" value={form.tags} onChange={e => setForm(f => ({...f, tags: e.target.value}))}
                   placeholder="workshop, paris, afro" className="input-base" />
+              </div>
+              <div className="md:col-span-2 flex items-start gap-6 p-4 bg-background rounded-xl border border-white/5">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.is_international}
+                    onChange={e => setForm(f => ({...f, is_international: e.target.checked}))}
+                    className="w-4 h-4 accent-primary-500"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-white">International event</p>
+                    <p className="text-xs text-text-muted">Event takes place outside Ghana — appears in the International tab</p>
+                  </div>
+                </label>
+                {form.is_international && (
+                  <div className="flex-1">
+                    <label className="block text-xs text-text-muted mb-1">Country</label>
+                    <input type="text" value={form.country} onChange={e => setForm(f => ({...f, country: e.target.value}))}
+                      placeholder="e.g. Nigeria, Uganda, France..." className="input-base text-sm py-1.5" />
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">

@@ -1,9 +1,24 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Check, Globe, Bell, Shield, Palette, Loader2 } from 'lucide-react'
+import { Check, Globe, Bell, Shield, Palette, Loader2, Image, Share2, Save } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import ImageUpload from '@/components/ui/ImageUpload'
 import { getSetting, saveSetting } from '@/lib/db'
+
+type SocialLinks = {
+  instagram: string
+  youtube: string
+  twitter: string
+  facebook: string
+}
+
+const defaultSocial: SocialLinks = {
+  instagram: '',
+  youtube: '',
+  twitter: '',
+  facebook: '',
+}
 
 export default function AdminSettingsPage() {
   const [saved, setSaved] = useState(false)
@@ -21,9 +36,32 @@ export default function AdminSettingsPage() {
     currency: 'GHS',
   })
 
+  // Logo
+  const [logoUrl, setLogoUrl] = useState('')
+  const [logoSaving, setLogoSaving] = useState(false)
+  const [logoSaved, setLogoSaved] = useState(false)
+
+  // Logo background circle
+  const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 100, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8 })
+  const [logoBgSaving, setLogoBgSaving] = useState(false)
+  const [logoBgSaved, setLogoBgSaved] = useState(false)
+
+  // Social links
+  const [social, setSocial] = useState<SocialLinks>(defaultSocial)
+  const [socialSaving, setSocialSaving] = useState(false)
+  const [socialSaved, setSocialSaved] = useState(false)
+
   useEffect(() => {
-    getSetting('maintenance_mode').then(val => {
-      if (val !== null) setForm(f => ({ ...f, maintenanceMode: val === 'true' }))
+    Promise.all([
+      getSetting('maintenance_mode'),
+      getSetting('site_logo'),
+      getSetting('logo_bg'),
+      getSetting('social_links'),
+    ]).then(([maintenance, logo, logoBgRaw, socialRaw]) => {
+      if (maintenance !== null) setForm(f => ({ ...f, maintenanceMode: maintenance === 'true' }))
+      if (logo) setLogoUrl(logo)
+      if (logoBgRaw) try { setLogoBg(JSON.parse(logoBgRaw)) } catch {}
+      if (socialRaw) try { setSocial(JSON.parse(socialRaw)) } catch {}
       setLoading(false)
     })
   }, [])
@@ -34,6 +72,37 @@ export default function AdminSettingsPage() {
     setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
+  }
+
+  const saveLogo = async () => {
+    setLogoSaving(true)
+    await saveSetting('site_logo', logoUrl)
+    setLogoSaving(false)
+    setLogoSaved(true)
+    setTimeout(() => setLogoSaved(false), 3000)
+  }
+
+  const saveLogoBg = async () => {
+    setLogoBgSaving(true)
+    await saveSetting('logo_bg', JSON.stringify(logoBg))
+    setLogoBgSaving(false)
+    setLogoBgSaved(true)
+    setTimeout(() => setLogoBgSaved(false), 3000)
+  }
+
+  function hexToRgba(hex: string, opacity: number) {
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    return `rgba(${r},${g},${b},${opacity / 100})`
+  }
+
+  const saveSocial = async () => {
+    setSocialSaving(true)
+    await saveSetting('social_links', JSON.stringify(social))
+    setSocialSaving(false)
+    setSocialSaved(true)
+    setTimeout(() => setSocialSaved(false), 3000)
   }
 
   if (loading) return <div className="p-6 text-text-secondary">Loading settings...</div>
@@ -50,6 +119,204 @@ export default function AdminSettingsPage() {
           <Check size={16} /> Settings saved!
         </div>
       )}
+
+      {/* ── LOGO ── */}
+      <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
+        <div className="flex items-center gap-2 mb-2">
+          <Image size={16} className="text-primary-500" />
+          <h2 className="font-bold text-white">Logo & Branding</h2>
+        </div>
+        <p className="text-xs text-text-muted -mt-2">Upload your logo — it will appear in the navbar and footer. Transparent PNG or SVG recommended.</p>
+        <ImageUpload label="Site Logo" value={logoUrl} onChange={setLogoUrl} folder="branding" />
+        {logoUrl && (
+          <div className="p-4 bg-background rounded-xl border border-white/5 flex items-center gap-4">
+            <p className="text-xs text-text-muted">Preview:</p>
+            <img src={logoUrl} alt="Logo preview" className="h-10 w-auto object-contain" />
+          </div>
+        )}
+        <button
+          onClick={saveLogo}
+          disabled={logoSaving}
+          className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-60 transition-colors text-sm font-semibold"
+        >
+          {logoSaving ? <Loader2 size={14} className="animate-spin" /> : logoSaved ? <Check size={14} /> : <Save size={14} />}
+          {logoSaving ? 'Saving…' : logoSaved ? 'Saved!' : 'Save Logo'}
+        </button>
+        {logoSaved && <p className="text-xs text-emerald-400">Logo updated on the site.</p>}
+      </div>
+
+      {/* ── LOGO BG CIRCLE ── */}
+      <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-4 h-4 rounded-full bg-primary-500" />
+          <h2 className="font-bold text-white">Logo Background Circle</h2>
+        </div>
+        <p className="text-xs text-text-muted">A circle (or shape) displayed behind the logo in the navbar and footer.</p>
+
+        {/* Live preview */}
+        <div className="flex items-center gap-6 p-5 bg-background rounded-xl border border-white/5">
+          <p className="text-xs text-text-muted flex-shrink-0">Preview:</p>
+          <div
+            className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+            style={{ width: 40 + logoBg.padding, height: 40 + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
+          >
+            {logoUrl
+              ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: 40 - logoBg.padding / 2, height: 40 - logoBg.padding / 2 }} />
+              : <span className="text-xs font-black text-white/60">ABA</span>
+            }
+          </div>
+          <p className="text-xs text-text-muted">This is how it looks in the navbar</p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Color */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">Background Color</label>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                value={logoBg.color}
+                onChange={e => setLogoBg(b => ({ ...b, color: e.target.value }))}
+                className="w-12 h-10 rounded-lg border border-white/10 bg-surface cursor-pointer p-1"
+              />
+              <input
+                type="text"
+                value={logoBg.color}
+                onChange={e => setLogoBg(b => ({ ...b, color: e.target.value }))}
+                placeholder="#ffffff"
+                className="input-base flex-1 font-mono text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Opacity */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">Opacity — <span className="text-primary-400">{logoBg.opacity}%</span></label>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={logoBg.opacity}
+              onChange={e => setLogoBg(b => ({ ...b, opacity: Number(e.target.value) }))}
+              className="w-full accent-primary-500"
+            />
+            <div className="flex justify-between text-[10px] text-text-muted mt-1">
+              <span>Transparent</span><span>Opaque</span>
+            </div>
+          </div>
+
+          {/* Shape */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">Shape</label>
+            <div className="flex gap-2">
+              {(['circle', 'rounded', 'square'] as const).map(s => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setLogoBg(b => ({ ...b, shape: s }))}
+                  className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all capitalize ${logoBg.shape === s ? 'bg-primary-500 text-white border-primary-500' : 'bg-surface-2 text-text-secondary border-white/10 hover:border-white/30'}`}
+                >
+                  {s === 'circle' ? '⬤ Circle' : s === 'rounded' ? '▣ Rounded' : '■ Square'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Padding */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">Padding — <span className="text-primary-400">{logoBg.padding}px</span></label>
+            <input
+              type="range"
+              min={0}
+              max={24}
+              value={logoBg.padding}
+              onChange={e => setLogoBg(b => ({ ...b, padding: Number(e.target.value) }))}
+              className="w-full accent-primary-500"
+            />
+            <div className="flex justify-between text-[10px] text-text-muted mt-1">
+              <span>Tight</span><span>Spacious</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={saveLogoBg}
+          disabled={logoBgSaving}
+          className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-60 transition-colors text-sm font-semibold"
+        >
+          {logoBgSaving ? <Loader2 size={14} className="animate-spin" /> : logoBgSaved ? <Check size={14} /> : <Save size={14} />}
+          {logoBgSaving ? 'Saving…' : logoBgSaved ? 'Saved!' : 'Save Circle Style'}
+        </button>
+        {logoBgSaved && <p className="text-xs text-emerald-400">Circle style updated in the navbar and footer.</p>}
+      </div>
+
+      {/* ── SOCIAL MEDIA ── */}
+      <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
+        <div className="flex items-center gap-2 mb-2">
+          <Share2 size={16} className="text-secondary-400" />
+          <h2 className="font-bold text-white">Social Media Links</h2>
+        </div>
+        <p className="text-xs text-text-muted -mt-2">These links appear in the footer. Paste the full URL of your page.</p>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-white mb-1.5 flex items-center gap-2">
+              <span className="text-pink-400">Instagram</span>
+            </label>
+            <input
+              type="url"
+              value={social.instagram}
+              onChange={e => setSocial(s => ({ ...s, instagram: e.target.value }))}
+              placeholder="https://instagram.com/afrobreakconcepts"
+              className="input-base"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-white mb-1.5">
+              <span className="text-red-400">YouTube</span>
+            </label>
+            <input
+              type="url"
+              value={social.youtube}
+              onChange={e => setSocial(s => ({ ...s, youtube: e.target.value }))}
+              placeholder="https://youtube.com/@afrobreak"
+              className="input-base"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-white mb-1.5">
+              <span className="text-sky-400">Twitter / X</span>
+            </label>
+            <input
+              type="url"
+              value={social.twitter}
+              onChange={e => setSocial(s => ({ ...s, twitter: e.target.value }))}
+              placeholder="https://twitter.com/afrobreak"
+              className="input-base"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-white mb-1.5">
+              <span className="text-blue-400">Facebook</span>
+            </label>
+            <input
+              type="url"
+              value={social.facebook}
+              onChange={e => setSocial(s => ({ ...s, facebook: e.target.value }))}
+              placeholder="https://facebook.com/afrobreakconcepts"
+              className="input-base"
+            />
+          </div>
+        </div>
+        <button
+          onClick={saveSocial}
+          disabled={socialSaving}
+          className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-60 transition-colors text-sm font-semibold"
+        >
+          {socialSaving ? <Loader2 size={14} className="animate-spin" /> : socialSaved ? <Check size={14} /> : <Save size={14} />}
+          {socialSaving ? 'Saving…' : socialSaved ? 'Saved!' : 'Save Social Links'}
+        </button>
+        {socialSaved && <p className="text-xs text-emerald-400">Social links updated in the footer.</p>}
+      </div>
 
       {/* General */}
       <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake, Quote, Star } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { getPartners } from '@/lib/db'
 
 function PartnerFeedbackForm() {
   const [fb, setFb] = useState({ name: '', org: '', rating: 0, message: '' })
@@ -98,19 +99,20 @@ const partnerTypes = [
   },
 ]
 
-const currentPartners = [
-  { name: 'KGL Foundation', type: 'Foundation', logo: '🌍' },
-  { name: 'France Ghana', type: 'Partnership', logo: '🤝' },
-  { name: 'Tropisme', type: 'Arts & Culture', logo: '🎭' },
-  { name: 'Elavanyo School', type: 'Education', logo: '🏫' },
-  { name: 'Fitrip Ghana', type: 'Sports', logo: '🏃' },
-  { name: 'The Ruggeds', type: 'Netherlands', logo: '💪' },
-  { name: 'Street Off', type: 'Events', logo: '🎪' },
-  { name: 'Red Bull', type: 'Beverage', logo: '🔴' },
-  { name: 'Institut Français', type: 'Cultural', logo: '🇫🇷' },
-  { name: 'European Union', type: 'Institution', logo: '🇪🇺' },
-  { name: 'Ministry of Europe', type: 'Government', logo: '🏛️' },
+const staticPartners = [
+  { id: 's1', name: 'KGL Foundation', type: 'Foundation', logo_url: '', website: '' },
+  { id: 's2', name: 'France Ghana', type: 'Partnership', logo_url: '', website: '' },
+  { id: 's3', name: 'Tropisme', type: 'Arts & Culture', logo_url: '', website: '' },
+  { id: 's4', name: 'Elavanyo School', type: 'Education', logo_url: '', website: '' },
+  { id: 's5', name: 'Fitrip Ghana', type: 'Sports', logo_url: '', website: '' },
+  { id: 's6', name: 'The Ruggeds', type: 'Netherlands', logo_url: '', website: '' },
+  { id: 's7', name: 'Street Off', type: 'Events', logo_url: '', website: '' },
+  { id: 's8', name: 'Red Bull', type: 'Beverage', logo_url: '', website: '' },
+  { id: 's9', name: 'Institut Français', type: 'Cultural', logo_url: '', website: '' },
+  { id: 's10', name: 'European Union', type: 'Institution', logo_url: '', website: '' },
+  { id: 's11', name: 'Ministry of Europe', type: 'Government', logo_url: '', website: '' },
 ]
+type Partner = typeof staticPartners[0]
 
 const testimonials = [
   {
@@ -141,9 +143,14 @@ const testimonials = [
 ]
 
 export default function PartnersPage() {
+  const [partners, setPartners] = useState<Partner[]>(staticPartners)
   const [selected, setSelected] = useState<typeof partnerTypes[0] | null>(null)
   const [form, setForm] = useState({ name: '', email: '', org: '', message: '' })
   const [sent, setSent] = useState(false)
+
+  useEffect(() => {
+    getPartners().then(data => { if (data && data.length > 0) setPartners(data as Partner[]) })
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -203,12 +210,18 @@ export default function PartnersPage() {
         {/* Current Partners */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-white mb-8">Our Partners</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {currentPartners.map(partner => (
-              <div key={partner.name} className="bg-surface border border-white/5 rounded-2xl p-4 text-center hover:border-white/15 transition-all">
-                <span className="text-3xl block mb-2">{partner.logo}</span>
-                <p className="text-white text-xs font-semibold">{partner.name}</p>
-                <p className="text-text-muted text-[10px]">{partner.type}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            {partners.map(partner => (
+              <div key={partner.id} className={`bg-surface border border-white/5 rounded-2xl p-4 text-center hover:border-primary-500/20 transition-all ${partner.website ? 'cursor-pointer' : ''}`}
+                onClick={() => partner.website ? window.open(partner.website, '_blank') : null}>
+                <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                  {partner.logo_url
+                    ? <img src={partner.logo_url} alt={partner.name} className="w-full h-full object-contain p-1" />
+                    : <span className="text-2xl font-black text-text-muted">{partner.name.charAt(0)}</span>
+                  }
+                </div>
+                <p className="text-white text-xs font-semibold leading-tight">{partner.name}</p>
+                {partner.type && <p className="text-text-muted text-[10px] mt-0.5">{partner.type}</p>}
               </div>
             ))}
           </div>
