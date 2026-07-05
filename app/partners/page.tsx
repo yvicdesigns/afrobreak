@@ -207,23 +207,43 @@ export default function PartnersPage() {
           </div>
         </div>
 
-        {/* Current Partners */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-8">Our Partners</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            {partners.map(partner => (
-              <div key={partner.id} className={`bg-surface border border-white/5 rounded-2xl p-4 text-center hover:border-primary-500/20 transition-all ${partner.website ? 'cursor-pointer' : ''}`}
-                onClick={() => partner.website ? window.open(partner.website, '_blank') : null}>
-                <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3 overflow-hidden">
-                  {partner.logo_url
-                    ? <img src={partner.logo_url} alt={partner.name} className="w-full h-full object-contain p-1" />
-                    : <span className="text-2xl font-black text-text-muted">{partner.name.charAt(0)}</span>
-                  }
+        {/* Current Partners — Marquee */}
+        <div>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">Our Partners</h2>
+            <p className="text-text-secondary text-sm">Trusted by organizations across Africa and beyond</p>
+          </div>
+
+          <div className="relative overflow-hidden bg-white rounded-2xl py-8">
+            {/* Fade edges */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: 'linear-gradient(to right, white, transparent)' }} />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: 'linear-gradient(to left, white, transparent)' }} />
+
+            {/* Scrolling track — duplicated for seamless loop */}
+            <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
+              {[...partners, ...partners].map((partner, i) => (
+                <div
+                  key={i}
+                  className={`flex-shrink-0 flex flex-col items-center justify-center gap-2 px-10 ${partner.website ? 'cursor-pointer group' : ''}`}
+                  onClick={() => partner.website ? window.open(partner.website, '_blank') : undefined}
+                >
+                  <div className="h-14 flex items-center justify-center">
+                    {partner.logo_url ? (
+                      <img
+                        src={partner.logo_url}
+                        alt={partner.name}
+                        className="max-h-14 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        style={{ maxWidth: '120px' }}
+                      />
+                    ) : (
+                      <span className="text-gray-500 font-bold text-sm text-center leading-tight whitespace-nowrap">
+                        {partner.name}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <p className="text-white text-xs font-semibold leading-tight">{partner.name}</p>
-                {partner.type && <p className="text-text-muted text-[10px] mt-0.5">{partner.type}</p>}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

@@ -318,6 +318,18 @@ body {
   100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
 }
 
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* ================================================================
    LIGHT THEME
    ================================================================ */
