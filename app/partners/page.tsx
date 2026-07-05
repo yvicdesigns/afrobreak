@@ -219,9 +219,9 @@ export default function PartnersPage() {
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: 'linear-gradient(to right, white, transparent)' }} />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: 'linear-gradient(to left, white, transparent)' }} />
 
-            {/* Scrolling track — duplicated for seamless loop */}
+            {/* Scrolling track — 6 copies for seamless loop regardless of logo count */}
             <div className="animate-marquee flex items-center" style={{ width: 'max-content' }}>
-              {[...partners, ...partners].map((partner, i) => (
+              {[...partners, ...partners, ...partners, ...partners, ...partners, ...partners].map((partner, i) => (
                 <div
                   key={i}
                   className={`flex-shrink-0 flex flex-col items-center justify-center gap-2 px-10 ${partner.website ? 'cursor-pointer group' : ''}`}
