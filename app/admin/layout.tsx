@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import clsx from 'clsx'
 import { supabase } from '@/lib/supabase'
+import { getSetting } from '@/lib/db'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
@@ -36,18 +37,24 @@ const notifications = [
   { id: 3, text: 'Video upload complete', time: '3 hours ago', unread: false },
 ]
 
+type LogoBg = { color: string; opacity: number; shape: string; padding: number; size: number }
+
 function Sidebar({
-  sidebarOpen, mobile = false, pathname, setMobileSidebarOpen
+  sidebarOpen, mobile = false, pathname, setMobileSidebarOpen, logoUrl, logoBg
 }: {
   sidebarOpen: boolean
   mobile?: boolean
   pathname: string
   setMobileSidebarOpen: (v: boolean) => void
+  logoUrl: string
+  logoBg: LogoBg | null
 }) {
   const isActive = (item: typeof navItems[0]) => {
     if (item.exact) return pathname === item.href
     return pathname.startsWith(item.href)
   }
+
+  const logoSize = logoBg?.size ?? 32
 
   return (
     <div className={clsx(
@@ -59,9 +66,27 @@ function Sidebar({
         'flex items-center border-b border-white/5 h-16 flex-shrink-0',
         (sidebarOpen || mobile) ? 'px-5 gap-3' : 'px-3 justify-center'
       )}>
-        <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-glow-orange">
-          <Play size={12} className="text-white fill-white ml-0.5" />
-        </div>
+        {logoUrl ? (
+          <div
+            className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${!logoBg || logoBg.opacity === 0 ? '' : logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+            style={logoBg && logoBg.opacity > 0 ? {
+              width: logoSize + logoBg.padding,
+              height: logoSize + logoBg.padding,
+              backgroundColor: (() => {
+                const r = parseInt(logoBg.color.slice(1,3), 16)
+                const g = parseInt(logoBg.color.slice(3,5), 16)
+                const b = parseInt(logoBg.color.slice(5,7), 16)
+                return `rgba(${r},${g},${b},${logoBg.opacity/100})`
+              })(),
+            } : { width: logoSize, height: logoSize }}
+          >
+            <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: logoSize, height: logoSize }} />
+          </div>
+        ) : (
+          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-glow-orange">
+            <Play size={12} className="text-white fill-white ml-0.5" />
+          </div>
+        )}
         {(sidebarOpen || mobile) && (
           <div>
             <span className="text-sm font-black">
@@ -127,6 +152,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [notifOpen, setNotifOpen] = useState(false)
   const [unreadCount, setUnreadCount] = useState(2)
   const [checking, setChecking] = useState(true)
+  const [logoUrl, setLogoUrl] = useState('')
+  const [logoBg, setLogoBg] = useState<LogoBg | null>(null)
+
+  useEffect(() => {
+    Promise.all([getSetting('site_logo'), getSetting('logo_bg')]).then(([logo, bg]) => {
+      if (logo) setLogoUrl(logo)
+      if (bg) try { setLogoBg(JSON.parse(bg)) } catch {}
+    })
+  }, [])
 
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: { user } }) => {
@@ -159,7 +193,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen bg-background flex">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex flex-col flex-shrink-0 fixed left-0 top-0 h-screen z-30">
-        <Sidebar sidebarOpen={sidebarOpen} pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} />
+        <Sidebar sidebarOpen={sidebarOpen} pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} />
       </div>
 
       {/* Mobile sidebar */}
@@ -167,7 +201,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileSidebarOpen(false)} />
           <div className="relative flex-shrink-0 animate-slide-down">
-            <Sidebar sidebarOpen={true} mobile pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} />
+            <Sidebar sidebarOpen={true} mobile pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} />
           </div>
         </div>
       )}
