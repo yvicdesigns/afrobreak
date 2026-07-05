@@ -3,6 +3,7 @@ import Hero from '@/components/home/Hero'
 import FeaturedVideos from '@/components/home/FeaturedVideos'
 import UpcomingEvents from '@/components/home/UpcomingEvents'
 import AboutSection from '@/components/home/AboutSection'
+import PartnersMarquee from '@/components/home/PartnersMarquee'
 import LatestBlog from '@/components/home/LatestBlog'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function HomePage() {
       <FeaturedVideos />
       <UpcomingEvents />
       <AboutSection />
+      <PartnersMarquee />
       <LatestBlog />
     </>
   )
