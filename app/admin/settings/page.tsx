@@ -42,7 +42,7 @@ export default function AdminSettingsPage() {
   const [logoSaved, setLogoSaved] = useState(false)
 
   // Logo background circle
-  const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 100, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8, size: 40 })
+  const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 0, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8, size: 40 })
   const [logoBgSaving, setLogoBgSaving] = useState(false)
   const [logoBgSaved, setLogoBgSaved] = useState(false)
 
@@ -147,31 +147,61 @@ export default function AdminSettingsPage() {
 
       {/* ── LOGO BG CIRCLE ── */}
       <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-4 h-4 rounded-full bg-primary-500" />
-          <h2 className="font-bold text-white">Logo Background Circle</h2>
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-primary-500" />
+            <h2 className="font-bold text-white">Logo Background Circle</h2>
+          </div>
+          <button
+            type="button"
+            onClick={() => setLogoBg(b => ({ ...b, opacity: 0 }))}
+            className="text-xs px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-lg transition-colors"
+          >
+            Supprimer le fond
+          </button>
         </div>
-        <p className="text-xs text-text-muted">A circle (or shape) displayed behind the logo in the navbar and footer.</p>
+        <p className="text-xs text-text-muted">Une forme colorée derrière le logo dans la navbar et le footer. Mets Opacity à 0 pour désactiver.</p>
 
         {/* Live preview */}
-        <div className="flex items-center gap-6 p-5 bg-background rounded-xl border border-white/5">
-          <p className="text-xs text-text-muted flex-shrink-0">Preview:</p>
-          <div className="flex items-center gap-4">
-            {/* Navbar size */}
-            <div className="flex flex-col items-center gap-1">
-              <div
-                className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
-                style={{ width: logoBg.size + logoBg.padding, height: logoBg.size + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
-              >
-                {logoUrl
-                  ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: logoBg.size, height: logoBg.size }} />
-                  : <span className="text-xs font-black text-white/60">ABA</span>
-                }
+        <div className="p-5 bg-background rounded-xl border border-white/5">
+          <p className="text-xs text-text-muted mb-4">Aperçu — fond sombre (gauche) et fond clair (droite) :</p>
+          <div className="flex items-center gap-8">
+            {/* Dark bg preview */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-28 h-16 bg-[#0f0f0f] rounded-xl flex items-center justify-center">
+                <div
+                  className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+                  style={{ width: logoBg.size + logoBg.padding, height: logoBg.size + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
+                >
+                  {logoUrl
+                    ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: logoBg.size, height: logoBg.size }} />
+                    : <span className="text-xs font-black text-white/40">LOGO</span>
+                  }
+                </div>
               </div>
-              <span className="text-[10px] text-text-muted">Navbar / Footer</span>
+              <span className="text-[10px] text-text-muted">Navbar (dark)</span>
+            </div>
+            {/* Light bg preview */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-28 h-16 bg-white rounded-xl flex items-center justify-center">
+                <div
+                  className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+                  style={{ width: logoBg.size + logoBg.padding, height: logoBg.size + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
+                >
+                  {logoUrl
+                    ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: logoBg.size, height: logoBg.size }} />
+                    : <span className="text-xs font-black text-black/40">LOGO</span>
+                  }
+                </div>
+              </div>
+              <span className="text-[10px] text-text-muted">Footer (light)</span>
+            </div>
+            <div className="text-xs text-text-muted">
+              <p>Taille : <span className="text-white">{logoBg.size}px</span></p>
+              <p>Total : <span className="text-white">{logoBg.size + logoBg.padding}px</span></p>
+              <p>Opacité fond : <span className={logoBg.opacity === 0 ? 'text-emerald-400' : 'text-white'}>{logoBg.opacity === 0 ? 'Désactivé' : `${logoBg.opacity}%`}</span></p>
             </div>
           </div>
-          <p className="text-xs text-text-muted">{logoBg.size}px logo · {logoBg.size + logoBg.padding}px total</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -268,9 +298,9 @@ export default function AdminSettingsPage() {
           className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-60 transition-colors text-sm font-semibold"
         >
           {logoBgSaving ? <Loader2 size={14} className="animate-spin" /> : logoBgSaved ? <Check size={14} /> : <Save size={14} />}
-          {logoBgSaving ? 'Saving…' : logoBgSaved ? 'Saved!' : 'Save Circle Style'}
+          {logoBgSaving ? 'Saving…' : logoBgSaved ? 'Saved!' : 'Sauvegarder'}
         </button>
-        {logoBgSaved && <p className="text-xs text-emerald-400">Circle style updated in the navbar and footer.</p>}
+        {logoBgSaved && <p className="text-xs text-emerald-400">Mis à jour dans la navbar et le footer.</p>}
       </div>
 
       {/* ── SOCIAL MEDIA ── */}
