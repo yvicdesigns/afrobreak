@@ -99,13 +99,15 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileSection, setMobileSection] = useState<string | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
-  const [logoUrl, setLogoUrl] = useState('')
-  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number } | null>(null)
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
+  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number; size: number } | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    getSetting('site_logo').then(v => { if (v) setLogoUrl(v) })
-    getSetting('logo_bg').then(v => { if (v) try { setLogoBg(JSON.parse(v)) } catch {} })
+    Promise.all([getSetting('site_logo'), getSetting('logo_bg')]).then(([logo, bg]) => {
+      setLogoUrl(logo || '')
+      if (bg) try { setLogoBg(JSON.parse(bg)) } catch {}
+    })
   }, [])
 
   useEffect(() => {
@@ -150,12 +152,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-              {logoUrl ? (
+              {logoUrl === null ? (
+                <div style={{ width: 32, height: 32 }} />
+              ) : logoUrl ? (
                 <div
                   className={`flex items-center justify-center overflow-hidden flex-shrink-0 transition-shadow group-hover:shadow-lg ${!logoBg ? '' : logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
                   style={logoBg ? {
-                    width: 32 + logoBg.padding,
-                    height: 32 + logoBg.padding,
+                    width: (logoBg.size ?? 40) + logoBg.padding,
+                    height: (logoBg.size ?? 40) + logoBg.padding,
                     backgroundColor: (() => {
                       const r = parseInt(logoBg.color.slice(1,3), 16)
                       const g = parseInt(logoBg.color.slice(3,5), 16)
@@ -164,7 +168,7 @@ export default function Navbar() {
                     })(),
                   } : {}}
                 >
-                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: 32, height: 32 }} />
+                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: logoBg?.size ?? 40, height: logoBg?.size ?? 40 }} />
                 </div>
               ) : (
                 <>

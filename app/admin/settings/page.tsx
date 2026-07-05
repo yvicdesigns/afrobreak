@@ -42,7 +42,7 @@ export default function AdminSettingsPage() {
   const [logoSaved, setLogoSaved] = useState(false)
 
   // Logo background circle
-  const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 100, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8 })
+  const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 100, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8, size: 40 })
   const [logoBgSaving, setLogoBgSaving] = useState(false)
   const [logoBgSaved, setLogoBgSaved] = useState(false)
 
@@ -60,7 +60,7 @@ export default function AdminSettingsPage() {
     ]).then(([maintenance, logo, logoBgRaw, socialRaw]) => {
       if (maintenance !== null) setForm(f => ({ ...f, maintenanceMode: maintenance === 'true' }))
       if (logo) setLogoUrl(logo)
-      if (logoBgRaw) try { setLogoBg(JSON.parse(logoBgRaw)) } catch {}
+      if (logoBgRaw) try { setLogoBg(prev => ({ ...prev, ...JSON.parse(logoBgRaw) })) } catch {}
       if (socialRaw) try { setSocial(JSON.parse(socialRaw)) } catch {}
       setLoading(false)
     })
@@ -156,19 +156,42 @@ export default function AdminSettingsPage() {
         {/* Live preview */}
         <div className="flex items-center gap-6 p-5 bg-background rounded-xl border border-white/5">
           <p className="text-xs text-text-muted flex-shrink-0">Preview:</p>
-          <div
-            className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
-            style={{ width: 40 + logoBg.padding, height: 40 + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
-          >
-            {logoUrl
-              ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: 40 - logoBg.padding / 2, height: 40 - logoBg.padding / 2 }} />
-              : <span className="text-xs font-black text-white/60">ABA</span>
-            }
+          <div className="flex items-center gap-4">
+            {/* Navbar size */}
+            <div className="flex flex-col items-center gap-1">
+              <div
+                className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
+                style={{ width: logoBg.size + logoBg.padding, height: logoBg.size + logoBg.padding, backgroundColor: hexToRgba(logoBg.color, logoBg.opacity) }}
+              >
+                {logoUrl
+                  ? <img src={logoUrl} alt="logo" className="object-contain" style={{ width: logoBg.size, height: logoBg.size }} />
+                  : <span className="text-xs font-black text-white/60">ABA</span>
+                }
+              </div>
+              <span className="text-[10px] text-text-muted">Navbar / Footer</span>
+            </div>
           </div>
-          <p className="text-xs text-text-muted">This is how it looks in the navbar</p>
+          <p className="text-xs text-text-muted">{logoBg.size}px logo · {logoBg.size + logoBg.padding}px total</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Size */}
+          <div className="sm:col-span-2">
+            <label className="block text-sm font-medium text-white mb-2">Logo Size — <span className="text-primary-400">{logoBg.size}px</span></label>
+            <input
+              type="range"
+              min={24}
+              max={120}
+              step={2}
+              value={logoBg.size}
+              onChange={e => setLogoBg(b => ({ ...b, size: Number(e.target.value) }))}
+              className="w-full accent-primary-500"
+            />
+            <div className="flex justify-between text-[10px] text-text-muted mt-1">
+              <span>Small (24px)</span><span>Large (120px)</span>
+            </div>
+          </div>
+
           {/* Color */}
           <div>
             <label className="block text-sm font-medium text-white mb-2">Background Color</label>
@@ -228,7 +251,7 @@ export default function AdminSettingsPage() {
             <input
               type="range"
               min={0}
-              max={24}
+              max={32}
               value={logoBg.padding}
               onChange={e => setLogoBg(b => ({ ...b, padding: Number(e.target.value) }))}
               className="w-full accent-primary-500"

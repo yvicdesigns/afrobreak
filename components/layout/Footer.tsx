@@ -43,15 +43,15 @@ const defaultSocial: SocialLinks = {
 }
 
 export default function Footer() {
-  const [logoUrl, setLogoUrl] = useState('')
-  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number } | null>(null)
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
+  const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number; size: number } | null>(null)
   const [social, setSocial] = useState<SocialLinks>(defaultSocial)
 
   useEffect(() => {
-    getSetting('site_logo').then(v => { if (v) setLogoUrl(v) })
-    getSetting('logo_bg').then(v => { if (v) try { setLogoBg(JSON.parse(v)) } catch {} })
-    getSetting('social_links').then(v => {
-      if (v) try { setSocial(JSON.parse(v)) } catch {}
+    Promise.all([getSetting('site_logo'), getSetting('logo_bg'), getSetting('social_links')]).then(([logo, bg, socialRaw]) => {
+      setLogoUrl(logo || '')
+      if (bg) try { setLogoBg(JSON.parse(bg)) } catch {}
+      if (socialRaw) try { setSocial(JSON.parse(socialRaw)) } catch {}
     })
   }, [])
 
@@ -70,12 +70,14 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              {logoUrl ? (
+              {logoUrl === null ? (
+                <div style={{ width: 40, height: 40 }} />
+              ) : logoUrl ? (
                 <div
                   className={`flex items-center justify-center overflow-hidden flex-shrink-0 ${!logoBg ? '' : logoBg.shape === 'circle' ? 'rounded-full' : logoBg.shape === 'rounded' ? 'rounded-xl' : 'rounded-none'}`}
                   style={logoBg ? {
-                    width: 40 + logoBg.padding,
-                    height: 40 + logoBg.padding,
+                    width: (logoBg.size ?? 40) + logoBg.padding,
+                    height: (logoBg.size ?? 40) + logoBg.padding,
                     backgroundColor: (() => {
                       const r = parseInt(logoBg.color.slice(1,3), 16)
                       const g = parseInt(logoBg.color.slice(3,5), 16)
@@ -84,7 +86,7 @@ export default function Footer() {
                     })(),
                   } : {}}
                 >
-                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: 40, height: 40 }} />
+                  <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: logoBg?.size ?? 40, height: logoBg?.size ?? 40 }} />
                 </div>
               ) : (
                 <>
