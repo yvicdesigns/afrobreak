@@ -1,105 +1,70 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ShoppingCart, X, Plus, Minus, ShoppingBag, Star, Truck, Shield, RotateCcw } from 'lucide-react'
 import type { Product, CartItem, ProductCategory } from '@/lib/types'
 import Button from '@/components/ui/Button'
 import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
+import { getProducts } from '@/lib/db'
 
-const products: Product[] = [
+const staticProducts: Product[] = [
   {
-    id: 'p1',
-    name: 'AfroBreak Classic Hoodie',
+    id: 'p1', name: 'AfroBreak Classic Hoodie',
     description: 'Premium heavyweight hoodie with embroidered AfroBreak logo. Perfect for dance sessions or casual wear.',
-    price: 59.99,
-    image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80',
-    category: 'Apparel',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Black', 'White', 'Orange'],
-    badge: 'Best Seller',
-    inStock: true,
+    price: 59.99, image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80',
+    category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'White', 'Orange'],
+    badge: 'Best Seller', inStock: true,
   },
   {
-    id: 'p2',
-    name: 'AfroBreak Dance Tee',
+    id: 'p2', name: 'AfroBreak Dance Tee',
     description: 'Lightweight breathable t-shirt designed for movement. 100% organic cotton with moisture-wicking technology.',
-    price: 29.99,
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80',
-    category: 'Apparel',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Black', 'White', 'Orange', 'Purple'],
+    price: 29.99, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80',
+    category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL'], colors: ['Black', 'White', 'Orange', 'Purple'],
     inStock: true,
   },
   {
-    id: 'p3',
-    name: 'Culture Snapback Cap',
+    id: 'p3', name: 'Culture Snapback Cap',
     description: 'Structured snapback with AfroBreak embroidery. One size fits all with adjustable snap closure.',
-    price: 34.99,
-    image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=600&q=80',
-    category: 'Accessories',
-    colors: ['Black', 'White'],
-    badge: 'New',
-    inStock: true,
+    price: 34.99, image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=600&q=80',
+    category: 'Accessories', colors: ['Black', 'White'], badge: 'New', inStock: true,
   },
   {
-    id: 'p4',
-    name: 'AfroBreak Dance Joggers',
+    id: 'p4', name: 'AfroBreak Dance Joggers',
     description: 'Ultra-flexible joggers built for dancers. Tapered fit with deep pockets and elastic waistband.',
-    price: 49.99,
-    image: 'https://images.unsplash.com/photo-1594938298603-c8148c4b4346?w=600&q=80',
-    category: 'Apparel',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Black', 'Grey'],
-    inStock: true,
+    price: 49.99, image: 'https://images.unsplash.com/photo-1594938298603-c8148c4b4346?w=600&q=80',
+    category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL'], colors: ['Black', 'Grey'], inStock: true,
   },
   {
-    id: 'p5',
-    name: 'Afro Roots Tote Bag',
+    id: 'p5', name: 'Afro Roots Tote Bag',
     description: 'Heavy-duty canvas tote bag with AfroBreak print. Spacious enough for all your dance gear.',
-    price: 19.99,
-    image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80',
-    category: 'Accessories',
-    colors: ['Black', 'Natural'],
-    inStock: true,
+    price: 19.99, image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80',
+    category: 'Accessories', colors: ['Black', 'Natural'], inStock: true,
   },
   {
-    id: 'p6',
-    name: 'Dance Crew Windbreaker',
+    id: 'p6', name: 'Dance Crew Windbreaker',
     description: 'Lightweight windbreaker jacket with full-zip closure. Water-resistant and packable.',
-    price: 79.99,
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
-    category: 'Apparel',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Black', 'Orange'],
-    badge: 'Limited',
-    inStock: true,
+    price: 79.99, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
+    category: 'Apparel', sizes: ['S', 'M', 'L', 'XL'], colors: ['Black', 'Orange'], badge: 'Limited', inStock: true,
   },
   {
-    id: 'p7',
-    name: 'AfroBreak Wristband Set',
+    id: 'p7', name: 'AfroBreak Wristband Set',
     description: 'Set of 3 silicone wristbands in AfroBreak brand colors. Show your culture everywhere.',
-    price: 9.99,
-    image: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80',
-    category: 'Accessories',
-    inStock: true,
+    price: 9.99, image: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80',
+    category: 'Accessories', inStock: true,
   },
   {
-    id: 'p8',
-    name: 'Premium Dance Shoes',
+    id: 'p8', name: 'Premium Dance Shoes',
     description: 'Professional split-sole dance shoes with suede bottom. Perfect for Afro and urban styles.',
-    price: 89.99,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
-    category: 'Footwear',
-    sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'],
-    colors: ['Black', 'White', 'Nude'],
-    badge: 'Pro Pick',
-    inStock: true,
+    price: 89.99, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
+    category: 'Footwear', sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'],
+    colors: ['Black', 'White', 'Nude'], badge: 'Pro Pick', inStock: true,
   },
 ]
 
 const categories: ('All' | ProductCategory)[] = ['All', 'Apparel', 'Accessories', 'Footwear', 'Digital']
 
 export default function StorePage() {
+  const [products, setProducts] = useState<Product[]>(staticProducts)
   const [activeCategory, setActiveCategory] = useState<'All' | ProductCategory>('All')
   const [cart, setCart] = useState<CartItem[]>([])
   const [cartOpen, setCartOpen] = useState(false)
@@ -108,6 +73,26 @@ export default function StorePage() {
   const [selectedColor, setSelectedColor] = useState<string>('')
   const [addedId, setAddedId] = useState<string | null>(null)
   const [checkoutOpen, setCheckoutOpen] = useState(false)
+
+  useEffect(() => {
+    getProducts().then((data: unknown[]) => {
+      if (data && data.length > 0) {
+        const mapped = (data as Record<string, unknown>[]).map(p => ({
+          id: p.id as string,
+          name: p.name as string,
+          description: (p.description as string) || '',
+          price: p.price as number,
+          image: (p.image as string) || '',
+          category: (p.category as ProductCategory) || 'Apparel',
+          sizes: (p.sizes as string[]) || [],
+          colors: (p.colors as string[]) || [],
+          badge: (p.badge as string) || undefined,
+          inStock: (p.in_stock as boolean) ?? true,
+        }))
+        setProducts(mapped)
+      }
+    })
+  }, [])
 
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory)
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -177,7 +162,7 @@ export default function StorePage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   activeCategory === cat
-                    ? 'bg-primary-500 text-white'
+                    ? 'bg-primary-500 text-[#0D0A1A] font-semibold'
                     : 'bg-surface border border-white/10 text-text-secondary hover:text-white hover:border-white/20'
                 }`}
               >
@@ -213,7 +198,7 @@ export default function StorePage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 {product.badge && (
-                  <span className="absolute top-3 left-3 px-2 py-1 bg-primary-500 text-white text-[10px] font-bold rounded-lg uppercase">
+                  <span className="absolute top-3 left-3 px-2 py-1 bg-primary-500 text-[#0D0A1A] text-[10px] font-bold rounded-lg uppercase">
                     {product.badge}
                   </span>
                 )}
