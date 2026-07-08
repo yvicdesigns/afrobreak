@@ -23,6 +23,7 @@ const navItems = [
   { href: '/admin/store', label: 'Store', icon: ShoppingBag },
   { href: '/admin/photos', label: 'Photos', icon: Image },
   { href: '/admin/team', label: 'Team', icon: UserSquare },
+  { href: '/admin/instructors', label: 'Ambassadors', icon: Users },
   { href: '/admin/about', label: 'About Page', icon: Info },
   { href: '/admin/awards', label: 'Awards', icon: Trophy },
   { href: '/admin/partners', label: 'Partners', icon: Handshake },

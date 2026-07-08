@@ -63,11 +63,16 @@ function mapInstructor(row: Record<string, unknown>): Instructor {
   return {
     id: row.id as string,
     name: row.name as string,
+    role: (row.role as string) || '',
     bio: row.bio as string,
-    avatar: row.avatar as string,
-    specialties: row.specialties as string[],
-    videoCount: row.video_count as number,
-    followers: row.followers as number,
+    avatar: (row.avatar as string) || '',
+    cover: (row.cover as string) || '',
+    specialties: (row.specialties as string[]) || [],
+    location: (row.location as string) || '',
+    rating: (row.rating as number) || 5.0,
+    videoCount: (row.video_count as number) || 0,
+    followers: (row.followers as number) || 0,
+    displayOrder: (row.display_order as number) || 0,
   }
 }
 

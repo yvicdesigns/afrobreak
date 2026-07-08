@@ -85,11 +85,20 @@ export default function InstructorsPage() {
   useEffect(() => {
     getInstructors().then(data => {
       if (data.length === 0) return
-      setInstructors(prev => prev.map(d => {
-        const db = data.find(i => i.id === d.id)
-        if (!db) return d
-        return { ...d, bio: db.bio, specialties: db.specialties, followers: db.followers, videos: db.videoCount }
+      const mapped: PageInstructor[] = data.map(db => ({
+        id: db.id,
+        name: db.name,
+        role: db.role || 'Global Ambassador',
+        avatar: db.avatar || defaultInstructors[0].avatar,
+        cover: db.cover || defaultInstructors[0].cover,
+        bio: db.bio,
+        specialties: db.specialties,
+        videos: db.videoCount,
+        followers: db.followers,
+        rating: db.rating || 5.0,
+        location: db.location || 'Africa / Global',
       }))
+      setInstructors(mapped)
     })
   }, [])
 

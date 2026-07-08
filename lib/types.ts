@@ -95,9 +95,14 @@ export interface CartItem {
 export interface Instructor {
   id: string
   name: string
+  role: string
   bio: string
   avatar: string
+  cover: string
   specialties: string[]
+  location: string
+  rating: number
   videoCount: number
   followers: number
+  displayOrder: number
 }
