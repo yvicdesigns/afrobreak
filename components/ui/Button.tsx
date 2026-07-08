@@ -19,9 +19,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const variantStyles: Record<ButtonVariant, string> = {
   primary: clsx(
     'bg-gradient-to-r from-primary-500 to-primary-600',
-    'text-white font-semibold',
+    'text-[#0D0A1A] font-semibold',
     'hover:from-primary-400 hover:to-primary-500',
-    'shadow-glow-orange hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]',
+    'shadow-glow-yellow hover:shadow-[0_0_30px_rgba(253,202,0,0.5)]',
     'border border-primary-500/30',
     'disabled:from-primary-800 disabled:to-primary-900 disabled:shadow-none'
   ),

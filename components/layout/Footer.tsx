@@ -141,7 +141,7 @@ export default function Footer() {
                     className="flex-1 bg-transparent px-3 py-2.5 text-sm text-white placeholder-text-muted focus:outline-none"
                   />
                 </div>
-                <button className="px-4 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-400 hover:to-primary-500 transition-all duration-200 flex-shrink-0">
+                <button className="px-4 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-[#0D0A1A] rounded-xl hover:from-primary-400 hover:to-primary-500 transition-all duration-200 flex-shrink-0">
                   <ArrowRight size={16} />
                 </button>
               </div>
