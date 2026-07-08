@@ -83,7 +83,7 @@ function Sidebar({
             <img src={logoUrl} alt="AfroBreak" className="object-contain" style={{ width: logoSize, height: logoSize }} />
           </div>
         ) : (
-          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-glow-orange">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-glow-blue">
             <Play size={12} className="text-white fill-white ml-0.5" />
           </div>
         )}

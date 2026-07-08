@@ -62,7 +62,7 @@ export default function SearchBar({
             'border rounded-2xl',
             'transition-all duration-300',
             isFocused
-              ? 'border-primary-500 shadow-[0_0_30px_rgba(249,115,22,0.2)]'
+              ? 'border-primary-500 shadow-[0_0_30px_rgba(13,61,200,0.2)]'
               : 'border-white/20'
           )}
         >
@@ -115,7 +115,7 @@ export default function SearchBar({
           'bg-surface-2 border rounded-xl',
           'transition-all duration-200',
           isFocused
-            ? 'border-primary-500/60 shadow-[0_0_0_3px_rgba(249,115,22,0.1)]'
+            ? 'border-primary-500/60 shadow-[0_0_0_3px_rgba(13,61,200,0.1)]'
             : 'border-white/10'
         )}
       >

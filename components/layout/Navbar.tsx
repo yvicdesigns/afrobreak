@@ -172,7 +172,7 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-glow-orange group-hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] transition-shadow">
+                  <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-glow-blue group-hover:shadow-[0_0_30px_rgba(13,61,200,0.6)] transition-shadow">
                     <Play size={14} className="text-white fill-white ml-0.5" />
                   </div>
                   <span className="text-xl font-black tracking-tight">

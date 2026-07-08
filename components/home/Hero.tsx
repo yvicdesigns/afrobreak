@@ -41,7 +41,7 @@ export default function Hero() {
       radius: number; alpha: number; color: string; rotation: number; rotSpeed: number
     }
 
-    const colors = ['rgba(249,115,22,', 'rgba(139,92,246,', 'rgba(251,191,36,']
+    const colors = ['rgba(13,61,200,', 'rgba(139,92,246,', 'rgba(253,202,0,']
     const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
