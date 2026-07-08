@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react'
 import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Handshake, Quote, Star } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { getPartners } from '@/lib/db'
+import { supabase } from '@/lib/supabase'
 
 function PartnerFeedbackForm() {
   const [fb, setFb] = useState({ name: '', org: '', rating: 0, message: '' })
   const [hovered, setHovered] = useState(0)
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   if (sent) return (
     <div className="bg-emerald-500/15 border border-emerald-500/30 rounded-2xl p-8 text-center">
@@ -18,8 +20,22 @@ function PartnerFeedbackForm() {
     </div>
   )
 
+  const handleFeedback = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (fb.rating === 0 || !fb.message) return
+    setSubmitting(true)
+    await supabase.from('partner_feedback').insert({
+      name: fb.name,
+      org: fb.org || null,
+      rating: fb.rating,
+      message: fb.message,
+    })
+    setSubmitting(false)
+    setSent(true)
+  }
+
   return (
-    <form onSubmit={e => { e.preventDefault(); if (fb.rating === 0 || !fb.message) return; setSent(true) }}
+    <form onSubmit={handleFeedback}
       className="bg-surface border border-white/10 rounded-2xl p-8 space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
@@ -47,7 +63,7 @@ function PartnerFeedbackForm() {
         <label className="block text-sm font-medium text-white mb-1.5">Your feedback *</label>
         <textarea required rows={4} value={fb.message} onChange={e => setFb(f => ({ ...f, message: e.target.value }))} placeholder="How has the partnership been? What's working well? Any suggestions?" className="input-base resize-none" />
       </div>
-      <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />}>
+      <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />} loading={submitting}>
         Submit Feedback
       </Button>
     </form>
@@ -147,13 +163,23 @@ export default function PartnersPage() {
   const [selected, setSelected] = useState<typeof partnerTypes[0] | null>(null)
   const [form, setForm] = useState({ name: '', email: '', org: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [submittingInquiry, setSubmittingInquiry] = useState(false)
 
   useEffect(() => {
     getPartners().then(data => { if (data && data.length > 0) setPartners(data as Partner[]) })
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmittingInquiry(true)
+    await supabase.from('partner_inquiries').insert({
+      name: form.name,
+      email: form.email,
+      org: form.org || null,
+      message: form.message,
+      partner_type: selected?.title || null,
+    })
+    setSubmittingInquiry(false)
     setSent(true)
   }
 
@@ -309,7 +335,7 @@ export default function PartnersPage() {
                 <label className="block text-sm font-medium text-white mb-1.5">Tell us about your partnership idea *</label>
                 <textarea required rows={4} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} placeholder="What kind of partnership are you looking for? What are your goals?" className="input-base resize-none" />
               </div>
-              <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />}>
+              <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />} loading={submittingInquiry}>
                 Send Message
               </Button>
             </form>

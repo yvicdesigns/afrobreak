@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Instagram, Youtube, Facebook, Twitter, Music, Send, Check } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
@@ -12,8 +13,12 @@ export default function ContactPage() {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) return
     setSending(true)
-    // Simulate sending (replace with real email service like Resend/EmailJS later)
-    await new Promise(r => setTimeout(r, 1200))
+    await supabase.from('contact_messages').insert({
+      name: form.name,
+      email: form.email,
+      subject: form.subject || null,
+      message: form.message,
+    })
     setSending(false)
     setSent(true)
     setForm({ name: '', email: '', subject: '', message: '' })

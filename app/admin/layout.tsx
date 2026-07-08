@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
   Settings, Menu, X, Play, ChevronRight, Bell, Music, ShoppingBag, Image,
-  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake
+  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake, MessageSquare
 } from 'lucide-react'
 import clsx from 'clsx'
 import { supabase } from '@/lib/supabase'
@@ -17,6 +17,7 @@ const navItems = [
   { href: '/admin/videos', label: 'Videos', icon: Video },
   { href: '/admin/events', label: 'Events', icon: Calendar },
   { href: '/admin/registrations', label: 'Registrations', icon: ClipboardList },
+  { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
   { href: '/admin/blog', label: 'Blog Posts', icon: BookOpen },
   { href: '/admin/music', label: 'Music', icon: Music },
   { href: '/admin/store', label: 'Store', icon: ShoppingBag },
