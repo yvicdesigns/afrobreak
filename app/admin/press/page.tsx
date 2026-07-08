@@ -1,8 +1,22 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, X, Save, ExternalLink } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Save, ExternalLink, Newspaper } from 'lucide-react'
 import { getPresscoverage, createPressCoverage, updatePressCoverage, deletePressCoverage } from '@/lib/db'
+
+const SQL = `create table if not exists press_coverage (
+  id text primary key,
+  outlet text not null,
+  title text not null,
+  date text,
+  type text default 'Feature',
+  logo text default '📰',
+  url text,
+  created_at timestamptz default now()
+);
+alter table press_coverage enable row level security;
+create policy "Public read press_coverage" on press_coverage for select using (true);
+create policy "Auth write press_coverage" on press_coverage for all to authenticated using (true) with check (true);`
 
 type PressItem = {
   id: string
@@ -19,12 +33,21 @@ const empty: Omit<PressItem, 'id'> = { outlet: '', title: '', date: '', type: 'F
 export default function AdminPressPage() {
   const [items, setItems] = useState<PressItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [dbError, setDbError] = useState(false)
+  const [sqlCopied, setSqlCopied] = useState(false)
   const [modal, setModal] = useState<null | 'create' | PressItem>(null)
   const [form, setForm] = useState<Omit<PressItem, 'id'>>(empty)
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    getPresscoverage().then(data => { setItems(data as PressItem[]); setLoading(false) })
+    getPresscoverage().then(data => {
+      if (!data || (data as PressItem[]).length === 0) {
+        // Check if table exists by attempting a count
+        setDbError(false)
+      }
+      setItems(data as PressItem[])
+      setLoading(false)
+    }).catch(() => { setDbError(true); setLoading(false) })
   }, [])
 
   const openCreate = () => { setForm(empty); setModal('create') }
@@ -56,16 +79,29 @@ export default function AdminPressPage() {
     <div className="p-6 max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-black text-white">Press Coverage</h1>
-          <p className="text-text-secondary text-sm mt-1">Manage press coverage shown on the Press page</p>
+          <h1 className="text-2xl font-black text-white flex items-center gap-2"><Newspaper size={22} className="text-primary-500" /> Press Coverage</h1>
+          <p className="text-text-secondary text-sm mt-1">Manage press coverage shown on the Press page · {items.length} articles</p>
         </div>
-        <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold">
+        <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold">
           <Plus size={16} /> Add Coverage
         </button>
       </div>
 
+      {dbError && (
+        <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-sm text-amber-300">
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-semibold">Table not found. Run this SQL in Supabase:</p>
+            <button onClick={() => { navigator.clipboard.writeText(SQL); setSqlCopied(true); setTimeout(() => setSqlCopied(false), 2000) }}
+              className="text-xs px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 transition-colors">
+              {sqlCopied ? '✓ Copied' : 'Copy SQL'}
+            </button>
+          </div>
+          <pre className="text-xs bg-black/30 p-3 rounded-lg overflow-auto max-h-40 whitespace-pre-wrap">{SQL}</pre>
+        </div>
+      )}
+
       {loading ? (
-        <div className="text-text-secondary text-center py-20">Loading...</div>
+        <div className="flex items-center justify-center h-40"><div className="w-8 h-8 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" /></div>
       ) : items.length === 0 ? (
         <div className="text-center py-20 text-text-secondary">No press coverage yet.</div>
       ) : (
@@ -130,7 +166,7 @@ export default function AdminPressPage() {
             </div>
             <div className="flex gap-3 pt-2">
               <button onClick={() => setModal(null)} className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm transition-colors">Cancel</button>
-              <button onClick={handleSave} disabled={saving || !form.outlet || !form.title} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">
+              <button onClick={handleSave} disabled={saving || !form.outlet || !form.title} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-[#0D0A1A] rounded-xl text-sm font-semibold transition-colors">
                 <Save size={14} /> {saving ? 'Saving...' : 'Save'}
               </button>
             </div>

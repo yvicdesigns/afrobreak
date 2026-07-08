@@ -1,20 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Trophy, Crown, Medal, Globe, X, MapPin, Calendar } from 'lucide-react'
+import { getChampions, getSetting } from '@/lib/db'
 
 type Champion = {
+  id?: string
   name: string
   country: string
   flag: string
   year: string
   category: 'Boys' | 'Girls' | 'Regional'
   photo?: string
-  desc: string
+  desc?: string
+  description?: string
   event: string
 }
 
-const champions: Champion[] = [
+const staticChampions: Champion[] = [
   // ── 2025 ─────────────────────────────────────────────────────────
   {
     name: 'Zinji', country: 'Algeria', flag: '🇩🇿', year: '2025',
@@ -178,11 +181,19 @@ const champions: Champion[] = [
   },
 ]
 
-const years = ['2025', '2024', '2023', '2022']
-
 export default function AwardsPage() {
+  const [champions, setChampions] = useState<Champion[]>(staticChampions)
   const [selected, setSelected] = useState<Champion | null>(null)
+  const [awardsLogo, setAwardsLogo] = useState('')
 
+  useEffect(() => {
+    Promise.all([getChampions(), getSetting('awards_logo')]).then(([data, logo]) => {
+      if (data && data.length > 0) setChampions(data as Champion[])
+      if (logo) setAwardsLogo(logo)
+    })
+  }, [])
+
+  const years = Array.from(new Set(champions.map(c => c.year))).sort((a, b) => Number(b) - Number(a))
   const africaFinals = champions.filter(c => c.category === 'Boys' || c.category === 'Girls')
   const regional = champions.filter(c => c.category === 'Regional')
 
@@ -192,10 +203,16 @@ export default function AwardsPage() {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 mb-6">
-            <Trophy size={14} className="text-gold-DEFAULT" />
-            <span className="text-sm font-semibold text-gold-DEFAULT tracking-widest uppercase">AfroBreak Dance Culture Awards</span>
-          </div>
+          {awardsLogo ? (
+            <div className="flex justify-center mb-6">
+              <img src={awardsLogo} alt="AfroBreak Culture Awards" className="h-24 w-auto object-contain" />
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 mb-6">
+              <Trophy size={14} className="text-gold-DEFAULT" />
+              <span className="text-sm font-semibold text-gold-DEFAULT tracking-widest uppercase">AfroBreak Dance Culture Awards</span>
+            </div>
+          )}
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
             Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-DEFAULT to-yellow-400">Champions</span>
           </h1>
@@ -375,7 +392,7 @@ export default function AwardsPage() {
                 </div>
               </div>
 
-              <p className="text-text-secondary text-sm leading-relaxed mb-4">{selected.desc}</p>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">{selected.desc || selected.description}</p>
 
               <div className="p-3 bg-background rounded-xl border border-white/5">
                 <p className="text-xs text-text-muted mb-0.5 uppercase tracking-wider">Event</p>

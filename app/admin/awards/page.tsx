@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, X, Save, Trophy } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Save, Trophy, Image, Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/ui/ImageUpload'
-import { getChampions, createChampion, updateChampion, deleteChampion } from '@/lib/db'
+import { getChampions, createChampion, updateChampion, deleteChampion, getSetting, saveSetting } from '@/lib/db'
 
 type Category = 'Boys' | 'Girls' | 'Regional' | 'Open'
 
@@ -49,12 +49,28 @@ export default function AdminAwardsPage() {
   const [filterYear, setFilterYear] = useState('All')
   const [filterCat, setFilterCat] = useState<'All' | Category>('All')
   const [dbError, setDbError] = useState(false)
+  const [awardsLogo, setAwardsLogo] = useState('')
+  const [savingLogo, setSavingLogo] = useState(false)
+  const [logoSaved, setLogoSaved] = useState(false)
 
   useEffect(() => {
-    getChampions()
-      .then(data => { setChampions(data as Champion[]); setLoading(false) })
-      .catch(() => { setDbError(true); setLoading(false) })
+    Promise.all([
+      getChampions(),
+      getSetting('awards_logo'),
+    ]).then(([data, logo]) => {
+      setChampions(data as Champion[])
+      if (logo) setAwardsLogo(logo)
+      setLoading(false)
+    }).catch(() => { setDbError(true); setLoading(false) })
   }, [])
+
+  const saveLogo = async () => {
+    setSavingLogo(true)
+    await saveSetting('awards_logo', awardsLogo)
+    setSavingLogo(false)
+    setLogoSaved(true)
+    setTimeout(() => setLogoSaved(false), 2000)
+  }
 
   const years = ['All', ...Array.from(new Set(champions.map(c => c.year))).sort((a, b) => Number(b) - Number(a))]
 
@@ -111,10 +127,36 @@ export default function AdminAwardsPage() {
         </div>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold"
+          className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold"
         >
           <Plus size={16} /> Add Champion
         </button>
+      </div>
+
+      {/* Awards Logo */}
+      <div className="mb-8 p-5 bg-surface border border-white/5 rounded-2xl">
+        <div className="flex items-center gap-2 mb-4">
+          <Image size={16} className="text-primary-500" />
+          <h2 className="text-sm font-bold text-white uppercase tracking-wider">AfroBreak Culture Awards Logo</h2>
+        </div>
+        <div className="flex items-end gap-6">
+          <div className="flex-1 max-w-xs">
+            <ImageUpload value={awardsLogo} onChange={setAwardsLogo} label="Awards Logo" folder="awards" />
+          </div>
+          {awardsLogo && (
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-xl overflow-hidden flex items-center justify-center p-2">
+                <img src={awardsLogo} alt="Awards logo" className="w-full h-full object-contain" />
+              </div>
+              <button onClick={saveLogo} disabled={savingLogo}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl font-bold text-sm hover:bg-primary-400 transition-colors disabled:opacity-60">
+                {savingLogo ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                {logoSaved ? 'Saved ✓' : 'Save Logo'}
+              </button>
+            </div>
+          )}
+        </div>
+        <p className="text-xs text-text-muted mt-3">This logo appears at the top of the Awards page. Upload the AfroBreak Culture Awards official logo here.</p>
       </div>
 
       {dbError && (
@@ -292,7 +334,7 @@ create policy "Auth write champions" on champions for all to authenticated using
               <button
                 onClick={handleSave}
                 disabled={saving || !form.name || !form.country}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-semibold"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl hover:bg-primary-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-semibold"
               >
                 {saving ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Save size={14} />}
                 {saving ? 'Saving...' : 'Save Champion'}
