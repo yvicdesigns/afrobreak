@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
   Settings, Menu, X, Play, ChevronRight, Bell, Music, ShoppingBag, Image,
-  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake, MessageSquare
+  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake, MessageSquare, Mail
 } from 'lucide-react'
 import clsx from 'clsx'
 import { supabase } from '@/lib/supabase'
@@ -26,10 +26,12 @@ const navItems = [
   { href: '/admin/instructors', label: 'Ambassadors', icon: Users },
   { href: '/admin/about', label: 'About Page', icon: Info },
   { href: '/admin/awards', label: 'Awards', icon: Trophy },
+  { href: '/admin/nominations', label: 'Nominations', icon: ClipboardList },
   { href: '/admin/partners', label: 'Partners', icon: Handshake },
   { href: '/admin/press', label: 'Press', icon: Newspaper },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/users', label: 'Users', icon: Users },
+  { href: '/admin/emails', label: 'Email Templates', icon: Mail },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
@@ -166,7 +168,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: { user } }) => {
-      if (!user) { router.replace('/'); return }
+      if (!user) { router.replace('/auth/login?redirect=/admin'); return }
 
       // Try profiles table first, fall back to email allowlist
       const ADMIN_EMAILS = ['afrobreakconcepts@gmail.com', 'yvicdesigns@gmail.com']

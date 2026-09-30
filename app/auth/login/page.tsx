@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Mail, Lock, Eye, EyeOff, Play, Chrome } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, Chrome } from 'lucide-react'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
 
@@ -27,7 +27,8 @@ function LoginForm() {
     setError('')
     const ok = await login(form.email, form.password)
     if (ok) {
-      router.push('/')
+      const redirectTo = searchParams.get('redirect') || '/'
+      router.push(redirectTo)
     } else {
       setError('Invalid email or password. Please check your credentials.')
       setLoading(false)
@@ -45,14 +46,8 @@ function LoginForm() {
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-glow-orange">
-              <Play size={16} className="text-white fill-white ml-0.5" />
-            </div>
-            <span className="text-2xl font-black">
-              <span className="text-primary-500">AFRO</span>
-              <span className="text-white">BREAK</span>
-            </span>
+          <Link href="/" className="inline-flex items-center justify-center mb-6">
+            <img src="/logo-auth.png" alt="AfroBreak" className="h-24 w-auto object-contain" />
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
           <p className="text-text-secondary">Sign in to continue your dance journey</p>

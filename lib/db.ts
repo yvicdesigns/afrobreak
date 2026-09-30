@@ -243,40 +243,197 @@ export async function deleteBlogPost(id: string): Promise<boolean> {
 }
 
 // ── MUSIC ─────────────────────────────────────────────────────────
+// All admin-created tracks/albums use settings table (avoids RLS on tracks/albums tables).
+// Legacy DB tracks (t1-t5 seed data) are read from tracks table + can be overridden/deleted via settings.
+// Settings keys: musictrack_{id} = full track JSON, musicalbum_{id} = full album JSON
+
+function parseSettingsTracks(rows: { key: string; value: string }[]) {
+  return rows
+    .map(r => { try { return JSON.parse(r.value) } catch { return null } })
+    .filter(Boolean)
+}
+
 export async function getTracks() {
-  const { data } = await supabase.from('tracks').select('*').order('created_at', { ascending: false })
-  return data || []
+  // Read settings-based tracks (admin-created or edits/deletes of legacy tracks)
+  const { data: sRows } = await supabase.from('settings').select('key, value').like('key', 'musictrack_%')
+  const settingsTracks = parseSettingsTracks(sRows || [])
+  const overrideIds = new Set(settingsTracks.map((t: Record<string, unknown>) => t.id as string))
+
+  // Read legacy DB tracks for any not overridden in settings
+  const { data: dbRows } = await supabase.from('tracks').select('*').order('created_at', { ascending: false })
+  const legacyTracks = (dbRows || [])
+    .filter(r => !overrideIds.has(r.id))
+    .map(r => ({
+      id: r.id,
+      title: r.title,
+      artist: r.artist,
+      album: r.album || '',
+      duration: r.duration || '',
+      cover: r.cover_url || '',
+      preview_url: r.audio_url || '',
+      genre: '',
+      badge: '',
+      price: r.price || 0,
+      download_url: '',
+      in_stock: true,
+    }))
+
+  // Merge: settings tracks first (newest), then legacy, excluding deleted ones
+  const all = [
+    ...settingsTracks.filter((t: Record<string, unknown>) => !t.deleted),
+    ...legacyTracks,
+  ]
+  return all
 }
+
 export async function createTrack(t: Record<string, unknown>) {
-  const { data, error } = await supabase.from('tracks').insert({ id: `t${Date.now()}`, ...t }).select().single()
-  if (error) return null
-  return data
+  const id = `musictrack_${Date.now()}`
+  const payload = {
+    id,
+    title: t.title || '',
+    artist: t.artist || '',
+    album: t.album || '',
+    duration: t.duration || '',
+    cover: t.cover || '',
+    preview_url: t.preview_url || '',
+    genre: t.genre || '',
+    badge: t.badge || '',
+    price: t.price || 0,
+    download_url: t.download_url || '',
+    in_stock: true,
+    created_at: new Date().toISOString(),
+  }
+  const ok = await saveSetting(id, JSON.stringify(payload))
+  if (!ok) return null
+  return payload
 }
+
 export async function updateTrack(id: string, t: Record<string, unknown>) {
-  const { error } = await supabase.from('tracks').update(t).eq('id', id)
-  return !error
+  // For both new (musictrack_) and legacy (t1-t5) tracks, save full data to settings
+  const settingsKey = id.startsWith('musictrack_') ? id : `musictrack_${id}`
+  const existing = await getSetting(settingsKey)
+  let base: Record<string, unknown> = {}
+  if (existing) {
+    try { base = JSON.parse(existing) } catch { /* use empty */ }
+  } else {
+    // Legacy track — pull current data from DB as base
+    const { data } = await supabase.from('tracks').select('*').eq('id', id).single()
+    if (data) base = {
+      id: data.id,
+      title: data.title,
+      artist: data.artist,
+      album: data.album || '',
+      duration: data.duration || '',
+      cover: data.cover_url || '',
+      preview_url: data.audio_url || '',
+      genre: '',
+      badge: '',
+      price: data.price || 0,
+      download_url: '',
+      in_stock: true,
+      created_at: data.created_at,
+    }
+  }
+  const updated = {
+    ...base,
+    id: id.startsWith('musictrack_') ? id : id,
+    title: t.title ?? base.title,
+    artist: t.artist ?? base.artist,
+    album: t.album ?? base.album,
+    duration: t.duration ?? base.duration,
+    cover: t.cover ?? base.cover,
+    preview_url: t.preview_url ?? base.preview_url,
+    genre: t.genre ?? base.genre,
+    badge: t.badge ?? base.badge,
+    price: t.price ?? base.price,
+    download_url: t.download_url ?? base.download_url,
+    in_stock: true,
+  }
+  return saveSetting(settingsKey, JSON.stringify(updated))
 }
+
 export async function deleteTrack(id: string) {
-  const { error } = await supabase.from('tracks').delete().eq('id', id)
-  return !error
+  if (id.startsWith('musictrack_')) {
+    const { error } = await supabase.from('settings').delete().eq('key', id)
+    return !error
+  }
+  // Legacy DB track: mark as deleted in settings so getTracks skips it
+  return saveSetting(`musictrack_${id}`, JSON.stringify({ id, deleted: true }))
 }
 
 export async function getAlbums() {
-  const { data } = await supabase.from('albums').select('*').order('created_at', { ascending: false })
-  return data || []
+  const { data: sRows } = await supabase.from('settings').select('key, value').like('key', 'musicalbum_%')
+  const settingsAlbums = parseSettingsTracks(sRows || [])
+  const overrideIds = new Set(settingsAlbums.map((a: Record<string, unknown>) => a.id as string))
+
+  const { data: dbRows } = await supabase.from('albums').select('*').order('created_at', { ascending: false })
+  const legacyAlbums = (dbRows || [])
+    .filter(r => !overrideIds.has(r.id))
+    .map(r => ({
+      id: r.id,
+      title: r.title,
+      artist: r.artist,
+      cover: r.cover_url || '',
+      genre: '',
+      price: 0,
+      track_count: 0,
+      description: '',
+      download_url: '',
+    }))
+
+  return [
+    ...settingsAlbums.filter((a: Record<string, unknown>) => !a.deleted),
+    ...legacyAlbums,
+  ]
 }
+
 export async function createAlbum(a: Record<string, unknown>) {
-  const { data, error } = await supabase.from('albums').insert({ id: `a${Date.now()}`, ...a }).select().single()
-  if (error) return null
-  return data
+  const id = `musicalbum_${Date.now()}`
+  const payload = {
+    id,
+    title: a.title || '',
+    artist: a.artist || '',
+    cover: a.cover || '',
+    genre: a.genre || '',
+    price: a.price || 0,
+    track_count: a.track_count || 0,
+    description: a.description || '',
+    download_url: a.download_url || '',
+    created_at: new Date().toISOString(),
+  }
+  const ok = await saveSetting(id, JSON.stringify(payload))
+  if (!ok) return null
+  return payload
 }
+
 export async function updateAlbum(id: string, a: Record<string, unknown>) {
-  const { error } = await supabase.from('albums').update(a).eq('id', id)
-  return !error
+  const settingsKey = id.startsWith('musicalbum_') ? id : `musicalbum_${id}`
+  const existing = await getSetting(settingsKey)
+  let base: Record<string, unknown> = {}
+  if (existing) {
+    try { base = JSON.parse(existing) } catch { /* use empty */ }
+  }
+  const updated = {
+    ...base,
+    id,
+    title: a.title ?? base.title,
+    artist: a.artist ?? base.artist,
+    cover: a.cover ?? base.cover,
+    genre: a.genre ?? base.genre,
+    price: a.price ?? base.price,
+    track_count: a.track_count ?? base.track_count,
+    description: a.description ?? base.description,
+    download_url: a.download_url ?? base.download_url,
+  }
+  return saveSetting(settingsKey, JSON.stringify(updated))
 }
+
 export async function deleteAlbum(id: string) {
-  const { error } = await supabase.from('albums').delete().eq('id', id)
-  return !error
+  if (id.startsWith('musicalbum_')) {
+    const { error } = await supabase.from('settings').delete().eq('key', id)
+    return !error
+  }
+  return saveSetting(`musicalbum_${id}`, JSON.stringify({ id, deleted: true }))
 }
 
 // ── STORE PRODUCTS ────────────────────────────────────────────────
@@ -366,6 +523,25 @@ export async function deletePressCoverage(id: string) {
   return !error
 }
 
+// ── DOCUMENTARIES ─────────────────────────────────────────────────
+export async function getDocumentaries() {
+  const { data } = await supabase.from('documentaries').select('*').order('year', { ascending: false })
+  return data || []
+}
+export async function createDocumentary(d: Record<string, unknown>) {
+  const { data, error } = await supabase.from('documentaries').insert({ id: `doc${Date.now()}`, ...d }).select().single()
+  if (error) return null
+  return data
+}
+export async function updateDocumentary(id: string, d: Record<string, unknown>) {
+  const { error } = await supabase.from('documentaries').update(d).eq('id', id)
+  return !error
+}
+export async function deleteDocumentary(id: string) {
+  const { error } = await supabase.from('documentaries').delete().eq('id', id)
+  return !error
+}
+
 // ── JOBS ──────────────────────────────────────────────────────────
 export async function getJobs() {
   const { data } = await supabase.from('jobs').select('*').order('title', { ascending: true })
@@ -423,5 +599,85 @@ export async function updatePartner(id: string, p: Record<string, unknown>) {
 }
 export async function deletePartner(id: string) {
   const { error } = await supabase.from('partners').delete().eq('id', id)
+  return !error
+}
+
+// ── AWARD CATEGORIES (stored in award_categories table) ────────────────
+export async function getAwardCategories() {
+  const { data } = await supabase.from('award_categories').select('*').order('num', { ascending: true })
+  return data || []
+}
+export async function updateAwardCategory(num: number, fields: Record<string, unknown>) {
+  const { error } = await supabase
+    .from('award_categories')
+    .update({ ...fields, updated_at: new Date().toISOString() })
+    .eq('num', num)
+  return !error
+}
+export async function seedAwardCategories(categories: Record<string, unknown>[]) {
+  const { error } = await supabase.from('award_categories').upsert(categories as never[])
+  if (error) throw new Error('Failed to seed award categories')
+  return true
+}
+
+// ── NOMINATIONS (stored as JSON rows in settings, key = nom_TIMESTAMP) ──
+export async function getNominations() {
+  const { data } = await supabase.from('settings').select('key, value').like('key', 'nom_%')
+  if (!data) return []
+  return data
+    .map(row => {
+      try {
+        const n = JSON.parse(row.value)
+        // Normalize camelCase (old format) to snake_case (current format)
+        if (n.nominatorName && !n.nominator_name) {
+          return {
+            id: n.id,
+            status: n.status || 'pending',
+            created_at: n.created_at,
+            nominator_name: n.nominatorName,
+            nominator_email: n.nominatorEmail,
+            nominator_phone: n.nominatorPhone,
+            nominator_country: n.nominatorCountry,
+            relationship_to_nominee: n.relationshipToNominee,
+            category_num: n.categoryNum,
+            category: n.categoryName,
+            section: n.section,
+            nominee_name: n.nomineeName,
+            nominee_stage_name: n.nomineeStage,
+            nominee_gender: n.nomineeGender,
+            nominee_country: n.nomineeCountry,
+            nominee_city: n.nomineeCity,
+            nominee_region: n.nomineeRegion,
+            nominee_email: n.nomineeEmail,
+            nominee_phone: n.nomineePhone,
+            nominee_social_links: n.nomineeSocial,
+            support_links: n.supportLinks,
+          }
+        }
+        return n
+      } catch { return null }
+    })
+    .filter(Boolean)
+    .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
+      new Date(b.created_at as string).getTime() - new Date(a.created_at as string).getTime()
+    )
+}
+export async function createNomination(n: Record<string, unknown>) {
+  const id = `nom_${Date.now()}`
+  const payload = { id, ...n, status: 'pending', created_at: new Date().toISOString() }
+  const ok = await saveSetting(id, JSON.stringify(payload))
+  if (!ok) throw new Error('Failed to save nomination')
+  return payload
+}
+export async function updateNominationStatus(id: string, status: string) {
+  const current = await getSetting(id)
+  if (!current) return false
+  try {
+    const parsed = JSON.parse(current)
+    return saveSetting(id, JSON.stringify({ ...parsed, status }))
+  } catch { return false }
+}
+export async function deleteNomination(id: string) {
+  const { error } = await supabase.from('settings').delete().eq('key', id)
   return !error
 }
