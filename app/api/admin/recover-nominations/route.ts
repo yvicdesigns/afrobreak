@@ -70,9 +70,10 @@ export async function POST() {
     process.env.NEXT_SERVCE_ROLE!
   )
 
-  const RESEND_KEY = process.env.RESEND_API_KEY
+  // Requires a full-access Resend key (not a send-only key)
+  const RESEND_KEY = process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY
   if (!RESEND_KEY) {
-    return NextResponse.json({ error: 'RESEND_API_KEY not configured' }, { status: 500 })
+    return NextResponse.json({ error: 'No Resend API key configured' }, { status: 500 })
   }
 
   // Collect all sent emails from Resend (paginate)
