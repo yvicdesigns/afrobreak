@@ -5,6 +5,7 @@ import { Play, Pause, ShoppingCart, Music, Download, Clock, Volume2, X, Check, C
 import Button from '@/components/ui/Button'
 import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
 import { getTracks, getAlbums } from '@/lib/db'
+import { useLanguage } from '@/lib/LanguageContext'
 
 type MusicGenre = 'All' | 'Afrobeats' | 'Amapiano' | 'Dancehall' | 'Afro-Fusion' | 'Hip-Hop'
 
@@ -34,6 +35,7 @@ interface Album {
 const genres: MusicGenre[] = ['All', 'Afrobeats', 'Amapiano', 'Dancehall', 'Afro-Fusion', 'Hip-Hop']
 
 export default function MusicPage() {
+  const { tr } = useLanguage()
   const [tracks, setTracks] = useState<Track[]>([])
   const [albums, setAlbums] = useState<Album[]>([])
   const [activeGenre, setActiveGenre] = useState<MusicGenre>('All')
@@ -78,13 +80,15 @@ export default function MusicPage() {
   const cartTotal = cartItems.reduce((sum: number, t: Track) => sum + t.price, 0)
 
   const togglePlay = (track: Track) => {
+    if (!track.preview) return
     if (playingId === track.id) {
       setPlayingId(null)
       audioRef.current?.pause()
     } else {
       if (audioRef.current) {
         audioRef.current.pause()
-        audioRef.current.src = track.preview || ''
+        audioRef.current.src = track.preview
+        audioRef.current.load()
         audioRef.current.play().catch(() => {})
       }
       setPlayingId(track.id)
@@ -110,17 +114,17 @@ export default function MusicPage() {
       <div className="relative bg-surface border-b border-white/5 py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">AfroBreak Music</p>
+          <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">{tr.music.eyebrow}</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
-            Feel the <span className="gradient-text-purple">Rhythm</span>
+            {tr.music.title} <span className="gradient-text-purple">{tr.music.titleAccent}</span>
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto mb-8">
-            Preview and purchase exclusive Afro & urban music tracks. Download instantly, own forever.
+            {tr.music.subtitle}
           </p>
           <div className="flex items-center justify-center gap-6 flex-wrap text-sm text-text-secondary">
-            <div className="flex items-center gap-2"><Download size={14} className="text-primary-500" /> Instant download</div>
-            <div className="flex items-center gap-2"><Music size={14} className="text-secondary-400" /> MP3 & WAV formats</div>
-            <div className="flex items-center gap-2"><Volume2 size={14} className="text-gold-DEFAULT" /> 30-sec preview</div>
+            <div className="flex items-center gap-2"><Download size={14} className="text-primary-500" /> {tr.music.instantDownload}</div>
+            <div className="flex items-center gap-2"><Music size={14} className="text-secondary-400" /> {tr.music.formats}</div>
+            <div className="flex items-center gap-2"><Volume2 size={14} className="text-gold" /> {tr.music.preview}</div>
           </div>
         </div>
       </div>
@@ -133,13 +137,13 @@ export default function MusicPage() {
               onClick={() => setTab('tracks')}
               className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${tab === 'tracks' ? 'bg-primary-500 text-white' : 'text-text-secondary hover:text-white'}`}
             >
-              Tracks
+              {tr.music.tabTracks}
             </button>
             <button
               onClick={() => setTab('albums')}
               className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${tab === 'albums' ? 'bg-primary-500 text-white' : 'text-text-secondary hover:text-white'}`}
             >
-              Albums
+              {tr.music.tabAlbums}
             </button>
           </div>
 
@@ -148,7 +152,7 @@ export default function MusicPage() {
             className="relative flex items-center gap-2 px-4 py-2 bg-surface border border-white/10 rounded-xl text-sm font-medium text-white hover:border-primary-500/40 transition-all"
           >
             <ShoppingCart size={16} className="text-primary-500" />
-            My Purchases
+            {tr.music.tabMyPurchases}
             {cart.length > 0 && (
               <span className="absolute -top-2 -right-2 w-5 h-5 bg-primary-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                 {cart.length}
@@ -171,7 +175,7 @@ export default function MusicPage() {
                       : 'bg-surface border border-white/10 text-text-secondary hover:text-white hover:border-white/20'
                   }`}
                 >
-                  {g}
+                  {(tr.music.genres as Record<string, string>)[g] ?? g}
                 </button>
               ))}
             </div>
@@ -190,13 +194,20 @@ export default function MusicPage() {
                   {/* Index / Play */}
                   <button
                     onClick={() => togglePlay(track)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-500/20 transition-all flex-shrink-0"
+                    disabled={!track.preview}
+                    title={track.preview ? undefined : 'No preview available'}
+                    className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all flex-shrink-0 ${
+                      track.preview
+                        ? 'bg-white/5 hover:bg-primary-500/20 cursor-pointer'
+                        : 'bg-white/3 cursor-not-allowed opacity-40'
+                    }`}
                   >
                     {playingId === track.id
                       ? <Pause size={16} className="text-primary-500" />
-                      : <span className="text-text-muted text-sm group-hover:hidden">{i + 1}</span>
+                      : track.preview
+                        ? <><span className="text-text-muted text-sm group-hover:hidden">{i + 1}</span><Play size={16} className="text-primary-500 hidden group-hover:block" /></>
+                        : <span className="text-text-muted text-sm">{i + 1}</span>
                     }
-                    {playingId !== track.id && <Play size={16} className="text-primary-500 hidden group-hover:block" />}
                   </button>
 
                   {/* Cover */}
@@ -228,9 +239,12 @@ export default function MusicPage() {
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="font-bold text-white">₵{track.price.toFixed(2)}</span>
                     {cart.includes(track.id) ? (
-                      <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-xl">
-                        <Check size={12} /> Owned
-                      </span>
+                      <button
+                        onClick={() => setCartOpen(true)}
+                        className="flex items-center gap-1 px-3 py-1.5 bg-gold/15 border border-gold/40 text-gold text-xs font-bold rounded-xl hover:bg-gold/25 transition-all"
+                      >
+                        <ShoppingCart size={12} /> {tr.music.checkout}
+                      </button>
                     ) : (
                       <button
                         onClick={() => addToCart(track.id)}
@@ -291,7 +305,7 @@ export default function MusicPage() {
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <div className="flex items-center gap-2">
                 <Music size={18} className="text-primary-500" />
-                <h2 className="font-bold text-white">My Purchases ({cart.length})</h2>
+                <h2 className="font-bold text-white">{tr.music.tabMyPurchases} ({cart.length})</h2>
               </div>
               <button onClick={() => setCartOpen(false)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
                 <X size={18} />
@@ -302,7 +316,7 @@ export default function MusicPage() {
               {cartItems.length === 0 ? (
                 <div className="text-center py-16">
                   <Music size={40} className="text-text-muted mx-auto mb-3" />
-                  <p className="text-text-secondary">No tracks selected</p>
+                  <p className="text-text-secondary">{tr.music.noTracks}</p>
                 </div>
               ) : (
                 cartItems.map(track => (
@@ -326,11 +340,11 @@ export default function MusicPage() {
             {cartItems.length > 0 && (
               <div className="p-5 border-t border-white/10 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-text-secondary">Total</span>
+                  <span className="text-text-secondary">{tr.music.total}</span>
                   <span className="text-xl font-black text-white">₵{cartTotal.toFixed(2)}</span>
                 </div>
                 <Button variant="primary" fullWidth leftIcon={<Download size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
-                  Buy & Download — ₵{cartTotal.toFixed(2)}
+                  {tr.music.buy} & {tr.checkout.buyDownload} — ₵{cartTotal.toFixed(2)}
                 </Button>
                 <p className="text-xs text-text-muted text-center">MP3 + WAV · Instant download · DRM-free</p>
               </div>
@@ -363,8 +377,8 @@ export default function MusicPage() {
       <div className="border-t border-white/5 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-secondary-500/15 to-primary-500/10 border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80" alt="Featured" className="w-full h-full object-cover" />
+            <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-secondary-500 to-primary-500 flex items-center justify-center">
+              <span className="text-2xl font-black text-white">DJ</span>
             </div>
             <div className="flex-1 text-center sm:text-left">
               <p className="text-secondary-400 text-xs font-bold uppercase tracking-widest mb-1">Featured Artist</p>

@@ -56,9 +56,9 @@ export default function VideoCard({ video, className, compact = false }: VideoCa
 
         {/* Premium lock */}
         {video.isPremium && (
-          <div className="absolute top-2 right-2 flex items-center gap-1.5 bg-gold-DEFAULT/20 backdrop-blur-sm border border-gold-DEFAULT/40 px-2 py-1 rounded-lg">
-            <Lock size={11} className="text-gold-DEFAULT" />
-            <span className="text-[10px] font-bold text-gold-DEFAULT uppercase tracking-wider">Premium</span>
+          <div className="absolute top-2 right-2 flex items-center gap-1.5 bg-gold/20 backdrop-blur-sm border border-gold/40 px-2 py-1 rounded-lg">
+            <Lock size={11} className="text-gold" />
+            <span className="text-[10px] font-bold text-gold uppercase tracking-wider">Premium</span>
           </div>
         )}
 

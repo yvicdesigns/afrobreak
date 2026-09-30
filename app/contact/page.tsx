@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Instagram, Youtube, Facebook, Twitter, Music, Send, Check } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function ContactPage() {
+  const { tr } = useLanguage()
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
@@ -13,11 +14,10 @@ export default function ContactPage() {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) return
     setSending(true)
-    await supabase.from('contact_messages').insert({
-      name: form.name,
-      email: form.email,
-      subject: form.subject || null,
-      message: form.message,
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
     })
     setSending(false)
     setSent(true)
@@ -32,13 +32,13 @@ export default function ContactPage() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/30 mb-6">
             <Mail size={14} className="text-primary-500" />
-            <span className="text-sm font-semibold text-primary-400 tracking-widest uppercase">Get In Touch</span>
+            <span className="text-sm font-semibold text-primary-400 tracking-widest uppercase">{tr.contact.eyebrow}</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Contact <span className="gradient-text-orange">Us</span>
+            {tr.contact.title} <span className="gradient-text-orange">{tr.contact.titleAccent}</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Questions, partnerships, press inquiries — we'd love to hear from you.
+            {tr.contact.subtitle}
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
-              <h2 className="text-lg font-bold text-white">Contact Info</h2>
+              <h2 className="text-lg font-bold text-white">{tr.contact.contactInfo}</h2>
 
               {[
                 { icon: Mail, label: 'Email', value: 'contact@afrobreak.com', href: 'mailto:contact@afrobreak.com' },
@@ -71,7 +71,7 @@ export default function ContactPage() {
 
             {/* Social */}
             <div className="bg-surface border border-white/5 rounded-2xl p-6">
-              <h2 className="text-lg font-bold text-white mb-4">Follow Us</h2>
+              <h2 className="text-lg font-bold text-white mb-4">{tr.contact.followUs}</h2>
               <div className="flex flex-wrap gap-3">
                 {[
                   { icon: Instagram, href: 'https://www.instagram.com/afrobreak_concepts/', label: 'Instagram AfroBreak' },
@@ -91,7 +91,7 @@ export default function ContactPage() {
 
             {/* FAQ quick links */}
             <div className="bg-surface border border-white/5 rounded-2xl p-6">
-              <h2 className="text-lg font-bold text-white mb-4">Quick Topics</h2>
+              <h2 className="text-lg font-bold text-white mb-4">{tr.contact.quickTopics}</h2>
               <div className="space-y-2">
                 {['Partnership inquiry', 'Press & media', 'Event booking', 'Technical support', 'Sponsorship'].map(topic => (
                   <button key={topic} onClick={() => setForm(f => ({ ...f, subject: topic }))}
@@ -111,47 +111,47 @@ export default function ContactPage() {
                   <div className="w-16 h-16 bg-emerald-500/15 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Check size={28} className="text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">Message sent!</h3>
-                  <p className="text-text-secondary mb-6">We'll get back to you within 24–48 hours.</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{tr.contact.successTitle}</h3>
+                  <p className="text-text-secondary mb-6">{tr.contact.successDesc}</p>
                   <button onClick={() => setSent(false)} className="text-primary-500 hover:text-primary-400 text-sm font-semibold transition-colors">
-                    Send another message
+                    {tr.contact.sendAnother}
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <h2 className="text-xl font-bold text-white mb-6">Send a Message</h2>
+                  <h2 className="text-xl font-bold text-white mb-6">{tr.contact.sendMessage}</h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-white mb-1.5">Name <span className="text-red-400">*</span></label>
+                      <label className="block text-sm font-medium text-white mb-1.5">{tr.contact.name} <span className="text-red-400">*</span></label>
                       <input type="text" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                        placeholder="Your name" className="input-base" required />
+                        placeholder={tr.contact.namePlaceholder} className="input-base" required />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-white mb-1.5">Email <span className="text-red-400">*</span></label>
+                      <label className="block text-sm font-medium text-white mb-1.5">{tr.contact.email} <span className="text-red-400">*</span></label>
                       <input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                        placeholder="you@example.com" className="input-base" required />
+                        placeholder={tr.contact.emailPlaceholder} className="input-base" required />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1.5">Subject</label>
+                    <label className="block text-sm font-medium text-white mb-1.5">{tr.contact.subject}</label>
                     <input type="text" value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
-                      placeholder="What's this about?" className="input-base" />
+                      placeholder={tr.contact.subjectPlaceholder} className="input-base" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1.5">Message <span className="text-red-400">*</span></label>
+                    <label className="block text-sm font-medium text-white mb-1.5">{tr.contact.message} <span className="text-red-400">*</span></label>
                     <textarea value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                      placeholder="Tell us more..." rows={6} className="input-base resize-none" required />
+                      placeholder={tr.contact.messagePlaceholder} rows={6} className="input-base resize-none" required />
                   </div>
 
                   <button type="submit" disabled={sending}
                     className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-white bg-primary-500 hover:bg-primary-600 disabled:opacity-60 transition-all duration-200">
                     {sending ? (
-                      <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</span>
+                      <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {tr.contact.sending}</span>
                     ) : (
-                      <><Send size={16} /> Send Message</>
+                      <><Send size={16} /> {tr.contact.send}</>
                     )}
                   </button>
                 </form>

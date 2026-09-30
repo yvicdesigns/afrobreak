@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { getTeamMembers, getSetting } from '@/lib/db'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const values = [
   { icon: Zap, title: 'Inspiration', desc: 'We ignite passion and creativity in every young talent we work with, using the power of Hip Hop and breakdance as a catalyst.' },
@@ -65,19 +66,19 @@ const testimonials = [
     quote: "Winning AfroBreak wasn't just about the title — it was about proving to myself and my community that African breakers have a global voice. What I love about AfroBreak is it's not just about battling. It's about community building. The workshops, the organizers are very receptive, good floor, ambulance to take care of dancers, the energy — they invest in you beyond the stage. I left with new skills, friends across the continent, and big dreams.",
     name: 'Lil Vic',
     title: 'AfroBreak African Champion 2023',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
+    avatar: '',
   },
   {
     quote: "Before AfroBreak, I was only dancing in crews. The training camp and workshops by Africa Breaking Academy changed my whole mindset and perspective. I got mentored by Bboy Lyricx, learned new styles, and even gained educational scholarships to complete my education. I'm not just a dancer now.",
     name: 'Tris Naomi',
     title: 'AfroBreak Ghana National & Ivorie Breaking Competition African Champion 2023',
-    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80',
+    avatar: '',
   },
   {
     quote: "AfroBreak changed everything for me. I was lucky enough to represent Benin three consecutive years at the event. After winning, I received international exposure, mentorship, and even a chance to travel for a cultural exchange program. It was more than a competition — it was a life-changer.",
     name: 'Bboy Smith',
     title: 'AfroBreak African and France Champion 2024',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
+    avatar: '',
   },
 ]
 
@@ -88,13 +89,15 @@ const TikTokIcon = ({ size = 16 }: { size?: number }) => (
 )
 
 const defaultTeam = [
-  { id: 'd1', name: 'Nana Tuffour Okai', role: 'Founder & Creative Director', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80', bio: 'Professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Paris 2024 Olympics Hall of Fame inductee.', display_order: 0, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
-  { id: 'd2', name: 'Francis Feby', role: 'Finance & Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80', bio: 'Oversees the financial management and administrative operations of Africa Breaking Academy, ensuring sustainable growth and transparency.', display_order: 1, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
-  { id: 'd3', name: 'Christable Okai', role: 'Communication & Relationship Manager', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80', bio: 'Leads communications, media relations, and community partnerships for ABA and AfroBreak across Africa and the global diaspora.', display_order: 2, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
-  { id: 'd4', name: 'Maxwell Tetteh Neur', role: 'Project Coordinator & Advisory Board', avatar: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&q=80', bio: 'Project Coordinator and Advisory Board Member, supporting program delivery, stakeholder engagement, and strategic planning.', display_order: 3, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd1', name: 'Nana Tuffour Okai', role: 'Founder & Creative Director', avatar: '', bio: 'Professionally known as Bboy Lyricx — pioneer of Afrobreak, co-founder of ABA, WDSF licensed athlete, Paris 2024 Olympics Hall of Fame inductee.', display_order: 0, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd2', name: 'Francis Feby', role: 'Finance & Administration', avatar: '', bio: 'Oversees the financial management and administrative operations of Africa Breaking Academy, ensuring sustainable growth and transparency.', display_order: 1, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd3', name: 'Christable Okai', role: 'Communication & Relationship Manager', avatar: '', bio: 'Leads communications, media relations, and community partnerships for ABA and AfroBreak across Africa and the global diaspora.', display_order: 2, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
+  { id: 'd4', name: 'Maxwell Tetteh Neur', role: 'Project Coordinator & Advisory Board', avatar: '', bio: 'Project Coordinator and Advisory Board Member, supporting program delivery, stakeholder engagement, and strategic planning.', display_order: 3, instagram: '', tiktok: '', facebook: '', twitter: '', youtube: '' },
 ]
 
 export default function AboutPage() {
+  const { tr } = useLanguage()
+  const [loading, setLoading] = useState(true)
   const [team, setTeam] = useState(defaultTeam)
   const [stats, setStats] = useState([
     { value: '28+', label: 'African Countries' },
@@ -111,12 +114,26 @@ export default function AboutPage() {
   const [selectedMember, setSelectedMember] = useState<typeof defaultTeam[0] | null>(null)
 
   useEffect(() => {
-    getTeamMembers().then(data => { if (data.length > 0) setTeam(data as typeof defaultTeam) })
-    getSetting('about_stats').then(v => { if (v) try { setStats(JSON.parse(v)) } catch {} })
-    getSetting('about_testimonials').then(v => { if (v) try { setActiveTestimonials(JSON.parse(v)) } catch {} })
-    getSetting('about_timeline').then(v => { if (v) try { setActiveTimeline(JSON.parse(v)) } catch {} })
-    getSetting('pioneer_photo').then(v => { if (v) setPioneerPhoto(v) })
+    Promise.all([
+      getTeamMembers(),
+      getSetting('about_stats'),
+      getSetting('about_testimonials'),
+      getSetting('about_timeline'),
+      getSetting('pioneer_photo'),
+    ]).then(([teamData, statsV, testiV, timelineV, pioneerV]) => {
+      if (teamData.length > 0) setTeam(teamData as typeof defaultTeam)
+      if (statsV) try { setStats(JSON.parse(statsV)) } catch {}
+      if (testiV) try { setActiveTestimonials(JSON.parse(testiV)) } catch {}
+      if (timelineV) try { setActiveTimeline(JSON.parse(timelineV)) } catch {}
+      if (pioneerV) setPioneerPhoto(pioneerV)
+    }).finally(() => setLoading(false))
   }, [])
+
+  if (loading) return (
+    <div className="min-h-screen pt-20 bg-background flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
 
   return (
     <div className="min-h-screen pt-20 bg-background">
@@ -140,7 +157,7 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">Who We Are</p>
+            <p className="text-secondary-400 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.whoWeAre}</p>
             <h2 className="text-3xl font-black text-white mb-6">The African Dance Organization with 21+ Country Reach</h2>
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>Africa Breaking Academy (ABA) is specialized in dance sports events, Hip Hop, educational workshops, dance and media commercials, dance activations, and productions.</p>
@@ -167,18 +184,18 @@ export default function AboutPage() {
       <div className="bg-surface border-y border-white/5 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">What We Stand For</p>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.whatWeStandFor}</p>
             <h2 className="text-3xl font-black text-white">Our Vision, Mission & Values</h2>
           </div>
 
           {/* Vision & Mission */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             <div className="p-6 rounded-2xl bg-background border border-primary-500/20">
-              <p className="text-primary-500 text-xs font-bold uppercase tracking-widest mb-3">Vision</p>
+              <p className="text-primary-500 text-xs font-bold uppercase tracking-widest mb-3">{tr.about.visionTitle}</p>
               <p className="text-text-secondary leading-relaxed">To become a global leader in empowering youth through breakdancing as a dance sport and Hip-Hop culture, fostering creativity, resilience, and social transformation in African communities and beyond.</p>
             </div>
             <div className="p-6 rounded-2xl bg-background border border-secondary-500/20">
-              <p className="text-secondary-400 text-xs font-bold uppercase tracking-widest mb-3">Mission</p>
+              <p className="text-secondary-400 text-xs font-bold uppercase tracking-widest mb-3">{tr.about.missionLabel}</p>
               <p className="text-text-secondary leading-relaxed">To inspire and empower individuals through innovative sports and Hip-Hop programs, creating inclusive opportunities for education, cultural exchange, and social impact across Africa — nurturing talent, promoting gender equity, and building sustainable partnerships.</p>
             </div>
           </div>
@@ -201,7 +218,7 @@ export default function AboutPage() {
       {/* AfroBreak Championship */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">The Championship</p>
+          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.theChampionship}</p>
           <h2 className="text-3xl font-black text-white mb-4">AfroBreak International Championship</h2>
           <p className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
             A high-level community development concept for building a sustainable dance sport, art, and Hip Hop industry in Ghana — leveraging the huge success of breakdancing at Paris 2024 Olympics and the upcoming Dakar 2026 Youth Olympics. Afrobreak, a fusion of Afro and breaking, blends the mesmerizing rhythms of Afro-music with the acrobatic artistry of breakdancing. It is more than a competition — it&apos;s a celebration of diversity, a collision of traditions, and a stage where talent knows no boundaries.
@@ -225,13 +242,13 @@ export default function AboutPage() {
             onClick={() => setChampExpanded(v => !v)}
             className="mt-5 inline-flex items-center gap-1.5 text-primary-400 hover:text-primary-300 font-semibold transition-colors text-xs uppercase tracking-widest"
           >
-            {champExpanded ? '↑ Show less' : '↓ Read more'}
+            {champExpanded ? `↑ ${tr.about.showLess}` : `↓ ${tr.about.readMore}`}
           </button>
         </div>
 
         {/* Countries */}
         <div className="bg-surface border border-white/5 rounded-2xl p-8">
-          <p className="text-center text-sm font-semibold text-primary-500 uppercase tracking-widest mb-6">Represented Countries</p>
+          <p className="text-center text-sm font-semibold text-primary-500 uppercase tracking-widest mb-6">{tr.about.representedCountries}</p>
           <div className="flex flex-wrap gap-3 justify-center">
             {countries.map(country => (
               <button
@@ -267,7 +284,7 @@ export default function AboutPage() {
                 <div className="text-7xl mb-3 leading-none">{selectedCountry.flag}</div>
                 <h3 className="text-2xl font-black text-white">{selectedCountry.name}</h3>
                 <span className="inline-block mt-2 text-xs px-3 py-1 rounded-full bg-primary-500/20 border border-primary-500/30 text-primary-400 font-semibold uppercase tracking-widest">
-                  Hiphop Culture
+                  {tr.about.hipHopCulture}
                 </span>
               </div>
               {/* Body */}
@@ -283,8 +300,8 @@ export default function AboutPage() {
       <div className="bg-surface border-y border-white/5 py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">The Pioneer</p>
-            <h2 className="text-3xl font-black text-white">About The Founder</h2>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.thePioneer}</p>
+            <h2 className="text-3xl font-black text-white">{tr.about.aboutFounder}</h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
             <div className="text-center">
@@ -296,7 +313,7 @@ export default function AboutPage() {
               <p className="text-primary-500 text-sm font-semibold mt-1">Nana Tuffour Okai</p>
               <p className="text-text-secondary text-xs mt-1">Co-Founder, Africa Breaking Academy</p>
               <div className="mt-4 space-y-1">
-                <span className="block text-xs px-3 py-1 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/20 text-gold-DEFAULT">Paris 2024 Olympics Hall of Fame</span>
+                <span className="block text-xs px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold">Paris 2024 Olympics Hall of Fame</span>
                 <span className="block text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-secondary">WDSF Licensed Athlete</span>
                 <span className="block text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-secondary">36+ Countries</span>
               </div>
@@ -318,7 +335,7 @@ export default function AboutPage() {
                 onClick={() => setBioExpanded(v => !v)}
                 className="inline-flex items-center gap-1.5 text-primary-400 hover:text-primary-300 font-semibold transition-colors text-xs uppercase tracking-widest"
               >
-                {bioExpanded ? '↑ Show less' : '↓ Read more'}
+                {bioExpanded ? `↑ ${tr.about.showLess}` : `↓ ${tr.about.readMore}`}
               </button>
             </div>
           </div>
@@ -328,8 +345,8 @@ export default function AboutPage() {
       {/* Timeline */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Since 2021</p>
-          <h2 className="text-3xl font-black text-white">Our Journey</h2>
+          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.sinceYear}</p>
+          <h2 className="text-3xl font-black text-white">{tr.about.ourJourney}</h2>
         </div>
         <div className="relative">
           <div className="absolute left-16 top-0 bottom-0 w-px bg-white/10" />
@@ -354,8 +371,8 @@ export default function AboutPage() {
       <div className="bg-surface border-y border-white/5 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">What We Offer</p>
-            <h2 className="text-3xl font-black text-white">Our Services</h2>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.whatWeOffer}</p>
+            <h2 className="text-3xl font-black text-white">{tr.about.ourServices}</h2>
             <p className="text-text-secondary mt-3 max-w-xl mx-auto">At Afro Break Concepts, we offer a range of creative and technical services designed to support individuals, organizations, and brands in the arts, culture, and entertainment sectors.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -387,8 +404,8 @@ export default function AboutPage() {
         <div className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">The People</p>
-              <h2 className="text-3xl font-black text-white">Meet the Team</h2>
+              <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.thePeople}</p>
+              <h2 className="text-3xl font-black text-white">{tr.about.meetTheTeam}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {team.map(member => (
@@ -409,7 +426,7 @@ export default function AboutPage() {
                   <h3 className="font-bold text-white mb-1">{member.name}</h3>
                   <p className="text-primary-500 text-xs font-semibold mb-2">{member.role}</p>
                   <p className="text-xs text-text-secondary leading-relaxed line-clamp-2">{member.bio}</p>
-                  <p className="text-[10px] text-primary-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">View profile →</p>
+                  <p className="text-[10px] text-primary-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">{tr.about.viewProfile} →</p>
                 </button>
               ))}
             </div>
@@ -421,8 +438,8 @@ export default function AboutPage() {
       <div className="bg-surface border-y border-white/5 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Beneficiaries & Participants</p>
-            <h2 className="text-3xl font-black text-white">What They Say</h2>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.about.beneficiaries}</p>
+            <h2 className="text-3xl font-black text-white">{tr.about.whatTheySay}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {activeTestimonials.map((t, i) => (
@@ -430,7 +447,13 @@ export default function AboutPage() {
                 <Quote size={24} className="text-primary-500/40 mb-4 flex-shrink-0" />
                 <p className="text-text-secondary text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-3">
-                  <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary-500/30 flex-shrink-0" />
+                  {t.avatar ? (
+                    <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary-500/30 flex-shrink-0" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-sm font-black text-white ring-2 ring-primary-500/30 flex-shrink-0">
+                      {t.name.split(' ').map((w: string) => w[0]).slice(0, 2).join('')}
+                    </div>
+                  )}
                   <div>
                     <p className="font-bold text-white text-sm">{t.name}</p>
                     <p className="text-primary-500 text-xs mt-0.5">{t.title}</p>
@@ -444,10 +467,10 @@ export default function AboutPage() {
 
       {/* CTA */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h2 className="text-3xl font-black text-white mb-4">Ready to join the movement?</h2>
+        <h2 className="text-3xl font-black text-white mb-4">{tr.about.joinMovement}</h2>
         <p className="text-text-secondary mb-8">Join thousands of dancers already learning, connecting, and growing with AfroBreak.</p>
         <Link href="/auth/signup">
-          <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>Get Started Free</Button>
+          <Button variant="primary" size="lg" rightIcon={<ArrowRight size={18} />}>{tr.about.getStartedFree}</Button>
         </Link>
       </div>
 

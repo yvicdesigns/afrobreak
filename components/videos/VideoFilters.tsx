@@ -3,6 +3,7 @@
 import { SlidersHorizontal } from 'lucide-react'
 import clsx from 'clsx'
 import type { VideoCategory } from '@/lib/types'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const categories: (VideoCategory | 'All')[] = ['All', 'Interview', 'Battle', 'Workshop', 'Documentary', 'Tutorial', 'Podcast', 'Talks', 'After Movie', 'Contemporary']
 
@@ -45,13 +46,15 @@ export default function VideoFilters({
   showPremiumOnly = false,
   onPremiumToggle,
 }: VideoFiltersProps) {
+  const { tr } = useLanguage()
+
   return (
     <div className="space-y-4">
       {/* Category pills */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-1.5 text-text-secondary mr-2 flex-shrink-0">
           <SlidersHorizontal size={15} />
-          <span className="text-sm font-medium">Filter:</span>
+          <span className="text-sm font-medium">{tr.videos.filterLabel}</span>
         </div>
         {categories.map(cat => (
           <button
@@ -62,7 +65,7 @@ export default function VideoFilters({
               selectedCategory === cat ? categoryActiveColors[cat] : categoryColors[cat]
             )}
           >
-            {cat}
+            {(tr.videos.categories as Record<string, string>)[cat] ?? cat}
           </button>
         ))}
 
@@ -72,11 +75,11 @@ export default function VideoFilters({
             className={clsx(
               'flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200',
               showPremiumOnly
-                ? 'bg-gold-DEFAULT/20 text-gold-DEFAULT border-gold-DEFAULT/40'
+                ? 'bg-gold/20 text-gold border-gold/40'
                 : 'bg-white/5 text-text-secondary border-white/10 hover:border-white/30 hover:text-white'
             )}
           >
-            ★ Premium Only
+            {tr.videos.premiumOnlyFilter}
           </button>
         )}
       </div>

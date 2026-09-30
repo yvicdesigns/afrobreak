@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Mail, Lock, User, Eye, EyeOff, Play, Chrome, CheckCircle } from 'lucide-react'
+import { Mail, Lock, User, Eye, EyeOff, Chrome, CheckCircle } from 'lucide-react'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
 
@@ -58,14 +58,8 @@ export default function SignupPage() {
       <div className="w-full max-w-lg relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-glow-orange">
-              <Play size={16} className="text-white fill-white ml-0.5" />
-            </div>
-            <span className="text-2xl font-black">
-              <span className="text-primary-500">AFRO</span>
-              <span className="text-white">BREAK</span>
-            </span>
+          <Link href="/" className="inline-flex items-center justify-center mb-6">
+            <img src="/logo-auth.png" alt="AfroBreak" className="h-24 w-auto object-contain" />
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Join the community</h1>
           <p className="text-text-secondary">Start your dance journey today — it&apos;s free</p>

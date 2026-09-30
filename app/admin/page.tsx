@@ -21,7 +21,7 @@ const barData = [
 const quickActions = [
   { label: 'Upload Video', href: '/admin/videos', icon: Video, color: 'text-primary-500' },
   { label: 'Add Event', href: '/admin/events', icon: Calendar, color: 'text-secondary-400' },
-  { label: 'Write Post', href: '/admin/blog', icon: BookOpen, color: 'text-gold-DEFAULT' },
+  { label: 'Write Post', href: '/admin/blog', icon: BookOpen, color: 'text-gold' },
 ]
 
 function formatViews(n: number): string {
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
   const stats = [
     { label: 'Total Videos', value: videos.length, icon: Video, color: 'text-primary-500', bg: 'bg-primary-500/10', change: 'Live from database', positive: true },
     { label: 'Total Events', value: eventCount, icon: Calendar, color: 'text-secondary-400', bg: 'bg-secondary-500/10', change: 'Live from database', positive: true },
-    { label: 'Blog Posts', value: postCount, icon: BookOpen, color: 'text-gold-DEFAULT', bg: 'bg-gold-DEFAULT/10', change: 'Live from database', positive: true },
+    { label: 'Blog Posts', value: postCount, icon: BookOpen, color: 'text-gold', bg: 'bg-gold/10', change: 'Live from database', positive: true },
     { label: 'Active Users', value: '—', icon: Users, color: 'text-emerald-400', bg: 'bg-emerald-500/10', change: 'Connect analytics', positive: true },
     { label: 'Monthly Revenue', value: '—', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-500/10', change: 'Connect Stripe', positive: true },
   ]
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
                   </td>
                   <td className="p-4 text-center">
                     {video.isPremium ? (
-                      <span className="px-2 py-0.5 rounded-full bg-gold-DEFAULT/15 text-gold-DEFAULT text-[10px] font-bold">YES</span>
+                      <span className="px-2 py-0.5 rounded-full bg-gold/15 text-gold text-[10px] font-bold">YES</span>
                     ) : (
                       <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">FREE</span>
                     )}

@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, X, Save, MapPin, Clock } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Save, MapPin, Clock, Briefcase } from 'lucide-react'
 import { getJobs, createJob, updateJob, deleteJob } from '@/lib/db'
+import { supabase } from '@/lib/supabase'
 
 type Job = {
   id: string
@@ -20,17 +21,72 @@ const empty: Omit<Job, 'id'> = {
   description: '', requirements: [], active: true
 }
 
+const SQL = `create table if not exists jobs (
+  id text primary key,
+  title text not null,
+  department text,
+  location text,
+  type text default 'Full-time',
+  description text,
+  requirements jsonb default '[]',
+  active boolean default true,
+  created_at timestamptz default now()
+);
+alter table jobs add column if not exists active boolean default true;
+alter table jobs enable row level security;
+create policy "Public read jobs" on jobs for select using (true);
+create policy "Auth write jobs" on jobs for all to authenticated using (true) with check (true);`
+
+const defaultJobs: Omit<Job, 'id'>[] = [
+  { title: 'Photographer', department: 'Creative', location: 'Accra / Remote', type: 'Full-time', active: true, description: "Capture the energy, culture, and emotion of AfroBreak events, workshops, and artists. Your images will tell the story of Africa's breaking movement to the world.", requirements: ['3+ years professional photography experience', 'Strong portfolio in events, dance, or sports photography', 'Proficiency in Adobe Lightroom / Photoshop', 'Based in or near Accra, Ghana'] },
+  { title: 'Editorial Director', department: 'Editorial', location: 'Accra / Remote', type: 'Full-time', active: true, description: "Lead AfroBreak's editorial vision across digital content, blog, press releases, and brand communications. Shape how we tell the story of breaking and hiphop culture in Africa.", requirements: ['5+ years editorial or content leadership experience', 'Deep knowledge of African music and dance culture', 'Fluent in English', 'Experience managing writers and creative contributors'] },
+  { title: 'Content & Video Producer', department: 'Content', location: 'Accra', type: 'Full-time', active: true, description: 'Lead the production of dance tutorials, event recaps, and documentary content. Work directly with our instructor team and Global Ambassadors to create world-class video content.', requirements: ['3+ years video production experience', 'Experience with dance or sports content', 'Proficiency in Adobe Premiere or Final Cut Pro', 'Strong eye for cultural authenticity'] },
+  { title: 'Creative Writer', department: 'Editorial', location: 'Accra / Remote', type: 'Part-time', active: true, description: 'Write compelling articles, artist profiles, event coverage, and cultural pieces for the AfroBreak platform and blog. Bring breaking culture to life through words.', requirements: ['Strong writing and storytelling skills', 'Passion for Afro and urban dance culture', 'Experience writing for digital media or blogs', 'Ability to deliver quality work on deadline'] },
+  { title: 'Marketing Manager', department: 'Marketing', location: 'Accra / Remote', type: 'Full-time', active: true, description: "Drive growth through digital marketing, event promotion, partnerships, and community campaigns. Own AfroBreak's acquisition and retention strategy across Africa and the diaspora.", requirements: ['4+ years digital marketing experience', 'Experience with cultural or community-led brands', 'Strong understanding of social media (Instagram, TikTok, YouTube)', 'Data-driven approach with creative sensibility'] },
+  { title: 'Community Manager', department: 'Community', location: 'Accra / Remote', type: 'Full-time', active: true, description: 'Build and manage the AfroBreak community across online platforms and in-person events. Engage members, onboard new participants, and create a welcoming space for dancers, artists, and hiphop practitioners across Africa.', requirements: ['2+ years community management experience', 'Deep passion for hiphop and dance culture', 'Excellent communication skills in English', 'Experience managing social media communities and events'] },
+  { title: 'Coach', department: 'Training', location: 'Accra', type: 'Full-time', active: true, description: 'Lead training sessions and camps for dancers at all levels — from youth beginners to competitive athletes. Work alongside our instructors and Global Ambassadors to develop talent and prepare participants for local and international competitions.', requirements: ['Proven coaching experience in dance or sports', 'Knowledge of breaking, hiphop, and Afro dance disciplines', 'Ability to motivate and develop young athletes', 'Experience with competition preparation and performance training'] },
+  { title: 'Instructor', department: 'Training', location: 'Accra / Remote', type: 'Part-time', active: true, description: "Teach dance classes and workshops in person and online. Deliver high-quality instruction in breaking, hiphop, Afro dance, or related styles to students of all ages and skill levels, representing AfroBreak's values of culture, excellence, and empowerment.", requirements: ['Proficiency in at least one hiphop/breaking/Afro dance style', 'Experience teaching or facilitating dance workshops', 'Ability to engage and inspire diverse groups', 'Passion for cultural education and youth development'] },
+]
+
 export default function AdminJobsPage() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
+  const [dbError, setDbError] = useState(false)
+  const [sqlCopied, setSqlCopied] = useState(false)
+  const [seeding, setSeeding] = useState(false)
+  const [seedError, setSeedError] = useState<string | null>(null)
   const [modal, setModal] = useState<null | 'create' | Job>(null)
   const [form, setForm] = useState<Omit<Job, 'id'>>(empty)
   const [reqInput, setReqInput] = useState('')
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    getJobs().then(data => { setJobs(data as Job[]); setLoading(false) })
+    // Use direct supabase to properly detect table-not-found (42P01)
+    supabase.from('jobs').select('*').order('title').then(({ data, error }) => {
+      if (error?.code === '42P01') setDbError(true)
+      else setJobs((data || []) as Job[])
+      setLoading(false)
+    })
   }, [])
+
+  const seedDefaults = async () => {
+    setSeeding(true)
+    setSeedError(null)
+    for (const { active: _ignored, ...rest } of defaultJobs) {
+      const { error } = await supabase.from('jobs').insert({
+        id: crypto.randomUUID(),
+        ...rest,
+      })
+      if (error) {
+        setSeedError(error.message)
+        setSeeding(false)
+        return
+      }
+    }
+    const { data } = await supabase.from('jobs').select('*').order('title')
+    setJobs((data || []) as Job[])
+    setSeeding(false)
+  }
 
   const openCreate = () => { setForm(empty); setReqInput(''); setModal('create') }
   const openEdit = (j: Job) => {
@@ -74,17 +130,49 @@ export default function AdminJobsPage() {
     <div className="p-6 max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-black text-white">Job Listings</h1>
-          <p className="text-text-secondary text-sm mt-1">Manage open positions shown on the Careers page</p>
+          <h1 className="text-2xl font-black text-white flex items-center gap-2"><Briefcase size={22} className="text-primary-500" /> Job Listings</h1>
+          <p className="text-text-secondary text-sm mt-1">Manage open positions shown on the Careers page · {jobs.length} postes</p>
         </div>
-        <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold">
+        <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl hover:bg-primary-400 transition-colors text-sm font-semibold">
           <Plus size={16} /> Add Job
         </button>
       </div>
 
+      {dbError && (
+        <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-sm text-amber-300">
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-semibold">Table not found. Run this SQL in Supabase:</p>
+            <button onClick={() => { navigator.clipboard.writeText(SQL); setSqlCopied(true); setTimeout(() => setSqlCopied(false), 2000) }}
+              className="text-xs px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 transition-colors">
+              {sqlCopied ? '✓ Copied' : 'Copy SQL'}
+            </button>
+          </div>
+          <pre className="text-xs bg-black/30 p-3 rounded-lg overflow-auto max-h-40 whitespace-pre-wrap">{SQL}</pre>
+        </div>
+      )}
+
+      {!dbError && jobs.length === 0 && !loading && (
+        <div className="mb-6 p-5 bg-primary-500/10 border border-primary-500/30 rounded-2xl space-y-3">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-white font-semibold text-sm">Aucun poste dans la base de données</p>
+              <p className="text-text-secondary text-xs mt-0.5">Importer les {defaultJobs.length} postes actuels du site en un clic</p>
+            </div>
+            <button
+              onClick={seedDefaults}
+              disabled={seeding}
+              className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-[#0D0A1A] rounded-xl font-bold text-sm hover:bg-primary-400 transition-colors disabled:opacity-60 flex-shrink-0"
+            >
+              {seeding ? <><div className="w-3.5 h-3.5 border-2 border-[#0D0A1A] border-t-transparent rounded-full animate-spin" /> Importation...</> : '⬆ Charger les données du site'}
+            </button>
+          </div>
+          {seedError && <p className="text-red-400 text-xs">Erreur lors de l'import : {seedError}</p>}
+        </div>
+      )}
+
       {loading ? (
-        <div className="text-text-secondary text-center py-20">Loading...</div>
-      ) : jobs.length === 0 ? (
+        <div className="flex items-center justify-center h-40"><div className="w-8 h-8 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" /></div>
+      ) : jobs.length === 0 && !dbError ? (
         <div className="text-center py-20 text-text-secondary">No job listings yet.</div>
       ) : (
         <div className="space-y-3">
@@ -169,7 +257,7 @@ export default function AdminJobsPage() {
             </div>
             <div className="flex gap-3 pt-2">
               <button onClick={() => setModal(null)} className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm transition-colors">Cancel</button>
-              <button onClick={handleSave} disabled={saving || !form.title} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">
+              <button onClick={handleSave} disabled={saving || !form.title} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:opacity-50 text-[#0D0A1A] rounded-xl text-sm font-semibold transition-colors">
                 <Save size={14} /> {saving ? 'Saving...' : 'Save'}
               </button>
             </div>

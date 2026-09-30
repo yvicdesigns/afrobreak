@@ -11,36 +11,65 @@ interface ImageUploadProps {
   folder?: string // e.g. 'thumbnails', 'covers', 'avatars'
 }
 
+async function compressImage(file: File, maxPx = 1200, quality = 0.82): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      URL.revokeObjectURL(url)
+      let { width, height } = img
+      if (width > maxPx || height > maxPx) {
+        if (width > height) { height = Math.round((height * maxPx) / width); width = maxPx }
+        else { width = Math.round((width * maxPx) / height); height = maxPx }
+      }
+      const canvas = document.createElement('canvas')
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')!
+      ctx.drawImage(img, 0, 0, width, height)
+      canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Compression failed')), 'image/webp', quality)
+    }
+    img.onerror = reject
+    img.src = url
+  })
+}
+
 export default function ImageUpload({ value, onChange, label = 'Image', folder = 'uploads' }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
+  const [compressing, setCompressing] = useState(false)
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       setError('Please select an image file')
       return
     }
-
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('Image must be under 5MB')
+    if (file.size > 20 * 1024 * 1024) {
+      setError('Image must be under 20MB')
       return
     }
 
     setError('')
+    setCompressing(true)
+
+    let blob: Blob
+    try {
+      blob = await compressImage(file)
+    } catch {
+      blob = file
+    }
+    setCompressing(false)
     setUploading(true)
 
-    const ext = file.name.split('.').pop()
-    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`
 
     const { data, error: uploadError } = await supabase.storage
       .from('media')
-      .upload(fileName, file, { upsert: false })
+      .upload(fileName, blob, { upsert: false, contentType: 'image/webp' })
 
     if (uploadError || !data) {
       setError('Upload failed. Please try again.')
@@ -86,11 +115,11 @@ export default function ImageUpload({ value, onChange, label = 'Image', folder =
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          disabled={uploading}
+          disabled={uploading || compressing}
           className="flex items-center gap-1.5 px-3 py-2 bg-primary-500/20 hover:bg-primary-500/30 disabled:opacity-50 text-primary-400 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap flex-shrink-0"
         >
-          {uploading ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
-          {uploading ? 'Uploading…' : 'Upload'}
+          {(compressing || uploading) ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
+          {compressing ? 'Compressing…' : uploading ? 'Uploading…' : 'Upload'}
         </button>
       </div>
 

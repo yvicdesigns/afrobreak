@@ -7,6 +7,7 @@ import { blogPosts as defaultPosts } from '@/lib/data'
 import type { BlogPost, BlogCategory } from '@/lib/types'
 import BlogCard from '@/components/blog/BlogCard'
 import { BookOpen } from 'lucide-react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const categories: (BlogCategory | 'All')[] = ['All', 'Interviews', 'Documentary', 'Podcast', 'Talks', 'Lifestyle', 'News']
 
@@ -31,6 +32,7 @@ const catActiveColors: Record<string, string> = {
 }
 
 export default function BlogPage() {
+  const { tr } = useLanguage()
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory | 'All'>('All')
 
@@ -52,14 +54,14 @@ export default function BlogPage() {
         <section className="relative py-10 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 mb-4">
-                <BookOpen size={14} className="text-gold-DEFAULT" />
-                <span className="text-sm font-semibold text-gold-DEFAULT uppercase tracking-widest">
-                  The AfroBreak Journal
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/15 border border-gold/30 mb-4">
+                <BookOpen size={14} className="text-gold" />
+                <span className="text-sm font-semibold text-gold uppercase tracking-widest">
+                  {tr.blog.journal}
                 </span>
               </div>
               <h1 className="heading-lg text-white">
-                Stories for <span className="gradient-text-orange">Dancers</span>
+                {tr.blog.storiesDancers.split(' ').slice(0, -1).join(' ')} <span className="gradient-text-orange">{tr.blog.storiesDancers.split(' ').slice(-1)[0]}</span>
               </h1>
             </div>
             <BlogCard post={featured} featured />
@@ -79,23 +81,23 @@ export default function BlogPage() {
                   selectedCategory === cat ? catActiveColors[cat] : catColors[cat]
                 )}
               >
-                {cat}
+                {(tr.blog.categories as Record<string, string>)[cat] ?? cat}
               </button>
             ))}
           </div>
 
           <p className="text-sm text-text-secondary mb-6">
-            <span className="text-white font-semibold">{filtered.length}</span> article{filtered.length !== 1 ? 's' : ''}
+            <span className="text-white font-semibold">{filtered.length}</span> {filtered.length !== 1 ? 'articles' : 'article'}
             {selectedCategory !== 'All' && (
-              <span> in <span className="text-primary-400">{selectedCategory}</span></span>
+              <span> {tr.blog.inCategory} <span className="text-primary-400">{(tr.blog.categories as Record<string, string>)[selectedCategory] ?? selectedCategory}</span></span>
             )}
           </p>
 
           {filtered.length === 0 ? (
             <div className="text-center py-24">
               <BookOpen size={48} className="text-text-muted mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">No articles found</h3>
-              <p className="text-text-secondary">More content coming soon in this category.</p>
+              <h3 className="text-xl font-bold text-white mb-2">{tr.blog.noArticles}</h3>
+              <p className="text-text-secondary">{tr.blog.comingSoonCat}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

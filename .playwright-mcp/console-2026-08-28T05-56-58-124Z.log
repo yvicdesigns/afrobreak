@@ -1,0 +1,1303 @@
+[    4853ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/profiles?select=*&id=eq.bbe9d259-39fd-486d-9a26-67f1569250bd:0
+[   49538ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/cookies?_rsc=14ufp:0
+[59053660ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59053660ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59053869ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59053870ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59054277ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59054277ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59055085ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59055085ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59056693ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59056693ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59059900ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59059900ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59066307ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59066308ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59079118ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59079118ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59083659ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59083659ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59083866ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59083867ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59084275ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59084276ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59085085ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59085085ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59086696ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59086696ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59089902ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59089902ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[59096311ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[59096311ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[62722826ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[62722826ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:32249 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[62723126ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[62723127ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138335315ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138335315ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138335524ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138335524ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138335933ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138335933ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138336742ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138336742ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138338351ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138338351ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138341562ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138341563ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138347970ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138347970ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138360781ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138360781ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138365315ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138365315ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138365523ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138365523ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138365931ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138365931ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138366742ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138366742ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138368347ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138368347ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[138371556ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[138371556ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[139340876ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[139340877ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140591642ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140591642ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140591850ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140591850ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140592257ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140592257ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140593065ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140593065ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140594674ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140594675ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140597884ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140597884ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140604294ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140604294ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140617103ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140617103ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140621643ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140621643ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140621851ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140621851ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140622256ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140622256ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140623065ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140623065ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140624675ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140624675ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[140627883ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[140627884ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[141988117ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[141988117ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142005356ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142005356ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142005566ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142005566ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142005976ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142005976ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142006786ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142006786ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142008395ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142008395ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142011606ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142011606ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142018016ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142018016ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142030825ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142030825ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142960332ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142960332ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142960539ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142960539ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142960948ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142960948ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142961758ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142961758ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[142963366ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[142963367ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143898242ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143898242ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143922002ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143922002ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143922206ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143922206ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143922615ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143922616ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143923424ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143923425ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143925034ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143925034ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143928243ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143928243ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[143934653ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[143934653ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[144920416ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[144920416ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145650489ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145650489ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145650696ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145650696ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145651107ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145651107ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145651915ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145651915ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145653525ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145653525ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145656735ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145656735ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145663142ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145663142ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145675953ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145675953ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145680490ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145680490ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145680700ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145680700ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145681109ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145681109ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145681918ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145681918ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145683528ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145683528ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145686738ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145686738ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[145693146ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[145693146ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[148667244ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[148667244ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[148671779ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[148671779ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[148671986ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[148671986ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149308134ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149308134ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149337466ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149337466ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149337673ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149337673ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149338081ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149338081ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149338888ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149338888ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149340498ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149340499ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149343708ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149343709ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[149350118ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[149350118ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[151251649ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[151251649ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152176951ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152176952ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152177160ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152177160ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152177569ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152177569ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152178378ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152178378ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152179987ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152179987ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152970955ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152970955ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152994714ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152994714ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152994922ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152994922ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152995331ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152995331ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152996138ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152996138ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[152997746ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[152997746ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[153000953ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[153000953ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[153007363ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[153007363ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[153970202ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[153970202ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[154968412ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[154968412ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[154968620ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[154968620ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[154969027ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[154969028ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[155909510ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[155909510ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156651757ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156651757ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156651964ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156651964ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156652373ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156652373ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156653180ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156653180ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156654788ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156654788ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156657998ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156657998ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[156664409ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[156664409ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[157700233ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[157700233ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[158759533ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[158759533ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[158759742ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[158759743ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[158760153ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[158760153ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[158760961ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[158760961ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[158762570ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[158762570ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[159761537ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[159761537ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160308956ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160308956ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160309162ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160309162ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160309569ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160309569ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160310379ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160310379ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160311988ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160311988ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160315199ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160315199ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160321608ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160321609ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[160334419ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[160334420ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[161410969ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[161410969ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[161411176ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[161411177ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[161411585ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[161411585ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[162483176ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[162483176ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163965984ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163965984ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163966192ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163966192ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163966601ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163966601ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163967410ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163967410ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163969018ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163969018ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163972226ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163972226ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163978634ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163978634ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[163991444ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[163991444ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[164951045ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[164951045ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[164951252ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[164951252ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[164951659ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[164951659ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[164952466ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[164952466ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[164954075ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[164954075ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[165968051ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[165968051ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166881085ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166881085ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166881290ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166881290ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166881695ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166881695ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166882500ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166882500ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166884106ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166884106ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166887312ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166887312ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166893720ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166893720ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166906527ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166906528ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166911089ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166911089ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25905
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25976
+    at new Promise (<anonymous>)
+    at rH._refreshAccessToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25836)
+    at rH._callRefreshToken (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:28605)
+    at rH.__loadSession (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:14624) @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166911298ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166911298ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166911708ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166911708ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166912517ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166912517ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166914125ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166914125ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0
+[166917332ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://ekmxmgshowdaxoewyjut.supabase.co/auth/v1/token?grant_type=refresh_token:0
+[166917332ms] [ERROR] TypeError: Failed to fetch
+    at https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:34717
+    at t7 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39757)
+    at t9 (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:44:39501)
+    at r (https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25659)
+    at async https://www.afrobreak.com/_next/static/chunks/1192-b18af12e5f525b00.js:57:25899 @ https://www.afrobreak.com/_next/static/chunks/7023-45e810f51e1a332a.js:0

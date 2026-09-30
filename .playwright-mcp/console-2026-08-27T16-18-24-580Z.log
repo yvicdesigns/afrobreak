@@ -1,0 +1,4 @@
+[    8096ms] [INFO] Redirecting navigation afrobreak.com -> www.afrobreak.com because the server presented a certificate valid for www.afrobreak.com but not for afrobreak.com. To disable such redirects launch Chrome with the following flag: --disable-features=SSLCommonNameMismatchHandling @ https://www.afrobreak.com/:0
+[  298862ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/favicon.ico:0
+[  356452ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/favicon.ico:0
+[  362905ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/cookies?_rsc=14ufp:0

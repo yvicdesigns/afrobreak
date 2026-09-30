@@ -10,18 +10,20 @@ import { getVideos, updateProfile, toggleFavorite, toggleWatchLater } from '@/li
 import type { Video } from '@/lib/types'
 import VideoCard from '@/components/videos/VideoCard'
 import Button from '@/components/ui/Button'
+import { useLanguage } from '@/lib/LanguageContext'
 
 type Tab = 'favorites' | 'watchlater' | 'history'
 
-const tabs: { id: Tab; label: string; icon: typeof Heart }[] = [
-  { id: 'favorites', label: 'Favorites', icon: Heart },
-  { id: 'watchlater', label: 'Watch Later', icon: Clock },
-  { id: 'history', label: 'Watch History', icon: Play },
-]
-
 export default function ProfilePage() {
+  const { tr } = useLanguage()
   const router = useRouter()
   const { currentUser, updateUser, logout } = useAuthStore()
+
+  const tabs: { id: Tab; label: string; icon: typeof Heart }[] = [
+    { id: 'favorites', label: tr.profile.favorites, icon: Heart },
+    { id: 'watchlater', label: tr.profile.watchLater, icon: Clock },
+    { id: 'history', label: tr.profile.watchHistory, icon: Play },
+  ]
   const [activeTab, setActiveTab] = useState<Tab>('favorites')
   const [allVideos, setAllVideos] = useState<Video[]>([])
   const [editOpen, setEditOpen] = useState(false)
@@ -47,7 +49,7 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Please log in</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">{tr.profile.loginRequired}</h2>
           <p className="text-text-secondary mb-6">You need to be logged in to view your profile.</p>
           <Link href="/auth/login"><Button variant="primary">Sign In</Button></Link>
         </div>
@@ -106,7 +108,7 @@ export default function ProfilePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="w-full max-w-md bg-surface border border-white/10 rounded-2xl shadow-xl animate-slide-down">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <h2 className="text-lg font-bold text-white">Edit Profile</h2>
+              <h2 className="text-lg font-bold text-white">{tr.profile.editProfile}</h2>
               <button onClick={() => setEditOpen(false)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
                 <X size={18} />
               </button>
@@ -118,7 +120,7 @@ export default function ProfilePage() {
                   <img src={editAvatar || currentUser.avatar} alt="Avatar" className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${editName}&background=f97316&color=fff` }} />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-sm font-medium text-white mb-1.5">Avatar URL</label>
+                  <label className="block text-sm font-medium text-white mb-1.5">{tr.profile.avatarUrl}</label>
                   <input
                     type="text"
                     value={editAvatar}
@@ -129,7 +131,7 @@ export default function ProfilePage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Display Name</label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.profile.displayName}</label>
                 <input
                   type="text"
                   value={editName}
@@ -140,15 +142,15 @@ export default function ProfilePage() {
               </div>
               {saveSuccess && (
                 <div className="flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 rounded-xl p-3 text-sm">
-                  <Check size={15} /> Profile updated!
+                  <Check size={15} /> {tr.profile.updated}
                 </div>
               )}
             </div>
             <div className="flex gap-3 p-6 pt-0">
               <Button variant="primary" fullWidth loading={saving} onClick={handleSaveProfile}>
-                Save Changes
-              </Button>
-              <Button variant="ghost" onClick={() => setEditOpen(false)}>Cancel</Button>
+                {tr.profile.saveChanges}
+</Button>
+              <Button variant="ghost" onClick={() => setEditOpen(false)}>{tr.profile.cancel}</Button>
             </div>
           </div>
         </div>
@@ -164,7 +166,7 @@ export default function ProfilePage() {
                 <img src={currentUser.avatar} alt={currentUser.name} className="w-full h-full object-cover" />
               </div>
               {currentUser.isPremium && (
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gold-DEFAULT rounded-full flex items-center justify-center shadow-glow-gold">
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gold rounded-full flex items-center justify-center shadow-glow-gold">
                   <Crown size={14} className="text-background" />
                 </div>
               )}
@@ -175,13 +177,13 @@ export default function ProfilePage() {
               <p className="text-text-secondary mb-3">{currentUser.email}</p>
               <div className="flex flex-wrap items-center gap-3">
                 {currentUser.isPremium ? (
-                  <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 text-xs font-bold text-gold-DEFAULT uppercase tracking-wider">
-                    <Crown size={12} /> Premium Member
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/15 border border-gold/30 text-xs font-bold text-gold uppercase tracking-wider">
+                    <Crown size={12} /> {tr.profile.premiumMember}
                   </span>
                 ) : (
                   <Link href="/subscribe">
                     <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-2 border border-white/10 text-xs font-bold text-text-secondary uppercase tracking-wider hover:border-primary-500/30 transition-colors cursor-pointer">
-                      Free Plan
+                      {tr.profile.freePlan}
                     </span>
                   </Link>
                 )}
@@ -193,7 +195,7 @@ export default function ProfilePage() {
 
             <div className="flex items-center gap-3">
               <Button variant="secondary" size="sm" leftIcon={<Edit3 size={14} />} onClick={handleOpenEdit}>
-                Edit Profile
+                {tr.profile.editProfile}
               </Button>
               <button
                 onClick={handleLogout}
@@ -206,13 +208,13 @@ export default function ProfilePage() {
           </div>
 
           {!currentUser.isPremium && (
-            <div className="mt-6 bg-gradient-to-r from-gold-dark/20 to-gold-DEFAULT/10 border border-gold-DEFAULT/30 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="mt-6 bg-gradient-to-r from-gold-dark/20 to-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <p className="font-semibold text-white mb-1">Unlock Premium Access</p>
+                <p className="font-semibold text-white mb-1">{tr.profile.unlockPremium}</p>
                 <p className="text-sm text-text-secondary">Get unlimited access to all 500+ videos for just ₵9.99/month</p>
               </div>
               <Link href="/subscribe">
-                <Button variant="gold" size="sm" leftIcon={<Crown size={14} />}>Upgrade Now</Button>
+                <Button variant="gold" size="sm" leftIcon={<Crown size={14} />}>{tr.profile.upgradeNow}</Button>
               </Link>
             </div>
           )}
@@ -248,12 +250,12 @@ export default function ProfilePage() {
             {activeTab === 'watchlater' && <Clock size={48} className="text-text-muted mx-auto mb-4" />}
             {activeTab === 'history' && <Play size={48} className="text-text-muted mx-auto mb-4" />}
             <h3 className="text-xl font-bold text-white mb-2">
-              {activeTab === 'favorites' ? 'No favorites yet' : activeTab === 'watchlater' ? 'Watch Later is empty' : 'No watch history'}
+              {activeTab === 'favorites' ? tr.profile.noFavorites : activeTab === 'watchlater' ? tr.profile.watchLaterEmpty : tr.profile.noHistory}
             </h3>
             <p className="text-text-secondary mb-6">
-              {activeTab === 'favorites' ? 'Heart videos to save them here.' : activeTab === 'watchlater' ? 'Save videos to watch them later.' : 'Start watching to build your history.'}
+              {activeTab === 'favorites' ? tr.profile.noFavoritesDesc : activeTab === 'watchlater' ? tr.profile.watchLaterDesc : tr.profile.noHistoryDesc}
             </p>
-            <Link href="/videos"><Button variant="primary">Browse Videos</Button></Link>
+            <Link href="/videos"><Button variant="primary">{tr.profile.browseVideos}</Button></Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -264,7 +266,7 @@ export default function ProfilePage() {
                   <button
                     onClick={() => activeTab === 'favorites' ? handleToggleFavorite(video.id) : handleToggleWatchLater(video.id)}
                     className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500/80 hover:bg-red-500 text-white text-xs opacity-0 group-hover:opacity-100 transition-all"
-                    title="Remove"
+                    title={tr.profile.remove}
                   >
                     <X size={12} />
                   </button>

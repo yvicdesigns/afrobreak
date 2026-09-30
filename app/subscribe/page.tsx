@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import { useAuthStore } from '@/lib/store'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/lib/LanguageContext'
 
 declare global {
   interface Window {
@@ -115,6 +116,7 @@ const faqs = [
 ]
 
 export default function SubscribePage() {
+  const { tr } = useLanguage()
   const router = useRouter()
   const { currentUser, updateUser } = useAuthStore()
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -187,7 +189,6 @@ export default function SubscribePage() {
       onClose: () => setLoading(false),
       callback: (response: { reference: string }) => {
         const endDate = subscriptionEnd.toISOString()
-        // Save subscription record
         supabase.from('subscriptions').insert({
           user_id: currentUser?.id,
           plan: checkoutPlan.id,
@@ -198,7 +199,6 @@ export default function SubscribePage() {
           started_at: new Date().toISOString(),
           ends_at: endDate,
         }).then(() => {
-          // Update user profile
           return supabase.from('profiles').update({
             is_premium: true,
             subscription_end: endDate,
@@ -211,7 +211,6 @@ export default function SubscribePage() {
         })
       },
     })
-
     handler.openIframe()
   }
 
@@ -219,17 +218,17 @@ export default function SubscribePage() {
     return (
       <div className="min-h-screen pt-16 bg-background flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <div className="w-24 h-24 bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 rounded-full flex items-center justify-center mx-auto mb-8">
-            <Crown size={44} className="text-gold-DEFAULT" />
+          <div className="w-24 h-24 bg-gold/15 border border-gold/30 rounded-full flex items-center justify-center mx-auto mb-8">
+            <Crown size={44} className="text-gold" />
           </div>
-          <h1 className="text-4xl font-black text-white mb-3">Welcome to Premium!</h1>
+          <h1 className="text-4xl font-black text-white mb-3">{tr.subscribe.welcomePremium}</h1>
           <p className="text-text-secondary text-lg mb-8">
-            You now have full access to the entire AfroBreak library.
+            {tr.subscribe.fullAccess}
           </p>
           <div className="bg-surface border border-white/10 rounded-2xl p-6 mb-8 text-left space-y-3">
             {plans[1].features.filter(f => f.included).map(f => (
               <div key={f.label} className="flex items-center gap-3">
-                <CheckCircle size={16} className="text-gold-DEFAULT flex-shrink-0" />
+                <CheckCircle size={16} className="text-gold flex-shrink-0" />
                 <span className="text-sm text-white">{f.label}</span>
               </div>
             ))}
@@ -237,11 +236,11 @@ export default function SubscribePage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/videos">
               <Button variant="gold" size="lg" leftIcon={<Crown size={16} />}>
-                Explore Premium Videos
+                {tr.subscribe.explorePremiumVideos}
               </Button>
             </Link>
             <Link href="/">
-              <Button variant="secondary" size="lg">Back to Home</Button>
+              <Button variant="secondary" size="lg">{tr.subscribe.backToHome}</Button>
             </Link>
           </div>
         </div>
@@ -251,16 +250,16 @@ export default function SubscribePage() {
 
   return (
     <>
-      <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
+      <Script src="https://js.paystack.co/v2/inline.js" strategy="afterInteractive" />
 
       <div className="min-h-screen pt-16 bg-background">
         {/* Header */}
         <div className="relative py-16 lg:py-24 overflow-hidden text-center">
           <div className="absolute inset-0 bg-gradient-radial from-secondary-500/10 via-transparent to-transparent" />
           <div className="relative max-w-3xl mx-auto px-4 sm:px-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/30 mb-6">
-              <Crown size={14} className="text-gold-DEFAULT" />
-              <span className="text-sm font-semibold text-gold-DEFAULT uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/15 border border-gold/30 mb-6">
+              <Crown size={14} className="text-gold" />
+              <span className="text-sm font-semibold text-gold uppercase tracking-widest">
                 Unlock Everything
               </span>
             </div>
@@ -271,10 +270,10 @@ export default function SubscribePage() {
               Join thousands of dancers learning with AfroBreak Premium. No ads. No limits. Cancel anytime.
             </p>
             {currentUser?.isPremium && (
-              <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gold-DEFAULT/15 border border-gold-DEFAULT/40 text-gold-DEFAULT font-semibold">
+              <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gold/15 border border-gold/40 text-gold font-semibold">
                 <Crown size={16} /> You&apos;re already Premium
                 {currentUser.subscriptionEnd && (
-                  <span className="text-xs text-gold-DEFAULT/70 ml-1">
+                  <span className="text-xs text-gold/70 ml-1">
                     · renews {new Date(currentUser.subscriptionEnd).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
                 )}
@@ -297,7 +296,7 @@ export default function SubscribePage() {
               >
                 {plan.badge && (
                   <div className={`absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
-                    plan.highlight ? 'bg-primary-500 text-white' : 'bg-gold-DEFAULT text-background'
+                    plan.highlight ? 'bg-primary-500 text-white' : 'bg-gold text-background'
                   }`}>
                     {plan.badge}
                   </div>
@@ -345,7 +344,7 @@ export default function SubscribePage() {
                     plan.highlight
                       ? 'bg-primary-500 hover:bg-primary-600 text-white'
                       : plan.id === 'annual'
-                      ? 'bg-gold-DEFAULT hover:bg-gold-dark text-background'
+                      ? 'bg-gold hover:bg-gold-dark text-background'
                       : 'bg-surface-2 hover:bg-white/10 text-text-secondary hover:text-white border border-white/10'
                   }`}
                 >
@@ -363,13 +362,13 @@ export default function SubscribePage() {
           {/* Feature comparison table */}
           <div className="bg-surface rounded-2xl border border-white/10 overflow-hidden mb-20">
             <div className="p-6 border-b border-white/10">
-              <h2 className="text-2xl font-bold text-white">Full Feature Comparison</h2>
+              <h2 className="text-2xl font-bold text-white">{tr.subscribe.featureComparison}</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-white/10">
-                    <th className="text-left p-4 text-text-secondary font-medium text-sm w-1/2">Feature</th>
+                    <th className="text-left p-4 text-text-secondary font-medium text-sm w-1/2">{tr.subscribe.featureLabel}</th>
                     {plans.map(p => (
                       <th key={p.id} className="text-center p-4 text-sm font-bold text-white">
                         {p.name}
@@ -399,7 +398,7 @@ export default function SubscribePage() {
 
           {/* FAQ */}
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold text-white text-center mb-8">Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-bold text-white text-center mb-8">{tr.subscribe.faq}</h2>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
                 <div key={i} className="bg-surface border border-white/10 rounded-xl overflow-hidden">
@@ -433,7 +432,7 @@ export default function SubscribePage() {
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <Crown size={18} className="text-gold-DEFAULT" />
+                <Crown size={18} className="text-gold" />
                 <div>
                   <h2 className="font-bold text-white">{checkoutPlan.name}</h2>
                   <p className="text-xs text-text-muted">${checkoutPlan.priceUSD}/{checkoutPlan.period}</p>
@@ -447,7 +446,7 @@ export default function SubscribePage() {
             <div className="p-5 space-y-4">
               {/* Currency */}
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Currency</label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.subscribe.currency}</label>
                 <select value={currency} onChange={e => setCurrency(e.target.value)} className="input-base">
                   {currencies.map(c => (
                     <option key={c.code} value={c.code} className="bg-surface">
@@ -465,7 +464,7 @@ export default function SubscribePage() {
 
               {/* Name */}
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Full Name <span className="text-red-400">*</span></label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.subscribe.fullName} <span className="text-red-400">*</span></label>
                 <input
                   type="text"
                   value={name}
@@ -477,7 +476,7 @@ export default function SubscribePage() {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Email <span className="text-red-400">*</span></label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.subscribe.yourEmail} <span className="text-red-400">*</span></label>
                 <input
                   type="email"
                   value={email}
@@ -489,12 +488,12 @@ export default function SubscribePage() {
               </div>
 
               {/* What you get */}
-              <div className="bg-gold-DEFAULT/5 border border-gold-DEFAULT/20 rounded-xl p-4">
-                <p className="text-xs font-semibold text-gold-DEFAULT uppercase tracking-wider mb-2">What you unlock</p>
+              <div className="bg-gold/5 border border-gold/20 rounded-xl p-4">
+                <p className="text-xs font-semibold text-gold uppercase tracking-wider mb-2">{tr.subscribe.included}</p>
                 <div className="space-y-1.5">
                   {checkoutPlan.features.filter(f => f.included && f.label !== 'Access to free videos' && f.label !== 'Browse events' && f.label !== 'Community blog' && f.label !== 'Basic profile').map(f => (
                     <div key={f.label} className="flex items-center gap-2">
-                      <Check size={12} className="text-gold-DEFAULT flex-shrink-0" />
+                      <Check size={12} className="text-gold flex-shrink-0" />
                       <span className="text-xs text-text-secondary">{f.label}</span>
                     </div>
                   ))}
@@ -506,15 +505,15 @@ export default function SubscribePage() {
               <button
                 onClick={handlePay}
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-background bg-gold-DEFAULT hover:bg-gold-dark disabled:opacity-60 transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-background bg-gold hover:bg-gold-dark disabled:opacity-60 transition-all duration-200"
               >
                 {loading
-                  ? <><Loader2 size={18} className="animate-spin" /> Processing…</>
+                  ? <><Loader2 size={18} className="animate-spin" /> {tr.subscribe.processing}</>
                   : <><Crown size={18} /> Pay {selectedCurrency.symbol}{(checkoutPlan.priceUSD * selectedCurrency.rate).toFixed(2)}</>
                 }
               </button>
 
-              <p className="text-center text-xs text-text-muted">Secured by Paystack · SSL encrypted · Cancel anytime</p>
+              <p className="text-center text-xs text-text-muted">{tr.subscribe.paySecured}</p>
             </div>
           </div>
         </div>

@@ -237,7 +237,7 @@ export default function AdminBlogPage() {
                 <div className="flex items-center gap-3">
                   <button type="button" onClick={() => setForm(f => ({...f, featured: !f.featured}))}
                     className={clsx('flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition-all',
-                      form.featured ? 'bg-gold-DEFAULT/15 text-gold-DEFAULT border-gold-DEFAULT/40' : 'bg-surface-2 text-text-secondary border-white/10')}>
+                      form.featured ? 'bg-gold/15 text-gold border-gold/40' : 'bg-surface-2 text-text-secondary border-white/10')}>
                     ★ {form.featured ? 'Featured Post' : 'Mark as Featured'}
                   </button>
                 </div>
@@ -281,7 +281,7 @@ export default function AdminBlogPage() {
                   <td className="p-4 hidden sm:table-cell"><Badge label={post.category} variant={post.category} /></td>
                   <td className="p-4 hidden md:table-cell text-sm text-text-secondary">{post.author}</td>
                   <td className="p-4 hidden lg:table-cell text-sm text-text-secondary">{formatDate(post.publishedAt)}</td>
-                  <td className="p-4 text-center">{post.featured ? <span className="text-gold-DEFAULT">★</span> : <span className="text-text-muted">☆</span>}</td>
+                  <td className="p-4 text-center">{post.featured ? <span className="text-gold">★</span> : <span className="text-text-muted">☆</span>}</td>
                   <td className="p-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => handleEdit(post)} className="p-2 rounded-lg text-text-secondary hover:text-blue-400 hover:bg-blue-500/10 transition-all"><Edit3 size={15} /></button>

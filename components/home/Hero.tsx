@@ -5,18 +5,14 @@ import Link from 'next/link'
 import { Play, Calendar, ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import DonateButton from '@/components/ui/DonateButton'
+import { useLanguage } from '@/lib/LanguageContext'
 
-const stats = [
-  { value: '11K+', label: 'Beneficiaries' },
-  { value: '1000+', label: 'Workshops' },
-  { value: '270+', label: 'Events' },
-  { value: '28+', label: 'Countries' },
-  { value: '100K+', label: 'Social Media' },
-]
+const statValues = ['11K+', '1000+', '270+', '28+', '100K+']
 
 const PARTICLE_COUNT = 15
 
 export default function Hero() {
+  const { tr } = useLanguage()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -126,7 +122,7 @@ export default function Hero() {
           style={{ animationDelay: '2s' }}
         />
         <div
-          className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full border border-gold-DEFAULT/8 animate-float"
+          className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full border border-gold/8 animate-float"
           style={{ animationDelay: '4s' }}
         />
         {/* Gradient orbs */}
@@ -143,7 +139,7 @@ export default function Hero() {
           >
             <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
             <span className="text-sm font-semibold text-primary-400 tracking-widest uppercase">
-              The Dance Platform
+              {tr.hero.eyebrow}
             </span>
           </div>
 
@@ -151,12 +147,12 @@ export default function Hero() {
           <h1
             className="heading-xl text-white mb-6 animate-slide-up opacity-initial fill-forwards animation-delay-100"
           >
-            RHYTHM AND{' '}
-            <span className="gradient-text-orange">DANCE</span>
+            {tr.hero.line1}{' '}
+            <span className="gradient-text-orange">{tr.hero.word1}</span>
             <br />
-            BREAKTHROUGH{' '}
+            {tr.hero.line2}{' '}
             <span className="relative inline-block">
-              <span className="gradient-text-purple">CULTURE</span>
+              <span className="gradient-text-purple">{tr.hero.word2}</span>
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary-500 to-transparent" />
             </span>
           </h1>
@@ -165,7 +161,7 @@ export default function Hero() {
           <p
             className="text-lg text-text-secondary leading-relaxed mb-10 max-w-xl animate-slide-up opacity-initial fill-forwards animation-delay-200"
           >
-            Empowering African Youth Breakthrough Hiphop Culture and Dance Sport for Development.
+            {tr.hero.subtitle}
           </p>
 
           {/* CTAs */}
@@ -179,7 +175,7 @@ export default function Hero() {
                 leftIcon={<Play size={18} className="fill-white" />}
                 className="btn-glow"
               >
-                Start Watching
+                {tr.hero.cta1}
               </Button>
             </Link>
             <Link href="/events">
@@ -188,36 +184,39 @@ export default function Hero() {
                 size="lg"
                 leftIcon={<Calendar size={18} />}
               >
-                Browse Events
+                {tr.hero.cta2}
               </Button>
             </Link>
             <DonateButton variant="hero" />
           </div>
 
           {/* Stats */}
-          <div
-            className="flex flex-wrap gap-8 animate-fade-in opacity-initial fill-forwards animation-delay-500"
-          >
-            {stats.map((stat, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div>
-                  <div className="text-2xl font-black gradient-text-orange">{stat.value}</div>
-                  <div className="text-xs text-text-secondary uppercase tracking-widest font-medium">
-                    {stat.label}
+          {(() => {
+            const statLabels = [tr.hero.stat3Label, tr.hero.statWorkshops, tr.hero.stat2Label, tr.hero.stat1Label, tr.hero.statSocial]
+            return (
+              <div className="flex flex-wrap gap-8 animate-fade-in opacity-initial fill-forwards animation-delay-500">
+                {statValues.map((val, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div>
+                      <div className="text-2xl font-black gradient-text-orange">{val}</div>
+                      <div className="text-xs text-text-secondary uppercase tracking-widest font-medium">
+                        {statLabels[i]}
+                      </div>
+                    </div>
+                    {i < statValues.length - 1 && (
+                      <div className="w-px h-10 bg-white/10" />
+                    )}
                   </div>
-                </div>
-                {i < stats.length - 1 && (
-                  <div className="w-px h-10 bg-white/10" />
-                )}
+                ))}
               </div>
-            ))}
-          </div>
+            )
+          })()}
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-xs text-text-secondary tracking-widest uppercase">Scroll</span>
+        <span className="text-xs text-text-secondary tracking-widest uppercase">{tr.hero.scroll}</span>
         <ChevronDown size={16} className="text-primary-500" />
       </div>
 

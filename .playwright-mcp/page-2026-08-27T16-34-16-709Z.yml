@@ -1,0 +1,5 @@
+- generic [active] [ref=f7e1]:
+  - alert [ref=f7e2]
+  - link "Chat with us on WhatsApp" [ref=f7e3] [cursor=pointer]:
+    - /url: https://wa.me/233543973224
+    - generic [ref=f7e7]: Talk to Us

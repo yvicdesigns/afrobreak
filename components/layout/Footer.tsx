@@ -5,33 +5,7 @@ import Link from 'next/link'
 import { Play, Instagram, Twitter, Youtube, Facebook, Mail, ArrowRight } from 'lucide-react'
 import DonateButton from '@/components/ui/DonateButton'
 import { getSetting } from '@/lib/db'
-
-const platformLinks = [
-  { label: 'Gallery', href: '/photos' },
-  { label: 'Music', href: '/music' },
-  { label: 'Videos', href: '/videos' },
-  { label: 'Blog', href: '/blog' },
-]
-
-const eventsLinks = [
-  { label: 'Upcoming', href: '/events?tab=upcoming' },
-  { label: 'International', href: '/events?tab=international' },
-  { label: 'History', href: '/events?tab=history' },
-]
-
-const companyLinks = [
-  { label: 'About Us', href: '/about' },
-  { label: 'Press', href: '/press' },
-  { label: 'Partners', href: '/partners' },
-  { label: 'Contact Us', href: '/contact' },
-]
-
-const moreLinks = [
-  { label: 'Awards', href: '/awards' },
-  { label: 'Shop', href: '/store' },
-  { label: 'Ambassadors', href: '/instructors' },
-  { label: 'Careers', href: '/careers' },
-]
+import { useLanguage } from '@/lib/LanguageContext'
 
 type SocialLinks = { instagram: string; youtube: string; twitter: string; facebook: string }
 
@@ -43,9 +17,51 @@ const defaultSocial: SocialLinks = {
 }
 
 export default function Footer() {
+  const { tr } = useLanguage()
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [logoBg, setLogoBg] = useState<{ color: string; opacity: number; shape: string; padding: number; size: number } | null>(null)
   const [social, setSocial] = useState<SocialLinks>(defaultSocial)
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterState, setNewsletterState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
+
+  const handleNewsletter = async () => {
+    if (!newsletterEmail || !/\S+@\S+\.\S+/.test(newsletterEmail)) return
+    setNewsletterState('loading')
+    const res = await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: newsletterEmail }),
+    })
+    setNewsletterState(res.ok ? 'done' : 'error')
+    if (res.ok) setNewsletterEmail('')
+  }
+
+  const platformLinks = [
+    { label: tr.footer.gallery, href: '/photos' },
+    { label: tr.footer.music, href: '/music' },
+    { label: tr.footer.videos, href: '/videos' },
+    { label: tr.footer.blog, href: '/blog' },
+  ]
+
+  const eventsLinks = [
+    { label: tr.footer.upcoming, href: '/events?tab=upcoming' },
+    { label: tr.footer.international, href: '/events?tab=international' },
+    { label: tr.footer.historyFooter, href: '/events?tab=history' },
+  ]
+
+  const companyLinks = [
+    { label: tr.footer.aboutUs, href: '/about' },
+    { label: tr.footer.press, href: '/press' },
+    { label: tr.footer.partners, href: '/partners' },
+    { label: tr.footer.contact, href: '/contact' },
+  ]
+
+  const moreLinks = [
+    { label: tr.footer.awards, href: '/awards' },
+    { label: tr.footer.shop, href: '/store' },
+    { label: tr.footer.ambassadors, href: '/instructors' },
+    { label: tr.footer.jobs, href: '/careers' },
+  ]
 
   useEffect(() => {
     Promise.all([getSetting('site_logo'), getSetting('logo_bg'), getSetting('social_links')]).then(([logo, bg, socialRaw]) => {
@@ -125,32 +141,48 @@ export default function Footer() {
 
             {/* Donate */}
             <div>
-              <p className="text-sm font-semibold text-white mb-2">Support the culture</p>
+              <p className="text-sm font-semibold text-white mb-2">{tr.footer.support}</p>
               <DonateButton variant="footer" />
             </div>
 
             {/* Newsletter */}
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-white">Stay in the loop</p>
-              <div className="flex gap-2">
-                <div className="flex-1 flex items-center bg-background border border-white/10 rounded-xl overflow-hidden focus-within:border-primary-500/60 transition-colors">
-                  <Mail size={15} className="ml-3 text-text-secondary flex-shrink-0" />
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="flex-1 bg-transparent px-3 py-2.5 text-sm text-white placeholder-text-muted focus:outline-none"
-                  />
-                </div>
-                <button className="px-4 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-[#0D0A1A] rounded-xl hover:from-primary-400 hover:to-primary-500 transition-all duration-200 flex-shrink-0">
-                  <ArrowRight size={16} />
-                </button>
-              </div>
+              <p className="text-sm font-semibold text-white">{tr.footer.newsletter}</p>
+              {newsletterState === 'done' ? (
+                <p className="text-sm text-emerald-400 font-medium">{tr.footer.newsletterSuccess}</p>
+              ) : (
+                <>
+                  <div className="flex gap-2">
+                    <div className="flex-1 flex items-center bg-background border border-white/10 rounded-xl overflow-hidden focus-within:border-primary-500/60 transition-colors">
+                      <Mail size={15} className="ml-3 text-text-secondary flex-shrink-0" />
+                      <input
+                        type="email"
+                        value={newsletterEmail}
+                        onChange={e => setNewsletterEmail(e.target.value)}
+                        onKeyDown={e => e.key === 'Enter' && handleNewsletter()}
+                        placeholder={tr.footer.emailPlaceholder}
+                        className="flex-1 bg-transparent px-3 py-2.5 text-sm text-white placeholder-text-muted focus:outline-none"
+                      />
+                    </div>
+                    <button
+                      onClick={handleNewsletter}
+                      disabled={newsletterState === 'loading'}
+                      className="px-4 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-[#0D0A1A] rounded-xl hover:from-primary-400 hover:to-primary-500 transition-all duration-200 flex-shrink-0 disabled:opacity-60"
+                    >
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                  {newsletterState === 'error' && (
+                    <p className="text-xs text-red-400">{tr.footer.newsletterError}</p>
+                  )}
+                </>
+              )}
             </div>
           </div>
 
           {/* Platform */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">Platform</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">{tr.footer.platform}</h3>
             <ul className="space-y-3">
               {platformLinks.map(link => (
                 <li key={link.href}>
@@ -164,7 +196,7 @@ export default function Footer() {
 
           {/* Events */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">Events</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">{tr.footer.events}</h3>
             <ul className="space-y-3">
               {eventsLinks.map(link => (
                 <li key={link.href}>
@@ -178,7 +210,7 @@ export default function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">Company</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">{tr.footer.company}</h3>
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.href}>
@@ -192,7 +224,7 @@ export default function Footer() {
 
           {/* More */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-widest">More</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest">{tr.footer.more}</h3>
             <ul className="space-y-3">
               {moreLinks.map(link => (
                 <li key={link.href}>
@@ -210,12 +242,12 @@ export default function Footer() {
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-muted text-center sm:text-left">
-            &copy; {new Date().getFullYear()} AfroBreak. All rights reserved. Built with passion for the culture.
+            &copy; {new Date().getFullYear()} AfroBreak. {tr.footer.rights}
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-xs text-text-muted hover:text-text-secondary transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-xs text-text-muted hover:text-text-secondary transition-colors">Terms</Link>
-            <Link href="/cookies" className="text-xs text-text-muted hover:text-text-secondary transition-colors">Cookies</Link>
+            <Link href="/privacy" className="text-xs text-text-muted hover:text-text-secondary transition-colors">{tr.footer.privacy}</Link>
+            <Link href="/terms" className="text-xs text-text-muted hover:text-text-secondary transition-colors">{tr.footer.terms}</Link>
+            <Link href="/cookies" className="text-xs text-text-muted hover:text-text-secondary transition-colors">{tr.footer.cookies}</Link>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, ChevronLeft, ChevronRight, Download, Instagram } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Download, Instagram, Camera } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 type PhotoCategory = 'All' | 'Events' | 'Workshops' | 'Battles' | 'Schools Outreach' | 'Community'
@@ -15,34 +15,18 @@ interface Photo {
   location?: string
 }
 
-const staticPhotos: Photo[] = [
-  { id: '1', src: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80', title: 'Afrobeat Session', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '2', src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80', title: 'Hip-Hop Cypher', category: 'Events', photographer: 'AfroBreak Media', location: 'Lyon' },
-  { id: '3', src: 'https://images.unsplash.com/photo-1504680177321-2e6a879d4e8f?w=800&q=80', title: 'Dancehall Vibes', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Marseille' },
-  { id: '4', src: 'https://images.unsplash.com/photo-1535525153412-5a42439a210e?w=800&q=80', title: 'Contemporary Fusion', category: 'Events', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '5', src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80', title: 'Battle Night', category: 'Battles', photographer: 'AfroBreak Media', location: 'Bordeaux' },
-  { id: '6', src: 'https://images.unsplash.com/photo-1508700929628-c3d7819c1498?w=800&q=80', title: 'B-Boy Showcase', category: 'Battles', photographer: 'AfroBreak Media', location: 'Toulouse' },
-  { id: '7', src: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80', title: 'Backstage Moments', category: 'Schools Outreach', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '8', src: 'https://images.unsplash.com/photo-1483362271674-7461064d5e66?w=800&q=80', title: 'Community Day', category: 'Community', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '9', src: 'https://images.unsplash.com/photo-1526483291330-fe44429f3e0d?w=800&q=80', title: 'Afro Workshop', category: 'Workshops', photographer: 'AfroBreak Media', location: 'Nice' },
-  { id: '10', src: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80', title: 'Kids Dance Party', category: 'Community', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '11', src: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80', title: 'Show Night', category: 'Events', photographer: 'AfroBreak Media', location: 'Lyon' },
-  { id: '12', src: 'https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?w=800&q=80', title: 'Urban Dance Festival', category: 'Events', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '13', src: 'https://images.unsplash.com/photo-1598387993441-a364f854cde4?w=800&q=80', title: 'Rehearsal Room', category: 'Schools Outreach', photographer: 'AfroBreak Media', location: 'Paris' },
-  { id: '14', src: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800&q=80', title: 'Battle Qualifiers', category: 'Battles', photographer: 'AfroBreak Media', location: 'Marseille' },
-  { id: '15', src: 'https://images.unsplash.com/photo-1526142684086-7ebd69df27a5?w=800&q=80', title: 'Community Gathering', category: 'Community', photographer: 'AfroBreak Media', location: 'Bordeaux' },
-]
-
 const categories: PhotoCategory[] = ['All', 'Events', 'Workshops', 'Battles', 'Schools Outreach', 'Community']
 
 export default function PhotosPage() {
-  const [photos, setPhotos] = useState<Photo[]>(staticPhotos)
+  const [photos, setPhotos] = useState<Photo[]>([])
+  const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState<PhotoCategory>('All')
   const [lightbox, setLightbox] = useState<number | null>(null)
 
   useEffect(() => {
     supabase.from('photos').select('*').order('created_at', { ascending: false }).then(({ data }) => {
       if (data && data.length > 0) setPhotos(data as Photo[])
+      setLoading(false)
     })
   }, [])
 
@@ -54,6 +38,12 @@ export default function PhotosPage() {
   const next = () => setLightbox(i => i !== null ? (i + 1) % filtered.length : null)
 
   const currentPhoto = lightbox !== null ? filtered[lightbox] : null
+
+  if (loading) return (
+    <div className="min-h-screen pt-20 bg-background flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
 
   return (
     <div className="min-h-screen pt-20 bg-background">
@@ -95,7 +85,13 @@ export default function PhotosPage() {
 
         {/* Masonry Grid */}
         {filtered.length === 0 ? (
-          <div className="text-center py-24 text-text-muted">No photos in this category yet.</div>
+          <div className="text-center py-24">
+            <div className="w-20 h-20 rounded-2xl bg-primary-500/10 flex items-center justify-center mx-auto mb-6">
+              <Camera size={36} className="text-primary-500/50" />
+            </div>
+            <p className="text-white font-bold text-lg mb-2">No photos yet</p>
+            <p className="text-text-muted text-sm">Photos will appear here once uploaded by the team.</p>
+          </div>
         ) : (
           <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3" style={{ columnGap: '12px' }}>
             {filtered.map((photo, index) => (

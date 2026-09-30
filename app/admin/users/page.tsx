@@ -90,8 +90,8 @@ export default function AdminUsersPage() {
           </div>
         </div>
         <div className="bg-surface border border-white/5 rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-xl bg-gold-DEFAULT/10 flex items-center justify-center">
-            <Crown size={18} className="text-gold-DEFAULT" />
+          <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
+            <Crown size={18} className="text-gold" />
           </div>
           <div>
             <p className="text-2xl font-black text-white">{premiumCount}</p>
@@ -160,7 +160,7 @@ export default function AdminUsersPage() {
                     </td>
                     <td className="p-4 text-center">
                       {user.is_premium
-                        ? <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold-DEFAULT/15 text-gold-DEFAULT text-[10px] font-bold"><Crown size={9} /> PREMIUM</span>
+                        ? <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold/15 text-gold text-[10px] font-bold"><Crown size={9} /> PREMIUM</span>
                         : <span className="px-2 py-0.5 rounded-full bg-white/5 text-text-secondary text-[10px] font-bold">FREE</span>
                       }
                     </td>
@@ -209,7 +209,7 @@ export default function AdminUsersPage() {
                 </div>
                 <button
                   onClick={() => setEditPremium(!editPremium)}
-                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${editPremium ? 'bg-gold-DEFAULT' : 'bg-white/10'}`}
+                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${editPremium ? 'bg-gold' : 'bg-white/10'}`}
                 >
                   <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${editPremium ? 'translate-x-6' : 'translate-x-0.5'}`} />
                 </button>
@@ -246,7 +246,7 @@ export default function AdminUsersPage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gold-DEFAULT hover:bg-gold-dark text-background font-bold text-sm transition-colors disabled:opacity-60"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gold hover:bg-gold-dark text-background font-bold text-sm transition-colors disabled:opacity-60"
                 >
                   {saving ? <><Loader2 size={15} className="animate-spin" /> Saving…</> : <><Check size={15} /> Save</>}
                 </button>

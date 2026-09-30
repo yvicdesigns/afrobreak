@@ -7,8 +7,10 @@ import VideoCard from '@/components/videos/VideoCard'
 import VideoFilters from '@/components/videos/VideoFilters'
 import SearchBar from '@/components/ui/SearchBar'
 import { Video as VideoIcon, SearchX } from 'lucide-react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function VideosPage() {
+  const { tr } = useLanguage()
   const [videos, setVideos] = useState<Video[]>([])
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<VideoCategory | 'All'>('All')
@@ -37,28 +39,24 @@ export default function VideosPage() {
     <div className="min-h-screen pt-16">
       <div className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80"
-            alt="Videos"
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+          <div className="w-full h-full bg-gradient-to-br from-primary-500/15 via-background to-secondary-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/30 mb-6">
             <VideoIcon size={14} className="text-primary-500" />
             <span className="text-sm font-semibold text-primary-400 uppercase tracking-widest">
-              Video Library
+              {tr.videos.videoLibrary}
             </span>
           </div>
           <h1 className="heading-lg text-white mb-4">
-            All <span className="gradient-text-orange">Videos</span>
+            {tr.videos.allVideos.split(' ')[0]} <span className="gradient-text-orange">{tr.videos.allVideos.split(' ').slice(1).join(' ')}</span>
           </h1>
           <p className="text-text-secondary max-w-2xl mx-auto mb-8">
-            Browse our complete library of {videos.length}+ dance tutorials across every style and level.
+            {tr.videos.libraryDesc.replace('{n}', String(videos.length))}
           </p>
           <SearchBar
-            placeholder="Search by title, instructor, or tag..."
+            placeholder={tr.videos.searchPlaceholderFull}
             value={search}
             onChange={setSearch}
             variant="hero"
@@ -79,9 +77,9 @@ export default function VideosPage() {
 
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-text-secondary">
-            Showing <span className="text-white font-semibold">{filtered.length}</span> video{filtered.length !== 1 ? 's' : ''}
+            {tr.videos.showing} <span className="text-white font-semibold">{filtered.length}</span> {filtered.length !== 1 ? tr.videos.title.toLowerCase() : 'video'}
             {(selectedCategory !== 'All' || search) && (
-              <span className="text-text-muted"> matching your filters</span>
+              <span className="text-text-muted"> {tr.videos.matchingFilters}</span>
             )}
           </p>
           <button
@@ -92,15 +90,15 @@ export default function VideosPage() {
             }}
             className="text-xs text-primary-500 hover:text-primary-400 font-medium transition-colors"
           >
-            Clear filters
+            {tr.videos.clearFilters}
           </button>
         </div>
 
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <SearchX size={48} className="text-text-muted mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No videos found</h3>
-            <p className="text-text-secondary mb-6">Try adjusting your filters or search terms.</p>
+            <h3 className="text-xl font-bold text-white mb-2">{tr.videos.noVideosFound}</h3>
+            <p className="text-text-secondary mb-6">{tr.videos.tryAdjusting}</p>
             <button
               onClick={() => {
                 setSearch('')
@@ -109,7 +107,7 @@ export default function VideosPage() {
               }}
               className="text-primary-500 hover:text-primary-400 font-medium transition-colors"
             >
-              Reset all filters
+              {tr.videos.resetFilters}
             </button>
           </div>
         ) : (

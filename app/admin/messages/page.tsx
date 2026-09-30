@@ -191,7 +191,7 @@ export default function AdminMessagesPage() {
           <p className="text-[11px] text-text-muted uppercase tracking-wider mb-1 flex items-center gap-1.5"><Star size={11} /> Feedback</p>
           <p className="text-2xl font-black text-white">{feedback.length}</p>
           {feedback.length > 0 && (
-            <p className="text-xs text-gold-DEFAULT mt-0.5">
+            <p className="text-xs text-gold mt-0.5">
               avg {(feedback.reduce((s,f) => s + f.rating, 0) / feedback.length).toFixed(1)} ★
             </p>
           )}
@@ -300,7 +300,7 @@ export default function AdminMessagesPage() {
                       {m.org && <p className="text-xs text-text-muted">{m.org}</p>}
                       <div className="flex gap-0.5 mt-1">
                         {[1,2,3,4,5].map(n => (
-                          <Star key={n} size={13} className={n <= m.rating ? 'text-gold-DEFAULT fill-gold-DEFAULT' : 'text-white/20'} />
+                          <Star key={n} size={13} className={n <= m.rating ? 'text-gold fill-gold' : 'text-white/20'} />
                         ))}
                       </div>
                     </div>

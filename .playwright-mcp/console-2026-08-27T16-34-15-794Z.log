@@ -1,0 +1,4 @@
+[   74092ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*:0
+[  141921ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*:0
+[  209044ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*:0
+[  317486ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*:0

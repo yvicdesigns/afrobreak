@@ -16,27 +16,7 @@ import SearchBar from '@/components/ui/SearchBar'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 import { supabase } from '@/lib/supabase'
 import { getSetting } from '@/lib/db'
-
-const aboutLinks = [
-  { label: 'About Us', href: '/about', icon: Users },
-  { label: 'Instructors', href: '/instructors', icon: Star },
-  { label: 'Press', href: '/press', icon: Newspaper },
-  { label: 'Careers', href: '/careers', icon: Briefcase },
-  { label: 'Partners', href: '/partners', icon: Handshake },
-]
-
-const eventsLinks = [
-  { label: 'Upcoming', href: '/events?tab=upcoming', icon: Calendar },
-  { label: 'International', href: '/events?tab=international', icon: Globe },
-  { label: 'History', href: '/events?tab=history', icon: History },
-]
-
-const platformLinks = [
-  { label: 'Gallery', href: '/photos', icon: Camera },
-  { label: 'Music', href: '/music', icon: Music },
-  { label: 'Videos', href: '/videos', icon: Video },
-  { label: 'Blog', href: '/blog', icon: BookOpen },
-]
+import { useLanguage } from '@/lib/LanguageContext'
 
 function NavDropdown({ label, links, pathname }: {
   label: string
@@ -93,6 +73,29 @@ function NavDropdown({ label, links, pathname }: {
 export default function Navbar() {
   const pathname = usePathname()
   const { currentUser, logout } = useAuthStore()
+  const { tr, lang, toggle: toggleLang } = useLanguage()
+
+  const aboutLinks = [
+    { label: tr.nav.aboutUs, href: '/about', icon: Users },
+    { label: tr.nav.instructors, href: '/instructors', icon: Star },
+    { label: tr.nav.press, href: '/press', icon: Newspaper },
+    { label: tr.nav.careers, href: '/careers', icon: Briefcase },
+    { label: tr.nav.partners, href: '/partners', icon: Handshake },
+  ]
+
+  const eventsLinks = [
+    { label: tr.nav.upcoming, href: '/events?tab=upcoming', icon: Calendar },
+    { label: tr.nav.international, href: '/events?tab=international', icon: Globe },
+    { label: tr.nav.history, href: '/events?tab=history', icon: History },
+  ]
+
+  const platformLinks = [
+    { label: tr.nav.gallery, href: '/photos', icon: Camera },
+    { label: tr.nav.music, href: '/music', icon: Music },
+    { label: tr.nav.videos, href: '/videos', icon: Video },
+    { label: tr.nav.blog, href: '/blog', icon: BookOpen },
+  ]
+
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -133,11 +136,11 @@ export default function Navbar() {
   useEffect(() => { setMobileOpen(false) }, [pathname])
 
   const flatLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Awards', href: '/awards' },
-    { label: 'Gallery', href: '/photos' },
-    { label: 'Shop', href: '/store' },
-    { label: 'Contact', href: '/contact' },
+    { label: tr.nav.home, href: '/' },
+    { label: tr.nav.awards, href: '/awards' },
+    { label: tr.nav.gallery, href: '/photos' },
+    { label: tr.nav.store, href: '/store' },
+    { label: tr.nav.contact, href: '/contact' },
   ]
 
   return (
@@ -185,17 +188,26 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-0.5">
-              <Link href="/" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Home</Link>
-              <NavDropdown label="About" links={aboutLinks} pathname={pathname} />
-              <NavDropdown label="Events" links={eventsLinks} pathname={pathname} />
-              <Link href="/awards" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Awards</Link>
-              <NavDropdown label="Platform" links={platformLinks} pathname={pathname} />
-              <Link href="/store" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/store' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Shop</Link>
-              <Link href="/contact" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/contact' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Contact</Link>
+              <Link href="/" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.home}</Link>
+              <NavDropdown label={tr.nav.about} links={aboutLinks} pathname={pathname} />
+              <NavDropdown label={tr.nav.events} links={eventsLinks} pathname={pathname} />
+              <Link href="/awards" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.awards}</Link>
+              <NavDropdown label={tr.nav.platform} links={platformLinks} pathname={pathname} />
+              <Link href="/store" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/store' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.store}</Link>
+              <Link href="/contact" className={clsx('px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200', pathname === '/contact' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.contact}</Link>
             </div>
 
             {/* Right side */}
             <div className="flex items-center gap-2">
+              <button
+                onClick={toggleLang}
+                className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold transition-all duration-200"
+                aria-label="Toggle language"
+              >
+                <span className={lang === 'en' ? 'text-primary-400' : 'text-text-muted'}>EN</span>
+                <span className="text-white/20">|</span>
+                <span className={lang === 'fr' ? 'text-primary-400' : 'text-text-muted'}>FR</span>
+              </button>
               <ThemeToggle />
               <button onClick={() => setSearchOpen(!searchOpen)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all duration-200">
                 <Search size={18} />
@@ -206,7 +218,7 @@ export default function Navbar() {
                   <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-white/5 transition-all duration-200 group">
                     <div className="relative">
                       <img src={currentUser.avatar || `https://api.dicebear.com/7.x/initials/svg?seed=${currentUser.name}`} alt={currentUser.name} className="w-8 h-8 rounded-full object-cover ring-2 ring-primary-500/40 group-hover:ring-primary-500/70 transition-all" />
-                      {currentUser.isPremium && <Crown size={10} className="absolute -top-1 -right-1 text-gold-DEFAULT" />}
+                      {currentUser.isPremium && <Crown size={10} className="absolute -top-1 -right-1 text-gold" />}
                     </div>
                     <span className="text-sm font-medium text-white max-w-[80px] truncate">{currentUser.name}</span>
                     <ChevronDown size={14} className={clsx('text-text-secondary transition-transform duration-200', dropdownOpen && 'rotate-180')} />
@@ -217,16 +229,16 @@ export default function Navbar() {
                       <div className="p-3 border-b border-white/10">
                         <p className="text-sm font-semibold text-white truncate">{currentUser.name}</p>
                         <p className="text-xs text-text-secondary truncate">{currentUser.email}</p>
-                        {currentUser.isPremium && <span className="inline-flex items-center gap-1 mt-1 text-xs text-gold-DEFAULT"><Crown size={10} /> Premium</span>}
+                        {currentUser.isPremium && <span className="inline-flex items-center gap-1 mt-1 text-xs text-gold"><Crown size={10} /> Premium</span>}
                       </div>
                       <div className="p-2">
-                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><User size={15} /> Profile</Link>
-                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Heart size={15} /> Favorites</Link>
-                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Clock size={15} /> Watch Later</Link>
-                        {!currentUser.isPremium && <Link href="/subscribe" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gold-DEFAULT hover:bg-gold-DEFAULT/10 transition-all"><Crown size={15} /> Go Premium</Link>}
-                        {isAdmin && <Link href="/admin" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Settings size={15} /> Admin</Link>}
+                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><User size={15} /> {tr.nav.profile}</Link>
+                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Heart size={15} /> {tr.nav.favorites}</Link>
+                        <Link href="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Clock size={15} /> {tr.nav.watchLater}</Link>
+                        {!currentUser.isPremium && <Link href="/subscribe" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gold hover:bg-gold/10 transition-all"><Crown size={15} /> {tr.nav.goPremium}</Link>}
+                        {isAdmin && <Link href="/admin" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all"><Settings size={15} /> {tr.nav.admin}</Link>}
                         <div className="border-t border-white/10 mt-2 pt-2">
-                          <button onClick={() => { logout(); setDropdownOpen(false) }} className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-all"><LogOut size={15} /> Sign Out</button>
+                          <button onClick={() => { logout(); setDropdownOpen(false) }} className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-all"><LogOut size={15} /> {tr.nav.signOut}</button>
                         </div>
                       </div>
                     </div>
@@ -234,8 +246,8 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div className="hidden lg:flex items-center gap-2">
-                  <Link href="/auth/login"><Button variant="ghost" size="sm">Login</Button></Link>
-                  <Link href="/auth/signup"><Button variant="primary" size="sm">Get Started</Button></Link>
+                  <Link href="/auth/login"><Button variant="ghost" size="sm">{tr.nav.signIn}</Button></Link>
+                  <Link href="/auth/signup"><Button variant="primary" size="sm">{tr.nav.signUp}</Button></Link>
                 </div>
               )}
 
@@ -247,7 +259,7 @@ export default function Navbar() {
 
           {searchOpen && (
             <div className="pb-4 animate-slide-down">
-              <SearchBar placeholder="Search videos, events, blog posts..." autoFocus className="w-full"
+              <SearchBar placeholder={tr.nav.searchPlaceholder} autoFocus className="w-full"
                 onSubmit={(val) => { if (val.trim()) window.location.href = `/videos?search=${encodeURIComponent(val)}`; setSearchOpen(false) }} />
             </div>
           )}
@@ -257,11 +269,11 @@ export default function Navbar() {
         {mobileOpen && (
           <div className="lg:hidden bg-background/98 backdrop-blur-xl border-t border-white/10 animate-slide-down max-h-[80vh] overflow-y-auto">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
-              <Link href="/" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Home</Link>
+              <Link href="/" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.home}</Link>
 
               {/* About accordion */}
               <button onClick={() => setMobileSection(mobileSection === 'about' ? null : 'about')} className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all">
-                About <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'about' && 'rotate-180')} />
+                {tr.nav.about} <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'about' && 'rotate-180')} />
               </button>
               {mobileSection === 'about' && aboutLinks.map(l => (
                 <Link key={l.href} href={l.href} className="flex items-center gap-3 px-8 py-2.5 rounded-xl text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all">
@@ -271,7 +283,7 @@ export default function Navbar() {
 
               {/* Events accordion */}
               <button onClick={() => setMobileSection(mobileSection === 'events' ? null : 'events')} className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all">
-                Events <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'events' && 'rotate-180')} />
+                {tr.nav.events} <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'events' && 'rotate-180')} />
               </button>
               {mobileSection === 'events' && eventsLinks.map(l => (
                 <Link key={l.href} href={l.href} className="flex items-center gap-3 px-8 py-2.5 rounded-xl text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all">
@@ -279,11 +291,11 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link href="/awards" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Awards</Link>
+              <Link href="/awards" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/awards' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.awards}</Link>
 
               {/* Platform accordion */}
               <button onClick={() => setMobileSection(mobileSection === 'platform' ? null : 'platform')} className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all">
-                Platform <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'platform' && 'rotate-180')} />
+                {tr.nav.platform} <ChevronDown size={16} className={clsx('transition-transform', mobileSection === 'platform' && 'rotate-180')} />
               </button>
               {mobileSection === 'platform' && platformLinks.map(l => (
                 <Link key={l.href} href={l.href} className="flex items-center gap-3 px-8 py-2.5 rounded-xl text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-all">
@@ -291,8 +303,17 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link href="/store" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/store' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Shop</Link>
-              <Link href="/contact" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/contact' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>Contact</Link>
+              <Link href="/store" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/store' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.store}</Link>
+              <Link href="/contact" className={clsx('block px-4 py-3 rounded-xl text-base font-medium transition-all', pathname === '/contact' ? 'text-primary-500 bg-primary-500/10' : 'text-text-secondary hover:text-white hover:bg-white/5')}>{tr.nav.contact}</Link>
+
+              {/* Language toggle mobile */}
+              <div className="flex items-center px-4 py-3">
+                <button onClick={toggleLang} className="flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-white transition-colors">
+                  <span className={lang === 'en' ? 'text-primary-400' : ''}>EN</span>
+                  <span className="text-white/20">|</span>
+                  <span className={lang === 'fr' ? 'text-primary-400' : ''}>FR</span>
+                </button>
+              </div>
 
               <div className="pt-4 border-t border-white/10">
                 {currentUser ? (
@@ -304,14 +325,14 @@ export default function Navbar() {
                         <p className="text-xs text-text-secondary">{currentUser.email}</p>
                       </div>
                     </div>
-                    <Link href="/profile" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">Profile</Link>
-                    {isAdmin && <Link href="/admin" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">Admin</Link>}
-                    <button onClick={logout} className="block w-full text-left px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all">Sign Out</button>
+                    <Link href="/profile" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">{tr.nav.profile}</Link>
+                    {isAdmin && <Link href="/admin" className="block px-4 py-3 rounded-xl text-text-secondary hover:text-white hover:bg-white/5 transition-all">{tr.nav.admin}</Link>}
+                    <button onClick={logout} className="block w-full text-left px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all">{tr.nav.signOut}</button>
                   </div>
                 ) : (
                   <div className="flex flex-col gap-3 px-4">
-                    <Link href="/auth/login"><Button variant="secondary" fullWidth>Login</Button></Link>
-                    <Link href="/auth/signup"><Button variant="primary" fullWidth>Get Started Free</Button></Link>
+                    <Link href="/auth/login"><Button variant="secondary" fullWidth>{tr.nav.signIn}</Button></Link>
+                    <Link href="/auth/signup"><Button variant="primary" fullWidth>{tr.nav.signUp}</Button></Link>
                   </div>
                 )}
               </div>

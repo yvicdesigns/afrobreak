@@ -15,6 +15,7 @@ import VideoCard from '@/components/videos/VideoCard'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import { useAuthStore } from '@/lib/store'
+import { useLanguage } from '@/lib/LanguageContext'
 
 function formatViews(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
@@ -23,6 +24,7 @@ function formatViews(n: number): string {
 }
 
 export default function VideoDetailPage({ params }: { params: { id: string } }) {
+  const { tr } = useLanguage()
   const { currentUser, updateUser } = useAuthStore()
   const [video, setVideo] = useState<Video | null>(null)
   const [related, setRelated] = useState<Video[]>([])
@@ -47,7 +49,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
     })
   }, [params.id, currentUser])
 
-  if (loading) return <div className="min-h-screen pt-16 flex items-center justify-center"><p className="text-text-secondary">Loading...</p></div>
+  if (loading) return <div className="min-h-screen pt-16 flex items-center justify-center"><p className="text-text-secondary">{tr.common.loading}</p></div>
   if (!video) return notFound()
 
   const handleLike = () => {
@@ -93,7 +95,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
           className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-white transition-colors mb-6"
         >
           <ArrowLeft size={16} />
-          Back to Videos
+          {tr.videos.backToVideos}
         </Link>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -122,7 +124,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Eye size={14} className="text-primary-500" />
-                  {formatViews(video.views)} views
+                  {formatViews(video.views)} {tr.videos.views}
                 </span>
               </div>
 
@@ -150,7 +152,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
                   )}
                 >
                   <BookmarkPlus size={16} />
-                  {saved ? 'Saved' : 'Save'}
+                  {saved ? tr.videos.saved : tr.videos.save}
                 </button>
 
                 <button
@@ -163,7 +165,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
                   )}
                 >
                   <Clock size={16} />
-                  {watchLater ? 'Added' : 'Watch Later'}
+                  {watchLater ? tr.videos.added : tr.videos.watchLaterBtn}
                 </button>
 
                 <button
@@ -171,13 +173,13 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
                   className="flex items-center gap-2 px-4 py-2 rounded-xl border bg-surface-2 text-text-secondary border-white/10 hover:text-white hover:border-white/30 text-sm font-medium transition-all duration-200"
                 >
                   <Share2 size={16} />
-                  {shareMsg || 'Share'}
+                  {shareMsg || tr.videos.share}
                 </button>
               </div>
             </div>
 
             <div className="bg-surface rounded-2xl p-6 border border-white/5">
-              <h2 className="font-bold text-white text-lg mb-3">About this video</h2>
+              <h2 className="font-bold text-white text-lg mb-3">{tr.videos.aboutVideo}</h2>
               <p className="text-text-secondary leading-relaxed">{video.description}</p>
             </div>
 
@@ -194,18 +196,16 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
             </div>
 
             <div className="bg-surface rounded-2xl p-6 border border-white/5">
-              <h2 className="font-bold text-white text-lg mb-4">Your Instructor</h2>
+              <h2 className="font-bold text-white text-lg mb-4">{tr.videos.yourInstructor}</h2>
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 ring-2 ring-primary-500/30">
-                  <img
-                    src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80"
-                    alt={video.instructor}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 ring-2 ring-primary-500/30 bg-gradient-to-br from-secondary-500 to-primary-500 flex items-center justify-center">
+                  <span className="text-white font-black text-lg">
+                    {video.instructor.split(' ').map((w: string) => w[0]).slice(0, 2).join('')}
+                  </span>
                 </div>
                 <div>
                   <h3 className="font-bold text-white">{video.instructor}</h3>
-                  <p className="text-sm text-primary-400 mb-2">Dance Instructor</p>
+                  <p className="text-sm text-primary-400 mb-2">{tr.videos.danceInstructor}</p>
                   <p className="text-sm text-text-secondary">
                     World-class instructor specializing in {video.category} dance. Join thousands of students learning from one of the best in the business.
                   </p>
@@ -216,12 +216,12 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
 
           <div className="xl:col-span-1 space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="font-bold text-white text-lg">Related Videos</h2>
+              <h2 className="font-bold text-white text-lg">{tr.videos.relatedVideos}</h2>
               <Link
                 href="/videos"
                 className="flex items-center gap-1 text-xs text-primary-500 hover:text-primary-400 transition-colors"
               >
-                See all <ChevronRight size={12} />
+                {tr.videos.seeAll} <ChevronRight size={12} />
               </Link>
             </div>
 
@@ -233,20 +233,20 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
               </div>
             ) : (
               <div className="text-sm text-text-muted text-center py-8">
-                No related videos found.
+                {tr.videos.noRelated}
               </div>
             )}
 
             {!currentUser?.isPremium && (
-              <div className="bg-gradient-to-br from-gold-dark/20 to-gold-DEFAULT/10 border border-gold-DEFAULT/30 rounded-2xl p-6 text-center">
+              <div className="bg-gradient-to-br from-gold-dark/20 to-gold/10 border border-gold/30 rounded-2xl p-6 text-center">
                 <div className="text-3xl mb-3">👑</div>
-                <h3 className="font-bold text-white mb-2">Go Premium</h3>
+                <h3 className="font-bold text-white mb-2">{tr.videos.goPremiumBtn}</h3>
                 <p className="text-sm text-text-secondary mb-4">
                   Unlock all {premiumCount} premium videos for just ₵9.99/month.
                 </p>
                 <Link href="/subscribe">
                   <Button variant="gold" size="sm" fullWidth>
-                    Upgrade Now
+                    {tr.videos.upgradeNow}
                   </Button>
                 </Link>
               </div>

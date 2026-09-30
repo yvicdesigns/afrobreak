@@ -1,0 +1,222 @@
+- generic [active] [ref=f3e1]:
+  - alert [ref=f3e2]
+  - main [ref=f3e3]:
+    - generic [ref=f3e11]:
+      - generic [ref=f3e12]:
+        - button [ref=f3e13] [cursor=pointer]
+        - generic [ref=f3e15]:
+          - generic [ref=f3e16]: Admin
+          - generic [ref=f3e19]: awards
+        - generic [ref=f3e20]:
+          - button [ref=f3e22] [cursor=pointer]
+          - link "View Site" [ref=f3e27] [cursor=pointer]:
+            - /url: /
+      - main [ref=f3e28]:
+        - generic [ref=f3e29]:
+          - generic [ref=f3e31]:
+            - heading "Awards Management" [level=1] [ref=f3e32]
+            - paragraph [ref=f3e39]: Manage champions, categories and awards content
+          - generic [ref=f3e40]:
+            - button "Hall of Champions" [ref=f3e41] [cursor=pointer]
+            - button "Award Categories" [ref=f3e44] [cursor=pointer]
+          - generic [ref=f3e48]:
+            - paragraph [ref=f3e51]: Edit the name and description of each award category. Changes are reflected immediately on the public Awards page.
+            - textbox "Search category or section…" [ref=f3e67]
+            - generic [ref=f3e68]:
+              - generic [ref=f3e69]:
+                - generic [ref=f3e70]:
+                  - paragraph [ref=f3e71]: Individual Excellence Awards
+                  - paragraph [ref=f3e72]: 7 categories
+                - generic [ref=f3e73]:
+                  - generic [ref=f3e75]:
+                    - generic [ref=f3e76]: "#01"
+                    - generic [ref=f3e77]:
+                      - paragraph [ref=f3e79]: African Breaker of the Year (Male)
+                      - paragraph [ref=f3e80]: Presented to the most outstanding male B-Boy on the African continent. Recognises technical mastery of Breaking fundamentals — power moves, freezes, footwork and toprock — combined with personal style, musicality and competitive impact over the award year.
+                    - button [ref=f3e81] [cursor=pointer]
+                  - generic [ref=f3e86]:
+                    - generic [ref=f3e87]: "#02"
+                    - generic [ref=f3e88]:
+                      - paragraph [ref=f3e90]: African Breaker of the Year (Female)
+                      - paragraph [ref=f3e91]: Presented to the most outstanding female B-Girl on the African continent. Recognises technical excellence, creativity and competitive achievement in Breaking, celebrating the strength and representation of women in African Breaking culture.
+                    - button [ref=f3e92] [cursor=pointer]
+                  - generic [ref=f3e97]:
+                    - generic [ref=f3e98]: "#03"
+                    - generic [ref=f3e99]:
+                      - paragraph [ref=f3e101]: Breakout African Dancer of the Year
+                      - paragraph [ref=f3e102]: Awarded to the most exciting emerging street dancer of any discipline who has made a significant breakthrough during the award year. Open to any gender and any street dance style — recognising raw talent, rapid growth and fresh impact on the African or international scene.
+                    - button [ref=f3e103] [cursor=pointer]
+                  - generic [ref=f3e108]:
+                    - generic [ref=f3e109]: "#04"
+                    - generic [ref=f3e110]:
+                      - paragraph [ref=f3e112]: Best AfroDancer of the Year (Male)
+                      - paragraph [ref=f3e113]: Recognises the male dancer who has most powerfully embodied and advanced Afrodance — the family of movement styles rooted in African rhythm and culture, including Afrobeats dance, Afro-fusion and contemporary African popular dance forms.
+                    - button [ref=f3e114] [cursor=pointer]
+                  - generic [ref=f3e119]:
+                    - generic [ref=f3e120]: "#05"
+                    - generic [ref=f3e121]:
+                      - paragraph [ref=f3e123]: Best AfroDancer of the Year (Female)
+                      - paragraph [ref=f3e124]: Recognises the female dancer who has most powerfully embodied and advanced Afrodance. Celebrates artistic excellence, cultural authenticity and the role women play in leading, innovating and preserving African dance movement culture.
+                    - button [ref=f3e125] [cursor=pointer]
+                  - generic [ref=f3e130]:
+                    - generic [ref=f3e131]: "#06"
+                    - generic [ref=f3e132]:
+                      - paragraph [ref=f3e134]: Best Breaker – Diaspora
+                      - paragraph [ref=f3e135]: Awarded to the most outstanding B-Boy or B-Girl of African origin or heritage who is based outside the African continent. Recognises their excellence in Breaking and their role as a representative of African identity and culture on the global stage.
+                    - button [ref=f3e136] [cursor=pointer]
+                  - generic [ref=f3e141]:
+                    - generic [ref=f3e142]: "#07"
+                    - generic [ref=f3e143]:
+                      - paragraph [ref=f3e145]: Best AfroDancer – Diaspora
+                      - paragraph [ref=f3e146]: Awarded to the most outstanding Afrodancer of African origin or heritage who is based outside the African continent. Celebrates their artistic contribution to Afrodance globally and their role as a cultural bridge between the African diaspora and the continent.
+                    - button [ref=f3e147] [cursor=pointer]
+              - generic [ref=f3e151]:
+                - generic [ref=f3e152]:
+                  - paragraph [ref=f3e153]: Choreography & Creativity Awards
+                  - paragraph [ref=f3e154]: 3 categories
+                - generic [ref=f3e155]:
+                  - generic [ref=f3e157]:
+                    - generic [ref=f3e158]: "#08"
+                    - generic [ref=f3e159]:
+                      - paragraph [ref=f3e161]: Best African Choreographer
+                      - paragraph [ref=f3e162]: Recognises the choreographer who has demonstrated the highest level of artistic vision, technical craft and cultural relevance in their work over the award year. Eligible works include stage productions, music videos, live performances and HipHop theatre — open to all street and urban dance styles rooted in African culture.
+                    - button [ref=f3e163] [cursor=pointer]
+                  - generic [ref=f3e168]:
+                    - generic [ref=f3e169]: "#09"
+                    - generic [ref=f3e170]:
+                      - paragraph [ref=f3e172]: Best Creation / HipHop Theatre Performance
+                      - paragraph [ref=f3e173]: Awarded to the most outstanding original theatre or stage dance production created within the HipHop and street dance tradition during the award year. Honours artistic ambition, storytelling, production quality and cultural depth — work that elevates street dance into a theatrical performance art form.
+                    - button [ref=f3e174] [cursor=pointer]
+                  - generic [ref=f3e179]:
+                    - generic [ref=f3e180]: "#10"
+                    - generic [ref=f3e181]:
+                      - paragraph [ref=f3e183]: Best Dance Video / Documentary (Africa)
+                      - paragraph [ref=f3e184]: Awarded to the best filmed work celebrating African street dance culture — whether a dance performance video, short film or documentary. Judged on creative direction, cinematography, cultural storytelling and the ability to capture the essence and energy of African street dance for a wider audience.
+                    - button [ref=f3e185] [cursor=pointer]
+              - generic [ref=f3e189]:
+                - generic [ref=f3e190]:
+                  - paragraph [ref=f3e191]: Group & Crew Awards
+                  - paragraph [ref=f3e192]: 4 categories
+                - generic [ref=f3e193]:
+                  - generic [ref=f3e195]:
+                    - generic [ref=f3e196]: "#11"
+                    - generic [ref=f3e197]:
+                      - paragraph [ref=f3e199]: Best Breaking / HipHop Crew
+                      - paragraph [ref=f3e200]: Presented to the most outstanding Breaking or HipHop dance crew on the African continent. Evaluated on collective skill, crew chemistry, competitive achievements, community contribution and overall impact on African Breaking and HipHop culture during the award year.
+                    - button [ref=f3e201] [cursor=pointer]
+                  - generic [ref=f3e206]:
+                    - generic [ref=f3e207]: "#12"
+                    - generic [ref=f3e208]:
+                      - paragraph [ref=f3e210]: Best Afrodance Crew
+                      - paragraph [ref=f3e211]: Awarded to the most impressive group or crew performing in Afrodance and African urban dance styles. Recognises synchronisation, creativity, cultural expression and the crew's ability to bring African rhythm and movement to life as a collective.
+                    - button [ref=f3e212] [cursor=pointer]
+                  - generic [ref=f3e217]:
+                    - generic [ref=f3e218]: "#13"
+                    - generic [ref=f3e219]:
+                      - paragraph [ref=f3e221]: Best Traditional Dance Group
+                      - paragraph [ref=f3e222]: Recognises the group that has most powerfully preserved, presented and celebrated traditional African dance forms during the award year. Honours the role of traditional dance in maintaining cultural heritage, community identity and intergenerational knowledge.
+                    - button [ref=f3e223] [cursor=pointer]
+                  - generic [ref=f3e228]:
+                    - generic [ref=f3e229]: "#14"
+                    - generic [ref=f3e230]:
+                      - paragraph [ref=f3e232]: Best Female Dance Crew
+                      - paragraph [ref=f3e233]: Dedicated to gender empowerment in African street dance culture. Presented to the most outstanding all-female or female-led dance crew — celebrating talent, discipline and the cultural impact of women who drive forward street dance culture across the continent as performers, leaders and role models.
+                    - button [ref=f3e234] [cursor=pointer]
+              - generic [ref=f3e238]:
+                - generic [ref=f3e239]:
+                  - paragraph [ref=f3e240]: Regional Recognition Awards
+                  - paragraph [ref=f3e241]: 5 categories
+                - generic [ref=f3e242]:
+                  - generic [ref=f3e244]:
+                    - generic [ref=f3e245]: "#15"
+                    - generic [ref=f3e246]:
+                      - paragraph [ref=f3e248]: Best Breaker – West Africa
+                      - paragraph [ref=f3e249]: Awarded to the most outstanding B-Boy or B-Girl from West Africa, including Ghana, Nigeria, Senegal, Côte d'Ivoire, Mali, Guinea, Burkina Faso and surrounding nations. Judged on technical skill, competitive results, style and contribution to regional Breaking culture.
+                    - button [ref=f3e250] [cursor=pointer]
+                  - generic [ref=f3e255]:
+                    - generic [ref=f3e256]: "#16"
+                    - generic [ref=f3e257]:
+                      - paragraph [ref=f3e259]: Best Breaker – East Africa
+                      - paragraph [ref=f3e260]: Awarded to the most outstanding B-Boy or B-Girl from East Africa, including Kenya, Tanzania, Uganda, Ethiopia, Rwanda and surrounding nations. Recognises excellence, competitive achievement and the growing strength of Breaking culture across East Africa.
+                    - button [ref=f3e261] [cursor=pointer]
+                  - generic [ref=f3e266]:
+                    - generic [ref=f3e267]: "#17"
+                    - generic [ref=f3e268]:
+                      - paragraph [ref=f3e270]: Best Breaker – Central Africa
+                      - paragraph [ref=f3e271]: Awarded to the most outstanding B-Boy or B-Girl from Central Africa, including the Democratic Republic of Congo, Cameroon, Republic of Congo, Gabon and surrounding nations. Celebrates the distinctive energy and style of Central African Breaking culture.
+                    - button [ref=f3e272] [cursor=pointer]
+                  - generic [ref=f3e277]:
+                    - generic [ref=f3e278]: "#18"
+                    - generic [ref=f3e279]:
+                      - paragraph [ref=f3e281]: Best Breaker – Southern Africa
+                      - paragraph [ref=f3e282]: Awarded to the most outstanding B-Boy or B-Girl from Southern Africa, including South Africa, Zimbabwe, Mozambique, Zambia, Botswana and surrounding nations. Recognises technical mastery and the vibrant Breaking scenes of Southern Africa.
+                    - button [ref=f3e283] [cursor=pointer]
+                  - generic [ref=f3e288]:
+                    - generic [ref=f3e289]: "#19"
+                    - generic [ref=f3e290]:
+                      - paragraph [ref=f3e292]: Best Breaker – North Africa
+                      - paragraph [ref=f3e293]: Awarded to the most outstanding B-Boy or B-Girl from North Africa, including Egypt, Morocco, Algeria, Tunisia, Libya and surrounding nations. Celebrates the dynamic Breaking culture and distinctive movement language of North African breakers.
+                    - button [ref=f3e294] [cursor=pointer]
+              - generic [ref=f3e298]:
+                - generic [ref=f3e299]:
+                  - paragraph [ref=f3e300]: Industry & Impact Awards
+                  - paragraph [ref=f3e301]: 7 categories
+                - generic [ref=f3e302]:
+                  - generic [ref=f3e304]:
+                    - generic [ref=f3e305]: "#20"
+                    - generic [ref=f3e306]:
+                      - paragraph [ref=f3e308]: Dance DJ of the Year
+                      - paragraph [ref=f3e309]: Presented to the DJ who has made the most significant contribution to African street dance culture through music selections, event performances and cultural curation. Recognises the DJ's ability to move bodies, serve the culture and elevate the energy of Breaking, HipHop and Afrodance events across the continent and beyond.
+                    - button [ref=f3e310] [cursor=pointer]
+                  - generic [ref=f3e315]:
+                    - generic [ref=f3e316]: "#21"
+                    - generic [ref=f3e317]:
+                      - paragraph [ref=f3e319]: Dance Photographer of the Year
+                      - paragraph [ref=f3e320]: Awarded to the photographer who has most powerfully captured and communicated African street dance culture through their lens. Judged on technical excellence, artistic composition and the ability to freeze the power, emotion and storytelling of dance in a single image.
+                    - button [ref=f3e321] [cursor=pointer]
+                  - generic [ref=f3e326]:
+                    - generic [ref=f3e327]: "#22"
+                    - generic [ref=f3e328]:
+                      - paragraph [ref=f3e330]: Dance Videographer / Director of the Year
+                      - paragraph [ref=f3e331]: Recognises the videographer or director who has produced the most outstanding filmed content in service of African street dance culture. Celebrates technical skill, creative vision and the ability to grow the reach and visibility of the culture through moving image.
+                    - button [ref=f3e332] [cursor=pointer]
+                  - generic [ref=f3e337]:
+                    - generic [ref=f3e338]: "#23"
+                    - generic [ref=f3e339]:
+                      - paragraph [ref=f3e341]: Dance Educator of the Year
+                      - paragraph [ref=f3e342]: Awarded to the individual who has made the most outstanding contribution to dance education within African street dance culture — through teaching, mentoring, workshops, curriculum development or community outreach. Recognises those who sustain and grow the culture for the next generation.
+                    - button [ref=f3e343] [cursor=pointer]
+                  - generic [ref=f3e348]:
+                    - generic [ref=f3e349]: "#24"
+                    - generic [ref=f3e350]:
+                      - paragraph [ref=f3e352]: Dance Event / Competition of the Year
+                      - paragraph [ref=f3e353]: Presented to the event, festival or competition that made the greatest impact on African street dance culture during the award year. Judged on organisation, level of participation, cultural contribution, audience reach and lasting legacy for dancers and communities.
+                    - button [ref=f3e354] [cursor=pointer]
+                  - generic [ref=f3e359]:
+                    - generic [ref=f3e360]: "#25"
+                    - generic [ref=f3e361]:
+                      - paragraph [ref=f3e363]: Lifetime Achievement Award (African Dance)
+                      - paragraph [ref=f3e364]: The highest individual honour of the Afrobreak Culture Festival Awards. Presented to a figure who has dedicated their life to advancing African dance culture — as a dancer, choreographer, educator, organiser or leader. Recognises a career of sustained excellence, cultural contribution and lasting impact.
+                    - button [ref=f3e365] [cursor=pointer]
+                  - generic [ref=f3e370]:
+                    - generic [ref=f3e371]: "#26"
+                    - generic [ref=f3e372]:
+                      - paragraph [ref=f3e374]: African Dance Ambassador Award
+                      - paragraph [ref=f3e375]: Awarded to the individual who has most effectively carried African dance culture to a global audience — promoting, representing and advocating for the continent's street and urban dance traditions on international stages, through media, partnerships and cultural exchange.
+                    - button [ref=f3e376] [cursor=pointer]
+              - generic [ref=f3e380]:
+                - generic [ref=f3e381]:
+                  - paragraph [ref=f3e382]: The Great 8 · Special Honour
+                  - paragraph [ref=f3e383]: 1 category
+                - generic [ref=f3e386]:
+                  - generic [ref=f3e387]: "#27"
+                  - generic [ref=f3e388]:
+                    - paragraph [ref=f3e390]: The Great 8 — Pioneers of Breaking & HipHop in Africa
+                    - paragraph [ref=f3e391]: A unique and historic honour presented not as a competitive award but as a formal act of recognition and gratitude. The Great 8 acknowledges eight key personalities — B-Boys, B-Girls, organisers, educators, promoters or cultural leaders — whose vision, sacrifice and dedication were foundational to the establishment and growth of Breaking and HipHop culture on the African continent and in the global arena. The Great 8 are not nominees — they are legends, and this honour exists to ensure that the architects of African street dance culture are never forgotten.
+                  - button [ref=f3e392] [cursor=pointer]
+            - generic [ref=f3e60]:
+              - paragraph [ref=f3e61]: SQL — Create the award_categories table in Supabase
+              - generic [ref=f3e62]: create table if not exists award_categories ( num integer primary key, name text not null, description text, section text not null, section_order integer not null default 0, updated_at timestamptz default now() ); alter table award_categories enable row level security; create policy "Public read categories" on award_categories for select using (true); create policy "Auth write categories" on award_categories for all to authenticated using (true) with check (true);
+  - link "Chat with us on WhatsApp" [ref=f3e6] [cursor=pointer]:
+    - /url: https://wa.me/233543973224
+    - generic [ref=f3e10]: Talk to Us

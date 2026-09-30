@@ -1,0 +1,143 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - navigation [ref=e3]:
+    - generic [ref=e5]:
+      - link [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e8]:
+        - link "Home" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - button "About" [ref=e11] [cursor=pointer]
+        - button "Events" [ref=e15] [cursor=pointer]
+        - link "Awards" [ref=e18] [cursor=pointer]:
+          - /url: /awards
+        - button "Platform" [ref=e20] [cursor=pointer]
+        - link "Store" [ref=e23] [cursor=pointer]:
+          - /url: /store
+        - link "Contact" [ref=e24] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e25]:
+        - button "Toggle language" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]: EN
+          - generic [ref=e28]: "|"
+          - generic [ref=e29]: FR
+        - button "Switch to light mode" [ref=e30] [cursor=pointer]
+        - button [ref=e38] [cursor=pointer]
+        - generic [ref=e42]:
+          - link [ref=e43] [cursor=pointer]:
+            - /url: /auth/login
+            - button "Sign In" [ref=e44]
+          - link [ref=e46] [cursor=pointer]:
+            - /url: /auth/signup
+            - button "Sign Up" [ref=e47]
+  - main [ref=e49]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - link [ref=e53] [cursor=pointer]:
+          - /url: /
+          - img "AfroBreak" [ref=e54]
+        - heading "Welcome back" [level=1] [ref=e55]
+        - paragraph [ref=e56]: Sign in to continue your dance journey
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Email address
+            - textbox "you@example.com" [ref=e65]
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - generic [ref=e68]: Password
+              - link "Forgot password?" [ref=e69] [cursor=pointer]:
+                - /url: /auth/forgot-password
+            - generic [ref=e70]:
+              - textbox "••••••••" [ref=e74]
+              - button [ref=e75] [cursor=pointer]
+          - button "Sign In" [ref=e79] [cursor=pointer]
+        - generic [ref=e81]: or continue with
+        - button "Continue with Google" [ref=e85] [cursor=pointer]
+        - paragraph [ref=e91]:
+          - text: Don't have an account?
+          - link "Sign up free" [ref=e92] [cursor=pointer]:
+            - /url: /auth/signup
+  - contentinfo [ref=e93]:
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - link [ref=e97] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e99]: The premier platform for african dance Community . Learn from our well versed ambassadors , attend live events and connect with a global community of dancers.
+        - generic [ref=e100]:
+          - paragraph [ref=e101]: Support the culture
+          - button "Donate" [ref=e102] [cursor=pointer]
+        - generic [ref=e105]:
+          - paragraph [ref=e106]: Stay in the loop
+          - generic [ref=e107]:
+            - textbox "your@email.com" [ref=e112]
+            - button [ref=e113] [cursor=pointer]
+      - generic [ref=e116]:
+        - heading "Platform" [level=3] [ref=e117]
+        - list [ref=e118]:
+          - listitem [ref=e119]:
+            - link "Gallery" [ref=e120] [cursor=pointer]:
+              - /url: /photos
+          - listitem [ref=e121]:
+            - link "Music" [ref=e122] [cursor=pointer]:
+              - /url: /music
+          - listitem [ref=e123]:
+            - link "Videos" [ref=e124] [cursor=pointer]:
+              - /url: /videos
+          - listitem [ref=e125]:
+            - link "Blog" [ref=e126] [cursor=pointer]:
+              - /url: /blog
+      - generic [ref=e127]:
+        - heading "Events" [level=3] [ref=e128]
+        - list [ref=e129]:
+          - listitem [ref=e130]:
+            - link "Upcoming" [ref=e131] [cursor=pointer]:
+              - /url: /events?tab=upcoming
+          - listitem [ref=e132]:
+            - link "International" [ref=e133] [cursor=pointer]:
+              - /url: /events?tab=international
+          - listitem [ref=e134]:
+            - link "History" [ref=e135] [cursor=pointer]:
+              - /url: /events?tab=history
+      - generic [ref=e136]:
+        - heading "Company" [level=3] [ref=e137]
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - link "About Us" [ref=e140] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e141]:
+            - link "Press" [ref=e142] [cursor=pointer]:
+              - /url: /press
+          - listitem [ref=e143]:
+            - link "Partners" [ref=e144] [cursor=pointer]:
+              - /url: /partners
+          - listitem [ref=e145]:
+            - link "Contact Us" [ref=e146] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e147]:
+        - heading "More" [level=3] [ref=e148]
+        - list [ref=e149]:
+          - listitem [ref=e150]:
+            - link "Awards" [ref=e151] [cursor=pointer]:
+              - /url: /awards
+          - listitem [ref=e152]:
+            - link "Shop" [ref=e153] [cursor=pointer]:
+              - /url: /store
+          - listitem [ref=e154]:
+            - link "Ambassadors" [ref=e155] [cursor=pointer]:
+              - /url: /instructors
+          - listitem [ref=e156]:
+            - link "Careers" [ref=e157] [cursor=pointer]:
+              - /url: /careers
+    - generic [ref=e159]:
+      - paragraph [ref=e160]: © 2026 AfroBreak. All rights reserved. Built with passion for the culture.
+      - generic [ref=e161]:
+        - link "Privacy" [ref=e162] [cursor=pointer]:
+          - /url: /privacy
+        - link "Terms" [ref=e163] [cursor=pointer]:
+          - /url: /terms
+        - link "Cookies" [ref=e164] [cursor=pointer]:
+          - /url: /cookies
+  - link "Chat with us on WhatsApp" [ref=e165] [cursor=pointer]:
+    - /url: https://wa.me/233543973224
+    - generic [ref=e169]: Talk to Us

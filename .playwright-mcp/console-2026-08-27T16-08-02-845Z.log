@@ -1,0 +1,5 @@
+[    2602ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=value&key=eq.award_categories_json:0
+[  513225ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/favicon.ico:0
+[ 1002177ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.afrobreak.com/favicon.ico:0
+[ 1010657ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*&order=created_at.desc:0
+[ 1525854ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/nominations?select=*&order=created_at.desc:0

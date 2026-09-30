@@ -1,0 +1,2 @@
+[    3143ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/award_categories?select=*&order=num.asc:0
+[   53407ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/award_categories?columns=%22num%22%2C%22name%22%2C%22description%22%2C%22section%22%2C%22section_order%22:0

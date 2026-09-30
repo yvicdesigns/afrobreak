@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { Download, ExternalLink, Mail, Mic2, Film } from 'lucide-react'
 import Button from '@/components/ui/Button'
-import { getPresscoverage } from '@/lib/db'
+import { getPresscoverage, getDocumentaries } from '@/lib/db'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const defaultCoverage = [
   { id: 'd1', outlet: 'MyJoyOnline', title: 'Afro Break championship set for October 27 in Accra', date: 'October 2024', type: 'News', logo: '🗞️', url: 'https://www.myjoyonline.com/afro-break-championship-set-for-october-27-in-accra/' },
@@ -31,10 +32,11 @@ const interviews = [
   { title: 'Zinji — AfroBreak African Champion 2025 (Algeria)', outlet: 'AfroBreak TV', year: '2025', url: 'https://www.youtube.com/@afrobreakghana' },
 ]
 
-const documentaries = [
-  { title: 'Root of the Culture', desc: 'Documentary premiere following the journey of African breakers on their path to the AfroBreak Africa Final. Premiered July 19, 2025.', year: '2025', url: 'https://afrobreak.com/root-of-the-culture-premiere-on-july-19-2025/', thumbnail: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80' },
-  { title: 'Akwaaba AfroBreak', desc: 'Official dance video celebrating the AfroBreak movement and its cultural roots across the African continent.', year: '2025', url: 'https://afrobreak.com/akwaaba-afrobreak-music-official-dance-video/', thumbnail: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80' },
-  { title: 'Cultural Journey Exhibition', desc: 'Bboy Lyricx chronicles his journey through 36+ countries as a cultural ambassador for African breaking and hiphop culture.', year: '2024', url: 'https://afrobreak.com/ghana-breakdance-pioneer-bboy-lyricx-launches-cultural-journey-exhibition/', thumbnail: 'https://images.unsplash.com/photo-1508700929628-c3d7819c1498?w=800&q=80' },
+type Documentary = { id: string; title: string; description: string; year: string; url: string; thumbnail: string }
+const defaultDocumentaries: Documentary[] = [
+  { id: 'dd1', title: 'Root of the Culture', description: 'Documentary premiere following the journey of African breakers on their path to the AfroBreak Africa Final. Premiered July 19, 2025.', year: '2025', url: 'https://afrobreak.com/root-of-the-culture-premiere-on-july-19-2025/', thumbnail: '' },
+  { id: 'dd2', title: 'Akwaaba AfroBreak', description: 'Official dance video celebrating the AfroBreak movement and its cultural roots across the African continent.', year: '2025', url: 'https://afrobreak.com/akwaaba-afrobreak-music-official-dance-video/', thumbnail: '' },
+  { id: 'dd3', title: 'Cultural Journey Exhibition', description: 'Bboy Lyricx chronicles his journey through 36+ countries as a cultural ambassador for African breaking and hiphop culture.', year: '2024', url: 'https://afrobreak.com/ghana-breakdance-pioneer-bboy-lyricx-launches-cultural-journey-exhibition/', thumbnail: '' },
 ]
 
 const stats = [
@@ -45,26 +47,38 @@ const stats = [
 ]
 
 export default function PressPage() {
-  const [coverage, setCoverage] = useState(defaultCoverage)
+  const { tr } = useLanguage()
+  const [coverage, setCoverage] = useState<typeof defaultCoverage>([])
+  const [documentaries, setDocumentaries] = useState<Documentary[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getPresscoverage().then(data => { if (data.length > 0) setCoverage(data as typeof defaultCoverage) })
+    Promise.all([getPresscoverage(), getDocumentaries()]).then(([cov, docs]) => {
+      setCoverage((cov.length > 0 ? cov : defaultCoverage) as typeof defaultCoverage)
+      setDocumentaries(((docs as Documentary[]).length > 0 ? docs : defaultDocumentaries) as Documentary[])
+    }).finally(() => setLoading(false))
   }, [])
+
+  if (loading) return (
+    <div className="min-h-screen pt-20 bg-background flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
 
   return (
     <div className="min-h-screen pt-20 bg-background">
       {/* Hero */}
       <div className="bg-surface border-b border-white/5 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Newsroom</p>
+          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.press.eyebrow}</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
-            Press & <span className="gradient-text-orange">Media</span>
+            {tr.press.title} <span className="gradient-text-orange">{tr.press.titleAccent}</span>
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto mb-8">
-            Resources for journalists, bloggers and media professionals covering Afrobreak dance community.
+            {tr.press.resourcesFor}
           </p>
           <a href="mailto:press@afrobreak.com">
-            <Button variant="primary" leftIcon={<Mail size={16} />}>Contact Press Team</Button>
+            <Button variant="primary" leftIcon={<Mail size={16} />}>{tr.press.contactPressTeam}</Button>
           </a>
         </div>
       </div>
@@ -111,14 +125,17 @@ export default function PressPage() {
             <div className="w-10 h-10 rounded-xl bg-secondary-500/15 flex items-center justify-center">
               <Film size={20} className="text-secondary-400" />
             </div>
-            <h2 className="text-2xl font-bold text-white">Dance and Culture Documentaries</h2>
+            <h2 className="text-2xl font-bold text-white">{tr.press.danceDocumentaries}</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {documentaries.map((doc, i) => (
-              <a key={i} href={doc.url} target="_blank" rel="noopener noreferrer"
+            {documentaries.map((doc) => (
+              <a key={doc.id} href={doc.url} target="_blank" rel="noopener noreferrer"
                 className="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-secondary-500/30 transition-all">
-                <div className="relative h-40 overflow-hidden">
-                  <img src={doc.thumbnail} alt={doc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative h-40 overflow-hidden bg-white/5">
+                  {doc.thumbnail
+                    ? <img src={doc.thumbnail} alt={doc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    : <div className="w-full h-full flex items-center justify-center"><Film size={40} className="text-white/20" /></div>
+                  }
                   <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
                   <div className="absolute bottom-3 left-3">
                     <span className="px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold rounded-lg">{doc.year}</span>
@@ -126,7 +143,7 @@ export default function PressPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-white text-sm mb-1">{doc.title}</h3>
-                  <p className="text-text-secondary text-xs leading-relaxed">{doc.desc}</p>
+                  <p className="text-text-secondary text-xs leading-relaxed">{doc.description}</p>
                 </div>
               </a>
             ))}
@@ -135,7 +152,7 @@ export default function PressPage() {
 
         {/* Press Coverage */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-6">Press Coverage</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">{tr.press.pressCoverage}</h2>
           <div className="space-y-3">
             {coverage.map(item => (
               <div key={item.id} className="flex items-center gap-4 p-5 bg-surface border border-white/5 rounded-2xl hover:border-white/15 transition-all group">
@@ -172,7 +189,7 @@ export default function PressPage() {
                   <p className="text-text-secondary text-xs">{asset.desc} · {asset.size}</p>
                 </div>
                 <button className="px-3 py-1.5 bg-primary-500/15 text-primary-400 text-xs font-semibold rounded-lg hover:bg-primary-500 hover:text-white transition-all">
-                  Download
+                  {tr.press.download}
                 </button>
               </div>
             ))}
@@ -181,14 +198,14 @@ export default function PressPage() {
 
         {/* Contact */}
         <div className="bg-gradient-to-r from-primary-500/15 to-secondary-500/10 border border-white/10 rounded-2xl p-8 text-center">
-          <h3 className="text-xl font-bold text-white mb-2">Media Enquiries</h3>
+          <h3 className="text-xl font-bold text-white mb-2">{tr.press.mediaEnquiries}</h3>
           <p className="text-text-secondary mb-6">For interviews, fact-checking, or media requests, contact our press team directly.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="mailto:press@afrobreak.com" className="flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors">
               <Mail size={16} /> press@afrobreak.com
             </a>
             <span className="text-white/20 hidden sm:block">|</span>
-            <p className="text-text-secondary text-sm">Response within 24 hours</p>
+            <p className="text-text-secondary text-sm">{tr.press.responseTime}</p>
           </div>
         </div>
       </div>

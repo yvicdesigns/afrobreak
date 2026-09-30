@@ -8,12 +8,7 @@ import { getEvents } from '@/lib/db'
 import { events as defaultEvents } from '@/lib/data'
 import type { Event } from '@/lib/types'
 import EventCard from '@/components/events/EventCard'
-
-const tabs = [
-  { key: 'upcoming', label: 'Upcoming', icon: Calendar, description: 'Next AfroBreak events — register and join us' },
-  { key: 'international', label: 'International', icon: Globe, description: 'AfroBreak events across Africa and the world' },
-  { key: 'history', label: 'History', icon: History, description: 'Our journey — all past events' },
-]
+import { useLanguage } from '@/lib/LanguageContext'
 
 function isPast(dateStr: string) {
   const today = new Date()
@@ -22,11 +17,18 @@ function isPast(dateStr: string) {
 }
 
 function EventsContent() {
+  const { tr } = useLanguage()
   const searchParams = useSearchParams()
   const router = useRouter()
   const activeTab = searchParams.get('tab') || 'upcoming'
   const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
+
+  const tabs = [
+    { key: 'upcoming', label: tr.events.tabUpcoming, icon: Calendar, description: tr.events.subtitle },
+    { key: 'international', label: tr.events.tabInternational, icon: Globe, description: tr.events.subtitle },
+    { key: 'history', label: tr.events.tabHistory, icon: History, description: tr.events.subtitle },
+  ]
 
   useEffect(() => {
     getEvents().then(data => {
@@ -66,8 +68,8 @@ function EventsContent() {
       {/* Hero */}
       <div className="relative py-20 lg:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?w=1920&q=80" alt="Events" className="w-full h-full object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+          <div className="w-full h-full bg-gradient-to-br from-secondary-500/20 via-background to-primary-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-500/15 border border-secondary-500/30 mb-6">
@@ -77,7 +79,7 @@ function EventsContent() {
             </span>
           </div>
           <h1 className="heading-lg text-white mb-4">
-            AfroBreak <span className="gradient-text-purple">Events</span>
+            AfroBreak <span className="gradient-text-purple">{tr.events.title}</span>
           </h1>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">{currentTab.description}</p>
         </div>
@@ -123,14 +125,14 @@ function EventsContent() {
             {activeTab === 'upcoming' ? (
               <>
                 <Clock size={48} className="text-text-muted mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">No upcoming events yet</h3>
-                <p className="text-text-secondary">The next event will be announced soon. Stay tuned!</p>
+                <h3 className="text-xl font-bold text-white mb-2">{tr.events.noUpcoming}</h3>
+                <p className="text-text-secondary">{tr.events.noUpcomingDesc}</p>
               </>
             ) : (
               <>
                 <currentTab.icon size={48} className="text-text-muted mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">No events in this category yet</h3>
-                <p className="text-text-secondary">Check back soon.</p>
+                <h3 className="text-xl font-bold text-white mb-2">{tr.events.noCategoryYet}</h3>
+                <p className="text-text-secondary">{tr.events.checkBackSoon}</p>
               </>
             )}
           </div>
@@ -141,7 +143,7 @@ function EventsContent() {
               <div className="mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <p className="text-sm text-emerald-400 font-medium">
-                  Next event in {Math.ceil((new Date(filtered[0].date).getTime() - Date.now()) / 86400000)} days
+                  {tr.events.nextEventIn} {Math.ceil((new Date(filtered[0].date).getTime() - Date.now()) / 86400000)} {tr.events.days}
                 </p>
               </div>
             )}
@@ -149,13 +151,13 @@ function EventsContent() {
             {/* History: section label */}
             {activeTab === 'history' && (
               <p className="text-sm text-text-secondary mb-6">
-                <span className="text-white font-semibold">{filtered.length}</span> past event{filtered.length !== 1 ? 's' : ''} — sorted most recent first
+                <span className="text-white font-semibold">{filtered.length}</span> {tr.events.pastEventsLabel}
               </p>
             )}
 
             {activeTab === 'international' && (
               <p className="text-sm text-text-secondary mb-6">
-                <span className="text-white font-semibold">{filtered.length}</span> international event{filtered.length !== 1 ? 's' : ''} across Africa &amp; beyond
+                <span className="text-white font-semibold">{filtered.length}</span> {tr.events.intlEventsLabel}
               </p>
             )}
 

@@ -7,8 +7,10 @@ import { getBlogPosts } from '@/lib/db'
 import { blogPosts as defaultPosts } from '@/lib/data'
 import type { BlogPost } from '@/lib/types'
 import BlogCard from '@/components/blog/BlogCard'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function LatestBlog() {
+  const { tr } = useLanguage()
   const [posts, setPosts] = useState<BlogPost[]>([])
 
   useEffect(() => {
@@ -23,16 +25,16 @@ export default function LatestBlog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-gold-DEFAULT text-sm font-semibold uppercase tracking-widest mb-2">
-              From The Community
+            <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-2">
+              {tr.home.fromCommunity}
             </p>
-            <h2 className="heading-md text-white">Latest Articles</h2>
+            <h2 className="heading-md text-white">{tr.home.latestArticles}</h2>
           </div>
           <Link
             href="/blog"
-            className="flex items-center gap-1 text-sm font-medium text-gold-DEFAULT hover:text-yellow-300 transition-colors group"
+            className="flex items-center gap-1 text-sm font-medium text-gold hover:text-yellow-300 transition-colors group"
           >
-            View All
+            {tr.home.viewAll}
             <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

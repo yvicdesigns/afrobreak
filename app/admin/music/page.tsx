@@ -60,7 +60,7 @@ export default function AdminMusicPage() {
       flash('Track updated!')
     } else {
       const created = await createTrack(payload)
-      if (created) setTracks(prev => [created as TrackRow, ...prev])
+      if (created) setTracks(prev => [created as unknown as TrackRow, ...prev])
       flash('Track added!')
     }
     setSaving(false)
@@ -105,10 +105,10 @@ export default function AdminMusicPage() {
     } else {
       const created = await createAlbum(payload)
       if (created) {
-        setAlbums(prev => [created as AlbumRow, ...prev])
+        setAlbums(prev => [created as unknown as AlbumRow, ...prev])
         flash('Album added!')
       } else {
-        setFormError('Failed to save album. Make sure you ran the SQL to add description and download_url columns in Supabase.')
+        setFormError('Failed to save album.')
         setSaving(false)
         return
       }

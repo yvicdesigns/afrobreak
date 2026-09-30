@@ -1,0 +1,205 @@
+- generic [active] [ref=f19e1]:
+  - generic [ref=f19e2]:
+    - generic [ref=f19e3]:
+      - generic [ref=f19e4]:
+        - link "Skip to content" [ref=f19e6] [cursor=pointer]:
+          - /url: "#main"
+        - banner [ref=f19e9]:
+          - generic [ref=f19e10]:
+            - generic [ref=f19e11]:
+              - link "Supabase Back to organization home" [ref=f19e12] [cursor=pointer]:
+                - /url: /dashboard/organizations
+                - img "Supabase" [ref=f19e13]
+                - generic [ref=f19e14]: Back to organization home
+              - button "Connect" [disabled] [ref=f19e22]
+            - generic [ref=f19e27]:
+              - button "Feedback" [ref=f19e28] [cursor=pointer]
+              - generic [ref=f19e30]:
+                - button [ref=f19e31] [cursor=pointer]:
+                  - paragraph [ref=f19e36]: Search...
+                  - generic [ref=f19e37]: ⌘K
+                - button "Help" [ref=f19e39] [cursor=pointer]
+                - button "Advisor Center" [ref=f19e46] [cursor=pointer]
+                - button "SQL Editor" [ref=f19e51] [cursor=pointer]
+                - button "AI Assistant" [ref=f19e56] [cursor=pointer]
+              - button [ref=f19e64] [cursor=pointer]
+        - generic [ref=f19e69]:
+          - generic [ref=f19e73]:
+            - navigation [ref=f19e75]:
+              - list [ref=f19e77]:
+                - listitem [ref=f19e78]:
+                  - link "Project Overview" [ref=f19e79] [cursor=pointer]:
+                    - /url: /dashboard/project/ekmxmgshowdaxoewyjut
+                - listitem [ref=f19e82]:
+                  - button "Table Editor" [disabled]
+                - listitem [ref=f19e83]:
+                  - button "SQL Editor" [disabled]
+              - list [ref=f19e85]:
+                - listitem [ref=f19e86]:
+                  - button "Database" [disabled]
+                - listitem [ref=f19e87]:
+                  - button "Authentication" [disabled]
+                - listitem [ref=f19e88]:
+                  - button "Storage" [disabled]
+                - listitem [ref=f19e89]:
+                  - link "Edge Functions" [ref=f19e90] [cursor=pointer]:
+                    - /url: /dashboard/project/ekmxmgshowdaxoewyjut/functions
+                - listitem [ref=f19e96]:
+                  - button "Realtime" [disabled]
+              - list [ref=f19e98]:
+                - listitem [ref=f19e99]:
+                  - button "Advisors" [disabled]
+                - listitem [ref=f19e100]:
+                  - button "Observability" [disabled]
+                - listitem [ref=f19e101]:
+                  - link "Logs" [ref=f19e102] [cursor=pointer]:
+                    - /url: /dashboard/project/ekmxmgshowdaxoewyjut/logs
+                - listitem [ref=f19e104]:
+                  - button "Integrations" [disabled]
+              - list [ref=f19e106]:
+                - listitem [ref=f19e107]:
+                  - link "Project Settings" [ref=f19e108] [cursor=pointer]:
+                    - /url: /dashboard/project/ekmxmgshowdaxoewyjut/settings/general
+            - button "Sidebar control" [ref=f19e114] [cursor=pointer]
+          - main [ref=f19e121]:
+            - generic [ref=f19e123]:
+              - generic [ref=f19e127]:
+                - heading "Database" [level=4] [ref=f19e130]
+                - menu "Sidebar" [disabled] [ref=f19e133]:
+                  - list [ref=f19e134]:
+                    - generic [ref=f19e137]:
+                      - generic [ref=f19e138]: Database Management
+                      - generic [ref=f19e142]:
+                        - link [disabled] [ref=f19e143] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/schemas
+                          - menuitem "Schema Visualizer" [disabled] [ref=f19e144]
+                        - link [disabled] [ref=f19e149] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/tables
+                          - menuitem "Tables" [disabled] [ref=f19e150]
+                        - link [disabled] [ref=f19e155] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/functions
+                          - menuitem "Functions" [disabled] [ref=f19e156]
+                        - link [disabled] [ref=f19e161] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/triggers/data
+                          - menuitem "Triggers" [disabled] [ref=f19e162]
+                        - link [disabled] [ref=f19e167] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/types
+                          - menuitem "Enumerated Types" [disabled] [ref=f19e168]
+                        - link [disabled] [ref=f19e173] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/extensions
+                          - menuitem "Extensions" [disabled] [ref=f19e174]
+                        - link [disabled] [ref=f19e179] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/indexes
+                          - menuitem "Indexes" [disabled] [ref=f19e180]
+                        - link [disabled] [ref=f19e185] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/publications
+                          - menuitem "Publications" [disabled] [ref=f19e186]
+                    - generic [ref=f19e194]:
+                      - generic [ref=f19e195]: Access Control
+                      - generic [ref=f19e199]:
+                        - link [disabled] [ref=f19e200] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/policies
+                          - menuitem "Policies" [disabled] [ref=f19e201]
+                        - link [disabled] [ref=f19e206] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/roles
+                          - menuitem "Roles" [disabled] [ref=f19e207]
+                    - generic [ref=f19e215]:
+                      - generic [ref=f19e216]: Configuration
+                      - link [disabled] [ref=f19e221] [cursor=pointer]:
+                        - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/settings
+                        - menuitem "Settings" [disabled] [ref=f19e222]
+                    - generic [ref=f19e230]:
+                      - generic [ref=f19e231]: Platform
+                      - generic [ref=f19e235]:
+                        - link [disabled] [ref=f19e236] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/replication
+                          - menuitem "Replication" [disabled] [ref=f19e237]
+                        - link [disabled] [ref=f19e242] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/backups/scheduled
+                          - menuitem "Backups" [disabled] [ref=f19e243]
+                        - link [disabled] [ref=f19e248] [cursor=pointer]:
+                          - /url: /dashboard/project/ekmxmgshowdaxoewyjut/database/migrations
+                          - menuitem "Migrations" [disabled] [ref=f19e249]
+              - separator [disabled] [ref=f19e254]
+              - main [ref=f19e265]:
+                - generic [ref=f19e269]:
+                  - heading "Database Settings" [level=1] [ref=f19e270]
+                  - generic [ref=f19e271]: Connections, security, and network configuration
+                - generic [ref=f19e272]:
+                  - generic [ref=f19e273]:
+                    - generic [ref=f19e276]:
+                      - heading "Database password" [level=2] [ref=f19e277]
+                      - generic [ref=f19e278]: Used for direct Postgres connections
+                    - generic [ref=f19e281]:
+                      - generic [ref=f19e282]:
+                        - heading "Reset database password" [level=3] [ref=f19e283]
+                        - paragraph [ref=f19e284]: The database password isn’t viewable after creation. Resetting it will break any existing connections.
+                      - button "Reset password" [disabled] [ref=f19e285]
+                  - generic [ref=f19e287]:
+                    - generic [ref=f19e289]:
+                      - heading "Connection pooling" [level=2] [ref=f19e291]
+                      - link "Docs" [ref=f19e293] [cursor=pointer]:
+                        - /url: https://supabase.com/docs/guides/database/connecting-to-postgres#connection-pooler
+                    - generic [ref=f19e320]:
+                      - generic [ref=f19e321]: You need additional permissions to update connection pooling settings
+                      - generic [ref=f19e322]:
+                        - button "Cancel" [disabled]
+                        - button "Save" [disabled]
+                  - generic [ref=f19e323]:
+                    - generic [ref=f19e325]:
+                      - heading "SSL configuration" [level=2] [ref=f19e327]
+                      - link "Docs" [ref=f19e328] [cursor=pointer]:
+                        - /url: https://supabase.com/docs/guides/platform/ssl-enforcement
+                    - generic [ref=f19e335]:
+                      - generic [ref=f19e337]:
+                        - status [ref=f19e342]: Loading SSL configuration
+                        - generic [ref=f19e343]:
+                          - generic [ref=f19e344]: Enforce SSL on incoming connections
+                          - generic [ref=f19e346]: Reject non-SSL connections to your database
+                      - generic [ref=f19e348]:
+                        - button "Download certificate" [disabled] [ref=f19e351]
+                        - generic [ref=f19e357]:
+                          - generic [ref=f19e358]: SSL Certificate
+                          - generic [ref=f19e360]: Use this certificate when connecting to your database to prevent snooping and man-in-the-middle attacks.
+                  - generic [ref=f19e361]:
+                    - generic [ref=f19e363]:
+                      - heading "Disk Management" [level=2] [ref=f19e365]
+                      - link "Docs" [ref=f19e366] [cursor=pointer]:
+                        - /url: https://supabase.com/docs/guides/platform/database-size#disk-management
+                    - alert [ref=f19e373]:
+                      - paragraph [ref=f19e376]: Disk size configuration is not available for projects on the Free Plan
+                      - generic [ref=f19e377]:
+                        - paragraph [ref=f19e378]: If you are intending to use more than 500MB of disk space, then you will need to upgrade to at least the Pro Plan.
+                        - link "Upgrade subscription" [ref=f19e379] [cursor=pointer]:
+                          - /url: /dashboard/org/undefined/billing?panel=subscriptionPlan
+                  - generic [ref=f19e383]:
+                    - generic [ref=f19e384]:
+                      - heading "Network bans" [level=2] [ref=f19e385]
+                      - generic [ref=f19e386]: IP addresses temporarily blocked due to suspicious traffic
+                    - link "Docs" [ref=f19e387] [cursor=pointer]:
+                      - /url: https://supabase.com/docs/reference/cli/supabase-network-bans
+      - generic [ref=f19e402]:
+        - generic:
+          - img "Background pattern"
+        - generic [ref=f19e403]:
+          - button "Close banner" [ref=f19e405] [cursor=pointer]
+          - generic [ref=f19e410]:
+            - generic [ref=f19e411]: Notice
+            - generic [ref=f19e412]:
+              - paragraph [ref=f19e413]: We're updating our Terms of Service
+              - paragraph [ref=f19e414]: Our Data Processing Addendum is now built into the Terms, effective August 1, 2026.
+            - button "Learn more" [ref=f19e415] [cursor=pointer]
+    - region "Notifications alt+T":
+      - list
+      - list:
+        - status [ref=f19e417]:
+          - generic [ref=f19e418]:
+            - paragraph [ref=f19e420]:
+              - text: We use cookies to collect data and improve our services.
+              - link "Learn more" [ref=f19e421] [cursor=pointer]:
+                - /url: https://supabase.com/privacy#8-cookies-and-similar-technologies-used-on-our-european-services
+            - generic [ref=f19e422]:
+              - button "Accept" [ref=f19e423] [cursor=pointer]
+              - button "Opt out" [ref=f19e425] [cursor=pointer]
+              - button "Privacy settings" [ref=f19e427] [cursor=pointer]
+  - alert [ref=f19e428]: Settings | Database | Supabase

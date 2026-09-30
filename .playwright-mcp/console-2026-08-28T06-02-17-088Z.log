@@ -1,0 +1,14 @@
+[   11729ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=*&key=like.nom_%25&order=created_at.desc:0
+[   23230ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=*&key=like.nom_%25&order=created_at.desc:0
+[  348345ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=value&key=eq.about_timeline:0
+[  348355ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=value&key=eq.about_stats:0
+[  355431ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/covers/1783523326197-cfue8x3vbop.PNG:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/avatars/1783522047598-b1xv8tfzbaf.jpg:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/covers/1783523285268-uo97j3dchda.PNG:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/avatars/1783522282699-3wfb8bw9xox.JPG:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/covers/1783523076094-vj0jb0nnz9o.JPG:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/avatars/1783521784446-heohdmvqgc4.JPG:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/covers/1783523265567-iim0d0ez3kg.jpg:0
+[  355432ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://ekmxmgshowdaxoewyjut.supabase.co/storage/v1/object/public/media/avatars/1783522594528-ihp6fsjdbhf.jpeg:0
+[  411036ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=value&key=eq.email_newsletter_template:0
+[  411044ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://ekmxmgshowdaxoewyjut.supabase.co/rest/v1/settings?select=value&key=eq.email_contact_template:0

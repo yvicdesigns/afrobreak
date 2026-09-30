@@ -1,0 +1,248 @@
+- generic [active] [ref=f8e1]:
+  - alert [ref=f8e2]
+  - navigation [ref=f8e8]:
+    - generic [ref=f8e10]:
+      - link [ref=f8e11] [cursor=pointer]:
+        - /url: /
+        - img "AfroBreak" [ref=f8e13]
+      - generic [ref=f8e14]:
+        - button "Toggle language" [ref=f8e15] [cursor=pointer]:
+          - generic [ref=f8e16]: EN
+          - generic [ref=f8e17]: "|"
+          - generic [ref=f8e18]: FR
+        - button "Switch to light mode" [ref=f8e19] [cursor=pointer]
+        - button [ref=f8e27] [cursor=pointer]
+        - button [ref=f8e31] [cursor=pointer]
+  - main [ref=f8e33]:
+    - generic [ref=f8e35]:
+      - generic [ref=f8e36]:
+        - img "AfroBreak Culture Awards" [ref=f8e38]
+        - heading "AfroBreak Culture Awards" [level=1] [ref=f8e39]
+        - paragraph [ref=f8e40]: Recognize, celebrate and evaluate excellence in breaking and Hip Hop culture across Africa and the global dance community.
+      - generic [ref=f8e41]:
+        - button "Hall of Champions" [ref=f8e42] [cursor=pointer]
+        - button "Culture Awards 2026" [ref=f8e45] [cursor=pointer]
+      - generic [ref=f8e52]:
+        - generic [ref=f8e55]:
+          - generic [ref=f8e56]: Afrobreak Culture Festival 2026 Awards
+          - heading "27 Categories of Excellence" [level=2] [ref=f8e64]
+          - paragraph [ref=f8e65]: The Afrobreak Culture Festival 2026 Awards celebrate the individuals, crews, educators and industry professionals who have shaped, elevated and advanced street dance culture across the African continent and within the African diaspora.
+          - generic [ref=f8e66]:
+            - generic [ref=f8e67]: 20th November 2026
+            - generic [ref=f8e71]: Accra, Ghana
+            - generic [ref=f8e76]: AfroBreak International Festival 2026
+        - generic [ref=f8e81]:
+          - generic [ref=f8e82]:
+            - heading "Submit Your Nomination" [level=3] [ref=f8e88]
+            - paragraph [ref=f8e89]: Nominate an individual, crew or industry professional for the Afrobreak Culture Festival 2026 Awards.
+          - generic [ref=f8e90]:
+            - generic [ref=f8e91]:
+              - heading "1 Nominator Details" [level=4] [ref=f8e92]:
+                - generic [ref=f8e93]: "1"
+                - text: Nominator Details
+              - generic [ref=f8e94]:
+                - generic [ref=f8e95]:
+                  - generic [ref=f8e96]: Full Name *
+                  - textbox "Your full name" [ref=f8e97]: Test Nominator
+                - generic [ref=f8e98]:
+                  - generic [ref=f8e99]: Email Address *
+                  - textbox "you@example.com" [ref=f8e100]: test@afrobreak.com
+                - generic [ref=f8e101]:
+                  - generic [ref=f8e102]: Phone / WhatsApp
+                  - textbox "+1 234 567 8900" [ref=f8e103]
+                - generic [ref=f8e104]:
+                  - generic [ref=f8e105]: Country
+                  - textbox "Your country" [ref=f8e106]
+                - generic [ref=f8e107]:
+                  - generic [ref=f8e108]: Relationship to Nominee
+                  - combobox [ref=f8e109]:
+                    - option "Select..." [selected]
+                    - option "Self"
+                    - option "Friend"
+                    - option "Manager / Agent"
+                    - option "Fellow dancer"
+                    - option "Fan"
+                    - option "Organisation"
+                    - option "Other"
+            - generic [ref=f8e110]:
+              - heading "2 Award Category" [level=4] [ref=f8e111]:
+                - generic [ref=f8e112]: "2"
+                - text: Award Category
+              - generic [ref=f8e114]:
+                - generic [ref=f8e115]: Category Selected *
+                - combobox [ref=f8e116]:
+                  - option "Select a category..."
+                  - option "#1 — African Breaker of the Year (Male)" [selected]
+                  - option "#2 — African Breaker of the Year (Female)"
+                  - option "#3 — Breakout African Dancer of the Year"
+                  - option "#4 — Best AfroDancer of the Year (Male)"
+                  - option "#5 — Best AfroDancer of the Year (Female)"
+                  - option "#6 — Best Breaker – Diaspora"
+                  - option "#7 — Best AfroDancer – Diaspora"
+                  - option "#8 — Best African Choreographer"
+                  - option "#9 — Best Creation / HipHop Theatre Performance"
+                  - option "#10 — Best Dance Video / Documentary (Africa)"
+                  - option "#11 — Best Breaking / HipHop Crew"
+                  - option "#12 — Best Afrodance Crew"
+                  - option "#13 — Best Traditional Dance Group"
+                  - option "#14 — Best Female Dance Crew"
+                  - option "#15 — Best Breaker – West Africa"
+                  - option "#16 — Best Breaker – East Africa"
+                  - option "#17 — Best Breaker – Central Africa"
+                  - option "#18 — Best Breaker – Southern Africa"
+                  - option "#19 — Best Breaker – North Africa"
+                  - option "#20 — Dance DJ of the Year"
+                  - option "#21 — Dance Photographer of the Year"
+                  - option "#22 — Dance Videographer / Director of the Year"
+                  - option "#23 — Dance Educator of the Year"
+                  - option "#24 — Dance Event / Competition of the Year"
+                  - option "#25 — Lifetime Achievement Award (African Dance)"
+                  - option "#26 — African Dance Ambassador Award"
+                  - option "#27 — The Great 8 — Pioneers of Breaking & HipHop in Africa"
+                - paragraph [ref=f8e250]: "Section: Individual Excellence Awards"
+            - generic [ref=f8e117]:
+              - heading "3 Nominee Details" [level=4] [ref=f8e118]:
+                - generic [ref=f8e119]: "3"
+                - text: Nominee Details
+              - generic [ref=f8e120]:
+                - generic [ref=f8e121]:
+                  - generic [ref=f8e122]: Nominee Full Name *
+                  - textbox "Full legal name" [ref=f8e123]: Test Nominee
+                - generic [ref=f8e124]:
+                  - generic [ref=f8e125]: Stage / Dancer Name
+                  - textbox "e.g. Bboy Lyricx" [ref=f8e126]
+                - generic [ref=f8e127]:
+                  - generic [ref=f8e128]: Gender
+                  - combobox [ref=f8e129]:
+                    - option "Select..." [selected]
+                    - option "Male"
+                    - option "Female"
+                    - option "Non-binary"
+                    - option "Prefer not to say"
+                - generic [ref=f8e130]:
+                  - generic [ref=f8e131]: Country
+                  - textbox "Nominee's country" [ref=f8e132]: Ghana
+                - generic [ref=f8e133]:
+                  - generic [ref=f8e134]: City
+                  - textbox "Nominee's city" [ref=f8e135]
+                - generic [ref=f8e136]:
+                  - generic [ref=f8e137]: African Region
+                  - combobox [ref=f8e138]:
+                    - option "Select region..." [selected]
+                    - option "West Africa"
+                    - option "East Africa"
+                    - option "Central Africa"
+                    - option "Southern Africa"
+                    - option "North Africa"
+                    - option "Diaspora"
+                - generic [ref=f8e139]:
+                  - generic [ref=f8e140]: Nominee Email
+                  - textbox "nominee@example.com" [ref=f8e141]
+                - generic [ref=f8e142]:
+                  - generic [ref=f8e143]: Nominee Phone / WhatsApp
+                  - textbox "+233 00 000 0000" [ref=f8e144]
+                - generic [ref=f8e145]:
+                  - generic [ref=f8e146]: Social Media Links
+                  - textbox "Instagram, TikTok, YouTube, Facebook... (one per line)" [ref=f8e147]
+                - generic [ref=f8e148]:
+                  - generic [ref=f8e149]: Support Links
+                  - textbox "Links to videos, articles, or other supporting evidence (one per line)" [ref=f8e150]
+            - generic [ref=f8e151]:
+              - heading "4 Confirmation" [level=4] [ref=f8e152]:
+                - generic [ref=f8e153]: "4"
+                - text: Confirmation
+              - generic [ref=f8e154]:
+                - generic [ref=f8e155] [cursor=pointer]: I confirm the information provided is accurate to the best of my knowledge
+                - generic [ref=f8e158] [cursor=pointer]: I consent to the nominee being contacted regarding this nomination
+            - button "Submit Nomination" [ref=f8e161] [cursor=pointer]
+  - contentinfo [ref=f8e165]:
+    - generic [ref=f8e167]:
+      - generic [ref=f8e168]:
+        - link [ref=f8e169] [cursor=pointer]:
+          - /url: /
+          - img "AfroBreak" [ref=f8e171]
+        - paragraph [ref=f8e172]: The premier platform for african dance Community . Learn from our well versed ambassadors , attend live events and connect with a global community of dancers.
+        - generic [ref=f8e173]:
+          - link "Instagram" [ref=f8e174] [cursor=pointer]:
+            - /url: https://www.instagram.com/afrobreak_concepts/
+          - link "YouTube" [ref=f8e178] [cursor=pointer]:
+            - /url: https://www.youtube.com/@afrobreakconcepts
+          - link "Facebook" [ref=f8e182] [cursor=pointer]:
+            - /url: https://www.facebook.com/profile.php?id=100063704975811
+        - generic [ref=f8e185]:
+          - paragraph [ref=f8e186]: Support the culture
+          - button "Donate" [ref=f8e187] [cursor=pointer]
+        - generic [ref=f8e190]:
+          - paragraph [ref=f8e191]: Stay in the loop
+          - generic [ref=f8e192]:
+            - textbox "your@email.com" [ref=f8e197]
+            - button [ref=f8e198] [cursor=pointer]
+      - generic [ref=f8e201]:
+        - heading "Platform" [level=3] [ref=f8e202]
+        - list [ref=f8e203]:
+          - listitem [ref=f8e204]:
+            - link "Gallery" [ref=f8e205] [cursor=pointer]:
+              - /url: /photos
+          - listitem [ref=f8e206]:
+            - link "Music" [ref=f8e207] [cursor=pointer]:
+              - /url: /music
+          - listitem [ref=f8e208]:
+            - link "Videos" [ref=f8e209] [cursor=pointer]:
+              - /url: /videos
+          - listitem [ref=f8e210]:
+            - link "Blog" [ref=f8e211] [cursor=pointer]:
+              - /url: /blog
+      - generic [ref=f8e212]:
+        - heading "Events" [level=3] [ref=f8e213]
+        - list [ref=f8e214]:
+          - listitem [ref=f8e215]:
+            - link "Upcoming" [ref=f8e216] [cursor=pointer]:
+              - /url: /events?tab=upcoming
+          - listitem [ref=f8e217]:
+            - link "International" [ref=f8e218] [cursor=pointer]:
+              - /url: /events?tab=international
+          - listitem [ref=f8e219]:
+            - link "History" [ref=f8e220] [cursor=pointer]:
+              - /url: /events?tab=history
+      - generic [ref=f8e221]:
+        - heading "Company" [level=3] [ref=f8e222]
+        - list [ref=f8e223]:
+          - listitem [ref=f8e224]:
+            - link "About Us" [ref=f8e225] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f8e226]:
+            - link "Press" [ref=f8e227] [cursor=pointer]:
+              - /url: /press
+          - listitem [ref=f8e228]:
+            - link "Partners" [ref=f8e229] [cursor=pointer]:
+              - /url: /partners
+          - listitem [ref=f8e230]:
+            - link "Contact Us" [ref=f8e231] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=f8e232]:
+        - heading "More" [level=3] [ref=f8e233]
+        - list [ref=f8e234]:
+          - listitem [ref=f8e235]:
+            - link "Awards" [ref=f8e236] [cursor=pointer]:
+              - /url: /awards
+          - listitem [ref=f8e237]:
+            - link "Shop" [ref=f8e238] [cursor=pointer]:
+              - /url: /store
+          - listitem [ref=f8e239]:
+            - link "Ambassadors" [ref=f8e240] [cursor=pointer]:
+              - /url: /instructors
+          - listitem [ref=f8e241]:
+            - link "Careers" [ref=f8e242] [cursor=pointer]:
+              - /url: /careers
+    - generic [ref=f8e244]:
+      - paragraph [ref=f8e245]: © 2026 AfroBreak. All rights reserved. Built with passion for the culture.
+      - generic [ref=f8e246]:
+        - link "Privacy" [ref=f8e247] [cursor=pointer]:
+          - /url: /privacy
+        - link "Terms" [ref=f8e248] [cursor=pointer]:
+          - /url: /terms
+        - link "Cookies" [ref=f8e249] [cursor=pointer]:
+          - /url: /cookies
+  - link "Chat with us on WhatsApp" [ref=f8e3] [cursor=pointer]:
+    - /url: https://wa.me/233543973224
+    - generic [ref=f8e7]: Talk to Us

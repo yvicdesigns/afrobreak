@@ -24,11 +24,11 @@ interface BadgeProps {
 const variantMap: Record<string, string> = {
   primary: 'bg-primary-500/20 text-primary-400 border border-primary-500/30',
   secondary: 'bg-secondary-500/20 text-secondary-400 border border-secondary-500/30',
-  gold: 'bg-gold-DEFAULT/20 text-gold-DEFAULT border border-gold-DEFAULT/30',
+  gold: 'bg-gold/20 text-gold border border-gold/30',
   success: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
   danger: 'bg-red-500/20 text-red-400 border border-red-500/30',
   muted: 'bg-white/5 text-text-secondary border border-white/10',
-  premium: 'bg-gradient-to-r from-gold-dark/30 to-gold-DEFAULT/30 text-gold-DEFAULT border border-gold-DEFAULT/40',
+  premium: 'bg-gradient-to-r from-gold-dark/30 to-gold/30 text-gold border border-gold/40',
   // Video categories
   'Interview': 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30',
   'Documentary': 'bg-amber-500/20 text-amber-400 border border-amber-500/30',

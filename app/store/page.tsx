@@ -6,56 +6,57 @@ import type { Product, CartItem, ProductCategory } from '@/lib/types'
 import Button from '@/components/ui/Button'
 import PaystackCheckoutModal from '@/components/ui/PaystackCheckoutModal'
 import { getProducts } from '@/lib/db'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const staticProducts: Product[] = [
   {
     id: 'p1', name: 'AfroBreak Classic Hoodie',
     description: 'Premium heavyweight hoodie with embroidered AfroBreak logo. Perfect for dance sessions or casual wear.',
-    price: 59.99, image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80',
+    price: 59.99, image: '',
     category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'White', 'Orange'],
     badge: 'Best Seller', inStock: true,
   },
   {
     id: 'p2', name: 'AfroBreak Dance Tee',
     description: 'Lightweight breathable t-shirt designed for movement. 100% organic cotton with moisture-wicking technology.',
-    price: 29.99, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80',
+    price: 29.99, image: '',
     category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL'], colors: ['Black', 'White', 'Orange', 'Purple'],
     inStock: true,
   },
   {
     id: 'p3', name: 'Culture Snapback Cap',
     description: 'Structured snapback with AfroBreak embroidery. One size fits all with adjustable snap closure.',
-    price: 34.99, image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=600&q=80',
+    price: 34.99, image: '',
     category: 'Accessories', colors: ['Black', 'White'], badge: 'New', inStock: true,
   },
   {
     id: 'p4', name: 'AfroBreak Dance Joggers',
     description: 'Ultra-flexible joggers built for dancers. Tapered fit with deep pockets and elastic waistband.',
-    price: 49.99, image: 'https://images.unsplash.com/photo-1594938298603-c8148c4b4346?w=600&q=80',
+    price: 49.99, image: '',
     category: 'Apparel', sizes: ['XS', 'S', 'M', 'L', 'XL'], colors: ['Black', 'Grey'], inStock: true,
   },
   {
     id: 'p5', name: 'Afro Roots Tote Bag',
     description: 'Heavy-duty canvas tote bag with AfroBreak print. Spacious enough for all your dance gear.',
-    price: 19.99, image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80',
+    price: 19.99, image: '',
     category: 'Accessories', colors: ['Black', 'Natural'], inStock: true,
   },
   {
     id: 'p6', name: 'Dance Crew Windbreaker',
     description: 'Lightweight windbreaker jacket with full-zip closure. Water-resistant and packable.',
-    price: 79.99, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
+    price: 79.99, image: '',
     category: 'Apparel', sizes: ['S', 'M', 'L', 'XL'], colors: ['Black', 'Orange'], badge: 'Limited', inStock: true,
   },
   {
     id: 'p7', name: 'AfroBreak Wristband Set',
     description: 'Set of 3 silicone wristbands in AfroBreak brand colors. Show your culture everywhere.',
-    price: 9.99, image: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80',
+    price: 9.99, image: '',
     category: 'Accessories', inStock: true,
   },
   {
     id: 'p8', name: 'Premium Dance Shoes',
     description: 'Professional split-sole dance shoes with suede bottom. Perfect for Afro and urban styles.',
-    price: 89.99, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
+    price: 89.99, image: '',
     category: 'Footwear', sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'],
     colors: ['Black', 'White', 'Nude'], badge: 'Pro Pick', inStock: true,
   },
@@ -64,7 +65,9 @@ const staticProducts: Product[] = [
 const categories: ('All' | ProductCategory)[] = ['All', 'Apparel', 'Accessories', 'Footwear', 'Digital']
 
 export default function StorePage() {
-  const [products, setProducts] = useState<Product[]>(staticProducts)
+  const { tr } = useLanguage()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState<'All' | ProductCategory>('All')
   const [cart, setCart] = useState<CartItem[]>([])
   const [cartOpen, setCartOpen] = useState(false)
@@ -76,22 +79,20 @@ export default function StorePage() {
 
   useEffect(() => {
     getProducts().then((data: unknown[]) => {
-      if (data && data.length > 0) {
-        const mapped = (data as Record<string, unknown>[]).map(p => ({
-          id: p.id as string,
-          name: p.name as string,
-          description: (p.description as string) || '',
-          price: p.price as number,
-          image: (p.image as string) || '',
-          category: (p.category as ProductCategory) || 'Apparel',
-          sizes: (p.sizes as string[]) || [],
-          colors: (p.colors as string[]) || [],
-          badge: (p.badge as string) || undefined,
-          inStock: (p.in_stock as boolean) ?? true,
-        }))
-        setProducts(mapped)
-      }
-    })
+      const mapped = (data && data.length > 0 ? data : staticProducts) as Record<string, unknown>[]
+      setProducts(mapped.map(p => ({
+        id: p.id as string,
+        name: p.name as string,
+        description: (p.description as string) || '',
+        price: p.price as number,
+        image: (p.image as string) || '',
+        category: (p.category as ProductCategory) || 'Apparel',
+        sizes: (p.sizes as string[]) || [],
+        colors: (p.colors as string[]) || [],
+        badge: (p.badge as string) || undefined,
+        inStock: (p.in_stock as boolean) ?? true,
+      })))
+    }).finally(() => setLoading(false))
   }, [])
 
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory)
@@ -123,25 +124,31 @@ export default function StorePage() {
     }).filter(Boolean) as CartItem[])
   }
 
+  if (loading) return (
+    <div className="min-h-screen pt-20 bg-background flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+
   return (
     <div className="min-h-screen pt-20 bg-background">
       {/* Hero */}
       <div className="bg-surface border-b border-white/5 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">AfroBreak Store</p>
+          <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.store.eyebrow}</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
-            Wear the <span className="gradient-text-orange">Culture</span>
+            {tr.store.title} <span className="gradient-text-orange">{tr.store.titleAccent}</span>
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto">
-            Official AfroBreak merchandise. Dance gear, apparel, and accessories crafted for the community.
+            {tr.store.subtitle}
           </p>
 
           {/* Trust badges */}
           <div className="flex items-center justify-center gap-8 mt-8 flex-wrap">
             {[
-              { icon: Truck, text: 'Free shipping over ₵50' },
-              { icon: Shield, text: 'Secure payment' },
-              { icon: RotateCcw, text: '30-day returns' },
+              { icon: Truck, text: tr.store.freeShipping },
+              { icon: Shield, text: tr.store.securePayment },
+              { icon: RotateCcw, text: tr.store.returns },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-2 text-sm text-text-secondary">
                 <Icon size={15} className="text-primary-500" />
@@ -192,11 +199,18 @@ export default function StorePage() {
               className="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary-500/20 transition-all duration-300"
             >
               <div className="relative aspect-square overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary-500/10 to-secondary-500/10 flex flex-col items-center justify-center gap-2">
+                    <ShoppingBag size={40} className="text-primary-500/40" />
+                    <span className="text-xs text-text-muted font-medium">{product.name.split(' ').slice(0, 2).join(' ')}</span>
+                  </div>
+                )}
                 {product.badge && (
                   <span className="absolute top-3 left-3 px-2 py-1 bg-primary-500 text-[#0D0A1A] text-[10px] font-bold rounded-lg uppercase">
                     {product.badge}
@@ -215,7 +229,7 @@ export default function StorePage() {
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-black text-white">₵{product.price.toFixed(2)}</span>
                   <Button variant="primary" size="sm" onClick={() => openProduct(product)}>
-                    Add to Cart
+                    {tr.store.addToCart}
                   </Button>
                 </div>
               </div>
@@ -292,7 +306,7 @@ export default function StorePage() {
                 leftIcon={<ShoppingCart size={16} />}
                 onClick={() => addToCart(selectedProduct, selectedSize, selectedColor)}
               >
-                Add to Cart — ₵{selectedProduct.price.toFixed(2)}
+                {tr.store.addToCart} — ₵{selectedProduct.price.toFixed(2)}
               </Button>
             </div>
           </div>
@@ -307,7 +321,7 @@ export default function StorePage() {
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <div className="flex items-center gap-2">
                 <ShoppingBag size={18} className="text-primary-500" />
-                <h2 className="font-bold text-white">Your Cart ({cartCount})</h2>
+                <h2 className="font-bold text-white">{tr.store.yourCart} ({cartCount})</h2>
               </div>
               <button onClick={() => setCartOpen(false)} className="p-2 rounded-lg text-text-secondary hover:text-white hover:bg-white/10 transition-all">
                 <X size={18} />
@@ -318,7 +332,7 @@ export default function StorePage() {
               {cart.length === 0 ? (
                 <div className="text-center py-16">
                   <ShoppingCart size={40} className="text-text-muted mx-auto mb-3" />
-                  <p className="text-text-secondary">Your cart is empty</p>
+                  <p className="text-text-secondary">{tr.store.cartEmpty}</p>
                 </div>
               ) : (
                 cart.map((item, i) => (
@@ -350,7 +364,7 @@ export default function StorePage() {
             {cart.length > 0 && (
               <div className="p-5 border-t border-white/10 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-text-secondary">Total</span>
+                  <span className="text-text-secondary">{tr.store.total}</span>
                   <span className="text-xl font-black text-white">₵{cartTotal.toFixed(2)}</span>
                 </div>
                 {cartTotal < 50 && (
@@ -359,10 +373,10 @@ export default function StorePage() {
                   </p>
                 )}
                 <Button variant="primary" fullWidth leftIcon={<ShoppingCart size={16} />} onClick={() => { setCartOpen(false); setCheckoutOpen(true) }}>
-                  Checkout — ₵{cartTotal.toFixed(2)}
+                  {tr.store.checkout} — ₵{cartTotal.toFixed(2)}
                 </Button>
                 <Button variant="ghost" fullWidth onClick={() => setCartOpen(false)}>
-                  Continue Shopping
+                  {tr.store.continueShopping}
                 </Button>
               </div>
             )}
@@ -390,9 +404,9 @@ export default function StorePage() {
       {/* Reviews section */}
       <div className="border-t border-white/5 py-16 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-white mb-2">What the community says</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">{tr.store.reviewsTitle}</h2>
           <div className="flex justify-center gap-1 mb-8">
-            {[1,2,3,4,5].map(i => <Star key={i} size={18} className="text-gold-DEFAULT fill-gold-DEFAULT" />)}
+            {[1,2,3,4,5].map(i => <Star key={i} size={18} className="text-gold fill-gold" />)}
             <span className="text-text-secondary text-sm ml-2">4.9 / 5 based on 240+ reviews</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -403,7 +417,7 @@ export default function StorePage() {
             ].map(review => (
               <div key={review.name} className="bg-surface border border-white/5 rounded-2xl p-5 text-left">
                 <div className="flex gap-0.5 mb-3">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={12} className="text-gold-DEFAULT fill-gold-DEFAULT" />)}
+                  {[1,2,3,4,5].map(i => <Star key={i} size={12} className="text-gold fill-gold" />)}
                 </div>
                 <p className="text-sm text-text-secondary mb-3 italic">&ldquo;{review.text}&rdquo;</p>
                 <p className="text-sm font-semibold text-white">{review.name}</p>

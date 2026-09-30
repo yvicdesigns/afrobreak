@@ -115,7 +115,7 @@ export default function AboutSection() {
                 </div>
                 <div className="w-px h-10 bg-white/10" />
                 <div className="text-center">
-                  <div className="text-2xl font-black text-gold-DEFAULT">24/7</div>
+                  <div className="text-2xl font-black text-gold">24/7</div>
                   <div className="text-xs text-text-secondary">Available</div>
                 </div>
               </div>

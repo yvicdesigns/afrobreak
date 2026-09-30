@@ -7,6 +7,7 @@ import clsx from 'clsx'
 import type { Video } from '@/lib/types'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
+import { useLanguage } from '@/lib/LanguageContext'
 
 interface VideoPlayerProps {
   video: Video
@@ -15,6 +16,7 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ video, className }: VideoPlayerProps) {
   const { currentUser } = useAuthStore()
+  const { tr } = useLanguage()
   const [playing, setPlaying] = useState(false)
 
   const canWatch = !video.isPremium || (currentUser?.isPremium ?? false)
@@ -39,23 +41,23 @@ export default function VideoPlayer({ video, className }: VideoPlayerProps) {
 
         {/* Paywall content */}
         <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-md">
-          <div className="w-20 h-20 rounded-full bg-gold-DEFAULT/20 border border-gold-DEFAULT/40 flex items-center justify-center mb-6">
-            <Lock size={32} className="text-gold-DEFAULT" />
+          <div className="w-20 h-20 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center mb-6">
+            <Lock size={32} className="text-gold" />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-3">Premium Content</h3>
+          <h3 className="text-2xl font-bold text-white mb-3">{tr.videos.premiumContent}</h3>
           <p className="text-text-secondary mb-6">
             This video is part of our Premium library. Unlock unlimited access to all {500}+ videos for just €9.99/month.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
             <Link href="/subscribe">
               <Button variant="gold" size="lg" leftIcon={<Crown size={18} />}>
-                Upgrade to Premium
+                {tr.videos.upgradeToPremium}
               </Button>
             </Link>
             {!currentUser && (
               <Link href="/auth/login">
                 <Button variant="secondary" size="lg">
-                  Log In
+                  {tr.videos.logIn}
                 </Button>
               </Link>
             )}

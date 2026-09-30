@@ -411,7 +411,7 @@ export default function AdminSettingsPage() {
       {/* Subscriptions */}
       <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
         <div className="flex items-center gap-2 mb-2">
-          <Palette size={16} className="text-gold-DEFAULT" />
+          <Palette size={16} className="text-gold" />
           <h2 className="font-bold text-white">Subscriptions</h2>
         </div>
         <div className="grid grid-cols-2 gap-4">

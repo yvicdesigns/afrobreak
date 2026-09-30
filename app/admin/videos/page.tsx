@@ -194,7 +194,7 @@ export default function AdminVideosPage() {
               <div className="md:col-span-2 flex items-center gap-4">
                 <button type="button" onClick={() => setForm(f => ({...f, isPremium: !f.isPremium}))}
                   className={clsx('flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition-all',
-                    form.isPremium ? 'bg-gold-DEFAULT/15 text-gold-DEFAULT border-gold-DEFAULT/40' : 'bg-surface-2 text-text-secondary border-white/10')}>
+                    form.isPremium ? 'bg-gold/15 text-gold border-gold/40' : 'bg-surface-2 text-text-secondary border-white/10')}>
                   {form.isPremium ? <Lock size={15} /> : <Unlock size={15} />}
                   {form.isPremium ? 'Premium' : 'Free'}
                 </button>
@@ -247,7 +247,7 @@ export default function AdminVideosPage() {
                   <td className="p-4 hidden md:table-cell"><Badge label={video.level} variant={video.level} /></td>
                   <td className="p-4 text-center">
                     {video.isPremium
-                      ? <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold-DEFAULT/15 text-gold-DEFAULT text-[10px] font-bold"><Lock size={9} /> PREMIUM</span>
+                      ? <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold/15 text-gold text-[10px] font-bold"><Lock size={9} /> PREMIUM</span>
                       : <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold"><Unlock size={9} /> FREE</span>
                     }
                   </td>

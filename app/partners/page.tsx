@@ -5,8 +5,10 @@ import { CheckCircle, ArrowRight, Music, Video, Calendar, Users, Building, Hands
 import Button from '@/components/ui/Button'
 import { getPartners } from '@/lib/db'
 import { supabase } from '@/lib/supabase'
+import { useLanguage } from '@/lib/LanguageContext'
 
 function PartnerFeedbackForm() {
+  const { tr } = useLanguage()
   const [fb, setFb] = useState({ name: '', org: '', rating: 0, message: '' })
   const [hovered, setHovered] = useState(0)
   const [sent, setSent] = useState(false)
@@ -39,28 +41,28 @@ function PartnerFeedbackForm() {
       className="bg-surface border border-white/10 rounded-2xl p-8 space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-white mb-1.5">Your Name *</label>
-          <input type="text" required value={fb.name} onChange={e => setFb(f => ({ ...f, name: e.target.value }))} placeholder="Your name" className="input-base" />
+          <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.yourName} *</label>
+          <input type="text" required value={fb.name} onChange={e => setFb(f => ({ ...f, name: e.target.value }))} placeholder={tr.partners.yourName} className="input-base" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white mb-1.5">Organization</label>
+          <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.organization}</label>
           <input type="text" value={fb.org} onChange={e => setFb(f => ({ ...f, org: e.target.value }))} placeholder="Your org or project" className="input-base" />
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-white mb-2">Rating *</label>
+        <label className="block text-sm font-medium text-white mb-2">{tr.partners.rating} *</label>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map(n => (
             <button type="button" key={n}
               onMouseEnter={() => setHovered(n)} onMouseLeave={() => setHovered(0)}
               onClick={() => setFb(f => ({ ...f, rating: n }))}>
-              <Star size={28} className={`transition-colors ${n <= (hovered || fb.rating) ? 'text-gold-DEFAULT fill-gold-DEFAULT' : 'text-white/20'}`} />
+              <Star size={28} className={`transition-colors ${n <= (hovered || fb.rating) ? 'text-gold fill-gold' : 'text-white/20'}`} />
             </button>
           ))}
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-white mb-1.5">Your feedback *</label>
+        <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.yourFeedback} *</label>
         <textarea required rows={4} value={fb.message} onChange={e => setFb(f => ({ ...f, message: e.target.value }))} placeholder="How has the partnership been? What's working well? Any suggestions?" className="input-base resize-none" />
       </div>
       <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />} loading={submitting}>
@@ -159,6 +161,7 @@ const testimonials = [
 ]
 
 export default function PartnersPage() {
+  const { tr } = useLanguage()
   const [partners, setPartners] = useState<Partner[]>(staticPartners)
   const [selected, setSelected] = useState<typeof partnerTypes[0] | null>(null)
   const [form, setForm] = useState({ name: '', email: '', org: '', message: '' })
@@ -187,7 +190,7 @@ export default function PartnersPage() {
     <div className="min-h-screen pt-20 bg-background">
       {/* Hero */}
       <div className="relative bg-surface border-b border-white/5 py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-gold-DEFAULT/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-gold/5" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Partnerships</p>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -276,8 +279,8 @@ export default function PartnersPage() {
         {/* Testimonials */}
         <div>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white mb-2">What Our Partners Say</h2>
-            <p className="text-text-secondary">Voices from across the AfroBreak network</p>
+            <h2 className="text-3xl font-bold text-white mb-2">{tr.partners.whatPartnersSay}</h2>
+            <p className="text-text-secondary">{tr.partners.voicesFrom}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -296,8 +299,8 @@ export default function PartnersPage() {
         {/* Partners Feedback */}
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">Partners Feedback</p>
-            <h2 className="text-2xl font-bold text-white mb-2">Share Your Experience</h2>
+            <p className="text-primary-500 text-sm font-semibold uppercase tracking-widest mb-3">{tr.partners.partnersFeedback}</p>
+            <h2 className="text-2xl font-bold text-white mb-2">{tr.partners.shareExperience}</h2>
             <p className="text-text-secondary">Already working with us? We'd love to hear how the partnership is going.</p>
           </div>
           <PartnerFeedbackForm />
@@ -312,31 +315,31 @@ export default function PartnersPage() {
           {sent ? (
             <div className="bg-emerald-500/15 border border-emerald-500/30 rounded-2xl p-8 text-center">
               <CheckCircle size={40} className="text-emerald-400 mx-auto mb-3" />
-              <h3 className="text-xl font-bold text-white mb-2">Message sent!</h3>
-              <p className="text-text-secondary">Our team will contact you within 48 hours.</p>
+              <h3 className="text-xl font-bold text-white mb-2">{tr.partners.messageSent}</h3>
+              <p className="text-text-secondary">{tr.partners.thankYouDesc}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-surface border border-white/10 rounded-2xl p-8 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">Your Name *</label>
-                  <input type="text" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="John Doe" className="input-base" />
+                  <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.yourName} *</label>
+                  <input type="text" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder={tr.partners.yourName} className="input-base" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white mb-1.5">Email *</label>
+                  <label className="block text-sm font-medium text-white mb-1.5">{tr.contact.email} *</label>
                   <input type="email" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="you@example.com" className="input-base" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Organization / Project</label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.orgProject}</label>
                 <input type="text" value={form.org} onChange={e => setForm(f => ({ ...f, org: e.target.value }))} placeholder="Your studio, label, or brand" className="input-base" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-white mb-1.5">Tell us about your partnership idea *</label>
+                <label className="block text-sm font-medium text-white mb-1.5">{tr.partners.partnershipIdea} *</label>
                 <textarea required rows={4} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} placeholder="What kind of partnership are you looking for? What are your goals?" className="input-base resize-none" />
               </div>
               <Button type="submit" variant="primary" fullWidth size="lg" rightIcon={<ArrowRight size={16} />} loading={submittingInquiry}>
-                Send Message
+                {tr.partners.sendMessage}
               </Button>
             </form>
           )}

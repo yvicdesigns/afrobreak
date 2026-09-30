@@ -88,11 +88,20 @@ function SpecialtiesInput({ value, onChange }: { value: string[]; onChange: (v: 
   )
 }
 
+const defaultAmbassadors = [
+  { name: 'Kemi Adeyemi', role: 'Global Ambassador', bio: 'Born in Lagos and based in Accra, Kemi has been teaching Afrobeats dance for over 12 years. She has choreographed for major African artists and leads workshops across West Africa.', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80', cover: '', specialties: ['Afrobeats', 'Afro Fusion', 'Choreography'], location: 'Accra, Ghana', rating: 5.0, video_count: 24, followers: 18500, display_order: 0 },
+  { name: 'Marcus "Flow" Johnson', role: 'Global Ambassador — Hip-Hop', bio: 'A veteran of the hip-hop dance scene with 20 years of experience spanning New York, London, and Accra. Marcus specializes in urban styles and battle culture.', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80', cover: '', specialties: ['Hip-Hop', 'Breaking', 'Freestyle', 'Locking', 'Popping'], location: 'Africa / Global', rating: 4.9, video_count: 31, followers: 24300, display_order: 1 },
+  { name: 'Amara Diallo', role: 'Global Ambassador — Contemporary', bio: "Choreographer and performer whose work bridges traditional West African dance with contemporary forms. Her company has toured internationally and her AfroBreak classes are consistently oversubscribed.", avatar: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=80', cover: '', specialties: ['Contemporary', 'West African', 'Choreography', 'Afro Fusion'], location: 'Africa / Global', rating: 4.8, video_count: 18, followers: 14200, display_order: 2 },
+  { name: 'Yaya Kingston', role: 'Global Ambassador — Dancehall', bio: "Jamaican-born, Accra-based Dancehall ambassador who has spent two decades spreading Caribbean dance culture across Africa and the diaspora. Yaya brings unmatched authenticity and infectious energy.", avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80', cover: '', specialties: ['Dancehall', 'Caribbean', 'Afro-Caribbean'], location: 'Accra, Ghana', rating: 4.7, video_count: 15, followers: 11800, display_order: 3 },
+]
+
 export default function AdminInstructorsPage() {
   const [instructors, setInstructors] = useState<Instructor[]>([])
   const [loading, setLoading] = useState(true)
   const [dbError, setDbError] = useState(false)
   const [sqlCopied, setSqlCopied] = useState(false)
+  const [seeding, setSeeding] = useState(false)
+  const [seedError, setSeedError] = useState<string | null>(null)
   const [modal, setModal] = useState<'add' | 'edit' | null>(null)
   const [form, setForm] = useState<Omit<Instructor, 'id'>>(empty)
   const [editId, setEditId] = useState<string | null>(null)
@@ -108,6 +117,44 @@ export default function AdminInstructorsPage() {
   }
 
   useEffect(() => { load() }, [])
+
+  const seedDefaults = async () => {
+    setSeeding(true)
+    setSeedError(null)
+
+    for (const a of defaultAmbassadors) {
+      const { error } = await supabase.from('instructors').insert({
+        id: crypto.randomUUID(),
+        name: a.name,
+        bio: a.bio,
+        avatar: a.avatar,
+        cover: a.cover,
+        specialties: a.specialties,
+        location: a.location,
+        rating: a.rating,
+        video_count: a.video_count,
+        followers: a.followers,
+        display_order: a.display_order,
+        role: a.role,
+      })
+      if (error) {
+        setSeedError(error.message)
+        setSeeding(false)
+        return
+      }
+    }
+
+    // Reload — fallback to no-order if display_order column missing
+    const { data, error: loadErr } = await supabase
+      .from('instructors').select('*').order('display_order', { ascending: true })
+    if (loadErr) {
+      const { data: d2 } = await supabase.from('instructors').select('*')
+      setInstructors(d2 || [])
+    } else {
+      setInstructors(data || [])
+    }
+    setSeeding(false)
+  }
 
   const openAdd = () => {
     setForm({ ...empty, display_order: instructors.length })
@@ -182,9 +229,9 @@ export default function AdminInstructorsPage() {
       </div>
 
       {dbError && (
-        <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-sm text-amber-300">
-          <div className="flex items-center justify-between mb-2">
-            <p className="font-semibold">Table needs migration. Run this SQL in Supabase:</p>
+        <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-sm text-amber-300 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="font-semibold">Table needs migration. Run this SQL in Supabase first:</p>
             <button
               onClick={() => { navigator.clipboard.writeText(SQL); setSqlCopied(true); setTimeout(() => setSqlCopied(false), 2000) }}
               className="text-xs px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 transition-colors"
@@ -193,16 +240,36 @@ export default function AdminInstructorsPage() {
             </button>
           </div>
           <pre className="text-xs bg-black/30 p-3 rounded-lg overflow-auto max-h-40 whitespace-pre-wrap">{SQL}</pre>
+          <p className="text-xs text-amber-400/70">After running the SQL, refresh this page — the import button will appear.</p>
         </div>
       )}
 
       {instructors.length === 0 && !dbError ? (
-        <div className="text-center py-20">
+        <div className="text-center py-16">
           <Users size={48} className="text-text-muted mx-auto mb-4" />
-          <p className="text-text-muted mb-4">No ambassadors yet. Add your first one!</p>
-          <button onClick={openAdd} className="px-6 py-2.5 bg-primary-500 text-[#0D0A1A] rounded-xl font-bold text-sm hover:bg-primary-400 transition-colors">
-            Add Ambassador
-          </button>
+          <p className="text-white font-semibold mb-1">Aucun ambassadeur dans la base de données</p>
+          <p className="text-text-secondary text-sm mb-6">Importer les {defaultAmbassadors.length} ambassadeurs actuels du site, ou ajouter manuellement.</p>
+
+          {seedError && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-left max-w-lg mx-auto">
+              <p className="text-red-400 text-xs font-semibold mb-1">Erreur lors de l&apos;import :</p>
+              <p className="text-red-300 text-xs font-mono break-all">{seedError}</p>
+              <p className="text-red-400/70 text-xs mt-2">Vérifiez que le SQL de migration a bien été exécuté dans Supabase (bouton &quot;Copy SQL&quot; ci-dessus).</p>
+            </div>
+          )}
+
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={seedDefaults}
+              disabled={seeding}
+              className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-[#0D0A1A] rounded-xl font-bold text-sm hover:bg-primary-400 transition-colors disabled:opacity-60"
+            >
+              {seeding ? <><div className="w-3.5 h-3.5 border-2 border-[#0D0A1A] border-t-transparent rounded-full animate-spin" /> Importation...</> : '⬆ Charger les données du site'}
+            </button>
+            <button onClick={openAdd} className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold text-sm transition-colors">
+              + Ajouter manuellement
+            </button>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -238,7 +305,7 @@ export default function AdminInstructorsPage() {
 
                 <div className="flex items-center justify-between text-xs text-text-muted">
                   <div className="flex items-center gap-1">
-                    <Star size={11} className="text-gold-DEFAULT fill-gold-DEFAULT" />
+                    <Star size={11} className="text-gold fill-gold" />
                     <span>{inst.rating?.toFixed(1)}</span>
                   </div>
                   {inst.location && <span>{inst.location}</span>}
