@@ -35,10 +35,10 @@ const benefits = [
 ]
 
 const imageGrid = [
-  'https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774423447004-p0joibckz7i.jpg',
-  'https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774423671621-mziusqbbe49.jpg',
-  'https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg',
-  'https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774424413803-ph5i2ubqwgk.jpg',
+  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774423447004-p0joibckz7i.jpg',
+  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774423671621-mziusqbbe49.jpg',
+  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg',
+  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424413803-ph5i2ubqwgk.jpg',
 ]
 
 export default function AboutSection() {

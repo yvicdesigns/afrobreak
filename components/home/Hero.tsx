@@ -92,7 +92,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://uexidlplvbssarvuxfyn.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg"
+          src="https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg"
           alt="Dancer"
           className="w-full h-full object-cover object-center"
         />
