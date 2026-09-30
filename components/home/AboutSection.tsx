@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CheckCircle, Users, Video, Globe, Star } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { getSetting } from '@/lib/db'
 
 const features = [
   {
@@ -34,14 +35,9 @@ const benefits = [
   'Exclusive interviews with artists',
 ]
 
-const imageGrid = [
-  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774423447004-p0joibckz7i.jpg',
-  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774423671621-mziusqbbe49.jpg',
-  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg',
-  'https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424413803-ph5i2ubqwgk.jpg',
-]
-
-export default function AboutSection() {
+export default async function AboutSection() {
+  const photosJson = await getSetting('about_photos')
+  const imageGrid: string[] = photosJson ? JSON.parse(photosJson) : []
   return (
     <section id="about" className="py-16 lg:py-24 bg-surface/20 section-gradient">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

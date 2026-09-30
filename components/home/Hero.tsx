@@ -11,7 +11,7 @@ const statValues = ['11K+', '1000+', '270+', '28+', '100K+']
 
 const PARTICLE_COUNT = 15
 
-export default function Hero() {
+export default function Hero({ heroImage }: { heroImage: string }) {
   const { tr } = useLanguage()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -92,7 +92,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://fwprmezlhjvtsytzoqgs.supabase.co/storage/v1/object/public/media/thumbnails/1774424299617-st0ntdzolp9.jpg"
+          src={heroImage}
           alt="Dancer"
           className="w-full h-full object-cover object-center"
         />
