@@ -11,34 +11,6 @@ type Champion = {
   category: 'Boys' | 'Girls' | 'Regional'; photo?: string; desc?: string; description?: string; event: string
 }
 
-// ── Static fallback champions ──────────────────────────────────────
-const staticChampions: Champion[] = [
-  { name: 'Zinji', country: 'Algeria', flag: '🇩🇿', year: '2025', category: 'Boys', desc: 'Zinji from Algeria claimed the AfroBreak Africa Final 2025 Boys title in a historic night at the Accra Sports Complex, representing North Africa at the highest level of continental breaking.', event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Kris', country: 'Nigeria', flag: '🇳🇬', year: '2025', category: 'Girls', desc: 'Kris from Nigeria was crowned AfroBreak African Girls Champion 2025, bringing power, precision and pure Nigerian breaking energy to claim her place in the Hall of Champions.', event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Pencil', country: 'Uganda', flag: '🇺🇬', year: '2025', category: 'Regional', desc: 'East Africa qualifier champion representing Uganda — one of the fastest-rising breaking scenes on the continent.', event: 'AfroBreak East Africa Qualifier — Kampala' },
-  { name: 'David', country: 'Mauritius', flag: '🇲🇺', year: '2025', category: 'Regional', desc: 'Island nation champion. David put Mauritius on the breaking map with his qualifier win, bringing Indian Ocean culture to the AfroBreak stage.', event: 'AfroBreak Mauritius Qualifier' },
-  { name: 'Lil Dan', country: 'Kenya', flag: '🇰🇪', year: '2025', category: 'Regional', desc: 'East Africa representative from Kenya. Lil Dan is a rising force in the Nairobi breaking community and a key figure in growing the culture across East Africa.', event: 'AfroBreak East Africa Qualifier' },
-  { name: 'Blesso', country: 'Ghana', flag: '🇬🇭', year: '2025', category: 'Regional', desc: 'Home country hero. Blesso has consistently represented Ghana with distinction across multiple AfroBreak editions, earning his place among the continental elite.', event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Tris Naomi', country: 'Ghana', flag: '🇬🇭', year: '2025', category: 'Regional', desc: 'One of the most dominant female breakers on the continent. Tris Naomi has been a fixture in AfroBreak since 2023, consistently pushing the level of girls breaking in Ghana and Africa.', event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Blanchard', country: 'Ivory Coast', flag: '🇨🇮', year: '2025', category: 'Regional', desc: 'Ivory Coast champion and one of the standout talents from Francophone West Africa. Blanchard brings technical breaking and cultural depth to every performance.', event: 'AfroBreak Ivory Coast Qualifier — Abidjan' },
-  { name: 'Smith', country: 'Benin', flag: '🇧🇯', year: '2024', category: 'Boys', desc: "Smith from Benin became AfroBreak African Champion 2024 with an electrifying performance at the Accra Sports Complex. One of West Africa's most consistent elite breakers and an ABA Global Ambassador.", event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Courtnea Paul', country: 'South Africa', flag: '🇿🇦', year: '2024', category: 'Girls', desc: 'Courtnea Paul claimed the Girls title at AfroBreak Africa Final 2024, representing South Africa with style and power. A landmark moment for Southern African breaking.', event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Dansi', country: 'Burkina Faso', flag: '🇧🇫', year: '2024', category: 'Regional', desc: "Dansi represents one of West Africa's most vibrant breaking scenes. His qualifier win in Ouagadougou showcased the depth of talent coming from Burkina Faso.", event: 'AfroBreak Burkina Faso Qualifier — Ouagadougou' },
-  { name: 'ZH', country: 'Benin', flag: '🇧🇯', year: '2024', category: 'Regional', desc: 'Benin qualifier champion. ZH follows in the footsteps of compatriot Smith, proving that Benin is one of the most consistent breaking nations on the continent.', event: 'AfroBreak Benin Qualifier — Cotonou' },
-  { name: 'Nagi', country: 'Ghana', flag: '🇬🇭', year: '2024', category: 'Regional', desc: 'Ghana qualifier champion 2024. Nagi brings creativity and explosive footwork to the battle floor, a key player in the Accra breaking scene.', event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Viks', country: 'Ghana', flag: '🇬🇭', year: '2024', category: 'Regional', desc: 'Girls qualifier champion from Ghana 2024. Viks is one of the leading female breakers in West Africa and a role model for the next generation of girl breakers.', event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Lil Vic', country: 'Nigeria', flag: '🇳🇬', year: '2023', category: 'Boys', desc: "Lil Vic from Nigeria became AfroBreak African Champion 2023 in a brilliant performance that showcased Nigerian breaking at its finest. A cultural ambassador for the movement across West Africa.", event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Sandrine', country: 'Benin', flag: '🇧🇯', year: '2023', category: 'Girls', desc: 'Sandrine from Benin was crowned Girls champion at the AfroBreak Africa Final 2023, the second edition of the Girls category. Her win cemented Benin as a powerhouse of continental breaking.', event: 'AfroBreak Africa Final — Accra, Ghana' },
-  { name: 'Chris Paul', country: 'Togo', flag: '🇹🇬', year: '2023', category: 'Regional', desc: "Qualifier champion from Lomé. Chris Paul is one of the faces of Togo's breaking scene — technical, creative, and consistent on the AfroBreak stage across multiple editions.", event: 'AfroBreak Togo Qualifier — Lomé' },
-  { name: 'Zira', country: 'Togo', flag: '🇹🇬', year: '2023', category: 'Regional', desc: 'Girls qualifier champion from Togo. Zira is a standout female breaker from Lomé, proving that Togo punches above its weight in both boys and girls categories.', event: 'AfroBreak Togo Qualifier — Lomé' },
-  { name: 'Ola', country: 'Benin', flag: '🇧🇯', year: '2023', category: 'Regional', desc: 'Benin qualifier champion 2023. Ola brings raw power and West African breaking culture to the floor, a respected name in the Cotonou dance community.', event: 'AfroBreak Benin Qualifier — Cotonou' },
-  { name: 'Vicky', country: 'Nigeria', flag: '🇳🇬', year: '2023', category: 'Regional', desc: "Nigeria qualifier champion in the Girls category 2023. Vicky is part of Nigeria's growing pool of elite female breakers, trained and battle-tested on the AfroBreak circuit.", event: 'AfroBreak Nigeria Qualifier — Lagos' },
-  { name: 'The Curse', country: 'South Africa', flag: '🇿🇦', year: '2023', category: 'Regional', desc: 'Southern Africa qualifier champion. The Curse represents the strength of South African breaking, a scene known for its power moves and distinctive style.', event: 'AfroBreak Southern Africa Qualifier' },
-  { name: 'Blesso', country: 'Ghana', flag: '🇬🇭', year: '2023', category: 'Regional', desc: 'Multi-year qualifier champion from Ghana. Blesso is one of the most decorated breakers on the AfroBreak circuit and a pillar of the Accra breaking community.', event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Tris Naomi', country: 'Ghana', flag: '🇬🇭', year: '2023', category: 'Regional', desc: "Girls qualifier champion from Ghana 2023. Tris Naomi's consistency across multiple editions of AfroBreak makes her one of the most respected female competitors on the continent.", event: 'AfroBreak Ghana Qualifier — Accra' },
-  { name: 'Pape', country: 'Senegal', flag: '🇸🇳', year: '2022', category: 'Boys', desc: 'Pape from Senegal was the inaugural AfroBreak African Champion in 2022, setting the standard for what African breaking excellence looks like on the continental stage.', event: 'AfroBreak Africa Final — Accra Cultural Centre, Ghana' },
-  { name: 'Roxy', country: 'Ghana', flag: '🇬🇭', year: '2022', category: 'Regional', desc: 'Ghana qualifier champion 2022. Roxy was part of the founding generation of AfroBreak competitors — helping establish the event as the premier breaking platform in Africa.', event: 'AfroBreak Ghana Qualifier — Accra' },
-]
 
 // ── Award categories ──────────────────────────────────────────────
 const awardSections = [
@@ -163,7 +135,12 @@ export default function AwardsPage() {
 
   useEffect(() => {
     Promise.all([getChampions(), getSetting('awards_logo'), getAwardCategories()]).then(([data, logo, cats]) => {
-      setChampions((data && data.length > 0 ? data : staticChampions) as Champion[])
+      setChampions((data || []).map((c: Record<string, unknown>) => ({
+        ...c,
+        year: String(c.year),
+        desc: (c.description || c.desc || '') as string,
+        photo: (c.photo || c.image || '') as string,
+      })) as Champion[])
       if (logo) setAwardsLogo(logo)
       if (cats && cats.length > 0) {
         const catMap = new Map((cats as { num: number; name: string; description: string; section: string }[]).map(c => [c.num, c]))
