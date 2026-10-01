@@ -6,6 +6,8 @@ import { AuthProvider } from '@/lib/store'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import ThemeProvider from '@/components/ThemeProvider'
 import { LanguageProvider } from '@/lib/LanguageContext'
+import PwaRegister from '@/components/PwaRegister'
+import VisitorTracker from '@/components/VisitorTracker'
 
 export const metadata: Metadata = {
   title: {
@@ -55,6 +57,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'AfroBreak',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+  },
 }
 
 export default function RootLayout({
@@ -67,6 +78,8 @@ export default function RootLayout({
       <head>
         {/* Prevent flash of wrong theme */}
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('afrobreak-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}` }} />
+        <meta name="theme-color" content="#FDCA00" />
+        <link rel="apple-touch-icon" href="/logo-auth.png" />
       </head>
       {/* Google AdSense — Auto Ads (Google places ads automatically in good spots) */}
       <Script
@@ -86,6 +99,8 @@ export default function RootLayout({
             </AuthProvider>
           </LanguageProvider>
         </ThemeProvider>
+        <PwaRegister />
+        <VisitorTracker />
       </body>
     </html>
   )
