@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Save, Plus, Trash2, ChevronDown, ChevronUp, Check, Loader2 } from 'lucide-react'
-import { getSetting, saveSetting } from '@/lib/db'
+import { saveSettingAction, getSettingAction } from '@/app/admin/settings-actions'
 import ImageUpload from '@/components/ui/ImageUpload'
 
 // ── Types ────────────────────────────────────────────────────────
@@ -92,36 +92,36 @@ export default function AdminAboutPage() {
   const [pioneerSaved, setPioneerSaved] = useState(false)
 
   useEffect(() => {
-    getSetting('about_stats').then(v => { if (v) try { setStats(JSON.parse(v)) } catch {} })
-    getSetting('about_testimonials').then(v => { if (v) try { setTestimonials(JSON.parse(v)) } catch {} })
-    getSetting('about_timeline').then(v => { if (v) try { setTimeline(JSON.parse(v)) } catch {} })
-    getSetting('pioneer_photo').then(v => { if (v) setPioneerPhoto(v) })
+    getSettingAction('about_stats').then(v => { if (v) try { setStats(JSON.parse(v)) } catch {} })
+    getSettingAction('about_testimonials').then(v => { if (v) try { setTestimonials(JSON.parse(v)) } catch {} })
+    getSettingAction('about_timeline').then(v => { if (v) try { setTimeline(JSON.parse(v)) } catch {} })
+    getSettingAction('pioneer_photo').then(v => { if (v) setPioneerPhoto(v) })
   }, [])
 
   const saveStats = async () => {
     setStatsSaving(true)
-    await saveSetting('about_stats', JSON.stringify(stats))
+    await saveSettingAction('about_stats', JSON.stringify(stats))
     setStatsSaving(false); setStatsSaved(true)
     setTimeout(() => setStatsSaved(false), 3000)
   }
 
   const saveTestimonials = async () => {
     setTestSaving(true)
-    await saveSetting('about_testimonials', JSON.stringify(testimonials))
+    await saveSettingAction('about_testimonials', JSON.stringify(testimonials))
     setTestSaving(false); setTestSaved(true)
     setTimeout(() => setTestSaved(false), 3000)
   }
 
   const saveTimeline = async () => {
     setTlSaving(true)
-    await saveSetting('about_timeline', JSON.stringify(timeline))
+    await saveSettingAction('about_timeline', JSON.stringify(timeline))
     setTlSaving(false); setTlSaved(true)
     setTimeout(() => setTlSaved(false), 3000)
   }
 
   const savePioneerPhoto = async () => {
     setPioneerSaving(true)
-    await saveSetting('pioneer_photo', pioneerPhoto)
+    await saveSettingAction('pioneer_photo', pioneerPhoto)
     setPioneerSaving(false); setPioneerSaved(true)
     setTimeout(() => setPioneerSaved(false), 3000)
   }

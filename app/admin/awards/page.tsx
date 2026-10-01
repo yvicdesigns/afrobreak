@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Save, Trophy, Image, Loader2, Crown, BookOpen, Search, Check } from 'lucide-react'
 import ImageUpload from '@/components/ui/ImageUpload'
-import { getChampions, createChampion, updateChampion, deleteChampion, getSetting, saveSetting, getAwardCategories, updateAwardCategory, seedAwardCategories } from '@/lib/db'
+import { getChampions, createChampion, updateChampion, deleteChampion, getSetting, getAwardCategories, updateAwardCategory, seedAwardCategories } from '@/lib/db'
+import { saveSettingAction } from '@/app/admin/settings-actions'
 
 // ── Static seed data for categories ──────────────────────────────
 const SEED_CATEGORIES = [
@@ -126,7 +127,7 @@ export default function AdminAwardsPage() {
 
   const saveLogo = async () => {
     setSavingLogo(true)
-    await saveSetting('awards_logo', awardsLogo)
+    await saveSettingAction('awards_logo', awardsLogo)
     setSavingLogo(false)
     setLogoSaved(true)
     setTimeout(() => setLogoSaved(false), 2000)

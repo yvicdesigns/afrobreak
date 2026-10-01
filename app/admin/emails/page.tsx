@@ -6,7 +6,8 @@ import {
   Type, MousePointer, FileText, Eye, CheckCircle,
   Link as LinkIcon, AlignLeft, Smartphone, List, Plus, Trash2, Send, Users
 } from 'lucide-react'
-import { getSetting, saveSetting } from '@/lib/db'
+import { getSetting } from '@/lib/db'
+import { saveSettingAction } from '@/app/admin/settings-actions'
 import ImageUpload from '@/components/ui/ImageUpload'
 
 type Tab = 'newsletter' | 'contact'
@@ -399,8 +400,8 @@ export default function EmailTemplatesPage() {
 
   const handleSave = async () => {
     setSaving(true)
-    if (tab === 'newsletter') await saveSetting('email_newsletter_template', JSON.stringify(nl))
-    else await saveSetting('email_contact_template', JSON.stringify(contact))
+    if (tab === 'newsletter') await saveSettingAction('email_newsletter_template', JSON.stringify(nl))
+    else await saveSettingAction('email_contact_template', JSON.stringify(contact))
     setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)

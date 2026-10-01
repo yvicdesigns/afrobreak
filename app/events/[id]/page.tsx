@@ -42,7 +42,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
     if (!regName) { setRegError('Please enter your name.'); return }
     if (!regEmail || !/\S+@\S+\.\S+/.test(regEmail)) { setRegError('Please enter a valid email.'); return }
     setRegLoading(true)
-    await supabase.from('event_registrations').insert({
+    const { error: regErr } = await supabase.from('event_registrations').insert({
       event_id: event?.id,
       event_title: event?.title,
       name: regName,
@@ -51,6 +51,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
       status: 'confirmed',
     })
     setRegLoading(false)
+    if (regErr) { setRegError('Registration failed. Please try again.'); return }
     setShowRegModal(false)
     setRegistered(true)
   }
@@ -381,7 +382,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                 name,
                 email,
                 amount_paid: event.price,
-                paystack_ref: ref,
+                payment_ref: ref,
                 status: 'confirmed',
               }).then(() => {
                 setShowPayment(false)
