@@ -39,7 +39,7 @@ function mapEvent(row: Record<string, unknown>): Event {
     tags: row.tags as string[],
     youtubeUrl: row.youtube_url as string | undefined,
     country: row.country as string | undefined,
-    isInternational: row.is_international as boolean | undefined,
+    is_international: row.is_international as boolean | undefined,
   }
 }
 
