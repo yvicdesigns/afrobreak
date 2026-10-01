@@ -132,11 +132,13 @@ export default function SubscribePage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [logoUrl, setLogoUrl] = useState('')
 
   useEffect(() => {
     getSetting('premium_price').then(v => { if (v) setMonthlyPrice(Number(v)) })
     getSetting('annual_price').then(v => { if (v) setAnnualPrice(Number(v)) })
     getSetting('currency_default').then(v => { if (v) setCurrency(v) })
+    getSetting('site_logo').then(v => { if (v) setLogoUrl(v) })
   }, [])
 
   useEffect(() => {
@@ -442,10 +444,19 @@ export default function SubscribePage() {
           <div className="w-full max-w-md bg-surface border border-white/10 rounded-2xl shadow-2xl">
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-white/10">
-              <div className="flex items-center gap-2">
-                <Crown size={18} className="text-gold" />
-                <div>
-                  <h2 className="font-bold text-white">{checkoutPlan.name}</h2>
+              <div className="flex items-center gap-3">
+                {logoUrl ? (
+                  <img src={logoUrl} alt="AfroBreak" className="h-8 w-auto object-contain flex-shrink-0" />
+                ) : (
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-7 h-7 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Crown size={13} className="text-white fill-white" />
+                    </div>
+                    <span className="text-sm font-black"><span className="text-primary-500">AFRO</span><span className="text-white">BREAK</span></span>
+                  </div>
+                )}
+                <div className="border-l border-white/10 pl-3">
+                  <h2 className="font-bold text-white text-sm">{checkoutPlan.name}</h2>
                   <p className="text-xs text-text-muted">{selectedCurrency.symbol}{(checkoutPlan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}/{checkoutPlan.period}</p>
                 </div>
               </div>
