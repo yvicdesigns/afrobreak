@@ -21,13 +21,13 @@ export default function VisitorCount() {
       .catch(() => {})
   }, [])
 
-  if (!stats || (stats.total === 0 && stats.month === 0)) return null
+  if (!stats || stats.total === 0) return null
 
   return (
     <div className="flex items-center gap-2 text-xs text-text-muted">
       <Users size={13} className="text-primary-500 flex-shrink-0" />
       <span>
-        <span className="font-bold text-white">{fmt(stats.month)}</span> visiteurs ce mois
+        <span className="font-bold text-white">{fmt(stats.total)}</span> visiteurs au total
         {stats.today > 0 && (
           <> · <span className="font-bold text-emerald-400">{fmt(stats.today)}</span> aujourd&apos;hui</>
         )}
