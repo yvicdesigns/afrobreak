@@ -106,6 +106,7 @@ export default function AdminInstructorsPage() {
   const [form, setForm] = useState<Omit<Instructor, 'id'>>(empty)
   const [editId, setEditId] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [deleting, setDeleting] = useState<string | null>(null)
 
   const load = () => {
@@ -178,6 +179,7 @@ export default function AdminInstructorsPage() {
   const handleSave = async () => {
     if (!form.name.trim()) return
     setSaving(true)
+    setSaveError(null)
     const payload = {
       ...form,
       specialties: form.specialties,
@@ -187,10 +189,12 @@ export default function AdminInstructorsPage() {
       display_order: Number(form.display_order),
     }
     if (modal === 'add') {
-      const { data } = await supabase.from('instructors').insert(payload).select().single()
+      const { data, error } = await supabase.from('instructors').insert(payload).select().single()
+      if (error) { setSaveError(error.message); setSaving(false); return }
       if (data) setInstructors(prev => [...prev, data])
     } else if (editId) {
-      await supabase.from('instructors').update(payload).eq('id', editId)
+      const { error } = await supabase.from('instructors').update(payload).eq('id', editId)
+      if (error) { setSaveError(error.message); setSaving(false); return }
       setInstructors(prev => prev.map(i => i.id === editId ? { ...i, ...payload, id: editId } : i))
     }
     setSaving(false)
@@ -416,8 +420,14 @@ export default function AdminInstructorsPage() {
               </div>
             </div>
 
+            {saveError && (
+              <div className="mx-5 mb-0 p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+                <p className="text-red-400 text-xs font-semibold">Erreur : {saveError}</p>
+              </div>
+            )}
+
             <div className="flex gap-3 p-5 border-t border-white/10 flex-shrink-0">
-              <button onClick={() => setModal(null)} className="flex-1 py-2.5 rounded-xl border border-white/10 text-sm text-text-secondary hover:text-white hover:border-white/30 transition-colors">
+              <button onClick={() => { setModal(null); setSaveError(null) }} className="flex-1 py-2.5 rounded-xl border border-white/10 text-sm text-text-secondary hover:text-white hover:border-white/30 transition-colors">
                 Cancel
               </button>
               <button onClick={handleSave} disabled={saving || !form.name.trim()}
