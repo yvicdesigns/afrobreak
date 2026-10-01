@@ -205,8 +205,9 @@ export async function POST(req: NextRequest) {
 
   const [tpl, logoUrl] = await Promise.all([getTemplate(), getLogoUrl()])
 
+  const FROM = process.env.EMAIL_FROM || 'AfroBreak <onboarding@resend.dev>'
   await resend.emails.send({
-    from: 'AfroBreak <onboarding@resend.dev>',
+    from: FROM,
     to: email,
     subject: tpl.subject,
     html: buildHtml(tpl, logoUrl),

@@ -94,8 +94,9 @@ export async function POST(req: NextRequest) {
 
   const [tpl, logoUrl] = await Promise.all([getTemplate(), getLogoUrl()])
 
+  const FROM = process.env.EMAIL_FROM || 'AfroBreak <onboarding@resend.dev>'
   const { error } = await resend.emails.send({
-    from: 'AfroBreak <onboarding@resend.dev>',
+    from: FROM,
     to: 'contact@afrobreak.com',
     replyTo: email,
     subject: subject ? `[Contact] ${subject}` : `[Contact] Message from ${name}`,

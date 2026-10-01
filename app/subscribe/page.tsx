@@ -9,6 +9,7 @@ import { useAuthStore } from '@/lib/store'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/lib/LanguageContext'
+import { getSetting } from '@/lib/db'
 
 declare global {
   interface Window {
@@ -124,11 +125,19 @@ export default function SubscribePage() {
   // Checkout modal
   const [checkoutPlan, setCheckoutPlan] = useState<typeof plans[number] | null>(null)
   const [currency, setCurrency] = useState('GHS')
+  const [monthlyPrice, setMonthlyPrice] = useState(9.99)
+  const [annualPrice, setAnnualPrice] = useState(500)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    getSetting('premium_price').then(v => { if (v) setMonthlyPrice(Number(v)) })
+    getSetting('annual_price').then(v => { if (v) setAnnualPrice(Number(v)) })
+    getSetting('currency_default').then(v => { if (v) setCurrency(v) })
+  }, [])
 
   useEffect(() => {
     if (currentUser) {
@@ -163,7 +172,7 @@ export default function SubscribePage() {
 
     setLoading(true)
 
-    const convertedTotal = checkoutPlan.priceUSD * selectedCurrency.rate
+    const convertedTotal = checkoutPlan.id === 'monthly' ? monthlyPrice : annualPrice
     const amountInSmallestUnit = Math.round(convertedTotal * 100)
     const ref = `afrobreak-sub-${checkoutPlan.id}-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
@@ -181,34 +190,34 @@ export default function SubscribePage() {
       currency,
       ref,
       metadata: {
+        user_id: currentUser?.id,
         custom_fields: [
           { display_name: 'Name', variable_name: 'name', value: name },
           { display_name: 'Plan', variable_name: 'plan', value: checkoutPlan.id },
         ],
       },
       onClose: () => setLoading(false),
-      callback: (response: { reference: string }) => {
+      callback: async (response: { reference: string }) => {
         const endDate = subscriptionEnd.toISOString()
-        supabase.from('subscriptions').insert({
+        // Record subscription client-side (webhook also handles this server-side)
+        await supabase.from('subscriptions').upsert({
+          paystack_ref: response.reference || ref,
           user_id: currentUser?.id,
           plan: checkoutPlan.id,
           amount: convertedTotal,
           currency,
-          paystack_ref: response.reference || ref,
           status: 'active',
           started_at: new Date().toISOString(),
           ends_at: endDate,
-        }).then(() => {
-          return supabase.from('profiles').update({
-            is_premium: true,
-            subscription_end: endDate,
-          }).eq('id', currentUser!.id)
-        }).then(() => {
-          updateUser({ isPremium: true, subscriptionEnd: endDate })
-          setLoading(false)
-          setCheckoutPlan(null)
-          setSuccess(true)
-        })
+        }, { onConflict: 'paystack_ref' })
+        await supabase.from('profiles').update({
+          is_premium: true,
+          subscription_end: endDate,
+        }).eq('id', currentUser!.id)
+        updateUser({ isPremium: true, subscriptionEnd: endDate })
+        setLoading(false)
+        setCheckoutPlan(null)
+        setSuccess(true)
       },
     })
     handler.openIframe()
@@ -310,7 +319,9 @@ export default function SubscribePage() {
                       <span className="text-4xl font-black text-white">Free</span>
                     ) : (
                       <>
-                        <span className="text-4xl font-black text-white">₵{plan.priceUSD.toFixed(2)}</span>
+                        <span className="text-4xl font-black text-white">
+                          {selectedCurrency.symbol}{(plan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}
+                        </span>
                         <span className="text-text-secondary mb-1">/{plan.period}</span>
                       </>
                     )}
@@ -353,7 +364,7 @@ export default function SubscribePage() {
                     ? 'Current Plan'
                     : plan.priceUSD === 0
                     ? 'Get Started Free'
-                    : `Subscribe — ₵${plan.priceUSD.toFixed(2)}/${plan.period}`}
+                    : `Subscribe — ${selectedCurrency.symbol}${(plan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}/${plan.period}`}
                 </button>
               </div>
             ))}
@@ -435,7 +446,7 @@ export default function SubscribePage() {
                 <Crown size={18} className="text-gold" />
                 <div>
                   <h2 className="font-bold text-white">{checkoutPlan.name}</h2>
-                  <p className="text-xs text-text-muted">${checkoutPlan.priceUSD}/{checkoutPlan.period}</p>
+                  <p className="text-xs text-text-muted">{selectedCurrency.symbol}{(checkoutPlan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}/{checkoutPlan.period}</p>
                 </div>
               </div>
               <button onClick={() => setCheckoutPlan(null)} className="p-2 rounded-xl hover:bg-white/10 text-text-muted transition-colors">
@@ -456,9 +467,8 @@ export default function SubscribePage() {
                 </select>
                 <p className="text-xs text-text-muted mt-1">
                   Total: <span className="text-white font-bold">
-                    {selectedCurrency.symbol}{(checkoutPlan.priceUSD * selectedCurrency.rate).toFixed(2)}
+                    {selectedCurrency.symbol}{(checkoutPlan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}
                   </span>
-                  {currency !== 'USD' && <span className="ml-1">(≈ ${checkoutPlan.priceUSD} USD)</span>}
                 </p>
               </div>
 
@@ -509,7 +519,7 @@ export default function SubscribePage() {
               >
                 {loading
                   ? <><Loader2 size={18} className="animate-spin" /> {tr.subscribe.processing}</>
-                  : <><Crown size={18} /> Pay {selectedCurrency.symbol}{(checkoutPlan.priceUSD * selectedCurrency.rate).toFixed(2)}</>
+                  : <><Crown size={18} /> Pay {selectedCurrency.symbol}{(checkoutPlan.id === 'monthly' ? monthlyPrice : annualPrice).toFixed(2)}</>
                 }
               </button>
 
