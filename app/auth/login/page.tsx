@@ -5,7 +5,9 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Mail, Lock, Eye, EyeOff, Chrome } from 'lucide-react'
 import { useAuthStore } from '@/lib/store'
+import { supabase } from '@/lib/supabase'
 import Button from '@/components/ui/Button'
+import { getSetting } from '@/lib/db'
 
 function LoginForm() {
   const router = useRouter()
@@ -16,6 +18,15 @@ function LoginForm() {
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [logoSrc, setLogoSrc] = useState('/logo-auth.png')
+  const [logoSize, setLogoSize] = useState(96)
+  const [logoGap, setLogoGap] = useState(4)
+
+  useEffect(() => {
+    getSetting('login_logo').then(v => { if (v) setLogoSrc(v) })
+    getSetting('login_logo_size').then(v => { if (v) setLogoSize(Number(v)) })
+    getSetting('login_logo_gap').then(v => { if (v) setLogoGap(Number(v)) })
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,12 +56,12 @@ function LoginForm() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center justify-center mb-6">
-            <img src="/logo-auth.png" alt="AfroBreak" className="h-24 w-auto object-contain" />
+        <div className="flex flex-col items-center mb-6">
+          <Link href="/" className="block">
+            <img src={logoSrc} alt="AfroBreak" style={{ height: logoSize, width: 'auto', maxWidth: '100%', objectFit: 'contain', display: 'block' }} />
           </Link>
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
-          <p className="text-text-secondary">Sign in to continue your dance journey</p>
+          <h1 className="text-3xl font-bold text-white mb-1 text-center" style={{ marginTop: logoGap }}>Welcome back</h1>
+          <p className="text-text-secondary text-center">Sign in to continue your dance journey</p>
         </div>
 
         {/* Card */}
@@ -123,8 +134,16 @@ function LoginForm() {
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
-          {/* Google button */}
-          <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200">
+          <button
+            type="button"
+            onClick={async () => {
+              await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: `${window.location.origin}/auth/callback` },
+              })
+            }}
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+          >
             <Chrome size={18} className="text-blue-400" />
             Continue with Google
           </button>

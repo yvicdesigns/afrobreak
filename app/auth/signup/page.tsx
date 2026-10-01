@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Mail, Lock, User, Eye, EyeOff, Chrome, CheckCircle } from 'lucide-react'
 import { useAuthStore } from '@/lib/store'
 import Button from '@/components/ui/Button'
+import { getSetting } from '@/lib/db'
 
 const perks = [
   'Access 200+ free dance tutorials',
@@ -21,6 +22,11 @@ export default function SignupPage() {
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [signupsAllowed, setSignupsAllowed] = useState(true)
+
+  useEffect(() => {
+    getSetting('allow_signup').then(v => { if (v !== null) setSignupsAllowed(v !== 'false') })
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -56,6 +62,17 @@ export default function SignupPage() {
       </div>
 
       <div className="w-full max-w-lg relative z-10">
+        {!signupsAllowed && (
+          <div className="bg-surface border border-white/10 rounded-2xl p-10 text-center shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+            <div className="text-4xl mb-4">🔒</div>
+            <h2 className="text-2xl font-bold text-white mb-2">Inscriptions fermées</h2>
+            <p className="text-text-secondary text-sm mb-6">Les nouvelles inscriptions sont temporairement désactivées. Revenez bientôt.</p>
+            <Link href="/" className="inline-flex items-center justify-center px-6 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-400 transition-colors text-sm">
+              Retour à l&apos;accueil
+            </Link>
+          </div>
+        )}
+        {signupsAllowed && <>
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center justify-center mb-6">
@@ -194,7 +211,17 @@ export default function SignupPage() {
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
-          <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200">
+          <button
+            type="button"
+            onClick={async () => {
+              const { supabase: sb } = await import('@/lib/supabase')
+              await sb.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: `${window.location.origin}/auth/callback` },
+              })
+            }}
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+          >
             <Chrome size={18} className="text-blue-400" />
             Sign up with Google
           </button>
@@ -206,6 +233,7 @@ export default function SignupPage() {
             </Link>
           </p>
         </div>
+        </>}
       </div>
     </div>
   )

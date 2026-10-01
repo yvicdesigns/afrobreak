@@ -26,14 +26,14 @@ function PartnerFeedbackForm() {
     e.preventDefault()
     if (fb.rating === 0 || !fb.message) return
     setSubmitting(true)
-    await supabase.from('partner_feedback').insert({
+    const { error } = await supabase.from('partner_feedback').insert({
       name: fb.name,
       org: fb.org || null,
       rating: fb.rating,
       message: fb.message,
     })
     setSubmitting(false)
-    setSent(true)
+    if (!error) setSent(true)
   }
 
   return (
@@ -175,7 +175,7 @@ export default function PartnersPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmittingInquiry(true)
-    await supabase.from('partner_inquiries').insert({
+    const { error } = await supabase.from('partner_inquiries').insert({
       name: form.name,
       email: form.email,
       org: form.org || null,
@@ -183,7 +183,7 @@ export default function PartnersPage() {
       partner_type: selected?.title || null,
     })
     setSubmittingInquiry(false)
-    setSent(true)
+    if (!error) setSent(true)
   }
 
   return (

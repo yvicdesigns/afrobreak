@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import ImageUpload from '@/components/ui/ImageUpload'
 
-const eventTypes: EventType[] = ['Workshop', 'Class', 'Show', 'Battle']
+const eventTypes: EventType[] = ['Workshop', 'Class', 'Show', 'Battle', 'Qualifier']
 
 const emptyForm = {
   title: '',

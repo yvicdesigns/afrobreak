@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { Check, Globe, Bell, Shield, Palette, Loader2, Image, Share2, Save } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import ImageUpload from '@/components/ui/ImageUpload'
-import { getSetting, saveSetting } from '@/lib/db'
+import { getSetting } from '@/lib/db'
+import { saveSettingAction } from '@/app/admin/settings-actions'
 
 type SocialLinks = {
   instagram: string
@@ -33,6 +34,7 @@ export default function AdminSettingsPage() {
     newSubscriberNotif: true,
     allowSignup: true,
     premiumPrice: '9.99',
+    annualPrice: '500',
     currency: 'GHS',
   })
 
@@ -40,6 +42,13 @@ export default function AdminSettingsPage() {
   const [logoUrl, setLogoUrl] = useState('')
   const [logoSaving, setLogoSaving] = useState(false)
   const [logoSaved, setLogoSaved] = useState(false)
+
+  // Login logo
+  const [loginLogo, setLoginLogo] = useState('')
+  const [loginLogoSize, setLoginLogoSize] = useState(96)
+  const [loginLogoGap, setLoginLogoGap] = useState(8)
+  const [loginLogoSaving, setLoginLogoSaving] = useState(false)
+  const [loginLogoSaved, setLoginLogoSaved] = useState(false)
 
   // Logo background circle
   const [logoBg, setLogoBg] = useState({ color: '#ffffff', opacity: 0, shape: 'circle' as 'circle' | 'rounded' | 'square', padding: 8, size: 40 })
@@ -57,18 +66,38 @@ export default function AdminSettingsPage() {
       getSetting('site_logo'),
       getSetting('logo_bg'),
       getSetting('social_links'),
-    ]).then(([maintenance, logo, logoBgRaw, socialRaw]) => {
+      getSetting('login_logo'),
+      getSetting('premium_price'),
+      getSetting('currency_default'),
+      getSetting('allow_signup'),
+    ]).then(([maintenance, logo, logoBgRaw, socialRaw, loginLogoVal, price, cur, signup]) => {
       if (maintenance !== null) setForm(f => ({ ...f, maintenanceMode: maintenance === 'true' }))
       if (logo) setLogoUrl(logo)
       if (logoBgRaw) try { setLogoBg(prev => ({ ...prev, ...JSON.parse(logoBgRaw) })) } catch {}
       if (socialRaw) try { setSocial(JSON.parse(socialRaw)) } catch {}
+      if (loginLogoVal) setLoginLogo(loginLogoVal)
+      if (price) setForm(f => ({ ...f, premiumPrice: price }))
+      getSetting('annual_price').then(v => { if (v) setForm(f => ({ ...f, annualPrice: v })) })
+      if (cur) setForm(f => ({ ...f, currency: cur }))
+      if (signup !== null) setForm(f => ({ ...f, allowSignup: signup !== 'false' }))
+      getSetting('login_logo_size').then(v => { if (v) setLoginLogoSize(Number(v)) })
+      getSetting('login_logo_gap').then(v => { if (v) setLoginLogoGap(Number(v)) })
       setLoading(false)
     })
   }, [])
 
   const handleSave = async () => {
     setSaving(true)
-    await saveSetting('maintenance_mode', form.maintenanceMode ? 'true' : 'false')
+    await Promise.all([
+      saveSettingAction('maintenance_mode', form.maintenanceMode ? 'true' : 'false'),
+      saveSettingAction('premium_price', form.premiumPrice),
+      saveSettingAction('annual_price', form.annualPrice),
+      saveSettingAction('currency_default', form.currency),
+      saveSettingAction('allow_signup', form.allowSignup ? 'true' : 'false'),
+      saveSettingAction('site_name', form.siteName),
+      saveSettingAction('site_url', form.siteUrl),
+      saveSettingAction('contact_email', form.contactEmail),
+    ])
     setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
@@ -76,15 +105,27 @@ export default function AdminSettingsPage() {
 
   const saveLogo = async () => {
     setLogoSaving(true)
-    await saveSetting('site_logo', logoUrl)
+    await saveSettingAction('site_logo', logoUrl)
     setLogoSaving(false)
     setLogoSaved(true)
     setTimeout(() => setLogoSaved(false), 3000)
   }
 
+  const saveLoginLogo = async () => {
+    setLoginLogoSaving(true)
+    await Promise.all([
+      saveSettingAction('login_logo', loginLogo),
+      saveSettingAction('login_logo_size', String(loginLogoSize)),
+      saveSettingAction('login_logo_gap', String(loginLogoGap)),
+    ])
+    setLoginLogoSaving(false)
+    setLoginLogoSaved(true)
+    setTimeout(() => setLoginLogoSaved(false), 3000)
+  }
+
   const saveLogoBg = async () => {
     setLogoBgSaving(true)
-    await saveSetting('logo_bg', JSON.stringify(logoBg))
+    await saveSettingAction('logo_bg', JSON.stringify(logoBg))
     setLogoBgSaving(false)
     setLogoBgSaved(true)
     setTimeout(() => setLogoBgSaved(false), 3000)
@@ -99,7 +140,7 @@ export default function AdminSettingsPage() {
 
   const saveSocial = async () => {
     setSocialSaving(true)
-    await saveSetting('social_links', JSON.stringify(social))
+    await saveSettingAction('social_links', JSON.stringify(social))
     setSocialSaving(false)
     setSocialSaved(true)
     setTimeout(() => setSocialSaved(false), 3000)
@@ -143,6 +184,106 @@ export default function AdminSettingsPage() {
           {logoSaving ? 'Saving…' : logoSaved ? 'Saved!' : 'Save Logo'}
         </button>
         {logoSaved && <p className="text-xs text-emerald-400">Logo updated on the site.</p>}
+      </div>
+
+      {/* ── LOGIN LOGO ── */}
+      <div className="bg-surface border border-white/5 rounded-2xl p-6 space-y-5">
+        <div className="flex items-center gap-2 mb-2">
+          <Image size={16} className="text-secondary-400" />
+          <h2 className="font-bold text-white">Login Page Logo</h2>
+        </div>
+        <p className="text-xs text-text-muted -mt-2">Logo affiché sur la page de connexion. Tu peux ajuster la taille et voir un aperçu en temps réel.</p>
+
+        <ImageUpload label="Login Logo" value={loginLogo} onChange={setLoginLogo} folder="branding" />
+
+        {/* Size slider */}
+        <div>
+          <label className="block text-sm font-medium text-white mb-2">
+            Taille du logo — <span className="text-primary-400">{loginLogoSize}px</span>
+          </label>
+          <input
+            type="range"
+            min={48}
+            max={200}
+            step={4}
+            value={loginLogoSize}
+            onChange={e => setLoginLogoSize(Number(e.target.value))}
+            className="w-full accent-primary-500"
+          />
+          <div className="flex justify-between text-[10px] text-text-muted mt-1">
+            <span>Petit (48px)</span>
+            <span>Grand (200px)</span>
+          </div>
+        </div>
+
+        {/* Gap slider */}
+        <div>
+          <label className="block text-sm font-medium text-white mb-2">
+            Espace logo → titre — <span className="text-primary-400">{loginLogoGap}px</span>
+          </label>
+          <input
+            type="range"
+            min={-40}
+            max={48}
+            step={2}
+            value={loginLogoGap}
+            onChange={e => setLoginLogoGap(Number(e.target.value))}
+            className="w-full accent-primary-500"
+          />
+          <div className="flex justify-between text-[10px] text-text-muted mt-1">
+            <span>Très proche (-40px)</span>
+            <span>Espacé (48px)</span>
+          </div>
+        </div>
+
+        {/* Live preview of the login page */}
+        <div>
+          <p className="text-xs font-medium text-text-muted uppercase tracking-wider mb-3">Aperçu de la page login</p>
+          <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a]" style={{ minHeight: 320 }}>
+            {/* Blurred background blobs */}
+            <div className="relative flex items-center justify-center py-10 px-6 overflow-hidden" style={{ minHeight: 320 }}>
+              <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="w-full max-w-xs relative z-10">
+                {/* Logo */}
+                <div className="flex flex-col items-center mb-5">
+                  {loginLogo ? (
+                    <img
+                      src={loginLogo}
+                      alt="Login logo"
+                      style={{ height: loginLogoSize, width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
+                    />
+                  ) : (
+                    <div
+                      className="flex items-center justify-center rounded-xl bg-white/5 text-text-muted text-xs"
+                      style={{ height: loginLogoSize, width: loginLogoSize }}
+                    >
+                      Logo
+                    </div>
+                  )}
+                  <p className="text-white font-bold text-lg" style={{ marginTop: loginLogoGap }}>Welcome back</p>
+                  <p className="text-white/40 text-xs">Sign in to continue your dance journey</p>
+                </div>
+                {/* Fake form */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3">
+                  <div className="h-9 bg-white/5 border border-white/10 rounded-xl" />
+                  <div className="h-9 bg-white/5 border border-white/10 rounded-xl" />
+                  <div className="h-9 bg-yellow-500/80 rounded-xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={saveLoginLogo}
+          disabled={loginLogoSaving}
+          className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-400 disabled:opacity-60 transition-colors text-sm font-semibold"
+        >
+          {loginLogoSaving ? <Loader2 size={14} className="animate-spin" /> : loginLogoSaved ? <Check size={14} /> : <Save size={14} />}
+          {loginLogoSaving ? 'Saving…' : loginLogoSaved ? 'Saved!' : 'Save Login Logo'}
+        </button>
+        {loginLogoSaved && <p className="text-xs text-emerald-400">Logo de connexion mis à jour.</p>}
       </div>
 
       {/* ── LOGO BG CIRCLE ── */}
@@ -416,19 +557,25 @@ export default function AdminSettingsPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white mb-1.5">Premium Price</label>
-            <input type="number" value={form.premiumPrice} onChange={e => setForm(f => ({...f, premiumPrice: e.target.value}))} min={0} step={0.99} className="input-base" />
+            <label className="block text-sm font-medium text-white mb-1.5">Prix mensuel</label>
+            <input type="number" value={form.premiumPrice} onChange={e => setForm(f => ({...f, premiumPrice: e.target.value}))} min={0} step={0.01} className="input-base" />
+            <p className="text-[10px] text-text-muted mt-1">Ex: 9.99 → GH₵9.99/mois</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-white mb-1.5">Currency</label>
-            <select value={form.currency} onChange={e => setForm(f => ({...f, currency: e.target.value}))} className="input-base">
+            <label className="block text-sm font-medium text-white mb-1.5">Prix annuel</label>
+            <input type="number" value={form.annualPrice} onChange={e => setForm(f => ({...f, annualPrice: e.target.value}))} min={0} step={1} className="input-base" />
+            <p className="text-[10px] text-text-muted mt-1">Ex: 500 → GH₵500/an</p>
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-white mb-1.5">Devise par défaut</label>
+          <select value={form.currency} onChange={e => setForm(f => ({...f, currency: e.target.value}))} className="input-base">
               <option value="GHS" className="bg-surface">GHS ₵</option>
               <option value="EUR" className="bg-surface">EUR €</option>
               <option value="USD" className="bg-surface">USD $</option>
               <option value="GBP" className="bg-surface">GBP £</option>
             </select>
           </div>
-        </div>
         <div className="flex items-center justify-between p-4 bg-surface-2 rounded-xl border border-white/5">
           <div>
             <p className="text-sm font-medium text-white">Allow New Signups</p>

@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Video, Calendar, BookOpen, Users,
   Settings, Menu, X, Play, ChevronRight, Bell, Music, ShoppingBag, Image,
-  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake, MessageSquare, Mail
+  UserSquare, Newspaper, Briefcase, Trophy, ClipboardList, Info, Handshake, MessageSquare, Mail, CreditCard
 } from 'lucide-react'
 import clsx from 'clsx'
 import { supabase } from '@/lib/supabase'
@@ -31,6 +31,7 @@ const navItems = [
   { href: '/admin/press', label: 'Press', icon: Newspaper },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/users', label: 'Users', icon: Users },
+  { href: '/admin/subscriptions', label: 'Subscriptions', icon: CreditCard },
   { href: '/admin/emails', label: 'Email Templates', icon: Mail },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
@@ -44,7 +45,7 @@ const notifications = [
 type LogoBg = { color: string; opacity: number; shape: string; padding: number; size: number }
 
 function Sidebar({
-  sidebarOpen, mobile = false, pathname, setMobileSidebarOpen, logoUrl, logoBg
+  sidebarOpen, mobile = false, pathname, setMobileSidebarOpen, logoUrl, logoBg, adminName, adminEmail
 }: {
   sidebarOpen: boolean
   mobile?: boolean
@@ -52,6 +53,8 @@ function Sidebar({
   setMobileSidebarOpen: (v: boolean) => void
   logoUrl: string
   logoBg: LogoBg | null
+  adminName: string
+  adminEmail: string
 }) {
   const isActive = (item: typeof navItems[0]) => {
     if (item.exact) return pathname === item.href
@@ -89,15 +92,6 @@ function Sidebar({
         ) : (
           <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-glow-blue">
             <Play size={12} className="text-white fill-white ml-0.5" />
-          </div>
-        )}
-        {(sidebarOpen || mobile) && (
-          <div>
-            <span className="text-sm font-black">
-              <span className="text-primary-500">AFRO</span>
-              <span className="text-white">BREAK</span>
-            </span>
-            <p className="text-[10px] text-text-muted leading-none">Admin Panel</p>
           </div>
         )}
       </div>
@@ -138,8 +132,8 @@ function Sidebar({
               <Users size={14} className="text-primary-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-white truncate">Admin User</p>
-              <p className="text-xs text-text-muted truncate">admin@afrobreak.com</p>
+              <p className="text-sm font-semibold text-white truncate">{adminName || 'Admin'}</p>
+              <p className="text-xs text-text-muted truncate">{adminEmail}</p>
             </div>
           </div>
         </div>
@@ -158,6 +152,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checking, setChecking] = useState(true)
   const [logoUrl, setLogoUrl] = useState('')
   const [logoBg, setLogoBg] = useState<LogoBg | null>(null)
+  const [adminName, setAdminName] = useState('')
+  const [adminEmail, setAdminEmail] = useState('')
 
   useEffect(() => {
     Promise.all([getSetting('site_logo'), getSetting('logo_bg')]).then(([logo, bg]) => {
@@ -170,14 +166,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) { router.replace('/auth/login?redirect=/admin'); return }
 
+      setAdminEmail(user.email ?? '')
+
       // Try profiles table first, fall back to email allowlist
       const ADMIN_EMAILS = ['afrobreakconcepts@gmail.com', 'yvicdesigns@gmail.com']
       try {
         const { data } = await supabase
           .from('profiles')
-          .select('is_admin')
+          .select('is_admin, name')
           .eq('id', user.id)
           .single()
+        if (data?.name) setAdminName(data.name)
         const isAdmin = data?.is_admin || ADMIN_EMAILS.includes(user.email ?? '')
         if (!isAdmin) { router.replace('/'); return }
       } catch {
@@ -197,7 +196,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen bg-background flex">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex flex-col flex-shrink-0 fixed left-0 top-0 h-screen z-30">
-        <Sidebar sidebarOpen={sidebarOpen} pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} />
+        <Sidebar sidebarOpen={sidebarOpen} pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} adminName={adminName} adminEmail={adminEmail} />
       </div>
 
       {/* Mobile sidebar */}
@@ -205,7 +204,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileSidebarOpen(false)} />
           <div className="relative flex-shrink-0 animate-slide-down">
-            <Sidebar sidebarOpen={true} mobile pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} />
+            <Sidebar sidebarOpen={true} mobile pathname={pathname} setMobileSidebarOpen={setMobileSidebarOpen} logoUrl={logoUrl} logoBg={logoBg} adminName={adminName} adminEmail={adminEmail} />
           </div>
         </div>
       )}
