@@ -6,6 +6,7 @@ import { Play, Instagram, Twitter, Youtube, Facebook, Mail, ArrowRight } from 'l
 import DonateButton from '@/components/ui/DonateButton'
 import { getSetting } from '@/lib/db'
 import { useLanguage } from '@/lib/LanguageContext'
+import VisitorCount from '@/components/VisitorCount'
 
 type SocialLinks = { instagram: string; youtube: string; twitter: string; facebook: string }
 
@@ -120,6 +121,8 @@ export default function Footer() {
             <p className="text-text-secondary text-sm leading-relaxed max-w-xs">
               The premier platform for african dance Community . Learn from our well versed ambassadors , attend live events and connect with a global community of dancers.
             </p>
+
+            <VisitorCount />
 
             {/* Social */}
             {socialLinks.length > 0 && (
