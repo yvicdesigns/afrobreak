@@ -557,18 +557,18 @@ export default function AdminSettingsPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white mb-1.5">Prix mensuel</label>
+            <label className="block text-sm font-medium text-white mb-1.5">Monthly price</label>
             <input type="number" value={form.premiumPrice} onChange={e => setForm(f => ({...f, premiumPrice: e.target.value}))} min={0} step={0.01} className="input-base" />
-            <p className="text-[10px] text-text-muted mt-1">Ex: 9.99 → GH₵9.99/mois</p>
+            <p className="text-[10px] text-text-muted mt-1">e.g. 9.99 → GH₵9.99/month</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-white mb-1.5">Prix annuel</label>
+            <label className="block text-sm font-medium text-white mb-1.5">Annual price</label>
             <input type="number" value={form.annualPrice} onChange={e => setForm(f => ({...f, annualPrice: e.target.value}))} min={0} step={1} className="input-base" />
-            <p className="text-[10px] text-text-muted mt-1">Ex: 500 → GH₵500/an</p>
+            <p className="text-[10px] text-text-muted mt-1">e.g. 500 → GH₵500/year</p>
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white mb-1.5">Devise par défaut</label>
+          <label className="block text-sm font-medium text-white mb-1.5">Default currency</label>
           <select value={form.currency} onChange={e => setForm(f => ({...f, currency: e.target.value}))} className="input-base">
               <option value="GHS" className="bg-surface">GHS ₵</option>
               <option value="EUR" className="bg-surface">EUR €</option>

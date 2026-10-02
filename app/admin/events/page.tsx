@@ -40,6 +40,7 @@ export default function AdminEventsPage() {
   const [form, setForm] = useState<FormState>(emptyForm)
   const [errors, setErrors] = useState<Partial<FormState>>({})
   const [success, setSuccess] = useState('')
+  const [saveError, setSaveError] = useState('')
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function AdminEventsPage() {
     e.preventDefault()
     if (!validate()) return
     setSaving(true)
+    setSaveError('')
     const tags = form.tags.split(',').map(t => t.trim()).filter(Boolean)
 
     if (editId) {
@@ -80,6 +82,14 @@ export default function AdminEventsPage() {
             : ev
         ))
         setSuccess('Event updated!')
+        setSaving(false)
+        setForm(emptyForm)
+        setShowForm(false)
+        setEditId(null)
+        setTimeout(() => setSuccess(''), 3000)
+      } else {
+        setSaveError('Failed to update event. Please try again.')
+        setSaving(false)
       }
     } else {
       const created = await createEvent({
@@ -92,14 +102,16 @@ export default function AdminEventsPage() {
       if (created) {
         setEventList(prev => [created, ...prev])
         setSuccess('Event created!')
+        setSaving(false)
+        setForm(emptyForm)
+        setShowForm(false)
+        setEditId(null)
+        setTimeout(() => setSuccess(''), 3000)
+      } else {
+        setSaveError('Failed to create event. Please try again.')
+        setSaving(false)
       }
     }
-
-    setSaving(false)
-    setForm(emptyForm)
-    setShowForm(false)
-    setEditId(null)
-    setTimeout(() => setSuccess(''), 3000)
   }
 
   const handleEdit = (event: Event) => {
@@ -139,6 +151,11 @@ export default function AdminEventsPage() {
       {success && (
         <div className="flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 rounded-xl p-4">
           <Check size={16} /> {success}
+        </div>
+      )}
+      {saveError && (
+        <div className="flex items-center gap-2 bg-red-500/15 border border-red-500/30 text-red-400 rounded-xl p-4">
+          <X size={16} /> {saveError}
         </div>
       )}
 

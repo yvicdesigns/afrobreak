@@ -79,7 +79,7 @@ export default function StorePage() {
 
   useEffect(() => {
     getProducts().then((data: unknown[]) => {
-      const mapped = (data && data.length > 0 ? data : staticProducts) as Record<string, unknown>[]
+      const mapped = (data || []) as Record<string, unknown>[]
       setProducts(mapped.map(p => ({
         id: p.id as string,
         name: p.name as string,

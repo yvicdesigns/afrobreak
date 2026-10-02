@@ -13,7 +13,7 @@ type DayStat = { date: string; views: number; visitors: number }
 type PageStat = { path: string; views: number }
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })
+  return new Date(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
 }
 
 function Trend({ current, previous }: { current: number; previous: number }) {
@@ -104,7 +104,7 @@ export default function AnalyticsPage() {
           <h1 className="text-2xl font-black text-white flex items-center gap-2">
             <BarChart2 size={22} className="text-primary-500" /> Analytics
           </h1>
-          <p className="text-text-secondary text-sm mt-1">Trafic du site en temps réel</p>
+          <p className="text-text-secondary text-sm mt-1">Real-time site traffic</p>
         </div>
         <div className="flex items-center gap-1 p-1 bg-surface-2 rounded-xl border border-white/5">
           {([7, 14, 30] as const).map(r => (
@@ -113,7 +113,7 @@ export default function AnalyticsPage() {
               onClick={() => setRange(r)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${range === r ? 'bg-primary-500 text-[#0D0A1A]' : 'text-text-secondary hover:text-white'}`}
             >
-              {r}j
+              {r}d
             </button>
           ))}
         </div>
@@ -129,7 +129,7 @@ export default function AnalyticsPage() {
             <Trend current={currViews} previous={prevViews} />
           </div>
           <p className="text-2xl font-black text-white">{loading ? '—' : totalViews.toLocaleString()}</p>
-          <p className="text-text-secondary text-sm mt-0.5">Pages vues ({range}j)</p>
+          <p className="text-text-secondary text-sm mt-0.5">Page views ({range}d)</p>
         </div>
 
         <div className="bg-surface border border-white/5 rounded-2xl p-5">
@@ -140,7 +140,7 @@ export default function AnalyticsPage() {
             <Trend current={currVisitors} previous={prevVisitors} />
           </div>
           <p className="text-2xl font-black text-white">{loading ? '—' : totalVisitors.toLocaleString()}</p>
-          <p className="text-text-secondary text-sm mt-0.5">Visiteurs uniques ({range}j)</p>
+          <p className="text-text-secondary text-sm mt-0.5">Unique visitors ({range}d)</p>
         </div>
 
         <div className="bg-surface border border-white/5 rounded-2xl p-5">
@@ -150,13 +150,13 @@ export default function AnalyticsPage() {
             </div>
           </div>
           <p className="text-2xl font-black text-white">{loading ? '—' : avgDaily.toLocaleString()}</p>
-          <p className="text-text-secondary text-sm mt-0.5">Moyenne / jour</p>
+          <p className="text-text-secondary text-sm mt-0.5">Daily average</p>
         </div>
       </div>
 
       {/* Bar Chart */}
       <div className="bg-surface border border-white/5 rounded-2xl p-6">
-        <h2 className="text-sm font-bold text-white mb-5">Pages vues par jour</h2>
+        <h2 className="text-sm font-bold text-white mb-5">Page views per day</h2>
         {loading ? (
           <div className="h-40 flex items-center justify-center">
             <div className="w-6 h-6 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
@@ -164,7 +164,7 @@ export default function AnalyticsPage() {
         ) : (
           <div className="flex items-end gap-1 h-40">
             {days.map((d) => (
-              <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group" title={`${formatDate(d.date)}: ${d.views} vues, ${d.visitors} visiteurs`}>
+              <div key={d.date} className="flex-1 flex flex-col items-center gap-1 group" title={`${formatDate(d.date)}: ${d.views} views, ${d.visitors} visitors`}>
                 <div className="relative w-full flex items-end justify-center" style={{ height: '128px' }}>
                   {/* Visitors bar (behind) */}
                   <div
@@ -189,11 +189,11 @@ export default function AnalyticsPage() {
         <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/5">
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded-sm bg-primary-500/70" />
-            <span className="text-xs text-text-secondary">Pages vues</span>
+            <span className="text-xs text-text-secondary">Page views</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded-sm bg-emerald-500/25" />
-            <span className="text-xs text-text-secondary">Visiteurs uniques</span>
+            <span className="text-xs text-text-secondary">Unique visitors</span>
           </div>
         </div>
       </div>
@@ -201,14 +201,14 @@ export default function AnalyticsPage() {
       {/* Top Pages */}
       <div className="bg-surface border border-white/5 rounded-2xl p-6">
         <h2 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-          <Globe size={15} className="text-primary-400" /> Pages les plus visitées
+          <Globe size={15} className="text-primary-400" /> Most visited pages
         </h2>
         {loading ? (
           <div className="h-20 flex items-center justify-center">
             <div className="w-6 h-6 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : pages.length === 0 ? (
-          <p className="text-text-muted text-sm text-center py-8">Aucune donnée pour cette période.</p>
+          <p className="text-text-muted text-sm text-center py-8">No data for this period.</p>
         ) : (
           <div className="space-y-2">
             {pages.map(({ path, views }, i) => {
@@ -219,7 +219,7 @@ export default function AnalyticsPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm text-white font-medium truncate">{path || '/'}</span>
-                      <span className="text-xs text-text-secondary ml-2 flex-shrink-0">{views.toLocaleString()} vues</span>
+                      <span className="text-xs text-text-secondary ml-2 flex-shrink-0">{views.toLocaleString()} views</span>
                     </div>
                     <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
                       <div
@@ -238,20 +238,20 @@ export default function AnalyticsPage() {
       {/* Daily table */}
       <div className="bg-surface border border-white/5 rounded-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-white/5">
-          <h2 className="text-sm font-bold text-white">Détail par jour</h2>
+          <h2 className="text-sm font-bold text-white">Daily breakdown</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/5">
                 <th className="px-6 py-3 text-left text-xs font-semibold text-text-muted">Date</th>
-                <th className="px-6 py-3 text-right text-xs font-semibold text-text-muted">Pages vues</th>
-                <th className="px-6 py-3 text-right text-xs font-semibold text-text-muted">Visiteurs uniques</th>
+                <th className="px-6 py-3 text-right text-xs font-semibold text-text-muted">Page views</th>
+                <th className="px-6 py-3 text-right text-xs font-semibold text-text-muted">Unique visitors</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={3} className="px-6 py-8 text-center text-text-muted">Chargement…</td></tr>
+                <tr><td colSpan={3} className="px-6 py-8 text-center text-text-muted">Loading…</td></tr>
               ) : [...days].reverse().map((d) => (
                 <tr key={d.date} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                   <td className="px-6 py-3 text-text-secondary">{formatDate(d.date)}</td>
